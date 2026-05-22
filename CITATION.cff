@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: "SOS 2026 Stellarator Optimization Teaching Repository"
+message: "If you use this teaching repository, please cite it and the underlying scientific codes."
+type: software
+authors:
+  - family-names: Jorge
+    given-names: Rogerio
+repository-code: "https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization"
+license: MIT
+version: 0.1.0
+date-released: 2026-05-22
+keywords:
+  - stellarator
+  - optimization
+  - VMEC
+  - Boozer coordinates
+  - neoclassical transport
+  - turbulence

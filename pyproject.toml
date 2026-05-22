@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sos2026-rjorge-stellarator-optimization"
+version = "0.1.0"
+description = "Teaching repository for SOS 2026 stellarator optimization lectures"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Rogerio Jorge"}]
+dependencies = [
+  "numpy",
+  "scipy",
+  "matplotlib",
+  "pandas",
+  "xarray",
+  "netCDF4",
+  "h5py",
+  "imageio",
+  "nbformat",
+]
+
+[project.optional-dependencies]
+notebooks = ["jupyter", "jupyterlab", "ipywidgets", "plotly", "nbconvert"]
+test = ["pytest"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+testpaths = ["tests"]
+addopts = "-ra"

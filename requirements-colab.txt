@@ -1,0 +1,24 @@
+numpy
+scipy
+matplotlib
+pandas
+xarray
+netCDF4
+h5py
+jupyter
+ipywidgets
+plotly
+imageio
+tqdm
+nbformat
+nbconvert
+pytest
+
+# Optional in Colab after cached mode works:
+# jax
+# vmec-jax
+# booz_xform_jax
+# neo-jax
+# sfincs_jax
+# spectraxgk
+# simsopt

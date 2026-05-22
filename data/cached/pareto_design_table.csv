@@ -1,0 +1,9 @@
+design,qs_residual,epsilon_eff,coil_length,curvature,normal_field_error,turbulence_proxy,profile_error
+HSX-thread,0.025,0.018,1.15,1.2,0.24,0.36,0.25
+W7X-ref,0.04,0.013,1.3,1.32,0.18,0.28,0.22
+QA-coils,0.02,0.021,1.42,1.46,0.16,0.42,0.32
+QI-transport,0.032,0.011,1.55,1.6,0.22,0.3,0.24
+easy-coils,0.06,0.036,0.92,0.98,0.44,0.5,0.4
+balanced,0.03,0.017,1.12,1.18,0.2,0.26,0.2
+aggressive-QS,0.014,0.015,1.68,1.75,0.12,0.47,0.36
+profile-safe,0.038,0.016,1.2,1.25,0.25,0.24,0.18

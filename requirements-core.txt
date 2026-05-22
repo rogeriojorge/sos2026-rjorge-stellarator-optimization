@@ -1,0 +1,17 @@
+numpy
+scipy
+matplotlib
+pandas
+xarray
+netCDF4
+h5py
+jupyter
+jupyterlab
+ipykernel
+ipywidgets
+plotly
+imageio
+tqdm
+nbformat
+nbconvert
+pytest

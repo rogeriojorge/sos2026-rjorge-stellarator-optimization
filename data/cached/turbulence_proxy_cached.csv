@@ -1,0 +1,7 @@
+design,linear_proxy,quasilinear_proxy,nonlinear_validation
+A_QS,0.22,0.31,0.5
+B_low_ripple,0.18,0.28,0.37
+C_easy_coils,0.42,0.46,0.54
+D_turbulence_checked,0.3,0.23,0.21
+E_balanced,0.26,0.25,0.27
+F_aggressive,0.14,0.34,0.62

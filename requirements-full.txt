@@ -1,0 +1,16 @@
+-r requirements-core.txt
+
+# Verified locally from inspected pyproject.toml / README files on 2026-05-22.
+# Import names are documented in docs/code_stack.md.
+jax
+vmec-jax
+booz_xform_jax
+neo-jax
+sfincs_jax
+spectraxgk
+simsopt
+essos
+
+# NEOPAX was verified as a source package named NEOPAX. Use source install unless a
+# PyPI release is confirmed for your platform.
+git+https://github.com/uwplasma/NEOPAX.git

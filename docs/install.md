@@ -1,0 +1,46 @@
+# Installation
+
+## 10-minute local setup
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements-core.txt -e .
+python scripts/run_smoke_tests.py
+```
+
+This is the recommended student setup. It runs cached notebooks and generates all educational figures.
+
+## Colab setup
+
+```python
+!git clone https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization.git
+%cd sos2026-rjorge-stellarator-optimization
+!pip install -r requirements-colab.txt -e .
+```
+
+Do not run long package installs during lecture unless the instructor explicitly prepared that path.
+
+## Full local setup
+
+```bash
+python -m pip install -r requirements-full.txt -e .
+python scripts/fetch_equilibria.py --minimal
+python scripts/generate_all_figures.py
+python scripts/generate_movies.py
+python scripts/execute_notebooks_core.py
+pytest -q
+```
+
+`requirements-full.txt` is best effort. Some scientific packages may need compiler, MPI, GPU, or platform-specific work.
+
+## JAX notes
+
+Use CPU for classroom reliability unless a GPU environment has already been tested:
+
+```bash
+JAX_PLATFORMS=cpu python scripts/run_smoke_tests.py
+```
+
+If GPU JAX is installed, verify devices before a live demo.
