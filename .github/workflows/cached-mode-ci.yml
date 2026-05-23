@@ -1,0 +1,44 @@
+name: Cached-mode CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  cached-mode:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install core dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-core.txt -e .
+
+      - name: Run release-readiness checks
+        run: python scripts/check_release_ready.py --skip-status-report
+
+      - name: Write status report
+        if: always()
+        run: python scripts/make_status_report.py
+
+      - name: Upload generated status logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cached-mode-status
+          path: |
+            STATUS.md
+            data/generated/status/
+          if-no-files-found: ignore

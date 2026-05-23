@@ -12,6 +12,12 @@ python scripts/run_smoke_tests.py
 
 This is the recommended student setup. It runs cached notebooks and generates all educational figures.
 
+To run the same cached-mode checks used before publishing:
+
+```bash
+python scripts/check_release_ready.py
+```
+
 ## Colab setup
 
 ```python

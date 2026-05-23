@@ -1,5 +1,7 @@
 # SOS 2026 Stellarator Optimization
 
+[![Cached-mode CI](https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization/actions/workflows/cached-mode-ci.yml/badge.svg)](https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization/actions/workflows/cached-mode-ci.yml)
+
 This repository supports Rogerio Jorge's four 90-minute lectures for the 2026 CEA-IRFM / Renaissance Fusion School on Stellarators in Aix-en-Provence. The course treats stellarator design as a computational optimization loop: equilibrium -> Boozer spectrum -> neoclassical metrics -> coils -> turbulence metrics -> profile closure -> Pareto decisions.
 
 ## 10-minute quickstart
@@ -44,6 +46,12 @@ pytest -q
 
 The full requirements include verified package names or source installs for `vmec_jax`, `booz_xform_jax`, `NEO_JAX`, `sfincs_jax`, `SPECTRAX-GK`, `NEOPAX`, `ESSOS`, and SIMSOPT, but the notebooks remain useful when those packages are absent.
 
+For a single cached-mode acceptance run, use:
+
+```bash
+python scripts/check_release_ready.py
+```
+
 ## Run modes
 
 - `tiny`: the fastest live path, intended for short classroom experiments.
@@ -78,7 +86,7 @@ Slides are Marp-compatible Markdown. Build with `slides/build_slides.sh` after i
 
 ## Documentation
 
-Start with `docs/install.md`, then use `docs/code_stack.md`, `docs/data_sources.md`, `docs/teaching_notes.md`, `docs/troubleshooting.md`, and `docs/references.md`.
+Start with `docs/install.md`, then use `docs/instructor_checklist.md`, `docs/live_demo_matrix.md`, `docs/code_stack.md`, `docs/data_sources.md`, `docs/teaching_notes.md`, `docs/troubleshooting.md`, and `docs/references.md`.
 
 ## Honesty policy
 
