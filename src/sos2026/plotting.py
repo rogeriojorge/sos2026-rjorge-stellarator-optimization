@@ -1,8 +1,7 @@
 from __future__ import annotations
 
+import warnings
 from pathlib import Path
-import matplotlib
-matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -23,9 +22,12 @@ def savefig(fig, name: str, dpi: int = 160) -> Path:
     ensure_directories()
     path = FIGURE_DIR / name
     path.parent.mkdir(parents=True, exist_ok=True)
-    fig.tight_layout()
+    with warnings.catch_warnings():
+        warnings.filterwarnings("ignore", message="This figure includes Axes that are not compatible with tight_layout")
+        fig.tight_layout()
     fig.savefig(path, dpi=dpi, bbox_inches="tight")
-    plt.close(fig)
+    if "inline" not in plt.get_backend().lower():
+        plt.close(fig)
     return path
 
 

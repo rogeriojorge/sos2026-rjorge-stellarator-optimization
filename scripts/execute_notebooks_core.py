@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
+from traitlets.config import Config
 
 from sos2026.paths import NOTEBOOK_DIR, GENERATED_DIR, STATUS_DIR, PROJECT_ROOT, ensure_directories
 
@@ -22,6 +23,14 @@ CORE_NOTEBOOKS = [
 ]
 
 
+def inline_config() -> Config:
+    config = Config()
+    config.InteractiveShellApp.matplotlib = "inline"
+    config.InlineBackend.figure_format = "png"
+    config.InlineBackend.rc = {"figure.dpi": 120}
+    return config
+
+
 def execute_one(name: str) -> dict:
     in_path = NOTEBOOK_DIR / name
     out_dir = GENERATED_DIR / "notebook_runs"
@@ -29,7 +38,7 @@ def execute_one(name: str) -> dict:
     out_path = out_dir / name
     try:
         nb = nbformat.read(in_path, as_version=4)
-        ep = ExecutePreprocessor(timeout=180, kernel_name="python3")
+        ep = ExecutePreprocessor(timeout=180, kernel_name="python3", config=inline_config())
         ep.preprocess(nb, {"metadata": {"path": str(PROJECT_ROOT)}})
         nbformat.write(nb, out_path)
         return {"name": name, "ok": True, "executed_copy": str(out_path.relative_to(PROJECT_ROOT))}

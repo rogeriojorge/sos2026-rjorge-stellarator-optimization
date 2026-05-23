@@ -12,52 +12,58 @@ const PPTX_DIR = path.join(ROOT, "slides", "pptx");
 const PREVIEW_ROOT = path.join(ROOT, "data", "generated", "pptx_previews");
 const LAYOUT_ROOT = path.join(ROOT, "data", "generated", "pptx_layouts");
 const MANIFEST_PATH = path.join(ROOT, "data", "generated", "status", "powerpoint_decks.json");
+const UW_CREST_WHITE = path.join(ROOT, "assets", "logos", "uw_crest_white.png");
+const UW_CREST_RED = path.join(ROOT, "assets", "logos", "uw_crest_red.png");
 const SLIDE_SIZE = { width: 1280, height: 720 };
 
 const transparent = "#00000000";
 const palette = {
-  paper: "#f7faf8",
-  paperWarm: "#fbfaf6",
-  ink: "#111827",
-  muted: "#4b5563",
-  faint: "#e5e7eb",
+  paper: "#ffffff",
+  paperWarm: "#ffffff",
+  ink: "#2b2b2b",
+  muted: "#6f6f6f",
+  faint: "#dddddd",
   panel: "#ffffff",
-  navy: "#172554",
-  teal: "#0f766e",
+  uwRed: "#c5050c",
+  uwDarkRed: "#9b0000",
+  uwGray: "#646569",
+  lightGray: "#f4f4f4",
+  navy: "#1f2937",
+  teal: "#047a7a",
   blue: "#2563eb",
   green: "#15803d",
-  amber: "#d97706",
-  coral: "#dc2626",
-  violet: "#6d28d9",
-  slate: "#334155",
+  amber: "#c46a00",
+  coral: "#c5050c",
+  violet: "#5b2c6f",
+  slate: "#444444",
 };
 
 const deckThemes = {
   lecture_1_geometry_metrics: {
-    accent: palette.teal,
-    accent2: palette.blue,
-    dark: "#0b3b3a",
+    accent: palette.uwRed,
+    accent2: palette.uwGray,
+    dark: palette.uwRed,
     tag: "Lecture 1",
     loopFocus: ["equilibrium", "Boozer spectrum", "metrics"],
   },
   lecture_2_coils_single_stage: {
-    accent: palette.amber,
-    accent2: palette.teal,
-    dark: "#5a2f08",
+    accent: palette.uwRed,
+    accent2: palette.uwGray,
+    dark: palette.uwRed,
     tag: "Lecture 2",
     loopFocus: ["coils", "B dot n", "single stage"],
   },
   lecture_3_transport_turbulence_metrics: {
-    accent: palette.violet,
-    accent2: palette.green,
-    dark: "#35134b",
+    accent: palette.uwRed,
+    accent2: palette.uwGray,
+    dark: palette.uwRed,
     tag: "Lecture 3",
     loopFocus: ["neoclassical", "turbulence", "validation"],
   },
   lecture_4_integrated_workflow: {
-    accent: palette.blue,
-    accent2: palette.coral,
-    dark: "#12345b",
+    accent: palette.uwRed,
+    accent2: palette.uwGray,
+    dark: palette.uwRed,
     tag: "Lecture 4",
     loopFocus: ["profiles", "Pareto", "decisions"],
   },
@@ -185,7 +191,7 @@ function text(slide, value, x, y, w, h, options = {}) {
 function titleFont(title) {
   if (title.length > 92) return 31;
   if (title.length > 72) return 35;
-  return 40;
+  return 42;
 }
 
 function bulletFont(value) {
@@ -198,46 +204,36 @@ function bulletFont(value) {
 
 function addPageTitle(slide, deck, item, slideNumber, total) {
   const theme = deckThemes[deck.id];
-  text(slide, theme.tag, 58, 27, 170, 26, {
-    fontSize: 15,
-    bold: true,
-    color: theme.accent,
-    valign: "middle",
-  });
-  text(slide, `${slideNumber}/${total}`, 1152, 27, 70, 26, {
-    fontSize: 14,
-    color: palette.muted,
-    align: "right",
-    valign: "middle",
-  });
-  text(slide, item.title, 58, 58, 1060, 64, {
+  addUwMark(slide);
+  text(slide, item.title, 34, 48, 1008, 70, {
     fontSize: titleFont(item.title),
     bold: true,
     color: palette.ink,
     valign: "middle",
   });
-  rect(slide, 58, 126, 160, 5, theme.accent);
-  rect(slide, 225, 126, 62, 5, theme.accent2);
+  rect(slide, 34, 126, 92, 7, theme.accent);
+  if (item.subtitle) {
+    text(slide, item.subtitle, 148, 122, 740, 26, {
+      fontSize: 18,
+      color: palette.muted,
+      valign: "middle",
+    });
+  }
 }
 
 function addFooter(slide, deck, slideNumber) {
-  const theme = deckThemes[deck.id];
-  rect(slide, 58, 672, 1165, 1, "#d1d5db");
-  text(slide, "SOS 2026 stellarator optimization teaching repo", 58, 686, 520, 22, {
-    fontSize: 13,
-    color: palette.muted,
-  });
-  text(slide, "cached -> tiny -> research", 925, 686, 210, 22, {
-    fontSize: 13,
+  rect(slide, 34, 660, 1120, 1, "#d0d0d0");
+  text(slide, "SOS 2026 Stellarator Optimization, Rogerio Jorge, UW-Madison", 964, 675, 250, 18, {
+    fontSize: 8,
     color: palette.muted,
     align: "right",
   });
-  rect(slide, 1150, 686, 38, 6, theme.accent);
-  text(slide, String(slideNumber).padStart(2, "0"), 1196, 680, 32, 24, {
-    fontSize: 13,
+  text(slide, "cached / tiny / research", 758, 675, 180, 18, {
+    fontSize: 8,
     color: palette.muted,
     align: "right",
   });
+  addSlideNumber(slide, slideNumber);
 }
 
 async function addImage(slide, relativePath, x, y, w, h, options = {}) {
@@ -261,6 +257,35 @@ async function addImage(slide, relativePath, x, y, w, h, options = {}) {
   image.position = { left: x, top: y, width: w, height: h };
 }
 
+function addImageSync(slide, absolutePath, x, y, w, h, options = {}) {
+  if (!fsSync.existsSync(absolutePath)) return undefined;
+  const buffer = fsSync.readFileSync(absolutePath);
+  const image = slide.images.add({
+    blob: arrayBufferFromBuffer(buffer),
+    fit: options.fit ?? "contain",
+    alt: options.alt ?? path.basename(absolutePath),
+  });
+  image.position = { left: x, top: y, width: w, height: h };
+  return image;
+}
+
+function addUwMark(slide, variant = "red-box") {
+  if (variant === "red-box") {
+    rect(slide, 1196, 0, 48, 82, palette.uwRed);
+    addImageSync(slide, UW_CREST_WHITE, 1206, 11, 28, 50, { fit: "contain", alt: "University of Wisconsin-Madison crest" });
+    return;
+  }
+  addImageSync(slide, UW_CREST_RED, 1186, 18, 44, 66, { fit: "contain", alt: "University of Wisconsin-Madison crest" });
+}
+
+function addSlideNumber(slide, slideNumber, color = palette.muted) {
+  text(slide, `Slide ${String(slideNumber).padStart(2, "0")}`, 30, 680, 90, 20, {
+    fontSize: 8,
+    color,
+    valign: "middle",
+  });
+}
+
 function addBullets(slide, bullets, x, y, w, h, options = {}) {
   const theme = options.theme;
   const gap = options.gap ?? 16;
@@ -280,110 +305,91 @@ function addBullets(slide, bullets, x, y, w, h, options = {}) {
 }
 
 function addLoopStrip(slide, deck, y = 604) {
-  const theme = deckThemes[deck.id];
-  const stages = ["equilibrium", "Boozer", "neo", "coils", "turbulence", "profiles", "Pareto"];
-  const x0 = 84;
-  const w = 154;
-  const gap = 8;
-  stages.forEach((stage, index) => {
-    const active = theme.loopFocus.some((focus) => stage.toLowerCase().includes(focus.toLowerCase().split(" ")[0]));
-    const x = x0 + index * (w + gap);
-    rect(slide, x, y, w, 40, active ? theme.accent : "#edf2f7", active ? theme.accent : "#cbd5e1", 1);
-    text(slide, stage, x + 10, y + 7, w - 20, 24, {
-      fontSize: 15,
-      bold: active,
-      color: active ? "#ffffff" : palette.slate,
-      align: "center",
-      valign: "middle",
-    });
-    if (index < stages.length - 1) {
-      text(slide, ">", x + w + 1, y + 9, gap + 6, 20, {
-        fontSize: 13,
-        color: palette.muted,
-        align: "center",
-      });
-    }
-  });
+  // The UW template keeps recurring chrome minimal; loop diagrams appear only
+  // when they are the slide's proof object.
+  return;
 }
 
 async function renderTitleSlide(presentation, deck, item, slideNumber, total) {
   const slide = presentation.slides.add();
   const theme = deckThemes[deck.id];
-  rect(slide, 0, 0, SLIDE_SIZE.width, SLIDE_SIZE.height, theme.dark);
-  rect(slide, 515, 0, 765, 720, palette.paperWarm);
-  rect(slide, 0, 0, 18, 720, theme.accent2);
-  text(slide, theme.tag, 64, 52, 220, 34, {
-    fontSize: 18,
+  rect(slide, 0, 0, SLIDE_SIZE.width, SLIDE_SIZE.height, "#ffffff");
+  addUwMark(slide);
+  text(slide, item.title, 40, 72, 700, 170, {
+    fontSize: item.title.length > 78 ? 43 : 50,
     bold: true,
-    color: "#d1fae5",
+    color: palette.ink,
     valign: "middle",
   });
-  text(slide, item.title, 62, 122, 418, 230, {
-    fontSize: item.title.length > 78 ? 42 : 48,
+  rect(slide, 40, 264, 92, 7, theme.accent);
+  text(slide, item.subtitle ?? "", 40, 294, 700, 70, {
+    fontSize: 25,
+    color: palette.uwGray,
+    valign: "middle",
+  });
+  addBullets(slide, item.bullets ?? [], 48, 402, 600, 130, {
+    theme,
+    dotColor: palette.uwRed,
+    color: palette.ink,
+    fontSize: 23,
+    gap: 14,
+    maxRowHeight: 58,
+  });
+  if (item.image) {
+    rect(slide, 742, 112, 438, 326, "#ffffff", "#d0d0d0", 1);
+    await addImage(slide, item.image, 764, 132, 394, 286, { fit: "contain" });
+  }
+  rect(slide, 0, 596, 1280, 124, theme.accent);
+  text(slide, "CEA-IRFM / Renaissance Fusion School on Stellarators", 42, 622, 570, 26, {
+    fontSize: 18,
     bold: true,
     color: "#ffffff",
     valign: "middle",
   });
-  text(slide, item.subtitle ?? "", 66, 370, 400, 72, {
-    fontSize: 24,
-    color: "#f8fafc",
+  text(slide, "Aix-en-Provence, 2026", 42, 650, 380, 24, {
+    fontSize: 16,
+    color: "#ffffff",
     valign: "middle",
   });
-  addBullets(slide, item.bullets ?? [], 72, 466, 395, 144, {
-    theme,
-    dotColor: theme.accent2,
-    color: "#f8fafc",
-    fontSize: 19,
-    gap: 8,
-    maxRowHeight: 76,
-  });
-  if (item.image) {
-    rect(slide, 570, 82, 636, 472, "#ffffff", "#d1d5db", 1);
-    await addImage(slide, item.image, 590, 100, 596, 432, { fit: "contain" });
-  }
-  text(slide, "Computational design loop", 570, 582, 270, 28, {
-    fontSize: 18,
+  text(slide, "Rogerio Jorge, University of Wisconsin-Madison", 780, 634, 390, 24, {
+    fontSize: 16,
     bold: true,
-    color: theme.accent,
-  });
-  addLoopStrip(slide, deck, 626);
-  text(slide, `${slideNumber}/${total}`, 1164, 36, 54, 24, {
-    fontSize: 14,
-    color: palette.muted,
+    color: "#ffffff",
     align: "right",
+    valign: "middle",
   });
+  addSlideNumber(slide, slideNumber, "#ffffff");
   return slide;
 }
 
 function renderTransition(presentation, deck, item, slideNumber, total) {
   const slide = presentation.slides.add();
   const theme = deckThemes[deck.id];
-  rect(slide, 0, 0, 1280, 720, theme.dark);
-  rect(slide, 0, 0, 1280, 16, theme.accent2);
-  text(slide, theme.tag, 76, 88, 220, 32, {
+  rect(slide, 0, 0, 1280, 720, "#ffffff");
+  rect(slide, 150, 118, 980, 512, theme.accent);
+  rect(slide, 150, 118, 980, 512, "#b00000", transparent, 0);
+  addUwMark(slide);
+  text(slide, theme.tag, 196, 168, 220, 32, {
     fontSize: 18,
     bold: true,
-    color: "#dbeafe",
+    color: "#ffffff",
     valign: "middle",
   });
-  text(slide, item.title, 74, 185, 890, 150, {
+  text(slide, item.title, 194, 238, 820, 132, {
     fontSize: item.title.length > 65 ? 46 : 56,
     bold: true,
     color: "#ffffff",
     valign: "middle",
   });
-  addBullets(slide, item.bullets ?? [], 84, 392, 800, 150, {
+  rect(slide, 198, 384, 88, 7, "#ffffff");
+  addBullets(slide, item.bullets ?? [], 198, 428, 760, 86, {
     theme,
-    dotColor: theme.accent2,
+    dotColor: "#ffffff",
     color: "#f8fafc",
-    fontSize: 25,
+    fontSize: 23,
     maxRowHeight: 62,
   });
-  text(slide, `${slideNumber}/${total}`, 1160, 660, 60, 24, {
-    fontSize: 14,
-    color: "#cbd5e1",
-    align: "right",
-  });
+  addFooter(slide, deck, slideNumber);
   return slide;
 }
 
@@ -392,25 +398,24 @@ async function renderFigure(presentation, deck, item, slideNumber, total) {
   const theme = deckThemes[deck.id];
   rect(slide, 0, 0, 1280, 720, palette.paper);
   addPageTitle(slide, deck, item, slideNumber, total);
-  rect(slide, 58, 154, 735, 446, "#ffffff", "#d1d5db", 1);
-  if (item.image) await addImage(slide, item.image, 78, 174, 695, 392, { fit: "contain" });
-  text(slide, "How to read it", 850, 165, 320, 28, {
+  rect(slide, 44, 168, 742, 430, "#ffffff", "#d0d0d0", 1);
+  if (item.image) await addImage(slide, item.image, 64, 188, 702, 386, { fit: "contain" });
+  text(slide, "How to read it", 830, 170, 320, 28, {
     fontSize: 20,
     bold: true,
     color: theme.accent,
   });
-  addBullets(slide, item.bullets ?? [], 842, 215, 340, 284, {
+  addBullets(slide, item.bullets ?? [], 826, 218, 352, 270, {
     theme,
-    fontSize: 22,
+    fontSize: 21,
     maxRowHeight: 88,
   });
-  rect(slide, 842, 526, 334, 58, "#fff7ed", "#fed7aa", 1);
-  text(slide, "Teaching rule: the plot is a design diagnostic, not decoration.", 862, 538, 294, 34, {
-    fontSize: 16,
-    color: "#9a3412",
+  rect(slide, 826, 520, 348, 56, palette.lightGray, "#d0d0d0", 1);
+  text(slide, "Use the figure to identify the design choice and the diagnostic that changes.", 846, 532, 306, 32, {
+    fontSize: 15,
+    color: palette.uwGray,
     valign: "middle",
   });
-  addLoopStrip(slide, deck);
   addFooter(slide, deck, slideNumber);
   return slide;
 }
@@ -450,15 +455,15 @@ function renderConcept(presentation, deck, item, slideNumber, total) {
       insets: { left: 0, right: 0, top: 8, bottom: 8 },
     });
   });
-  rect(slide, 110, 492, 1060, 72, "#eef2ff", "#c7d2fe", 1);
-  text(slide, "Optimization view", 136, 512, 190, 28, {
+  rect(slide, 110, 492, 1060, 72, palette.lightGray, "#d0d0d0", 1);
+  text(slide, "Class use", 136, 512, 150, 28, {
     fontSize: 18,
     bold: true,
-    color: palette.navy,
+    color: palette.uwRed,
   });
-  text(slide, "Turn each physical idea into an objective, constraint, validation gate, or reason to stop.", 330, 512, 790, 34, {
-    fontSize: 22,
-    color: palette.navy,
+  text(slide, "Connect the concept to one objective, one plot, and one exercise.", 304, 512, 790, 34, {
+    fontSize: 21,
+    color: palette.ink,
     valign: "middle",
   });
   addLoopStrip(slide, deck);
@@ -574,7 +579,7 @@ function renderWarning(presentation, deck, item, slideNumber, total) {
   const warningBullets = item.bullets ?? [];
   rect(slide, 88, 178, 1020, 410, "#ffffff", "#fed7aa", 2);
   rect(slide, 88, 178, 18, 410, palette.amber);
-  text(slide, "Failure mode / guardrail", 132, 212, 420, 34, {
+  text(slide, "Validation check", 132, 212, 420, 34, {
     fontSize: 23,
     bold: true,
     color: "#9a3412",
@@ -587,7 +592,7 @@ function renderWarning(presentation, deck, item, slideNumber, total) {
     maxRowHeight: 56,
   });
   rect(slide, 132, 512, 870, 1, "#fed7aa");
-  text(slide, "Classroom stance: label approximations and use cached mode when the live code is too expensive.", 134, 528, 850, 40, {
+  text(slide, "Classroom rule: label approximations, keep cached mode ready, and write down what was actually computed.", 134, 528, 850, 40, {
     fontSize: 18,
     color: "#9a3412",
     valign: "middle",
@@ -784,38 +789,37 @@ function renderSummary(presentation, deck, item, slideNumber, total) {
 function renderClosing(presentation, deck, item, slideNumber, total) {
   const slide = presentation.slides.add();
   const theme = deckThemes[deck.id];
-  rect(slide, 0, 0, 1280, 720, theme.dark);
-  text(slide, theme.tag, 78, 64, 180, 30, {
+  rect(slide, 0, 0, 1280, 720, "#ffffff");
+  rect(slide, 0, 0, 1280, 90, theme.accent);
+  addUwMark(slide);
+  text(slide, theme.tag, 64, 30, 180, 30, {
     fontSize: 18,
     bold: true,
-    color: "#dbeafe",
+    color: "#ffffff",
   });
-  text(slide, item.title, 78, 142, 820, 108, {
+  text(slide, item.title, 64, 150, 820, 108, {
     fontSize: item.title.length > 72 ? 44 : 54,
     bold: true,
-    color: "#ffffff",
+    color: palette.ink,
     valign: "middle",
   });
+  rect(slide, 66, 276, 92, 7, theme.accent);
   const bulletCount = (item.bullets ?? []).length;
-  addBullets(slide, item.bullets ?? [], 88, bulletCount > 3 ? 300 : 318, 850, bulletCount > 3 ? 250 : 156, {
+  addBullets(slide, item.bullets ?? [], 74, bulletCount > 3 ? 330 : 342, 850, bulletCount > 3 ? 220 : 156, {
     theme,
-    dotColor: theme.accent2,
-    color: "#f8fafc",
+    dotColor: theme.accent,
+    color: palette.ink,
     fontSize: bulletCount > 3 ? 23 : 27,
     gap: 12,
     maxRowHeight: 64,
   });
-  rect(slide, 84, 626, 812, 4, theme.accent2);
-  text(slide, "Repo lab handoff: rerun, perturb, compare, explain.", 88, 648, 820, 30, {
-    fontSize: 24,
-    color: "#e5e7eb",
+  rect(slide, 68, 612, 812, 3, theme.accent);
+  text(slide, "Repo lab handoff: rerun, perturb, compare, explain.", 72, 636, 820, 30, {
+    fontSize: 22,
+    color: palette.uwGray,
     valign: "middle",
   });
-  text(slide, `${slideNumber}/${total}`, 1156, 662, 64, 24, {
-    fontSize: 14,
-    color: "#cbd5e1",
-    align: "right",
-  });
+  addSlideNumber(slide, slideNumber);
   return slide;
 }
 
@@ -854,7 +858,7 @@ async function renderSlide(presentation, deck, item, slideNumber, total) {
     case "closing":
       return renderClosing(presentation, deck, item, slideNumber, total);
     case "backup":
-      return renderGeneric(presentation, deck, { ...item, title: `Appendix: ${item.title}` }, slideNumber, total);
+      return renderGeneric(presentation, deck, item, slideNumber, total);
     case "concept":
     default:
       return renderGeneric(presentation, deck, item, slideNumber, total);

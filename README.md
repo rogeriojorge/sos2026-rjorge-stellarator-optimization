@@ -20,6 +20,7 @@ jupyter lab notebooks/
 
 Cached mode is enough for all classroom notebooks and does not require compiling scientific codes.
 The finished lecture decks are in `slides/pptx/`; open the `.pptx` files directly in PowerPoint.
+The notebooks in `notebooks/` are committed with cached-mode outputs so GitHub can render the lesson plots without a local run.
 
 ## Colab quickstart
 
@@ -42,6 +43,8 @@ python scripts/generate_all_figures.py
 python scripts/generate_movies.py
 python scripts/execute_notebooks_core.py
 python scripts/execute_all_notebooks.py
+python scripts/execute_notebooks_in_place.py
+python scripts/audit_notebook_outputs.py
 python scripts/make_status_report.py
 pytest -q
 ```

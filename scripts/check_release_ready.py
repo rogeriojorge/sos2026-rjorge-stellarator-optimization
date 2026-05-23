@@ -16,6 +16,9 @@ COMMANDS = [
     ("generate figures", [sys.executable, "scripts/generate_all_figures.py"]),
     ("generate movies", [sys.executable, "scripts/generate_movies.py"]),
     ("execute core notebooks", [sys.executable, "scripts/execute_notebooks_core.py"]),
+    ("execute all notebooks", [sys.executable, "scripts/execute_all_notebooks.py"]),
+    ("execute notebooks in place", [sys.executable, "scripts/execute_notebooks_in_place.py"]),
+    ("audit notebook outputs", [sys.executable, "scripts/audit_notebook_outputs.py"]),
     ("status report", [sys.executable, "scripts/make_status_report.py"]),
     ("pytest", [sys.executable, "-m", "pytest", "-q"]),
 ]

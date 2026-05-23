@@ -37,6 +37,8 @@ python scripts/generate_all_figures.py
 python scripts/generate_movies.py
 python scripts/execute_notebooks_core.py
 python scripts/execute_all_notebooks.py
+python scripts/execute_notebooks_in_place.py
+python scripts/audit_notebook_outputs.py
 pytest -q
 ```
 
@@ -44,6 +46,18 @@ To execute every notebook in cached mode after changing lesson content:
 
 ```bash
 python scripts/execute_all_notebooks.py
+```
+
+To refresh the outputs that are committed for GitHub rendering:
+
+```bash
+python scripts/execute_notebooks_in_place.py
+```
+
+Then audit the committed outputs:
+
+```bash
+python scripts/audit_notebook_outputs.py
 ```
 
 The generated PowerPoint decks are already tracked in `slides/pptx/`. To rebuild them after editing `slides/powerpoint/deck_spec.json`, run this inside the Codex desktop runtime:

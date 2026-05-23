@@ -49,6 +49,8 @@ def main() -> int:
     movies = load_json("movies.json", {"movies": sorted(p.name for p in MOVIE_DIR.glob("*.gif")), "results": []})
     notebooks = load_json("notebook_execution.json", [])
     notebooks_all = load_json("notebook_execution_all.json", [])
+    notebooks_in_place = load_json("notebook_execution_in_place.json", [])
+    notebook_audit = load_json("notebook_output_audit.json", [])
     powerpoint = load_json("powerpoint_decks.json", {})
 
     lines = []
@@ -101,6 +103,24 @@ def main() -> int:
             lines.append(f"- `{item.get('name')}`: {'OK' if item.get('ok') else 'FAIL'}")
             if item.get("error"):
                 lines.append(f"  - {item['error']}")
+    if notebooks_in_place:
+        lines.append("")
+        lines.append("Committed notebooks with rendered outputs:")
+        for item in notebooks_in_place:
+            output_count = item.get("outputs", 0)
+            lines.append(f"- `{item.get('name')}`: {'OK' if item.get('ok') else 'FAIL'}; {output_count} output objects saved in-place")
+            if item.get("error"):
+                lines.append(f"  - {item['error']}")
+    if notebook_audit:
+        lines.append("")
+        lines.append("Notebook output audit:")
+        for item in notebook_audit:
+            lines.append(
+                f"- `{item.get('name')}`: {'OK' if item.get('ok') else 'FAIL'}; "
+                f"{item.get('output_cells')} cells with outputs; {item.get('rich_outputs')} plot/table-rich outputs"
+            )
+            for error in item.get("errors", []):
+                lines.append(f"  - cell {error.get('cell')}: {error.get('ename')}: {error.get('evalue')}")
     lines.append("")
     lines.append("## PowerPoint Deck Status")
     lines.append("")
