@@ -331,82 +331,84 @@
           "kind": "summary"
         },
         {
-          "title": "Extra slide 1.37: metric acceptance checklist",
+          "title": "Metric acceptance checklist",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Cached figure: use for trend, sign, and classroom discussion",
+            "Real-code run: use for numerical claim, comparison, or publication",
+            "STATUS.md record: data source, package path, and validation domain"
           ],
-          "kind": "backup"
+          "kind": "table"
         },
         {
-          "title": "Extra slide 1.38: discussion prompt",
+          "title": "Example - what is inside a wout file?",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Boundary Fourier coefficients define the solved surface",
+            "Iota and profiles connect geometry to resonances and transport",
+            "Grid resolution and convergence decide whether a scalar is meaningful"
           ],
-          "kind": "backup"
+          "kind": "concept"
         },
         {
-          "title": "Extra slide 1.39: research-mode switch",
+          "title": "Example - Boozer modes to penalize",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Keep the symmetry-preserving line visible",
+            "Penalize off-line modes that grow with perturbations",
+            "Check mode truncation before trusting small differences"
           ],
-          "kind": "backup"
+          "kind": "concept"
         },
         {
-          "title": "Extra slide 1.40: wout inspection",
+          "title": "When cached mode is enough",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Explaining the loop structure",
+            "Testing plotting and data plumbing",
+            "Preparing exercises where the answer is qualitative"
           ],
-          "kind": "backup"
+          "kind": "warning"
         },
         {
-          "title": "Extra slide 1.41: Boozer inspection",
+          "title": "When research mode is needed",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Reporting a numerical value",
+            "Comparing HSX and W7-X quantitatively",
+            "Changing VMEC or Boozer resolution"
           ],
-          "kind": "backup"
+          "kind": "warning"
         },
         {
-          "title": "Extra slide 1.42: metric acceptance checklist",
+          "title": "Research path: VMEC_JAX to Boozer transform",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Start from a verified input or wout file",
+            "Run a tiny equilibrium or load a real cached equilibrium",
+            "Transform one surface to Boozer coordinates",
+            "Plot spectra before forming scalar objectives",
+            "Record the run mode and package versions"
           ],
-          "kind": "backup"
+          "kind": "ladder"
         },
         {
-          "title": "Extra slide 1.43: discussion prompt",
+          "title": "Discussion: what did the optimizer see?",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Design variables: boundary modes, profiles, currents",
+            "Computed object: equilibrium, surface labels, spectra",
+            "Decision variable: scalar objective plus validation gates"
           ],
-          "kind": "backup"
+          "kind": "table"
         },
         {
-          "title": "Extra slide 1.44: research-mode switch",
+          "title": "Lecture 1 take-home messages",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Optimization starts with a parameterization",
+            "A beautiful surface is not yet a validated design",
+            "Every scalar metric needs the plot that explains it"
           ],
-          "kind": "backup"
+          "kind": "summary"
         },
         {
-          "title": "Lecture 1 close",
+          "title": "Take-home message",
           "bullets": [
             "Keep the scientific object and the computed artifact together",
-            "Use the notebooks to rerun, perturb, compare, and explain"
+            "Rerun, perturb, compare, and explain before trusting the optimum"
           ],
           "kind": "closing"
         }
@@ -741,82 +743,84 @@
           "kind": "summary"
         },
         {
-          "title": "Extra slide 2.37: stage-2 objective terms",
+          "title": "Stage-2 objective terms",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Normal-field error: does the coil set produce the target boundary?",
+            "Length and curvature: can the coils be built and maintained?",
+            "Separation and access: can the device be assembled and diagnosed?"
           ],
-          "kind": "backup"
+          "kind": "table"
         },
         {
-          "title": "Extra slide 2.38: SIMSOPT research path",
+          "title": "Example - SIMSOPT research path",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Load the public QA target or a verified local input",
+            "Build curves, Biot-Savart fields, and objectives",
+            "Run a tiny optimization before trusting a longer run"
           ],
-          "kind": "backup"
+          "kind": "concept"
         },
         {
-          "title": "Extra slide 2.39: fieldline vs particle metrics",
+          "title": "Fieldlines and particles answer different questions",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Fieldlines expose islands, topology, and stochasticity",
+            "Particle orbits expose fast-ion and alpha-loss risks",
+            "Both diagnostics should be rerun after coil changes"
           ],
-          "kind": "backup"
+          "kind": "concept"
         },
         {
-          "title": "Extra slide 2.40: single-stage acceptance checks",
+          "title": "Single-stage acceptance checks",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "The plasma metric improves without hiding coil complexity",
+            "The coil metric improves without destroying confinement metrics",
+            "The combined gradient is checked against finite differences"
           ],
-          "kind": "backup"
+          "kind": "warning"
         },
         {
-          "title": "Extra slide 2.41: coil robustness",
+          "title": "Coil robustness outputs to track",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Manufacturing errors: sensitivity to shape perturbations",
+            "Current errors: sensitivity to power-supply and trim changes",
+            "Maintenance tolerance: clearance, curvature, and access"
           ],
-          "kind": "backup"
+          "kind": "table"
         },
         {
-          "title": "Extra slide 2.42: stage-2 objective terms",
+          "title": "Research path: from curves to field quality",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Choose a target boundary",
+            "Initialize coil curves with enough clearance",
+            "Compute B dot n maps on the surface",
+            "Optimize with explicit regularization",
+            "Rerun topology and particle checks"
           ],
-          "kind": "backup"
+          "kind": "ladder"
         },
         {
-          "title": "Extra slide 2.43: SIMSOPT research path",
+          "title": "Example - a coil set can win the wrong metric",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Lower B dot n can come with higher curvature",
+            "Smoother coils can miss the requested boundary",
+            "A first experiment needs both magnetic accuracy and engineering margin"
           ],
-          "kind": "backup"
+          "kind": "concept"
         },
         {
-          "title": "Extra slide 2.44: fieldline vs particle metrics",
+          "title": "Lecture 2 take-home messages",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Stage 2 turns a field design into hardware",
+            "Single-stage optimization changes the tradeoff surface",
+            "Coil simplicity is a physics constraint once the device must be built"
           ],
-          "kind": "backup"
+          "kind": "summary"
         },
         {
-          "title": "Lecture 2 close",
+          "title": "Take-home message",
           "bullets": [
             "Keep the scientific object and the computed artifact together",
-            "Use the notebooks to rerun, perturb, compare, and explain"
+            "Rerun, perturb, compare, and explain before trusting the optimum"
           ],
           "kind": "closing"
         }
@@ -1091,145 +1095,147 @@
           "kind": "summary"
         },
         {
-          "title": "Extra slide 3.30: neoclassical outputs to track",
+          "title": "Neoclassical outputs to track",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Effective ripple: low-collisionality transport screen",
+            "Ambipolar roots: radial electric-field validation",
+            "Bootstrap current: profile-dependent equilibrium feedback"
           ],
-          "kind": "backup"
+          "kind": "table"
         },
         {
-          "title": "Extra slide 3.31: turbulence outputs to track",
+          "title": "Turbulence outputs to track",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Linear growth rate: fast instability screen",
+            "Quasilinear weight: ranking hypothesis",
+            "Nonlinear heat flux: validation for finalists"
           ],
-          "kind": "backup"
+          "kind": "table"
         },
         {
-          "title": "Extra slide 3.32: fast-particle outputs to track",
+          "title": "Fast-particle outputs to track",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Alpha confinement: reactor-relevant loss gate",
+            "Wall loads: engineering and material constraint",
+            "Orbit classes: topology-sensitive diagnostic"
           ],
-          "kind": "backup"
+          "kind": "table"
         },
         {
-          "title": "Extra slide 3.33: cached-mode trust",
+          "title": "Cached transport metrics teach the hierarchy",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Use them to compare trends and failure modes",
+            "Use real code for numerical thresholds",
+            "Document which physics was omitted"
           ],
-          "kind": "backup"
+          "kind": "warning"
         },
         {
-          "title": "Extra slide 3.34: discussion prompt",
+          "title": "Discussion: what can reverse the ranking?",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "A neoclassical winner can lose on turbulence",
+            "A turbulence winner can fail alpha confinement",
+            "A profile change can move both metrics together"
           ],
-          "kind": "backup"
+          "kind": "concept"
         },
         {
-          "title": "Extra slide 3.35: neoclassical outputs to track",
+          "title": "Research path: NEO_JAX and SFINCS_JAX",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Choose the same equilibrium and flux surface",
+            "Scan collisionality and radial electric field",
+            "Compare compact metrics before detailed validation",
+            "Record roots, bootstrap current, and sensitivity"
           ],
-          "kind": "backup"
+          "kind": "ladder"
         },
         {
-          "title": "Extra slide 3.36: turbulence outputs to track",
+          "title": "Research path: SPECTRAX-GK",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Start with a tiny linear calculation",
+            "Plot growth rate and frequency versus ky",
+            "Compare proxy rankings with nonlinear expectations",
+            "Keep the nonlinear validation gate explicit"
           ],
-          "kind": "backup"
+          "kind": "ladder"
         },
         {
-          "title": "Extra slide 3.37: fast-particle outputs to track",
+          "title": "Example - W7-X as a validation reminder",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Neoclassical optimization is necessary",
+            "Ion-temperature clamping motivates turbulence checks",
+            "Profiles decide whether the metric matters experimentally"
           ],
-          "kind": "backup"
+          "kind": "concept"
         },
         {
-          "title": "Extra slide 3.38: cached-mode trust",
+          "title": "Metric trust ladder",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Screen: cached or reduced model trend",
+            "Ranking hypothesis: tiny or quasilinear run",
+            "Validation: expensive run or experimental comparison"
           ],
-          "kind": "backup"
+          "kind": "table"
         },
         {
-          "title": "Extra slide 3.39: discussion prompt",
+          "title": "How to read a fast metric",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Growth rate screens instability before heat-flux validation",
+            "A scalar ripple value should point back to where losses occur",
+            "A profile proxy should lead to a solved discharge model"
           ],
-          "kind": "backup"
+          "kind": "warning"
         },
         {
-          "title": "Extra slide 3.40: neoclassical outputs to track",
+          "title": "Example - profile dependence enters early",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Collisionality depends on density and temperature",
+            "Bootstrap current changes equilibrium assumptions",
+            "Turbulent heat flux changes the temperature profile"
           ],
-          "kind": "backup"
+          "kind": "concept"
         },
         {
-          "title": "Extra slide 3.41: turbulence outputs to track",
+          "title": "Before showing a transport number",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Equilibrium: which surface and which profiles?",
+            "Kinetics: which species and collisionality?",
+            "Validation: which expensive calculation confirms it?"
           ],
-          "kind": "backup"
+          "kind": "table"
         },
         {
-          "title": "Extra slide 3.42: fast-particle outputs to track",
+          "title": "Exercise extension - choose two gates",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Pick an early screen that runs in class",
+            "Pick a validation gate for finalists",
+            "Explain which design could fail each gate"
           ],
-          "kind": "backup"
+          "kind": "concept"
         },
         {
-          "title": "Extra slide 3.43: cached-mode trust",
+          "title": "Transport metrics are gates, not decorations",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Use cheap metrics to steer the search",
+            "Use expensive metrics to challenge finalists",
+            "Always record the physics omitted by the shortcut"
           ],
-          "kind": "backup"
+          "kind": "summary"
         },
         {
-          "title": "Extra slide 3.44: discussion prompt",
+          "title": "Lecture 3 take-home messages",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Neoclassical, turbulence, and particles enter at different costs",
+            "A design ranking is only as strong as its validation ladder",
+            "Profile assumptions should be visible on every transport claim"
           ],
-          "kind": "backup"
+          "kind": "summary"
         },
         {
-          "title": "Lecture 3 close",
+          "title": "Take-home message",
           "bullets": [
             "Keep the scientific object and the computed artifact together",
-            "Use the notebooks to rerun, perturb, compare, and explain"
+            "Rerun, perturb, compare, and explain before trusting the optimum"
           ],
           "kind": "closing"
         }
@@ -1564,100 +1570,101 @@
           "kind": "closing"
         },
         {
-          "title": "Extra slide 4.35: repo lab flow",
+          "title": "Repo lab flow",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Start cached and confirm the figure appears",
+            "Change one objective or weight",
+            "Regenerate the plot and write one defensible sentence"
           ],
-          "kind": "backup"
+          "kind": "concept"
         },
         {
-          "title": "Extra slide 4.36: status report anatomy",
+          "title": "STATUS.md anatomy",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Package status: what imported and what was skipped",
+            "Data status: what was real and what was synthetic",
+            "Notebook status: what ran and what saved outputs"
           ],
-          "kind": "backup"
+          "kind": "table"
         },
         {
-          "title": "Extra slide 4.37: live-demo abort criteria",
+          "title": "Live-demo abort criteria",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "A package starts compiling during class",
+            "A notebook loses its cached fallback",
+            "A result is numerical but the validation path is missing"
           ],
-          "kind": "backup"
+          "kind": "warning"
         },
         {
-          "title": "Extra slide 4.38: next manual steps before school",
+          "title": "Manual steps before the school",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Choose the lecture machine and environment",
+            "Pre-fetch equilibria and verify notebooks render",
+            "Decide which research-mode demos are worth running live",
+            "Freeze the branch or tag used for the school"
           ],
-          "kind": "backup"
+          "kind": "ladder"
         },
         {
-          "title": "Extra slide 4.39: discussion prompt",
+          "title": "Discussion: what is a credible design argument?",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Show the boundary and the coils",
+            "Show the metrics that improve and the metrics that fail",
+            "Show the final choice on a Pareto plot"
           ],
-          "kind": "backup"
+          "kind": "concept"
         },
         {
-          "title": "Extra slide 4.40: repo lab flow",
+          "title": "What belongs in git",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Small inputs: versioned and documented",
+            "Cached data: labeled educational fallback",
+            "Large outputs: regenerated by scripts and ignored"
           ],
-          "kind": "backup"
+          "kind": "table"
         },
         {
-          "title": "Extra slide 4.41: status report anatomy",
+          "title": "Example - replace one cached artifact",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Run the real package for one surface",
+            "Save a small processed array with provenance",
+            "Update STATUS.md before changing the slide"
           ],
-          "kind": "backup"
+          "kind": "concept"
         },
         {
-          "title": "Extra slide 4.42: live-demo abort criteria",
+          "title": "Pareto decisions need context",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Weights express a design choice",
+            "Nondominated points still need validation",
+            "The final design must survive new constraints"
           ],
-          "kind": "backup"
+          "kind": "warning"
         },
         {
-          "title": "Extra slide 4.43: next manual steps before school",
+          "title": "After the school: turn lessons into research runs",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "Replace cached arrays one package at a time",
+            "Keep notebook exercises stable for students",
+            "Add validation artifacts before strengthening claims"
           ],
-          "kind": "backup"
+          "kind": "summary"
         },
         {
-          "title": "Extra slide 4.44: discussion prompt",
+          "title": "Lecture 4 take-home messages",
           "bullets": [
-            "What would you trust in cached mode?",
-            "What would require a real-code run?",
-            "Which diagnostic should be recorded in STATUS.md?"
+            "The design loop closes only after profiles and decisions",
+            "The repo is the lab manual and the audit trail",
+            "A credible optimum is a reproducible argument"
           ],
-          "kind": "backup"
+          "kind": "summary"
         },
         {
-          "title": "Lecture 4 close",
+          "title": "Take-home message",
           "bullets": [
             "Keep the scientific object and the computed artifact together",
-            "Use the notebooks to rerun, perturb, compare, and explain"
+            "Rerun, perturb, compare, and explain before trusting the optimum"
           ],
           "kind": "closing"
         }

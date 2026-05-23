@@ -11,7 +11,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from sos2026.paths import CACHE_DIR, STATUS_DIR, ensure_directories
-from sos2026.plotting import PALETTE, savefig, caption, plot_surface_3d, plot_iota_profile, plot_boozer_contour, plot_boozer_spectrum
+from sos2026.plotting import PALETTE, savefig, caption, fix_matplotlib_3d, plot_surface_3d, plot_iota_profile, plot_boozer_contour, plot_boozer_spectrum
 from sos2026.vmec_helpers import synthetic_surface, load_iota_profile, boundary_mode_scan
 from sos2026.boozer_helpers import synthetic_boozer_modes, compute_boozer_grid, symmetry_residual
 from sos2026.neo_helpers import epsilon_eff_curves, epsilon_sensitivity
@@ -68,6 +68,7 @@ def plot_coils():
             ax.plot(curve[:, 0], curve[:, 1], curve[:, 2], lw=2.0)
         ax.set_title(f"{stage.capitalize()} synthetic stage-2 coils")
         ax.set_axis_off()
+        fix_matplotlib_3d(ax)
         ax.view_init(elev=24, azim=36)
         savefig(fig, name)
     fig, axes = plt.subplots(1, 2, figsize=(9.2, 3.8), sharex=True, sharey=True)
@@ -133,6 +134,7 @@ def plot_fieldlines_particles():
     ax.plot(x, y, z, color=PALETTE["teal"], lw=1.0)
     ax.set_title("Cached fieldline diagnostic")
     ax.set_axis_off()
+    fix_matplotlib_3d(ax)
     savefig(fig, "06_fieldlines.png")
     t = np.linspace(0, 2 * np.pi, 300)
     fig, ax = plt.subplots(figsize=(5.8, 4.2))

@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import imageio.v2 as imageio
 
 from .paths import MOVIE_DIR, ensure_directories
+from .plotting import fix_matplotlib_3d
 from .vmec_helpers import synthetic_surface
 from .coil_helpers import coil_curves
 
@@ -31,6 +32,7 @@ def rotating_surface_gif(path: Path | None = None, frames: int = 28) -> Path:
             ax.plot(curve[:, 0], curve[:, 1], curve[:, 2], color="#111827", lw=1.0, alpha=0.75)
         ax.set_axis_off()
         ax.set_title("Cached rotating surface and coils", fontsize=11)
+        fix_matplotlib_3d(ax)
         ax.view_init(elev=22, azim=float(azim))
         imgs.append(_frame_from_figure(fig))
         plt.close(fig)

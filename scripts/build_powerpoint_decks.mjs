@@ -18,8 +18,8 @@ const SLIDE_SIZE = { width: 1280, height: 720 };
 
 const transparent = "#00000000";
 const palette = {
-  paper: "#ffffff",
-  paperWarm: "#ffffff",
+  paper: "#fefefe",
+  paperWarm: "#fefefe",
   ink: "#2b2b2b",
   muted: "#6f6f6f",
   faint: "#dddddd",
@@ -397,7 +397,6 @@ async function renderFigure(presentation, deck, item, slideNumber, total) {
   const slide = presentation.slides.add();
   const theme = deckThemes[deck.id];
   rect(slide, 0, 0, 1280, 720, palette.paper);
-  addPageTitle(slide, deck, item, slideNumber, total);
   rect(slide, 44, 168, 742, 430, "#ffffff", "#d0d0d0", 1);
   if (item.image) await addImage(slide, item.image, 64, 188, 702, 386, { fit: "contain" });
   text(slide, "How to read it", 830, 170, 320, 28, {
@@ -416,6 +415,7 @@ async function renderFigure(presentation, deck, item, slideNumber, total) {
     color: palette.uwGray,
     valign: "middle",
   });
+  addPageTitle(slide, deck, item, slideNumber, total);
   addFooter(slide, deck, slideNumber);
   return slide;
 }
@@ -575,7 +575,6 @@ function renderWarning(presentation, deck, item, slideNumber, total) {
   const slide = presentation.slides.add();
   const theme = deckThemes[deck.id];
   rect(slide, 0, 0, 1280, 720, "#fff7ed");
-  addPageTitle(slide, deck, item, slideNumber, total);
   const warningBullets = item.bullets ?? [];
   rect(slide, 88, 178, 1020, 410, "#ffffff", "#fed7aa", 2);
   rect(slide, 88, 178, 18, 410, palette.amber);
@@ -597,6 +596,7 @@ function renderWarning(presentation, deck, item, slideNumber, total) {
     color: "#9a3412",
     valign: "middle",
   });
+  addPageTitle(slide, deck, item, slideNumber, total);
   addFooter(slide, deck, slideNumber);
   return slide;
 }

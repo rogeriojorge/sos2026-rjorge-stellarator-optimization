@@ -91,7 +91,7 @@ Editable PowerPoint decks are tracked in `slides/pptx/`, with contact sheets in 
 
 ## Documentation
 
-Start with `docs/install.md`, then use `docs/instructor_checklist.md`, `docs/live_demo_matrix.md`, `docs/code_stack.md`, `docs/data_sources.md`, `docs/teaching_notes.md`, `docs/troubleshooting.md`, and `docs/references.md`.
+Start with `docs/install.md`, then use `docs/instructor_checklist.md`, `docs/live_demo_matrix.md`, `docs/code_stack.md`, `docs/data_sources.md`, `docs/teaching_notes.md`, `docs/troubleshooting.md`, and `docs/references.md`. The repository includes `.readthedocs.yaml` and `docs/conf.py` so Read the Docs can build the same documentation after the project is enabled there.
 
 ## Honesty policy
 

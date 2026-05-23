@@ -7,6 +7,18 @@ from pathlib import Path
 
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
+import numpy as np
+
+
+def composite_on_white(image):
+    if image.ndim != 3 or image.shape[2] < 4:
+        return image
+    rgb = image[..., :3]
+    alpha = image[..., 3:4]
+    if image.dtype.kind in {"u", "i"}:
+        rgb = rgb.astype(float) / 255.0
+        alpha = alpha.astype(float) / 255.0
+    return rgb * alpha + np.ones_like(rgb) * (1.0 - alpha)
 
 
 def parse_args() -> argparse.Namespace:
@@ -30,7 +42,7 @@ def main() -> int:
     flat_axes = axes.ravel() if hasattr(axes, "ravel") else [axes]
 
     for ax, image_path in zip(flat_axes, image_paths):
-        image = mpimg.imread(image_path)
+        image = composite_on_white(mpimg.imread(image_path))
         ax.imshow(image)
         ax.set_title(f"Slide {image_paths.index(image_path) + 1:02d}", fontsize=8, loc="left", pad=2)
         ax.axis("off")

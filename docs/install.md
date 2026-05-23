@@ -20,7 +20,7 @@ python scripts/check_release_ready.py
 
 ## Colab setup
 
-```python
+```text
 !git clone https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization.git
 %cd sos2026-rjorge-stellarator-optimization
 !pip install -r requirements-colab.txt -e .

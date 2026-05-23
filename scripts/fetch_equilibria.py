@@ -8,6 +8,7 @@ import argparse
 import json
 import shutil
 import urllib.request
+import warnings
 from pathlib import Path
 
 from sos2026.paths import PROJECT_ROOT, STATUS_DIR, VMEC_DIR, INPUT_DIR, ensure_directories
@@ -58,9 +59,16 @@ def raw_urls(repo: str, path: str):
 
 def validate_netcdf(path: Path) -> str:
     try:
-        import xarray as xr
-        with xr.open_dataset(path) as ds:
-            return f"netCDF OK; variables={len(ds.variables)}"
+        with warnings.catch_warnings():
+            warnings.filterwarnings(
+                "ignore",
+                message=".*pynvml package is deprecated.*",
+                category=FutureWarning,
+            )
+            import xarray as xr
+
+            with xr.open_dataset(path) as ds:
+                return f"netCDF OK; variables={len(ds.variables)}"
     except Exception as exc:
         return f"netCDF validation failed: {type(exc).__name__}: {exc}"
 
