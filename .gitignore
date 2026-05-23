@@ -20,6 +20,14 @@ sos2026_codex_prompt_package/
 *.pdf
 *.pptx
 *.ppt
+~$*.pptx
+~$*.ppt
+!slides/pptx/
+!slides/pptx/*.pptx
+!slides/pptx/contact_sheets/
+!slides/pptx/contact_sheets/*.png
+slides/pptx/~$*.pptx
+slides/pptx/~$*.ppt
 *.zip
 *.tar
 *.tar.gz

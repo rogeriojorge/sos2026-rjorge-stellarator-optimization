@@ -1,0 +1,1691 @@
+{
+  "decks": [
+    {
+      "id": "lecture_1_geometry_metrics",
+      "title": "Lecture 1 - Geometry, Equilibria, Boozer Coordinates, Metrics",
+      "slides": [
+        {
+          "title": "Stellarator optimization as a computational design loop",
+          "bullets": [
+            "Four 90-minute lectures: from equilibrium objects to Pareto decisions",
+            "Default path: cached, honest, runnable; research path: optional live codes"
+          ],
+          "kind": "title",
+          "image": "assets/figures/01_hsx_surface.png",
+          "subtitle": "Lecture 1: geometry, equilibria, Boozer coordinates, metrics"
+        },
+        {
+          "title": "Rogerio teaches the optimizer view of stellarator physics",
+          "bullets": [
+            "Arturo: geometry and magnetic coordinates",
+            "Alessandro: neoclassical and turbulent transport",
+            "This block: how those quantities become objectives, constraints, and validation gates"
+          ],
+          "kind": "map"
+        },
+        {
+          "title": "A modern design is a reproducible loop, not one optimized surface",
+          "bullets": [
+            "equilibrium -> Boozer spectrum -> neoclassical metrics -> coils -> turbulence metrics -> profiles -> Pareto decisions",
+            "Each arrow creates a data artifact that must be checked and versioned"
+          ],
+          "kind": "workflow"
+        },
+        {
+          "title": "The inverse problem starts with choices, not equations",
+          "bullets": [
+            "Choose boundary variables, profiles, currents, and coils",
+            "Ask which physics model is trusted at this stage",
+            "Record the assumptions before minimizing a number"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "The optimizer sees parameter vectors and diagnostics",
+          "bullets": [
+            "Boundary Fourier modes",
+            "Pressure/current profiles",
+            "Equilibrium residuals",
+            "iota, aspect ratio, volume, beta, magnetic well"
+          ],
+          "kind": "diagram"
+        },
+        {
+          "title": "Boundary Fourier modes are design variables with physics consequences",
+          "bullets": [
+            "Small changes can modify symmetry, aspect ratio, and resonances at the same time",
+            "That coupling is why one-objective slides are misleading"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "Profiles are part of the equilibrium object",
+          "bullets": [
+            "Pressure and current profiles can change rotational transform and stability",
+            "A boundary-only story is a useful first approximation, not a full design"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "VMEC is the first computational gate",
+          "bullets": [
+            "Input: boundary and radial profiles",
+            "Output: nested-surface equilibrium and `wout` file",
+            "Teaching fallback: read public `wout` files or use labeled synthetic surfaces"
+          ],
+          "kind": "code"
+        },
+        {
+          "title": "The `wout` file is a checked artifact",
+          "bullets": [
+            "Inspect dimensions, variables, iota profile, aspect ratio, and surface geometry",
+            "Do not treat an equilibrium file as a black box"
+          ],
+          "kind": "code"
+        },
+        {
+          "title": "HSX QHS is the compact live thread",
+          "bullets": [
+            "Small stellarator case",
+            "Natural quasisymmetry example",
+            "Used across equilibrium, Boozer, and neoclassical metric notebooks"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/01_hsx_surface.png"
+        },
+        {
+          "title": "Rotational transform is a profile, not a caption",
+          "bullets": [
+            "It controls field-line pitch and resonance exposure",
+            "It can be targeted, constrained, or monitored during optimization"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/01_iota_profile.png"
+        },
+        {
+          "title": "Equilibrium failure is a teaching feature",
+          "bullets": [
+            "Non-convergence is information",
+            "Bad resolution can produce attractive but false metrics",
+            "Cached mode lets the lecture continue while preserving the warning"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "Notebook project: first equilibrium object",
+          "bullets": [
+            "Load HSX `wout` if available",
+            "Plot LCFS and iota profile",
+            "Change one boundary-mode proxy and inspect metric coupling"
+          ],
+          "kind": "project",
+          "project": "notebooks/01_vmec_jax_first_equilibrium.ipynb"
+        },
+        {
+          "title": "Boozer coordinates are where symmetry becomes measurable",
+          "bullets": [
+            "Many design targets are statements about |B| in special coordinates",
+            "The spectrum separates symmetry-preserving and symmetry-breaking modes"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "A Boozer contour gives a fast visual check",
+          "bullets": [
+            "Clean bands suggest dominant intended symmetry",
+            "Damaged bands reveal off-symmetry content before reading a scalar residual"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/02_boozer_contour.png"
+        },
+        {
+          "title": "A Boozer spectrum gives the optimizer a target",
+          "bullets": [
+            "Dominant symmetry line: protect it",
+            "Off-line modes: penalize them",
+            "Weights encode physics judgment"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/02_boozer_spectrum.png"
+        },
+        {
+          "title": "Quasisymmetry is not one number",
+          "bullets": [
+            "QA, QH, and QP imply different mode structure",
+            "The chosen residual must match the intended symmetry family"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "Quasi-isodynamic and omnigenous ideas enter as gates",
+          "bullets": [
+            "Use enough theory to state the design target",
+            "Leave full derivations to the geometry and transport lectures"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "A compact residual is useful only with a mode audit",
+          "bullets": [
+            "Which modes were retained?",
+            "Which surface was used?",
+            "Was transform convergence checked?"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "Notebook project: Boozer spectrum",
+          "bullets": [
+            "Generate `B(theta,zeta)` from cached modes",
+            "Identify symmetry-breaking modes",
+            "Perturb one bad mode and watch the residual rise"
+          ],
+          "kind": "project",
+          "project": "notebooks/02_boozer_spectrum.ipynb"
+        },
+        {
+          "title": "Neoclassical theory becomes an optimization metric through compression",
+          "bullets": [
+            "Effective ripple summarizes a piece of low-collisionality transport risk",
+            "It is a screen, not a full transport solution"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "Effective ripple compares configurations as profiles",
+          "bullets": [
+            "Profile shape matters: edge and core can rank differently",
+            "A single scalar score hides where the risk lives"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/03_epsilon_eff_comparison.png"
+        },
+        {
+          "title": "Sensitivity matters more than the absolute cached value",
+          "bullets": [
+            "A useful metric tells the optimizer which direction is worse",
+            "Finite differences are enough for the teaching version"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/03_epsilon_eff_sensitivity.png"
+        },
+        {
+          "title": "Metric hierarchy is a cost hierarchy",
+          "bullets": [
+            "Geometry and Boozer metrics are cheap",
+            "NEO-like metrics are early transport screens",
+            "DKE/GK/profile calculations are validation gates"
+          ],
+          "kind": "ladder"
+        },
+        {
+          "title": "Gradients are not a mathematical luxury",
+          "bullets": [
+            "Finite differences are robust but expensive",
+            "Adjoints and autodiff make larger design spaces practical",
+            "Gradient quality must be checked against physics fidelity"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "Autodiff changes the coding contract",
+          "bullets": [
+            "Every operation in the objective must be differentiable or isolated",
+            "Cached mode teaches structure; research mode tests differentiability"
+          ],
+          "kind": "code"
+        },
+        {
+          "title": "The scalar objective is a negotiation",
+          "bullets": [
+            "J = magnetic quality + profile targets + coil risk + transport gates",
+            "Weights are values and risk choices, not constants of nature"
+          ],
+          "kind": "diagram"
+        },
+        {
+          "title": "Never optimize a metric you cannot explain",
+          "bullets": [
+            "Metric definition",
+            "Validation domain",
+            "Sensitivity direction",
+            "Known failure mode"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "Data provenance is a scientific result",
+          "bullets": [
+            "Real public HSX and W7-X files are fetched by script",
+            "Synthetic/cached arrays are labeled and documented in STATUS.md"
+          ],
+          "kind": "code"
+        },
+        {
+          "title": "Computational checkpoint for lecture 1",
+          "bullets": [
+            "Run environment check",
+            "Fetch equilibria",
+            "Generate figures",
+            "Open notebooks 01-03"
+          ],
+          "kind": "project",
+          "project": "scripts/check_release_ready.py"
+        },
+        {
+          "title": "Exercise: change a boundary mode",
+          "bullets": [
+            "Predict which metrics move first",
+            "Regenerate the surface and mode-scan figure",
+            "State what the toy model cannot prove"
+          ],
+          "kind": "exercise"
+        },
+        {
+          "title": "Exercise: circle the bad Boozer modes",
+          "bullets": [
+            "Which modes preserve the target symmetry?",
+            "Which modes would you penalize?",
+            "What happens if one bad mode triples?"
+          ],
+          "kind": "exercise"
+        },
+        {
+          "title": "Common trap: clean plot, weak artifact",
+          "bullets": [
+            "A nice contour is not enough",
+            "You need the input, mode truncation, surface choice, and convergence status"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "Common trap: treating cached curves as results",
+          "bullets": [
+            "Cached figures are educational objects",
+            "They keep the lecture reproducible",
+            "They do not replace verified code outputs"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "Transition: a boundary is not a device",
+          "bullets": [
+            "An optimized plasma boundary still needs coils",
+            "Stage-2 coil design can damage the stage-1 target"
+          ],
+          "kind": "transition",
+          "image": "assets/figures/04_initial_coils.png"
+        },
+        {
+          "title": "Lecture 1 notebook map",
+          "bullets": [
+            "00 environment",
+            "01 equilibrium",
+            "02 Boozer spectrum",
+            "03 effective ripple"
+          ],
+          "kind": "table"
+        },
+        {
+          "title": "Five rules from lecture 1",
+          "bullets": [
+            "Use artifacts, not screenshots",
+            "Name the design variables",
+            "Plot profiles, not only scalars",
+            "State the validation domain",
+            "Keep cached mode honest"
+          ],
+          "kind": "summary"
+        },
+        {
+          "title": "Backup: when to switch to research mode",
+          "bullets": [
+            "Package imports are not enough",
+            "Time a tiny run before class",
+            "Keep a cached plot ready for every live calculation"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Backup: what to inspect in a `wout` file",
+          "bullets": [
+            "dimensions",
+            "iota",
+            "boundary coefficients",
+            "volume/aspect",
+            "beta and pressure-current profiles"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Backup: what to inspect in a Boozer file",
+          "bullets": [
+            "surface labels",
+            "nfp",
+            "mode truncation",
+            "B00",
+            "dominant and off-symmetry modes"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Backup: metric acceptance checklist",
+          "bullets": [
+            "Does it move with the intended design variable?",
+            "Does it fail on known bad cases?",
+            "Does it correlate with a higher-fidelity gate?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L1.42: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L1.43: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L1.44: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Lecture 1 close",
+          "bullets": [
+            "A stellarator optimizer is only as good as its artifacts",
+            "Next: the plasma boundary has to be produced by coils"
+          ],
+          "kind": "closing",
+          "image": "assets/figures/02_boozer_spectrum.png"
+        }
+      ]
+    },
+    {
+      "id": "lecture_2_coils_single_stage",
+      "title": "Lecture 2 - Coils, Quadratic Flux, Single-Stage Optimization",
+      "slides": [
+        {
+          "title": "A plasma boundary is a wish; coils are the contract",
+          "bullets": [
+            "Lecture 2 turns target fields into buildable magnetic hardware",
+            "The central metric is `B dot n`, but the constraints are engineering-heavy"
+          ],
+          "kind": "title",
+          "image": "assets/figures/04_final_coils.png",
+          "subtitle": "Lecture 2: coils, stage-2 optimization, single-stage design"
+        },
+        {
+          "title": "Stage 1, stage 2, and single stage answer different questions",
+          "bullets": [
+            "Stage 1: which plasma boundary is attractive?",
+            "Stage 2: which coils can make it?",
+            "Single stage: can plasma and coils improve together?"
+          ],
+          "kind": "map"
+        },
+        {
+          "title": "The coil inverse problem is ill-posed",
+          "bullets": [
+            "Many current distributions can approximate the same field",
+            "Regularization decides which solutions are buildable"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "Quadratic flux is the basic stage-2 score",
+          "bullets": [
+            "Measure normal-field error on the target surface",
+            "Low `B dot n` means the field respects the requested boundary"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "Current-potential methods regularize a surface current",
+          "bullets": [
+            "NESCOIL and REGCOIL logic: solve for currents on a winding surface",
+            "Regularization trades field accuracy for smoother current patterns"
+          ],
+          "kind": "diagram"
+        },
+        {
+          "title": "Filamentary coils convert fields into curves",
+          "bullets": [
+            "Curves have length, curvature, torsion, and separation",
+            "A field target can be easy for a surface current and hard for discrete coils"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "SIMSOPT is the mature stage-2 teaching path",
+          "bullets": [
+            "Geometry objects, curves, Biot-Savart fields, objectives, optimization loops",
+            "Research mode should use the verified public QA input"
+          ],
+          "kind": "code"
+        },
+        {
+          "title": "Notebook project: SIMSOPT stage-2 coils",
+          "bullets": [
+            "Load public QA input or cached coil fallback",
+            "Plot initial/final coils",
+            "Compare normal-field error before and after"
+          ],
+          "kind": "project",
+          "project": "notebooks/04_simsopt_stage2_coils.ipynb"
+        },
+        {
+          "title": "Initial coils show the geometry before optimization",
+          "bullets": [
+            "The teaching curves are simple enough to inspect",
+            "The real lesson is the diagnostic grammar"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/04_initial_coils.png"
+        },
+        {
+          "title": "Final coils reduce field error but keep complexity visible",
+          "bullets": [
+            "A coil plot without diagnostics is incomplete",
+            "Students should ask: length, curvature, clearance, ports"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/04_final_coils.png"
+        },
+        {
+          "title": "Normal-field maps reveal what the coil picture hides",
+          "bullets": [
+            "Before/after maps show where the target surface is damaged",
+            "Local hot spots matter for robustness"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/04_bdotn_before_after.png"
+        },
+        {
+          "title": "Coil regularization is a Pareto problem",
+          "bullets": [
+            "Shorter/smoother coils can worsen field accuracy",
+            "A single optimum hides a design choice"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/04_coil_tradeoff.png"
+        },
+        {
+          "title": "Coil complexity has multiple dimensions",
+          "bullets": [
+            "Length",
+            "Maximum curvature",
+            "Mean-squared curvature",
+            "Torsion",
+            "Coil-to-coil and coil-to-surface separation"
+          ],
+          "kind": "table"
+        },
+        {
+          "title": "Ports and maintenance enter earlier than we wish",
+          "bullets": [
+            "Access constraints can invalidate attractive coil sets",
+            "Use engineering constraints as penalties or hard gates"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "HTS tapes add orientation and strain constraints",
+          "bullets": [
+            "A reactor coil is not a mathematical filament",
+            "Curvature and force metrics must eventually become mechanical checks"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "Fieldlines are coil diagnostics, not decoration",
+          "bullets": [
+            "They reveal islands, stochasticity, and topology changes",
+            "They do not guarantee particle confinement"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "Notebook project: ESSOS fieldlines and particles",
+          "bullets": [
+            "Plot cached fieldline/orbit diagnostics",
+            "Use ESSOS in research mode only after timing",
+            "Discuss fast-particle relevance for reactors"
+          ],
+          "kind": "project",
+          "project": "notebooks/06_essos_fieldlines_particles.ipynb"
+        },
+        {
+          "title": "Fieldline tracing gives a topology sanity check",
+          "bullets": [
+            "Good fieldlines support the coil story",
+            "Bad topology catches failures a scalar map can miss"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/06_fieldlines.png"
+        },
+        {
+          "title": "Particle confinement can fail after good fieldlines",
+          "bullets": [
+            "Fast-ion and alpha-particle losses are reactor gates",
+            "Guiding-center/full-orbit fidelity should be chosen deliberately"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/06_particle_orbit.png"
+        },
+        {
+          "title": "Two-stage optimization can lose the plasma target",
+          "bullets": [
+            "Stage 1 may find a boundary no reasonable coils can make",
+            "Stage 2 may return coils that damage the original objective"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "Single-stage optimization keeps coils in the loop",
+          "bullets": [
+            "Boundary variables and coil variables move together",
+            "`J = J_plasma + w_flux J_flux + w_coil J_coil`"
+          ],
+          "kind": "diagram"
+        },
+        {
+          "title": "Notebook project: single-stage toy",
+          "bullets": [
+            "Plot objective pieces separately",
+            "Vary the flux penalty weight",
+            "Identify the penalty that prevents unbuildable solutions"
+          ],
+          "kind": "project",
+          "project": "notebooks/05_single_stage_toy.ipynb"
+        },
+        {
+          "title": "Objective histories expose hidden tradeoffs",
+          "bullets": [
+            "The total objective can decrease while one term stalls",
+            "Plot terms, not just the sum"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/05_single_stage_history.png"
+        },
+        {
+          "title": "Weight continuation is a design instrument",
+          "bullets": [
+            "Start from an easier problem",
+            "Increase the coupling or constraint weight",
+            "Watch which term starts controlling the solution"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/05_weight_continuation.png"
+        },
+        {
+          "title": "Direct coil optimization changes the gradient story",
+          "bullets": [
+            "Biot-Savart fields are differentiable",
+            "Fieldline and particle objectives can be differentiated in JAX workflows",
+            "Gradient accuracy still needs validation"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "Do not confuse differentiable with correct",
+          "bullets": [
+            "Autodiff gives derivatives of the implemented model",
+            "The implemented model still has a validity domain"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "Robustness is a stage-2 metric",
+          "bullets": [
+            "Manufacturing errors",
+            "Current perturbations",
+            "Coil misalignment",
+            "Maintenance tolerances"
+          ],
+          "kind": "table"
+        },
+        {
+          "title": "A coil objective needs units and scales",
+          "bullets": [
+            "Length in meters",
+            "Curvature in inverse meters",
+            "Flux error normalized to field scale",
+            "Separation in centimeters"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "Computational checkpoint for lecture 2",
+          "bullets": [
+            "Run notebooks 04, 05, 06 in cached mode",
+            "Regenerate coil and fieldline figures",
+            "Record which paths are cached vs live"
+          ],
+          "kind": "project",
+          "project": "scripts/generate_all_figures.py"
+        },
+        {
+          "title": "Exercise: increase length penalty",
+          "bullets": [
+            "What improves?",
+            "What worsens?",
+            "Which metric would you plot before choosing?"
+          ],
+          "kind": "exercise"
+        },
+        {
+          "title": "Exercise: choose a coil set",
+          "bullets": [
+            "Design A: lower `B dot n`, higher curvature",
+            "Design B: smoother, worse flux",
+            "Which one survives a first experiment?"
+          ],
+          "kind": "exercise"
+        },
+        {
+          "title": "Common trap: beautiful coils without a target-surface map",
+          "bullets": [
+            "A coil rendering can hide normal-field hot spots",
+            "Always pair coil geometry with `B dot n` or flux diagnostics"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "Common trap: no separation metric",
+          "bullets": [
+            "Coils can cross or approach each other in mathematical optimization",
+            "A physical design needs clearance constraints"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "From coils to transport",
+          "bullets": [
+            "A buildable field is not automatically a good confinement field",
+            "Next lecture: transport metrics become objective functions and gates"
+          ],
+          "kind": "transition",
+          "image": "assets/figures/03_epsilon_eff_comparison.png"
+        },
+        {
+          "title": "Lecture 2 notebook map",
+          "bullets": [
+            "04 stage-2 coils",
+            "05 single-stage toy",
+            "06 fieldlines and particles",
+            "11 Pareto dashboard preview"
+          ],
+          "kind": "table"
+        },
+        {
+          "title": "Five rules from lecture 2",
+          "bullets": [
+            "Pair every boundary with coils",
+            "Plot `B dot n` maps",
+            "Keep coil complexity explicit",
+            "Use continuation for coupled objectives",
+            "Treat engineering as a gate"
+          ],
+          "kind": "summary"
+        },
+        {
+          "title": "Backup: stage-2 objective terms",
+          "bullets": [
+            "quadratic flux",
+            "length",
+            "curvature",
+            "separation",
+            "linking/topology constraints"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Backup: SIMSOPT research path",
+          "bullets": [
+            "Use public QA input",
+            "Start with a tiny replay",
+            "Do not run a long optimization live without cached fallback"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Backup: fieldline vs particle metrics",
+          "bullets": [
+            "Fieldline: topology",
+            "Guiding-center: fast-ion screen",
+            "Full orbit: validation",
+            "Wall map: engineering risk"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Backup: single-stage acceptance checks",
+          "bullets": [
+            "terms decrease together",
+            "no unbuildable coil geometry",
+            "target surface preserved",
+            "robustness not worse"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L2.41: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L2.42: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L2.43: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L2.44: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Lecture 2 close",
+          "bullets": [
+            "Coils turn a magnetic design into a device claim",
+            "Next: transport physics tests whether the field is worth building"
+          ],
+          "kind": "closing",
+          "image": "assets/figures/04_bdotn_before_after.png"
+        }
+      ]
+    },
+    {
+      "id": "lecture_3_transport_turbulence_metrics",
+      "title": "Lecture 3 - Neoclassical, Turbulence, Fast-Particle Metrics",
+      "slides": [
+        {
+          "title": "Transport physics becomes optimization metrics",
+          "bullets": [
+            "Lecture 3 treats neoclassical, turbulence, and fast particles as metrics and validation gates",
+            "The goal is not to rederive DKE or GK, but to use them responsibly"
+          ],
+          "kind": "title",
+          "image": "assets/figures/09_proxy_vs_nonlinear.png",
+          "subtitle": "Lecture 3: neoclassical, turbulence, fast-particle metrics"
+        },
+        {
+          "title": "Use a cost hierarchy, not one favorite code",
+          "bullets": [
+            "Geometry metrics are cheap",
+            "Boozer and effective-ripple metrics screen designs",
+            "DKE, gyrokinetics, particles, and profiles validate finalists"
+          ],
+          "kind": "ladder"
+        },
+        {
+          "title": "Neoclassical recap for optimizers",
+          "bullets": [
+            "Symmetry breaking produces trapped-particle radial drifts",
+            "Effective ripple compresses one transport risk",
+            "Ambipolar electric fields and bootstrap current need richer models"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "Effective ripple is an early design screen",
+          "bullets": [
+            "Useful: fast, profile-like, interpretable",
+            "Insufficient: does not replace a transport matrix or experiment"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/03_epsilon_eff_comparison.png"
+        },
+        {
+          "title": "NEO_JAX and SFINCS_JAX have different roles",
+          "bullets": [
+            "NEO_JAX: compact effective-ripple diagnostics",
+            "SFINCS_JAX: richer radially local drift-kinetic validation"
+          ],
+          "kind": "table"
+        },
+        {
+          "title": "Notebook project: SFINCS-JAX cached validation",
+          "bullets": [
+            "Read a collisionality scan",
+            "Inspect Er roots",
+            "Plot a bootstrap-current proxy"
+          ],
+          "kind": "project",
+          "project": "notebooks/07_sfincs_jax_neoclassical_cached.ipynb"
+        },
+        {
+          "title": "A D11-like scan teaches the validation shape",
+          "bullets": [
+            "Transport coefficients change across regimes",
+            "Suppression mechanisms are profile and field dependent"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/07_sfincs_d11_scan.png"
+        },
+        {
+          "title": "Ambipolar Er roots are not decorative",
+          "bullets": [
+            "Multiple roots can imply different impurity and turbulence behavior",
+            "Optimization should not hide the root choice"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/07_er_roots.png"
+        },
+        {
+          "title": "Bootstrap current is a constraint, not an afterthought",
+          "bullets": [
+            "It changes equilibrium and island risk",
+            "It depends on profiles and collisionality"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/07_bootstrap_profile.png"
+        },
+        {
+          "title": "W7-X shows why neoclassical optimization matters",
+          "bullets": [
+            "Reduced neoclassical losses are a stellarator-design success",
+            "The next bottleneck can still be turbulence"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "The turbulence question is a fidelity ladder",
+          "bullets": [
+            "Linear growth: fast screen",
+            "Quasilinear weights: ranking hypothesis",
+            "Nonlinear heat flux: expensive validation",
+            "Profiles: performance closure"
+          ],
+          "kind": "ladder"
+        },
+        {
+          "title": "Notebook project: SPECTRAX-GK linear metric",
+          "bullets": [
+            "Plot growth rate vs `ky rho_i`",
+            "Plot mode frequency",
+            "Say what the proxy cannot prove"
+          ],
+          "kind": "project",
+          "project": "notebooks/08_spectrax_gk_linear_metric.ipynb"
+        },
+        {
+          "title": "Linear growth rates are useful but dangerous",
+          "bullets": [
+            "They indicate instability drive",
+            "They do not determine nonlinear heat flux alone"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/08_growth_rate_spectrum.png"
+        },
+        {
+          "title": "Frequency helps identify branches",
+          "bullets": [
+            "Growth and frequency together are more informative than growth alone",
+            "Still not a confinement prediction"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/08_frequency_spectrum.png"
+        },
+        {
+          "title": "Proxy optimization can pick the wrong design",
+          "bullets": [
+            "A proxy may rank designs differently from nonlinear validation",
+            "The optimizer will exploit whatever metric you give it"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/09_proxy_vs_nonlinear.png"
+        },
+        {
+          "title": "Notebook project: proxy vs validation",
+          "bullets": [
+            "Choose the best design by each metric",
+            "Compare the names",
+            "Discuss why the rankings differ"
+          ],
+          "kind": "project",
+          "project": "notebooks/09_turbulence_metric_surrogate.ipynb"
+        },
+        {
+          "title": "W7-X ion-temperature clamping motivates turbulence-aware design",
+          "bullets": [
+            "Neoclassical success does not eliminate turbulent limits",
+            "Profile response can saturate performance"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/09_w7x_clamping_cartoon.png"
+        },
+        {
+          "title": "Fast particles are reactor gates",
+          "bullets": [
+            "Present experiments may tolerate losses that reactors cannot",
+            "Alpha confinement, wall loads, and orbit classes should enter late-stage validation"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "Particle metrics connect back to coils",
+          "bullets": [
+            "Coil errors can alter field topology",
+            "Fast-particle diagnostics should be rerun after coil design changes"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "Metric trust ladder",
+          "bullets": [
+            "screen",
+            "ranking hypothesis",
+            "validation calculation",
+            "experiment or integrated scenario"
+          ],
+          "kind": "ladder"
+        },
+        {
+          "title": "Validation means comparing failure modes too",
+          "bullets": [
+            "Does the metric fail on a known bad design?",
+            "Does it rank a known good design correctly?",
+            "Does it change smoothly under small perturbations?"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "Computational checkpoint for lecture 3",
+          "bullets": [
+            "Run notebooks 07, 08, 09",
+            "Record which curves are cached",
+            "Replace one cached column only if a real run is timed"
+          ],
+          "kind": "project",
+          "project": "scripts/execute_all_notebooks.py"
+        },
+        {
+          "title": "Exercise: choose early and late metrics",
+          "bullets": [
+            "Which metric screens 1000 designs?",
+            "Which metric validates 5 finalists?",
+            "What is the failure mode of each?"
+          ],
+          "kind": "exercise"
+        },
+        {
+          "title": "Exercise: proxy vs nonlinear ranking",
+          "bullets": [
+            "Select the proxy optimum",
+            "Select the validation optimum",
+            "Explain why the optimizer might prefer the wrong one"
+          ],
+          "kind": "exercise"
+        },
+        {
+          "title": "Common trap: treating a proxy as validation",
+          "bullets": [
+            "A proxy is valuable precisely because it is incomplete",
+            "The deck must say what physics it omits"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "Common trap: cost-free metrics",
+          "bullets": [
+            "Every high-fidelity metric consumes time, expertise, and input hygiene",
+            "Budget fidelity across the design loop"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "From transport to profiles",
+          "bullets": [
+            "Transport coefficients are not the final output",
+            "Profiles and sources decide whether a field supports performance"
+          ],
+          "kind": "transition",
+          "image": "assets/figures/10_profile_evolution.png"
+        },
+        {
+          "title": "Lecture 3 notebook map",
+          "bullets": [
+            "03 effective ripple",
+            "07 neoclassical validation",
+            "08 linear GK metric",
+            "09 turbulence surrogate"
+          ],
+          "kind": "table"
+        },
+        {
+          "title": "Five rules from lecture 3",
+          "bullets": [
+            "Use cheap screens early",
+            "Validate with richer physics late",
+            "Plot profiles and regimes",
+            "Never hide proxy failure",
+            "Record the trust ladder"
+          ],
+          "kind": "summary"
+        },
+        {
+          "title": "Backup: neoclassical outputs to track",
+          "bullets": [
+            "epsilon-effective",
+            "D11-like coefficients",
+            "Er roots",
+            "bootstrap current",
+            "particle/heat fluxes"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Backup: turbulence outputs to track",
+          "bullets": [
+            "linear growth",
+            "frequency",
+            "quasilinear weight",
+            "nonlinear heat flux",
+            "profile response"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Backup: fast-particle outputs to track",
+          "bullets": [
+            "loss fraction",
+            "loss time",
+            "wall hit pattern",
+            "orbit class",
+            "sensitivity to coil errors"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Backup: when to trust cached mode",
+          "bullets": [
+            "for teaching workflow",
+            "for plotting grammar",
+            "for exercises",
+            "not for design claims"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L3.34: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L3.35: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L3.36: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L3.37: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L3.38: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L3.39: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L3.40: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L3.41: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L3.42: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L3.43: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L3.44: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Lecture 3 close",
+          "bullets": [
+            "Transport metrics are valuable because they are imperfect and staged",
+            "Next: close the loop with profiles and Pareto decisions"
+          ],
+          "kind": "closing",
+          "image": "assets/figures/09_proxy_vs_nonlinear.png"
+        }
+      ]
+    },
+    {
+      "id": "lecture_4_integrated_workflow",
+      "title": "Lecture 4 - Profiles, Pareto Fronts, Repo Lab",
+      "slides": [
+        {
+          "title": "From optimized field to credible design workflow",
+          "bullets": [
+            "Lecture 4 integrates fields, coils, transport, profiles, and decisions",
+            "The deliverable is not a number; it is an auditable design argument"
+          ],
+          "kind": "title",
+          "image": "assets/figures/11_pareto_front.png",
+          "subtitle": "Lecture 4: profiles, Pareto fronts, repo lab"
+        },
+        {
+          "title": "The full loop has memory",
+          "bullets": [
+            "Geometry changes transport",
+            "Transport changes profiles",
+            "Profiles change objectives",
+            "Coils and engineering constrain what survives"
+          ],
+          "kind": "workflow"
+        },
+        {
+          "title": "Profiles are not optional",
+          "bullets": [
+            "Temperature and density gradients drive transport",
+            "Sources and sinks close the performance claim"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "NEOPAX or fallback profile closure",
+          "bullets": [
+            "Research path: profile-oriented JAX workflows",
+            "Cached path: educational radial diffusion/source model"
+          ],
+          "kind": "code"
+        },
+        {
+          "title": "Notebook project: profile closure",
+          "bullets": [
+            "Plot Ti, Te, and source balance",
+            "Increase turbulent transport",
+            "Explain why field-only optimization is incomplete"
+          ],
+          "kind": "project",
+          "project": "notebooks/10_neopax_profile_closure.ipynb"
+        },
+        {
+          "title": "Profile evolution reveals transport consequences",
+          "bullets": [
+            "Extra turbulent transport flattens the ion-temperature profile",
+            "A good field metric can still underperform after closure"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/10_profile_evolution.png"
+        },
+        {
+          "title": "Power balance is a residual check",
+          "bullets": [
+            "Sources, fluxes, and profiles must be mutually consistent",
+            "A profile plot without a balance check is weak evidence"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/10_power_balance.png"
+        },
+        {
+          "title": "Integrated objectives should be staged",
+          "bullets": [
+            "Early: cheap geometry and Boozer screens",
+            "Middle: coils and neoclassical metrics",
+            "Late: turbulence, particles, profiles, engineering"
+          ],
+          "kind": "ladder"
+        },
+        {
+          "title": "Reactor constraints enter as gates",
+          "bullets": [
+            "Alpha heating and losses",
+            "Wall loads and blankets",
+            "Tritium breeding",
+            "Maintenance and access",
+            "Materials and forces"
+          ],
+          "kind": "table"
+        },
+        {
+          "title": "Coil robustness returns in the final workflow",
+          "bullets": [
+            "Manufacturing tolerances",
+            "Current errors",
+            "Thermal/mechanical deformation",
+            "Field-error correction margin"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "No single best design exists",
+          "bullets": [
+            "Better transport can mean harder coils",
+            "Easier coils can mean worse turbulence or profiles",
+            "Decision weights must be explicit"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "Notebook project: Pareto dashboard",
+          "bullets": [
+            "Load cached design table",
+            "Compute nondominated points",
+            "Change weights and watch the selected design move"
+          ],
+          "kind": "project",
+          "project": "notebooks/11_pareto_design_dashboard.ipynb"
+        },
+        {
+          "title": "Pareto fronts expose tradeoffs",
+          "bullets": [
+            "Nondominated points are not all equally desirable",
+            "They are designs worth arguing about"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/11_pareto_front.png"
+        },
+        {
+          "title": "Weighted selection is a documented judgment",
+          "bullets": [
+            "Weights encode priorities, risk tolerance, and program stage",
+            "Changing them should be visible and reproducible"
+          ],
+          "kind": "figure",
+          "image": "assets/figures/11_weighted_selection.png"
+        },
+        {
+          "title": "Validation gates prevent metric gaming",
+          "bullets": [
+            "equilibrium",
+            "Boozer",
+            "neoclassical",
+            "coils",
+            "turbulence",
+            "particles",
+            "profiles",
+            "engineering"
+          ],
+          "kind": "ladder"
+        },
+        {
+          "title": "The GitHub repo is the lab manual",
+          "bullets": [
+            "Slides explain concepts",
+            "Notebooks execute projects",
+            "Scripts regenerate figures, movies, and status",
+            "STATUS.md records truthfulness"
+          ],
+          "kind": "code"
+        },
+        {
+          "title": "Cached, tiny, and research modes serve different audiences",
+          "bullets": [
+            "cached: student reliability",
+            "tiny: instructor live demo",
+            "research: real-code replacement after timing"
+          ],
+          "kind": "table"
+        },
+        {
+          "title": "CI is part of teaching reproducibility",
+          "bullets": [
+            "Cached-mode CI runs smoke tests, data fetch, figures, movies, notebooks, and pytest",
+            "Students can trust a green baseline before experimenting"
+          ],
+          "kind": "code"
+        },
+        {
+          "title": "Notebook project: full repo run",
+          "bullets": [
+            "`python scripts/check_release_ready.py`",
+            "`python scripts/execute_all_notebooks.py`",
+            "Review `STATUS.md` before making claims"
+          ],
+          "kind": "project",
+          "project": "scripts/check_release_ready.py"
+        },
+        {
+          "title": "Design sprint: modify one objective",
+          "bullets": [
+            "Choose one metric column",
+            "Change a weight or cached value",
+            "Regenerate one plot",
+            "Explain whether the design decision changed"
+          ],
+          "kind": "exercise"
+        },
+        {
+          "title": "Design sprint: replace one cached artifact",
+          "bullets": [
+            "Pick a real package output",
+            "Write it to `data/cached` with provenance",
+            "Update STATUS.md and rerun tests"
+          ],
+          "kind": "exercise"
+        },
+        {
+          "title": "How students should use the repo after the school",
+          "bullets": [
+            "Start cached",
+            "Change one notebook at a time",
+            "Keep generated outputs small",
+            "Document live-code failures honestly"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "How researchers should use the repo",
+          "bullets": [
+            "Replace fallback arrays with real outputs",
+            "Preserve notebook structure",
+            "Add tests for new artifacts",
+            "Avoid overclaiming new scientific results"
+          ],
+          "kind": "concept"
+        },
+        {
+          "title": "What belongs in git",
+          "bullets": [
+            "small public inputs",
+            "small cached data",
+            "figures used by slides",
+            "notebooks and scripts",
+            "status and docs"
+          ],
+          "kind": "table"
+        },
+        {
+          "title": "What does not belong in git",
+          "bullets": [
+            "prompt-package PDFs/PPTX/zips",
+            "private screenshots",
+            "large generated runs",
+            "tokens or local environments"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "Common trap: integrated workflow without ownership",
+          "bullets": [
+            "Every artifact needs an owner: script, notebook, source, and status line",
+            "Otherwise the workflow cannot be taught or debugged"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "Common trap: Pareto front as answer",
+          "bullets": [
+            "A Pareto front is an argument surface",
+            "The final choice still needs context and validation"
+          ],
+          "kind": "warning"
+        },
+        {
+          "title": "Final design commandments",
+          "bullets": [
+            "Do not show a boundary without coils",
+            "Do not show a metric without validation domain",
+            "Do not show a proxy without its failure mode",
+            "Do not show a Pareto point without the weights"
+          ],
+          "kind": "summary"
+        },
+        {
+          "title": "Commandment: keep cached mode honest",
+          "bullets": [
+            "Label synthetic data",
+            "Do not fake `wout` files",
+            "Record limitations in STATUS.md"
+          ],
+          "kind": "summary"
+        },
+        {
+          "title": "Commandment: make every plot teach a decision",
+          "bullets": [
+            "What changed?",
+            "Which design wins?",
+            "Which failure mode appears?",
+            "What would a higher-fidelity code check?"
+          ],
+          "kind": "summary"
+        },
+        {
+          "title": "Future of stellarator optimization",
+          "bullets": [
+            "Coupled",
+            "Differentiable",
+            "Multi-fidelity",
+            "Profile-aware",
+            "Reproducible"
+          ],
+          "kind": "closing",
+          "image": "assets/figures/11_pareto_front.png"
+        },
+        {
+          "title": "Repo lab: suggested 30-minute flow",
+          "bullets": [
+            "10 min environment and figures",
+            "10 min notebook edit",
+            "10 min Pareto decision discussion"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Backup: status report anatomy",
+          "bullets": [
+            "package import status",
+            "data status",
+            "figure/movie status",
+            "notebook execution status",
+            "cached vs real demos"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Backup: live-demo abort criteria",
+          "bullets": [
+            "unexpected GPU backend",
+            "long compilation",
+            "API mismatch",
+            "metric changes without time to explain"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Backup: next manual steps before school",
+          "bullets": [
+            "Pick live demos",
+            "Build final slide exports",
+            "Run on projector machine",
+            "Prepare cached fallback narrative"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L4.36: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L4.37: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L4.38: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L4.39: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L4.40: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L4.41: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L4.42: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L4.43: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Appendix L4.44: discussion prompt",
+          "bullets": [
+            "What would you trust in cached mode?",
+            "What would require a real-code run?",
+            "What failure mode should be documented?"
+          ],
+          "kind": "backup"
+        },
+        {
+          "title": "Lecture 4 close",
+          "bullets": [
+            "The future of stellarators is coupled, differentiable, and reproducible",
+            "The repo is the contract between lecture and computation"
+          ],
+          "kind": "closing",
+          "image": "assets/figures/10_profile_evolution.png"
+        }
+      ]
+    }
+  ]
+}

@@ -48,6 +48,8 @@ def main() -> int:
     figs = load_json("figures.json", {"figures": sorted(p.name for p in FIGURE_DIR.glob("*.png")), "count": len(list(FIGURE_DIR.glob("*.png")))})
     movies = load_json("movies.json", {"movies": sorted(p.name for p in MOVIE_DIR.glob("*.gif")), "results": []})
     notebooks = load_json("notebook_execution.json", [])
+    notebooks_all = load_json("notebook_execution_all.json", [])
+    powerpoint = load_json("powerpoint_decks.json", {})
 
     lines = []
     lines.append("# STATUS")
@@ -85,12 +87,42 @@ def main() -> int:
     lines.append("## Notebook Execution Status")
     lines.append("")
     if notebooks:
+        lines.append("Core acceptance notebooks:")
         for item in notebooks:
             lines.append(f"- `{item.get('name')}`: {'OK' if item.get('ok') else 'FAIL'}")
             if item.get("error"):
                 lines.append(f"  - {item['error']}")
     else:
         lines.append("- Core notebooks have not been executed in this checkout yet.")
+    if notebooks_all:
+        lines.append("")
+        lines.append("All teaching notebooks:")
+        for item in notebooks_all:
+            lines.append(f"- `{item.get('name')}`: {'OK' if item.get('ok') else 'FAIL'}")
+            if item.get("error"):
+                lines.append(f"  - {item['error']}")
+    lines.append("")
+    lines.append("## PowerPoint Deck Status")
+    lines.append("")
+    decks = powerpoint.get("decks", []) if isinstance(powerpoint, dict) else []
+    if decks:
+        for deck in decks:
+            output = Path(deck.get("output", ""))
+            contact = Path(deck.get("contactSheet", ""))
+            output_label = output.relative_to(PROJECT_ROOT) if output.is_absolute() and output.exists() else output
+            contact_label = contact.relative_to(PROJECT_ROOT) if contact.is_absolute() and contact.exists() else contact
+            lines.append(
+                f"- `{deck.get('id')}`: {deck.get('slideCount')} slides; "
+                f"PPTX `{output_label}`; contact sheet `{contact_label}`; "
+                f"{deck.get('outputBytes')} bytes."
+            )
+    else:
+        pptx_files = sorted((PROJECT_ROOT / "slides" / "pptx").glob("*.pptx"))
+        if pptx_files:
+            for path in pptx_files:
+                lines.append(f"- `{path.relative_to(PROJECT_ROOT)}`: PPTX present ({path.stat().st_size} bytes).")
+        else:
+            lines.append("- PowerPoint decks have not been generated in this checkout yet.")
     lines.append("")
     lines.append("## Real-Code Demos")
     lines.append("")

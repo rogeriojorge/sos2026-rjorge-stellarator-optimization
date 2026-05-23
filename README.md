@@ -19,6 +19,7 @@ jupyter lab notebooks/
 ```
 
 Cached mode is enough for all classroom notebooks and does not require compiling scientific codes.
+The finished lecture decks are in `slides/pptx/`; open the `.pptx` files directly in PowerPoint.
 
 ## Colab quickstart
 
@@ -40,6 +41,7 @@ python scripts/fetch_equilibria.py --minimal
 python scripts/generate_all_figures.py
 python scripts/generate_movies.py
 python scripts/execute_notebooks_core.py
+python scripts/execute_all_notebooks.py
 python scripts/make_status_report.py
 pytest -q
 ```
@@ -82,7 +84,7 @@ python scripts/check_release_ready.py
 - `slides/lecture_3_transport_turbulence_metrics.md`: neoclassical, turbulence, fast-particle metrics.
 - `slides/lecture_4_integrated_workflow.md`: profiles, Pareto fronts, repo lab.
 
-Slides are Marp-compatible Markdown. Build with `slides/build_slides.sh` after installing `@marp-team/marp-cli`, or read them directly in Markdown.
+Editable PowerPoint decks are tracked in `slides/pptx/`, with contact sheets in `slides/pptx/contact_sheets/` for quick review. The Markdown slide sources remain Marp-compatible; build with `slides/build_slides.sh` after installing `@marp-team/marp-cli`, or read them directly in Markdown.
 
 ## Documentation
 

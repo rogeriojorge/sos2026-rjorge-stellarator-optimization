@@ -9,14 +9,14 @@ Use this checklist to make the repository predictable on the lecture machine.
 - Run `python scripts/check_release_ready.py`.
 - Decide whether the live path is `cached`, `tiny`, or selected `research` demos.
 - If using real packages live, record the package versions in `STATUS.md`.
-- Open every slide deck once and confirm figures load from `assets/figures/`.
+- Open every PowerPoint deck in `slides/pptx/` once and confirm figures load.
 
 ## One day before
 
 - Re-run `python scripts/check_release_ready.py`.
 - Launch JupyterLab and execute the first two cells of every notebook.
 - Check both GIFs in `assets/movies/`.
-- Build Marp HTML/PDF if using rendered slides.
+- Review the contact sheets in `slides/pptx/contact_sheets/`; build Marp HTML/PDF only if using rendered Markdown slides.
 - Keep a local copy of `STATUS.md` open for honest caveats during questions.
 
 ## Day of lecture

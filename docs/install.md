@@ -36,7 +36,20 @@ python scripts/fetch_equilibria.py --minimal
 python scripts/generate_all_figures.py
 python scripts/generate_movies.py
 python scripts/execute_notebooks_core.py
+python scripts/execute_all_notebooks.py
 pytest -q
+```
+
+To execute every notebook in cached mode after changing lesson content:
+
+```bash
+python scripts/execute_all_notebooks.py
+```
+
+The generated PowerPoint decks are already tracked in `slides/pptx/`. To rebuild them after editing `slides/powerpoint/deck_spec.json`, run this inside the Codex desktop runtime:
+
+```bash
+node scripts/build_powerpoint_decks.mjs
 ```
 
 `requirements-full.txt` is best effort. Some scientific packages may need compiler, MPI, GPU, or platform-specific work.

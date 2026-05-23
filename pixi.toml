@@ -8,6 +8,7 @@ smoke = "python scripts/run_smoke_tests.py"
 figures = "python scripts/generate_all_figures.py"
 movies = "python scripts/generate_movies.py"
 notebooks = "python scripts/execute_notebooks_core.py"
+notebooks-all = "python scripts/execute_all_notebooks.py"
 ready = "python scripts/check_release_ready.py"
 test = "pytest -q"
 
