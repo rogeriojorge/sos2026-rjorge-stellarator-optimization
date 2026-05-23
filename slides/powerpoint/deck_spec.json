@@ -2,1671 +2,1296 @@
   "decks": [
     {
       "id": "lecture_1_geometry_metrics",
-      "title": "Lecture 1 - Geometry, Equilibria, Boozer Coordinates, Metrics",
+      "title": "Lecture 1 - What Does The Optimizer See?",
       "slides": [
         {
-          "title": "What can we now optimize directly?",
-          "bullets": [
-            "Equilibria, spectra, transport metrics, coils, profiles, and design decisions",
-            "The lecture sequence follows the same computational object through each step"
-          ],
           "kind": "title",
+          "title": "Can we design a stellarator by following gradients?",
+          "subtitle": "Lecture 1: what the optimizer actually sees",
           "image": "assets/figures/01_hsx_surface.png",
-          "subtitle": "Lecture 1: geometry, equilibria, Boozer coordinates, metrics"
+          "bullets": [
+            "Equilibrium, Boozer spectrum, and metrics become the design language",
+            "Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          ]
         },
         {
-          "title": "PART 1. From magnetic confinement to optimization variables",
+          "kind": "transition",
+          "title": "PART 1. From field lines to hidden symmetry",
           "bullets": [
-            "Use geometry to define the search space",
-            "Use computations to decide what changed"
-          ],
-          "kind": "transition"
+            "Goal: turn confinement physics into computable objectives",
+            "Caveat: geometry freedom creates an inverse problem"
+          ]
         },
         {
-          "title": "Stellarator optimization starts with a parameterization",
+          "kind": "quote",
+          "title": "Metrics are compressed physics",
           "bullets": [
-            "Boundary Fourier modes",
-            "Pressure and current profiles",
-            "Aspect ratio, iota, volume, beta, magnetic well"
-          ],
-          "kind": "diagram"
+            "They are useful only when we know what was compressed"
+          ]
         },
         {
-          "title": "The inverse problem starts with choices",
+          "kind": "workflow",
+          "title": "The optimizer sees artifacts, not intuition",
           "bullets": [
-            "Choose variables before choosing an optimizer",
-            "State which physics model is active",
-            "Record assumptions before comparing designs"
-          ],
-          "kind": "concept"
+            "Boundary and profiles create an equilibrium",
+            "Spectra and scalars turn physics into objectives",
+            "Every scalar needs a validation gate"
+          ]
         },
         {
-          "title": "What the optimizer sees",
-          "bullets": [
-            "Inputs: boundary and radial profiles",
-            "Outputs: nested surfaces, rotational transform, magnetic diagnostics",
-            "Artifacts: wout file, figures, status line"
-          ],
-          "kind": "workflow"
-        },
-        {
-          "title": "Boundary Fourier modes control the shape",
-          "bullets": [
-            "Small changes move symmetry, aspect ratio, and resonances together",
-            "Use mode scans to teach coupling before live optimization"
-          ],
-          "kind": "concept"
-        },
-        {
-          "title": "Profiles are part of the equilibrium object",
-          "bullets": [
-            "Pressure and current profiles change rotational transform and stability",
-            "A boundary-only story is a first approximation"
-          ],
-          "kind": "concept"
-        },
-        {
-          "title": "VMEC is the first computational gate",
-          "bullets": [
-            "Input: boundary and radial profiles",
-            "Output: nested-surface equilibrium and wout file",
-            "Teaching fallback: cached surface and iota profile"
-          ],
-          "kind": "code"
-        },
-        {
-          "title": "The wout file is a checked artifact",
-          "bullets": [
-            "Inspect dimensions, variables, iota profile, aspect ratio, and surface geometry",
-            "A plot without the file provenance is incomplete"
-          ],
-          "kind": "code"
-        },
-        {
-          "title": "Example: HSX-like QHS surface",
-          "bullets": [
-            "Small stellarator case for classroom calculations",
-            "Natural quasisymmetry example",
-            "Use cached figures for live robustness"
-          ],
           "kind": "figure",
-          "image": "assets/figures/01_hsx_surface.png"
+          "title": "The first object is a surface",
+          "image": "assets/figures/01_hsx_surface.png",
+          "bullets": [
+            "Read the shape as a parameterized boundary",
+            "This is a cached educational surface"
+          ],
+          "caption": "A visible surface is a design variable, not yet a validated device."
         },
         {
-          "title": "Example: rotational transform profile",
-          "bullets": [
-            "Iota controls field-line pitch and resonance exposure",
-            "Use changes in iota as a first optimization diagnostic"
-          ],
           "kind": "figure",
-          "image": "assets/figures/01_iota_profile.png"
+          "title": "W7-X is the reference case to keep in mind",
+          "image": "assets/figures/01_w7x_surface.png",
+          "bullets": [
+            "Use it as experimental motivation",
+            "Do not treat the fallback surface as a new W7-X result"
+          ],
+          "caption": "The reference case anchors the design discussion without duplicating geometry lectures."
         },
         {
-          "title": "Equilibrium convergence is a result",
-          "bullets": [
-            "Non-convergence contains information",
-            "Bad resolution can create attractive false metrics",
-            "Cached mode keeps the lecture moving while preserving the warning"
-          ],
-          "kind": "warning"
-        },
-        {
-          "title": "Notebook project: first equilibrium object",
-          "bullets": [
-            "Load the HSX wout file when available",
-            "Plot LCFS and iota profile",
-            "Change one boundary-mode proxy and inspect metric coupling"
-          ],
-          "kind": "project",
-          "project": "notebooks/01_vmec_jax_first_equilibrium.ipynb"
-        },
-        {
-          "title": "PART 2. Boozer coordinates turn geometry into spectra",
-          "bullets": [
-            "Represent magnetic-field strength in useful coordinates",
-            "Separate symmetry-preserving modes from symmetry-breaking modes"
-          ],
-          "kind": "transition"
-        },
-        {
-          "title": "Boozer coordinates make symmetry measurable",
-          "bullets": [
-            "Many design targets are statements about |B| in special coordinates",
-            "A spectrum converts geometry into a table of modes"
-          ],
-          "kind": "concept"
-        },
-        {
-          "title": "Example: B(theta,zeta) contour",
-          "bullets": [
-            "Clean bands suggest dominant intended symmetry",
-            "Inspect the contour before reading one scalar residual"
-          ],
           "kind": "figure",
-          "image": "assets/figures/02_boozer_contour.png"
-        },
-        {
-          "title": "Example: Boozer spectrum heatmap",
+          "title": "Rotational transform is a target, not a decoration",
+          "image": "assets/figures/01_iota_profile.png",
           "bullets": [
-            "Dominant symmetry-line modes carry the design target",
-            "Off-line modes define penalties and diagnostics"
+            "Plot pitch before optimizing spectra",
+            "Watch low-order rational surfaces"
           ],
-          "kind": "figure",
-          "image": "assets/figures/02_boozer_spectrum.png"
+          "caption": "A profile can be a constraint, an objective, or a diagnostic."
         },
         {
+          "kind": "figure",
+          "title": "A small boundary mode can move the objective",
+          "image": "assets/figures/01_boundary_mode_scan.png",
+          "bullets": [
+            "One knob changes QS residual and aspect ratio",
+            "This is the gradient intuition for stage 1"
+          ],
+          "caption": "The optimizer needs knobs whose effects can be measured."
+        },
+        {
+          "kind": "warning",
+          "title": "Equilibrium convergence is part of the result",
+          "bullets": [
+            "Record resolution and residuals",
+            "Do not compare designs before the solve is trustworthy",
+            "Cached mode keeps the teaching path alive"
+          ]
+        },
+        {
+          "kind": "code",
+          "title": "The wout file is the first checked artifact",
+          "bullets": [
+            "Inspect dimensions, surfaces, and mode counts",
+            "Use public HSX/W7-X files when present",
+            "Record what was actually read"
+          ]
+        },
+        {
+          "kind": "demo",
+          "title": "Demo break: first equilibrium object",
+          "project": "notebooks/01_vmec_jax_first_equilibrium.ipynb",
+          "image": "assets/figures/01_iota_profile.png",
+          "bullets": [
+            "Locate the HSX wout file",
+            "Plot surface and iota",
+            "Change one boundary-mode proxy"
+          ],
+          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+        },
+        {
+          "kind": "transition",
+          "title": "PART 2. Boozer coordinates make symmetry measurable",
+          "bullets": [
+            "The spectrum turns geometry into a table",
+            "Bad modes become penalties"
+          ]
+        },
+        {
+          "kind": "figure",
+          "title": "Boozer coordinates make symmetry visible",
+          "image": "assets/figures/02_boozer_contour.png",
+          "bullets": [
+            "Clean bands suggest the intended symmetry",
+            "Broken bands warn before the scalar metric"
+          ],
+          "caption": "This contour is a teaching diagnostic, not a fresh Boozer transform."
+        },
+        {
+          "kind": "figure",
+          "title": "The spectrum tells the optimizer what to penalize",
+          "image": "assets/figures/02_boozer_spectrum.png",
+          "bullets": [
+            "Green modes preserve the intended line",
+            "Red modes are symmetry-breaking targets"
+          ],
+          "caption": "Good and bad modes are marked explicitly for the classroom scan."
+        },
+        {
+          "kind": "figure",
+          "title": "A bad mode changes the picture immediately",
+          "image": "assets/figures/02_bad_mode_perturbation.png",
+          "bullets": [
+            "Perturb one coefficient",
+            "Regenerate contour and residual"
+          ],
+          "caption": "The exercise is to connect a table entry to a visible field-strength change."
+        },
+        {
+          "kind": "table",
           "title": "Several symmetry targets use the same workflow",
           "bullets": [
-            "Quasi-axisymmetry, quasi-helical symmetry, and quasi-isodynamicity differ by mode structure",
-            "The residual must match the intended target"
-          ],
-          "kind": "concept"
+            "Quasi-axisymmetry: penalize modes off the QA line",
+            "Quasi-helical symmetry: keep the QH ridge clean",
+            "Quasi-isodynamic: use different metrics but the same artifact discipline"
+          ]
         },
         {
-          "title": "Boozer transforms need a convergence audit",
-          "bullets": [
-            "Which modes were retained?",
-            "Which surfaces were used?",
-            "Was transform convergence checked?"
-          ],
-          "kind": "warning"
-        },
-        {
-          "title": "Notebook project: Boozer spectrum",
-          "bullets": [
-            "Generate B(theta,zeta) from cached modes",
-            "Identify symmetry-breaking modes",
-            "Perturb one bad mode and watch the residual rise"
-          ],
-          "kind": "project",
-          "project": "notebooks/02_boozer_spectrum.ipynb"
-        },
-        {
-          "title": "PART 3. Metrics turn spectra into design objectives",
-          "bullets": [
-            "Compress the spectrum into a useful scalar",
-            "Keep the full plot next to the scalar"
-          ],
-          "kind": "transition"
-        },
-        {
-          "title": "Effective ripple is an optimization metric",
-          "bullets": [
-            "Compresses low-collisionality neoclassical transport risk",
-            "Useful as a screen before expensive transport calculations"
-          ],
-          "kind": "concept"
-        },
-        {
-          "title": "Example: effective-ripple comparison",
-          "bullets": [
-            "Profile shapes matter: edge and core can rank differently",
-            "One scalar hides where the risk lives"
-          ],
           "kind": "figure",
-          "image": "assets/figures/03_epsilon_eff_comparison.png"
-        },
-        {
-          "title": "Example: sensitivity to one geometry knob",
+          "title": "Effective ripple is an early transport warning",
+          "image": "assets/figures/03_epsilon_eff_comparison.png",
           "bullets": [
-            "A useful metric tells the optimizer which direction is worse",
-            "Finite differences are enough for classroom intuition"
+            "Lower is better for this screen",
+            "Use it before expensive validation"
           ],
-          "kind": "figure",
-          "image": "assets/figures/03_epsilon_eff_sensitivity.png"
+          "caption": "This cached curve teaches how to read a metric; it is not a new NEO result."
         },
         {
-          "title": "Gradients expand the design space",
+          "kind": "figure",
+          "title": "Gradients tell us which knobs matter",
+          "image": "assets/figures/03_epsilon_eff_sensitivity.png",
           "bullets": [
             "Finite differences are robust for teaching",
-            "Adjoints and autodiff become important for large searches",
-            "Gradient quality must be checked against physics fidelity"
+            "Autodiff becomes important at scale"
           ],
-          "kind": "concept"
+          "caption": "The point is sensitivity ranking, not a production derivative."
         },
         {
-          "title": "Autodiff changes the coding contract",
-          "bullets": [
-            "Every operation in the objective must be differentiable or isolated",
-            "Cached mode teaches structure before research-mode autodiff tests"
-          ],
-          "kind": "code"
-        },
-        {
+          "kind": "quote",
           "title": "The scalar objective is a negotiation",
           "bullets": [
-            "Magnetic quality, profiles, coil risk, and transport gates compete",
-            "Weights encode values, program stage, and risk choices"
-          ],
-          "kind": "workflow"
+            "Weights encode scientific and engineering priorities"
+          ]
         },
         {
-          "title": "Metric definitions need units and provenance",
+          "kind": "demo",
+          "title": "Demo break: spectrum and ripple",
+          "project": "notebooks/02_boozer_spectrum.ipynb + notebooks/03_effective_ripple_neo_jax.ipynb",
+          "image": "assets/figures/02_boozer_spectrum.png",
           "bullets": [
-            "Definition of the residual",
-            "Validation domain",
-            "Sensitivity direction",
-            "Known failure mode"
+            "Circle bad modes",
+            "Change one scalar",
+            "Explain what the plot proves"
           ],
-          "kind": "warning"
+          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
         },
         {
-          "title": "Data provenance is a scientific result",
+          "kind": "warning",
+          "title": "Failure mode: optimizing a beautiful plot",
           "bullets": [
-            "Real public HSX and W7-X files are fetched by script",
-            "Synthetic/cached arrays are labeled and documented in STATUS.md"
-          ],
-          "kind": "code"
+            "A clean surface is not a validated design",
+            "A scalar can hide the wrong physics",
+            "A cached figure must say what it is"
+          ]
         },
         {
-          "title": "Computational checkpoint for lecture 1",
+          "kind": "summary",
+          "title": "Lecture 1 what to remember",
           "bullets": [
-            "Run the environment check",
-            "Fetch equilibria",
-            "Generate figures",
-            "Open notebooks 01-03"
-          ],
-          "kind": "project",
-          "project": "scripts/check_release_ready.py"
+            "Optimization starts with a parameterization",
+            "A wout file is a scientific artifact",
+            "Boozer spectra turn symmetry into penalties",
+            "Metrics must stay connected to validation"
+          ]
         },
         {
-          "title": "Exercise: change a boundary mode",
+          "kind": "quote",
+          "title": "A design loop starts when the artifact can be rerun",
           "bullets": [
-            "Predict which metrics move first",
-            "Regenerate the surface and mode-scan figure",
-            "State what the toy model can prove"
-          ],
-          "kind": "exercise"
+            "Repo and docs are part of the scientific object"
+          ]
         },
         {
-          "title": "Exercise: circle the bad Boozer modes",
+          "kind": "transition",
+          "title": "APPENDIX. Lecture 1 checks and replacements",
           "bullets": [
-            "Which modes preserve the target symmetry?",
-            "Which modes would you penalize?",
-            "What happens if one bad mode triples?"
-          ],
-          "kind": "exercise"
+            "Use this section when a live package succeeds",
+            "Keep cached mode as the classroom baseline"
+          ]
         },
         {
-          "title": "Checklist: VMEC file review",
+          "kind": "table",
+          "title": "VMEC file review",
           "bullets": [
-            "dimensions",
-            "iota",
-            "boundary coefficients",
-            "volume/aspect",
-            "beta and pressure-current profiles"
-          ],
-          "kind": "backup"
+            "Dimensions: surfaces, modes, field periods",
+            "Variables: iota, pressure, boundary coefficients",
+            "Provenance: public repo path and hash"
+          ]
         },
         {
-          "title": "Checklist: Boozer file review",
+          "kind": "table",
+          "title": "Boozer file review",
           "bullets": [
-            "surface labels",
-            "nfp",
-            "mode truncation",
-            "B00",
-            "dominant and off-symmetry modes"
-          ],
-          "kind": "backup"
+            "Surface labels: choose the same radial grid",
+            "Mode truncation: report m/n limits",
+            "Residual: separate symmetry-preserving from breaking modes"
+          ]
         },
         {
-          "title": "Lecture 1 notebook map",
-          "bullets": [
-            "00 environment",
-            "01 equilibrium",
-            "02 Boozer spectrum",
-            "03 effective ripple"
-          ],
-          "kind": "table"
-        },
-        {
-          "title": "Five rules from lecture 1",
-          "bullets": [
-            "Use artifacts with provenance",
-            "Name the design variables",
-            "Plot profiles together with scalars",
-            "State the validation domain",
-            "Keep cached mode honest"
-          ],
-          "kind": "summary"
-        },
-        {
-          "title": "Metric acceptance checklist",
-          "bullets": [
-            "Cached figure: use for trend, sign, and classroom discussion",
-            "Real-code run: use for numerical claim, comparison, or publication",
-            "STATUS.md record: data source, package path, and validation domain"
-          ],
-          "kind": "table"
-        },
-        {
-          "title": "Example - what is inside a wout file?",
-          "bullets": [
-            "Boundary Fourier coefficients define the solved surface",
-            "Iota and profiles connect geometry to resonances and transport",
-            "Grid resolution and convergence decide whether a scalar is meaningful"
-          ],
-          "kind": "concept"
-        },
-        {
-          "title": "Example - Boozer modes to penalize",
-          "bullets": [
-            "Keep the symmetry-preserving line visible",
-            "Penalize off-line modes that grow with perturbations",
-            "Check mode truncation before trusting small differences"
-          ],
-          "kind": "concept"
-        },
-        {
+          "kind": "warning",
           "title": "When cached mode is enough",
           "bullets": [
-            "Explaining the loop structure",
+            "Teaching the loop structure",
             "Testing plotting and data plumbing",
-            "Preparing exercises where the answer is qualitative"
-          ],
-          "kind": "warning"
+            "Preparing exercises with qualitative answers"
+          ]
         },
         {
+          "kind": "warning",
           "title": "When research mode is needed",
           "bullets": [
             "Reporting a numerical value",
             "Comparing HSX and W7-X quantitatively",
             "Changing VMEC or Boozer resolution"
-          ],
-          "kind": "warning"
+          ]
         },
         {
+          "kind": "code",
           "title": "Research path: VMEC_JAX to Boozer transform",
           "bullets": [
             "Start from a verified input or wout file",
-            "Run a tiny equilibrium or load a real cached equilibrium",
-            "Transform one surface to Boozer coordinates",
-            "Plot spectra before forming scalar objectives",
-            "Record the run mode and package versions"
-          ],
-          "kind": "ladder"
+            "Run a tiny equilibrium on the lecture machine",
+            "Replace cached arrays with documented outputs"
+          ]
         },
         {
+          "kind": "table",
+          "title": "Metric acceptance checklist",
+          "bullets": [
+            "Cached figure: use for trend and classroom discussion",
+            "Real-code run: use for numerical claim after provenance check",
+            "STATUS.md record: package, data source, and validation domain"
+          ]
+        },
+        {
+          "kind": "figure",
+          "title": "Backup figure: HSX surface",
+          "image": "assets/figures/01_hsx_surface.png",
+          "bullets": [
+            "Use if the live surface plot fails",
+            "Keep the cached label visible"
+          ],
+          "caption": "Fallback image for a short live-demo recovery."
+        },
+        {
+          "kind": "figure",
+          "title": "Backup figure: Boozer contour",
+          "image": "assets/figures/02_boozer_contour.png",
+          "bullets": [
+            "Use if the transform is slow",
+            "Discuss the expected symmetry pattern"
+          ],
+          "caption": "Fallback image for reading the contour before scalarizing."
+        },
+        {
+          "kind": "table",
           "title": "Discussion: what did the optimizer see?",
           "bullets": [
-            "Design variables: boundary modes, profiles, currents",
-            "Computed object: equilibrium, surface labels, spectra",
-            "Decision variable: scalar objective plus validation gates"
-          ],
-          "kind": "table"
+            "Design variable: boundary modes and profiles",
+            "Computed object: equilibrium, spectra, scalar metrics",
+            "Decision variable: which scalar deserves trust"
+          ]
         },
         {
-          "title": "Lecture 1 take-home messages",
-          "bullets": [
-            "Optimization starts with a parameterization",
-            "A beautiful surface is not yet a validated design",
-            "Every scalar metric needs the plot that explains it"
-          ],
-          "kind": "summary"
-        },
-        {
-          "title": "Take-home message",
+          "kind": "closing",
+          "title": "What to remember",
           "bullets": [
             "Keep the scientific object and the computed artifact together",
-            "Rerun, perturb, compare, and explain before trusting the optimum"
-          ],
-          "kind": "closing"
+            "Rerun, perturb, compare, and explain before trusting the optimum",
+            "Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          ]
         }
       ]
     },
     {
       "id": "lecture_2_coils_single_stage",
-      "title": "Lecture 2 - Coils, Quadratic Flux, Single-Stage Optimization",
+      "title": "Lecture 2 - Coils And Single-Stage Design",
       "slides": [
         {
-          "title": "From plasma boundary to magnetic coils",
-          "bullets": [
-            "Stage-2 coil design translates a target field into hardware",
-            "The central diagnostic is normal-field error together with coil complexity"
-          ],
           "kind": "title",
+          "title": "Can we build the field that we optimized?",
+          "subtitle": "Lecture 2: coils, quadratic flux, and single-stage design",
           "image": "assets/figures/04_final_coils.png",
-          "subtitle": "Lecture 2: coils, quadratic flux, single-stage optimization"
+          "bullets": [
+            "A plasma boundary is a wish; coils are the contract",
+            "Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          ]
         },
         {
-          "title": "PART 1. Stage 1, stage 2, and single-stage design",
+          "kind": "transition",
+          "title": "PART 1. The coil inverse problem",
           "bullets": [
-            "Stage 1 asks which plasma boundary is attractive",
-            "Stage 2 asks which coils can produce it",
-            "Single-stage design changes plasma and coils together"
-          ],
-          "kind": "transition"
+            "Stage 1 gives a target surface",
+            "Stage 2 asks hardware to reproduce it"
+          ]
         },
         {
-          "title": "What is single-stage optimization?",
+          "kind": "quote",
+          "title": "Never show a beautiful plasma without its coils",
           "bullets": [
-            "Stage 1: plasma shape",
-            "Stage 2: coil shapes",
-            "Single stage: expanded degrees of freedom"
-          ],
-          "kind": "map"
+            "The engineering contract starts at B dot n"
+          ]
         },
         {
-          "title": "The coil inverse problem is ill-posed",
+          "kind": "table",
+          "title": "Stage 1, stage 2, single stage",
           "bullets": [
-            "Many current distributions can approximate the same field",
-            "Regularization selects the buildable solution"
-          ],
-          "kind": "concept"
+            "Stage 1: optimize the plasma target",
+            "Stage 2: fit coils to that target",
+            "Single stage: move plasma and coils together"
+          ]
         },
         {
-          "title": "Quadratic flux is the basic stage-2 score",
-          "bullets": [
-            "Measure normal-field error on the target surface",
-            "Low B dot n means the field respects the requested boundary"
-          ],
-          "kind": "concept"
-        },
-        {
-          "title": "Current-potential methods regularize a surface current",
-          "bullets": [
-            "NESCOIL and REGCOIL solve for currents on a winding surface",
-            "Regularization trades field accuracy for smoother current patterns"
-          ],
-          "kind": "workflow"
-        },
-        {
-          "title": "Filamentary coils convert fields into curves",
-          "bullets": [
-            "Curves have length, curvature, torsion, and separation",
-            "A field target can be easy for a surface current and difficult for discrete coils"
-          ],
-          "kind": "concept"
-        },
-        {
-          "title": "SIMSOPT is the mature stage-2 teaching path",
-          "bullets": [
-            "Geometry objects, curves, Biot-Savart fields, objectives, optimization loops",
-            "Research mode should use verified public QA input"
-          ],
-          "kind": "code"
-        },
-        {
-          "title": "Notebook project: SIMSOPT stage-2 coils",
-          "bullets": [
-            "Load public QA input or cached coil fallback",
-            "Plot initial and final coils",
-            "Compare normal-field error before and after"
-          ],
-          "kind": "project",
-          "project": "notebooks/04_simsopt_stage2_coils.ipynb"
-        },
-        {
-          "title": "Example: initial coil set",
-          "bullets": [
-            "The teaching curves are simple enough to inspect",
-            "Their main lesson is the diagnostic grammar"
-          ],
           "kind": "figure",
-          "image": "assets/figures/04_initial_coils.png"
-        },
-        {
-          "title": "Example: final coil set",
+          "title": "Initial coils are a diagnostic, not an answer",
+          "image": "assets/figures/04_initial_coils.png",
           "bullets": [
-            "A coil plot without diagnostics is incomplete",
-            "Students should ask: length, curvature, clearance, ports"
+            "Look for scale, symmetry, and crowding",
+            "The curves are synthetic teaching coils"
           ],
-          "kind": "figure",
-          "image": "assets/figures/04_final_coils.png"
+          "caption": "The first coil set shows the inverse problem before regularization."
         },
         {
-          "title": "Example: normal-field error before and after",
+          "kind": "figure",
+          "title": "Final coils reduce the obvious mismatch",
+          "image": "assets/figures/04_final_coils.png",
           "bullets": [
-            "Before/after maps show where the target surface is damaged",
-            "Local hot spots matter for robustness"
+            "Compare shape and smoothness",
+            "Then ask whether access and curvature remain acceptable"
           ],
-          "kind": "figure",
-          "image": "assets/figures/04_bdotn_before_after.png"
+          "caption": "A better coil picture is still not a manufacturability proof."
         },
         {
-          "title": "Example: regularization tradeoff",
+          "kind": "figure",
+          "title": "B dot n is the basic stage-2 score",
+          "image": "assets/figures/04_bdotn_before_after.png",
           "bullets": [
-            "Shorter and smoother coils can worsen field accuracy",
-            "A single optimum hides a design choice"
+            "Blue/red patches show normal-field error",
+            "The target surface is damaged when patches remain"
           ],
-          "kind": "figure",
-          "image": "assets/figures/04_coil_tradeoff.png"
+          "caption": "Quadratic flux measures whether coils reproduce the requested boundary."
         },
         {
+          "kind": "figure",
+          "title": "Regularization trades field quality for hardware",
+          "image": "assets/figures/04_coil_tradeoff.png",
+          "bullets": [
+            "Shorter coils can make B dot n worse",
+            "A single optimum hides the engineering choice"
+          ],
+          "caption": "The annotation marks what gets worse when coils are pushed too hard."
+        },
+        {
+          "kind": "table",
           "title": "Coil complexity has multiple dimensions",
           "bullets": [
-            "Length",
-            "Maximum curvature",
-            "Mean-squared curvature",
-            "Torsion",
-            "Coil-to-coil and coil-to-surface separation"
-          ],
-          "kind": "table"
+            "Length: cost, maintenance, and access",
+            "Curvature: force and strain risk",
+            "Separation: ports and assembly constraints"
+          ]
         },
         {
+          "kind": "warning",
           "title": "Ports and maintenance enter early",
           "bullets": [
-            "Access constraints can invalidate attractive coil sets",
+            "Access can invalidate attractive coil sets",
             "Use engineering constraints as penalties or hard gates"
-          ],
-          "kind": "concept"
+          ]
         },
         {
-          "title": "HTS tapes add orientation and strain constraints",
+          "kind": "demo",
+          "title": "Demo break: SIMSOPT stage-2 coils",
+          "project": "notebooks/04_simsopt_stage2_coils.ipynb",
+          "image": "assets/figures/04_bdotn_before_after.png",
           "bullets": [
-            "A reactor coil is more than a mathematical filament",
-            "Curvature and force metrics eventually become mechanical checks"
+            "Compare initial and final coils",
+            "Plot B dot n maps",
+            "Name the tradeoff"
           ],
-          "kind": "concept"
+          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
         },
         {
-          "title": "PART 2. Fieldline and particle diagnostics",
+          "kind": "transition",
+          "title": "PART 2. Direct optimization",
           "bullets": [
-            "Coils can match a surface and still change topology",
-            "Fieldline and particle diagnostics catch late-stage surprises"
-          ],
-          "kind": "transition"
+            "Move field, particles, and coils in the same loop",
+            "Use differentiable codes where the gradient is meaningful"
+          ]
         },
         {
+          "kind": "figure",
           "title": "Fieldlines diagnose topology",
+          "image": "assets/figures/06_fieldlines.png",
           "bullets": [
-            "Reveal islands, stochasticity, and topology changes",
-            "Fieldline plots are followed by particle diagnostics"
+            "Good surfaces support the coil story",
+            "Bad topology catches failures a scalar may miss"
           ],
-          "kind": "concept"
+          "caption": "This cached fieldline is a qualitative diagnostic, not a live ESSOS run."
         },
         {
-          "title": "Notebook project: ESSOS fieldlines and particles",
-          "bullets": [
-            "Plot cached fieldline and orbit diagnostics",
-            "Use ESSOS in research mode only after timing",
-            "Discuss fast-particle relevance for reactors"
-          ],
-          "kind": "project",
-          "project": "notebooks/06_essos_fieldlines_particles.ipynb"
-        },
-        {
-          "title": "Example: cached field-line diagnostic",
-          "bullets": [
-            "Good fieldlines support the coil story",
-            "Bad topology catches failures a scalar map can miss"
-          ],
           "kind": "figure",
-          "image": "assets/figures/06_fieldlines.png"
-        },
-        {
-          "title": "Example: particle orbit cartoon",
+          "title": "Particles answer a different question",
+          "image": "assets/figures/06_particle_orbit.png",
           "bullets": [
-            "Fast-ion and alpha-particle losses are reactor gates",
-            "Guiding-center and full-orbit fidelity should be chosen deliberately"
+            "Fieldlines do not guarantee confinement",
+            "Fast-particle gates matter for reactors"
           ],
-          "kind": "figure",
-          "image": "assets/figures/06_particle_orbit.png"
+          "caption": "Orbit cartoons teach why particle objectives can enter directly."
         },
         {
-          "title": "Two-stage optimization can change the plasma target",
+          "kind": "movie",
+          "title": "Movie: rotating surface and coils",
+          "image": "assets/movies/rotating_surface_first_frame.png",
           "bullets": [
-            "Stage 1 may find a boundary that no reasonable coil set can make",
-            "Stage 2 may return coils that damage the original objective"
+            "Play rotating_surface.gif during class",
+            "Use the first frame in static slides"
           ],
-          "kind": "warning"
+          "caption": "Use the GIF live; use this first-frame PNG when PowerPoint is static."
         },
         {
-          "title": "PART 3. Single-stage optimization",
-          "bullets": [
-            "Move plasma and coil variables together",
-            "Use continuation to keep the problem teachable"
-          ],
-          "kind": "transition"
-        },
-        {
+          "kind": "workflow",
           "title": "Single-stage design keeps coils in the loop",
           "bullets": [
             "Boundary variables and coil variables move together",
             "The objective includes plasma metrics, flux error, and coil metrics"
-          ],
-          "kind": "workflow"
+          ]
         },
         {
-          "title": "Notebook project: single-stage toy",
-          "bullets": [
-            "Plot objective pieces separately",
-            "Vary the flux penalty weight",
-            "Identify the penalty that prevents unbuildable solutions"
-          ],
-          "kind": "project",
-          "project": "notebooks/05_single_stage_toy.ipynb"
-        },
-        {
-          "title": "Example: single-stage objective history",
-          "bullets": [
-            "The total objective can decrease while one term stalls",
-            "Plot terms together with the sum"
-          ],
           "kind": "figure",
-          "image": "assets/figures/05_single_stage_history.png"
+          "title": "Continuation makes the negotiation visible",
+          "image": "assets/figures/05_single_stage_history.png",
+          "bullets": [
+            "Watch objective terms decrease together",
+            "Stop when one term dominates the story"
+          ],
+          "caption": "A coupled objective is a trace, not just a final number."
         },
         {
-          "title": "Example: weight continuation",
-          "bullets": [
-            "Start from an easier problem",
-            "Increase coupling or constraint weight",
-            "Watch which term starts controlling the solution"
-          ],
           "kind": "figure",
-          "image": "assets/figures/05_weight_continuation.png"
-        },
-        {
-          "title": "Direct coil optimization changes the gradient story",
+          "title": "Weights reveal which constraint is active",
+          "image": "assets/figures/05_weight_continuation.png",
           "bullets": [
-            "Biot-Savart fields are differentiable",
-            "Fieldline and particle objectives can be differentiated in JAX workflows",
-            "Gradient accuracy still needs validation"
+            "Increasing one weight can improve one metric and hurt another",
+            "This is the classroom Pareto intuition"
           ],
-          "kind": "concept"
+          "caption": "Weight scans are design arguments."
         },
         {
+          "kind": "demo",
+          "title": "Demo break: fieldlines and single-stage toy",
+          "project": "notebooks/05_single_stage_toy.ipynb + notebooks/06_essos_fieldlines_particles.ipynb",
+          "image": "assets/figures/05_weight_continuation.png",
+          "bullets": [
+            "Change one weight",
+            "Run cached diagnostics",
+            "Defend the result"
+          ],
+          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+        },
+        {
+          "kind": "warning",
           "title": "Autodiff still needs validation",
           "bullets": [
-            "Autodiff gives derivatives of the implemented model",
-            "The implemented model still has a validity domain"
-          ],
-          "kind": "warning"
+            "A gradient is a derivative of the implemented model",
+            "The implemented model still has a validity domain",
+            "Finite differences remain a check"
+          ]
         },
         {
+          "kind": "table",
           "title": "Robustness is a stage-2 metric",
           "bullets": [
-            "Manufacturing errors",
-            "Current perturbations",
-            "Coil misalignment",
-            "Maintenance tolerances"
-          ],
-          "kind": "table"
+            "Manufacturing errors: sensitivity to shape perturbations",
+            "Current perturbations: sensitivity to power-supply changes",
+            "Maintenance tolerance: clearance, curvature, and access"
+          ]
         },
         {
-          "title": "A coil objective needs units and scales",
+          "kind": "summary",
+          "title": "Lecture 2 what to remember",
           "bullets": [
-            "Length in meters",
-            "Curvature in inverse meters",
-            "Flux error normalized to field scale",
-            "Separation in centimeters"
-          ],
-          "kind": "warning"
+            "Stage 2 turns a field design into hardware",
+            "Coil regularization is part of the objective",
+            "Single-stage optimization changes the tradeoff surface",
+            "Test engineering as a gate"
+          ]
         },
         {
-          "title": "Computational checkpoint for lecture 2",
+          "kind": "quote",
+          "title": "Simple coils far away from the plasma are difficult to find",
           "bullets": [
-            "Run notebooks 04, 05, 06 in cached mode",
-            "Regenerate coil and fieldline figures",
-            "Record which paths are cached and which are live"
-          ],
-          "kind": "project",
-          "project": "scripts/generate_all_figures.py"
+            "That sentence is an optimization problem"
+          ]
         },
         {
-          "title": "Exercise: increase the length penalty",
+          "kind": "transition",
+          "title": "APPENDIX. Lecture 2 checks and replacements",
           "bullets": [
-            "What improves?",
-            "What worsens?",
-            "Which metric would you plot before choosing?"
-          ],
-          "kind": "exercise"
+            "Use this section when SIMSOPT or ESSOS is available",
+            "Keep cached images for lecture timing"
+          ]
         },
         {
-          "title": "Exercise: choose a coil set",
-          "bullets": [
-            "Design A: lower B dot n, higher curvature",
-            "Design B: smoother, worse flux",
-            "Which one survives a first experiment?"
-          ],
-          "kind": "exercise"
-        },
-        {
-          "title": "Lecture 2 notebook map",
-          "bullets": [
-            "04 stage-2 coils",
-            "05 single-stage toy",
-            "06 fieldlines and particles",
-            "11 Pareto preview"
-          ],
-          "kind": "table"
-        },
-        {
-          "title": "Five rules from lecture 2",
-          "bullets": [
-            "Pair every boundary with coils",
-            "Plot B dot n maps",
-            "Keep coil complexity explicit",
-            "Use continuation for coupled objectives",
-            "Treat engineering as a gate"
-          ],
-          "kind": "summary"
-        },
-        {
+          "kind": "table",
           "title": "Stage-2 objective terms",
           "bullets": [
-            "Normal-field error: does the coil set produce the target boundary?",
-            "Length and curvature: can the coils be built and maintained?",
+            "Normal-field error: does the coil set reproduce the target?",
+            "Length and curvature: can the coil be built and maintained?",
             "Separation and access: can the device be assembled and diagnosed?"
-          ],
-          "kind": "table"
+          ]
         },
         {
-          "title": "Example - SIMSOPT research path",
+          "kind": "code",
+          "title": "SIMSOPT research path",
           "bullets": [
-            "Load the public QA target or a verified local input",
-            "Build curves, Biot-Savart fields, and objectives",
-            "Run a tiny optimization before trusting a longer run"
-          ],
-          "kind": "concept"
+            "Load the public QA target",
+            "Build curves and Biot-Savart fields",
+            "Run a short optimization before class"
+          ]
         },
         {
+          "kind": "table",
           "title": "Fieldlines and particles answer different questions",
           "bullets": [
-            "Fieldlines expose islands, topology, and stochasticity",
-            "Particle orbits expose fast-ion and alpha-loss risks",
-            "Both diagnostics should be rerun after coil changes"
-          ],
-          "kind": "concept"
+            "Fieldlines: topology and stochasticity",
+            "Particles: alpha-loss and orbit width",
+            "Both: rerun after coil changes"
+          ]
         },
         {
+          "kind": "warning",
           "title": "Single-stage acceptance checks",
           "bullets": [
             "The plasma metric improves without hiding coil complexity",
             "The coil metric improves without destroying confinement metrics",
-            "The combined gradient is checked against finite differences"
-          ],
-          "kind": "warning"
+            "The combined gradient passes a finite-difference check"
+          ]
         },
         {
+          "kind": "figure",
+          "title": "Backup figure: initial coils",
+          "image": "assets/figures/04_initial_coils.png",
+          "bullets": [
+            "Use to explain the starting point",
+            "Ask what makes the target hard"
+          ]
+        },
+        {
+          "kind": "figure",
+          "title": "Backup figure: final coils",
+          "image": "assets/figures/04_final_coils.png",
+          "bullets": [
+            "Use to explain the claimed improvement",
+            "Ask what still needs engineering checks"
+          ]
+        },
+        {
+          "kind": "figure",
+          "title": "Backup figure: particle orbit",
+          "image": "assets/figures/06_particle_orbit.png",
+          "bullets": [
+            "Use if a particle trace is unavailable",
+            "Connect orbit loss to reactor gates"
+          ]
+        },
+        {
+          "kind": "table",
           "title": "Coil robustness outputs to track",
           "bullets": [
-            "Manufacturing errors: sensitivity to shape perturbations",
-            "Current errors: sensitivity to power-supply and trim changes",
-            "Maintenance tolerance: clearance, curvature, and access"
-          ],
-          "kind": "table"
+            "Shape perturbations: sensitivity of B dot n",
+            "Current errors: sensitivity of flux surfaces",
+            "Mechanical tolerance: clearance, curvature, access"
+          ]
         },
         {
-          "title": "Research path: from curves to field quality",
+          "kind": "table",
+          "title": "Discussion: can a coil set win with the wrong metric?",
           "bullets": [
-            "Choose a target boundary",
-            "Initialize coil curves with enough clearance",
-            "Compute B dot n maps on the surface",
-            "Optimize with explicit regularization",
-            "Rerun topology and particle checks"
-          ],
-          "kind": "ladder"
+            "Lower B dot n: can come with high curvature",
+            "Smoother coils: can miss the target boundary",
+            "First experiment: needs both magnetic accuracy and engineering margin"
+          ]
         },
         {
-          "title": "Example - a coil set can win the wrong metric",
-          "bullets": [
-            "Lower B dot n can come with higher curvature",
-            "Smoother coils can miss the requested boundary",
-            "A first experiment needs both magnetic accuracy and engineering margin"
-          ],
-          "kind": "concept"
-        },
-        {
-          "title": "Lecture 2 take-home messages",
-          "bullets": [
-            "Stage 2 turns a field design into hardware",
-            "Single-stage optimization changes the tradeoff surface",
-            "Coil simplicity is a physics constraint once the device must be built"
-          ],
-          "kind": "summary"
-        },
-        {
-          "title": "Take-home message",
+          "kind": "closing",
+          "title": "What to remember",
           "bullets": [
             "Keep the scientific object and the computed artifact together",
-            "Rerun, perturb, compare, and explain before trusting the optimum"
-          ],
-          "kind": "closing"
+            "Rerun, perturb, compare, and explain before trusting the optimum",
+            "Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          ]
         }
       ]
     },
     {
       "id": "lecture_3_transport_turbulence_metrics",
-      "title": "Lecture 3 - Neoclassical, Turbulence, Fast-Particle Metrics",
+      "title": "Lecture 3 - Transport Metrics For Optimization",
       "slides": [
         {
-          "title": "Transport physics becomes optimization metrics",
-          "bullets": [
-            "Neoclassical, turbulence, and fast particles enter as screens and validation gates",
-            "The goal is to use the physics responsibly inside a design loop"
-          ],
           "kind": "title",
+          "title": "What should go into the objective function?",
+          "subtitle": "Lecture 3: neoclassical, turbulence, and fast-particle gates",
           "image": "assets/figures/09_proxy_vs_nonlinear.png",
-          "subtitle": "Lecture 3: neoclassical, turbulence, fast-particle metrics"
+          "bullets": [
+            "Can transport physics become an optimization metric?",
+            "Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          ]
         },
         {
+          "kind": "transition",
           "title": "PART 1. A hierarchy of transport calculations",
           "bullets": [
-            "Cheap screens remove poor designs early",
+            "Cheap screens move many designs",
             "Expensive calculations validate finalists"
-          ],
-          "kind": "transition"
+          ]
         },
         {
+          "kind": "quote",
+          "title": "The optimizer does exactly what we ask, not what we meant",
+          "bullets": [
+            "Metric design is part of physics"
+          ]
+        },
+        {
+          "kind": "table",
           "title": "Cost hierarchy for transport metrics",
           "bullets": [
-            "Geometry metrics are fast",
-            "Boozer and effective-ripple metrics screen designs",
-            "DKE, gyrokinetics, particles, and profiles validate finalists"
-          ],
-          "kind": "ladder"
+            "Geometry metrics: fastest screens",
+            "Effective ripple and Boozer metrics: early transport warnings",
+            "DKE, gyrokinetics, particles, profiles: validation gates"
+          ]
         },
         {
-          "title": "Neoclassical recap for optimizers",
-          "bullets": [
-            "Symmetry breaking produces trapped-particle radial drifts",
-            "Effective ripple compresses one transport risk",
-            "Ambipolar electric fields and bootstrap current matter"
-          ],
-          "kind": "concept"
-        },
-        {
-          "title": "Example: effective ripple comparison",
-          "bullets": [
-            "Useful: fast, profile-like, interpretable",
-            "Limit: still followed by transport matrices or experiments"
-          ],
           "kind": "figure",
-          "image": "assets/figures/03_epsilon_eff_comparison.png"
-        },
-        {
-          "title": "NEO-JAX and SFINCS-JAX have different roles",
+          "title": "Effective ripple is a neoclassical screen",
+          "image": "assets/figures/03_epsilon_eff_comparison.png",
           "bullets": [
-            "NEO_JAX: compact effective-ripple diagnostics",
-            "SFINCS_JAX: richer drift-kinetic validation"
+            "Rank candidates before expensive runs",
+            "Do not treat the scalar as the whole transport story"
           ],
-          "kind": "table"
+          "caption": "Cached curves teach the screen; they are not new transport calculations."
         },
         {
-          "title": "Notebook project: SFINCS-JAX cached validation",
+          "kind": "figure",
+          "title": "D11 scans add richer validation",
+          "image": "assets/figures/07_sfincs_d11_scan.png",
+          "bullets": [
+            "Collisionality changes the answer",
+            "Er suppression changes the interpretation"
+          ],
+          "caption": "This SFINCS-style scan is cached educational data."
+        },
+        {
+          "kind": "figure",
+          "title": "Ambipolar roots are not always unique",
+          "image": "assets/figures/07_er_roots.png",
+          "bullets": [
+            "Multiple roots imply multiple regimes",
+            "Optimization needs a root-choice rule"
+          ],
+          "caption": "The root structure is the lesson; the numbers are not a live SFINCS result."
+        },
+        {
+          "kind": "figure",
+          "title": "Bootstrap current feeds back on equilibrium",
+          "image": "assets/figures/07_bootstrap_profile.png",
+          "bullets": [
+            "Bootstrap current can alter transform and islands",
+            "Profile dependence enters early"
+          ],
+          "caption": "Transport outputs become equilibrium inputs."
+        },
+        {
+          "kind": "table",
+          "title": "W7-X lesson for optimizers",
+          "bullets": [
+            "Neoclassical optimization: reduced radial losses",
+            "Ion-temperature clamping: turbulence bottleneck",
+            "Profiles: decide whether the metric matters experimentally"
+          ]
+        },
+        {
+          "kind": "figure",
+          "title": "Neoclassical success can expose turbulence",
+          "image": "assets/figures/09_w7x_clamping_cartoon.png",
+          "bullets": [
+            "The blue expectation keeps rising",
+            "The orange curve saturates"
+          ],
+          "caption": "The cartoon motivates turbulence-aware validation without rederiving transport theory."
+        },
+        {
+          "kind": "demo",
+          "title": "Demo break: neoclassical cached validation",
+          "project": "notebooks/07_sfincs_jax_neoclassical_cached.ipynb",
+          "image": "assets/figures/07_sfincs_d11_scan.png",
           "bullets": [
             "Read a collisionality scan",
             "Inspect Er roots",
-            "Plot a bootstrap-current proxy"
+            "Plot bootstrap feedback"
           ],
-          "kind": "project",
-          "project": "notebooks/07_sfincs_jax_neoclassical_cached.ipynb"
+          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
         },
         {
-          "title": "Example: cached neoclassical scan",
-          "bullets": [
-            "Transport coefficients change across regimes",
-            "Suppression mechanisms are profile and field dependent"
-          ],
-          "kind": "figure",
-          "image": "assets/figures/07_sfincs_d11_scan.png"
-        },
-        {
-          "title": "Example: ambipolar Er roots",
-          "bullets": [
-            "Multiple roots can imply different impurity and turbulence behavior",
-            "Optimization records the root choice"
-          ],
-          "kind": "figure",
-          "image": "assets/figures/07_er_roots.png"
-        },
-        {
-          "title": "Example: bootstrap-current constraint",
-          "bullets": [
-            "Bootstrap current can change equilibrium and island risk",
-            "It depends on profiles and collisionality"
-          ],
-          "kind": "figure",
-          "image": "assets/figures/07_bootstrap_profile.png"
-        },
-        {
-          "title": "W7-X motivates neoclassical optimization",
-          "bullets": [
-            "Reduced neoclassical losses are a stellarator-design success",
-            "The next bottleneck can still be turbulence"
-          ],
-          "kind": "concept"
-        },
-        {
+          "kind": "transition",
           "title": "PART 2. Turbulence metrics",
           "bullets": [
-            "Use linear calculations as early screens",
-            "Compare with nonlinear validation when rankings matter"
-          ],
-          "kind": "transition"
+            "Linear calculations are early screens",
+            "Nonlinear validation changes rankings"
+          ]
         },
         {
-          "title": "The turbulence question is a fidelity ladder",
-          "bullets": [
-            "Linear growth: fast screen",
-            "Quasilinear weights: ranking hypothesis",
-            "Nonlinear heat flux: expensive validation",
-            "Profiles: performance closure"
-          ],
-          "kind": "ladder"
-        },
-        {
-          "title": "Notebook project: SPECTRAX-GK linear metric",
-          "bullets": [
-            "Plot growth rate versus ky rho_i",
-            "Plot mode frequency",
-            "State the range of validity of the proxy"
-          ],
-          "kind": "project",
-          "project": "notebooks/08_spectrax_gk_linear_metric.ipynb"
-        },
-        {
-          "title": "Example: linear growth-rate spectrum",
-          "bullets": [
-            "Growth-rate peaks indicate instability drive",
-            "They are followed by nonlinear heat-flux checks"
-          ],
           "kind": "figure",
-          "image": "assets/figures/08_growth_rate_spectrum.png"
+          "title": "Linear growth is a fast warning",
+          "image": "assets/figures/08_growth_rate_spectrum.png",
+          "bullets": [
+            "Positive growth marks unstable branches",
+            "The peak is not the heat flux"
+          ],
+          "caption": "Use growth rate as a screen, not as the final objective."
         },
         {
-          "title": "Example: linear mode frequency",
-          "bullets": [
-            "Growth and frequency together are more informative than growth alone",
-            "The sign and trend help identify mode families"
-          ],
           "kind": "figure",
-          "image": "assets/figures/08_frequency_spectrum.png"
+          "title": "Frequency helps identify the branch",
+          "image": "assets/figures/08_frequency_spectrum.png",
+          "bullets": [
+            "Growth and frequency belong together",
+            "The sign and trend help classify modes"
+          ],
+          "caption": "Frequency is diagnostic context, not the scalar objective."
         },
         {
-          "title": "Notebook project: proxy versus validation",
-          "bullets": [
-            "Choose the best design by each metric",
-            "Compare the rankings",
-            "Discuss why rankings differ"
-          ],
-          "kind": "project",
-          "project": "notebooks/09_turbulence_metric_surrogate.ipynb"
-        },
-        {
-          "title": "Example: proxy versus nonlinear validation",
-          "bullets": [
-            "A proxy may rank designs differently from nonlinear validation",
-            "The optimizer receives whatever metric you give it"
-          ],
           "kind": "figure",
-          "image": "assets/figures/09_proxy_vs_nonlinear.png"
+          "title": "A proxy can pick the wrong winner",
+          "image": "assets/figures/09_proxy_vs_nonlinear.png",
+          "bullets": [
+            "Red circle: proxy winner",
+            "Green circle: validation winner"
+          ],
+          "caption": "The ranking failure is the point of the plot."
         },
         {
-          "title": "Example: W7-X ion-temperature-gradient clamping",
+          "kind": "demo",
+          "title": "Demo break: turbulence proxy versus validation",
+          "project": "notebooks/08_spectrax_gk_linear_metric.ipynb + notebooks/09_turbulence_metric_surrogate.ipynb",
+          "image": "assets/figures/09_proxy_vs_nonlinear.png",
           "bullets": [
-            "Neoclassical success can leave turbulent limits",
-            "Profile response can saturate performance"
+            "Choose the proxy winner",
+            "Compare validation ranking",
+            "Explain the failure mode"
           ],
+          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+        },
+        {
+          "kind": "transition",
+          "title": "PART 3. Fast particles are reactor gates",
+          "bullets": [
+            "Alpha confinement, wall loads, and orbit classes matter",
+            "Particle metrics must rerun after coil changes"
+          ]
+        },
+        {
           "kind": "figure",
-          "image": "assets/figures/09_w7x_clamping_cartoon.png"
-        },
-        {
-          "title": "PART 3. Fast particles and validation gates",
-          "bullets": [
-            "Reactors require alpha-particle confinement",
-            "Particle metrics must be rerun after coil design changes"
-          ],
-          "kind": "transition"
-        },
-        {
-          "title": "Fast particles are reactor gates",
-          "bullets": [
-            "Present experiments may tolerate losses that reactors cannot",
-            "Alpha confinement, wall loads, and orbit classes enter late-stage validation"
-          ],
-          "kind": "concept"
-        },
-        {
           "title": "Particle metrics connect back to coils",
+          "image": "assets/figures/06_particle_orbit.png",
           "bullets": [
-            "Coil errors can alter field topology",
-            "Fast-particle diagnostics should be rerun after coil design changes"
+            "A fieldline picture can look acceptable",
+            "An orbit diagnostic can still fail"
           ],
-          "kind": "concept"
+          "caption": "Fast-particle checks belong in the validation ladder."
         },
         {
-          "title": "Metric trust ladder",
-          "bullets": [
-            "screen",
-            "ranking hypothesis",
-            "validation calculation",
-            "experiment or integrated scenario"
-          ],
-          "kind": "ladder"
-        },
-        {
+          "kind": "warning",
           "title": "Validation compares failure modes",
           "bullets": [
             "Does the metric fail on a known bad design?",
             "Does it rank a known good design correctly?",
-            "Does it change smoothly under small perturbations?"
-          ],
-          "kind": "warning"
+            "Does it change smoothly under perturbations?"
+          ]
         },
         {
-          "title": "Computational checkpoint for lecture 3",
-          "bullets": [
-            "Run notebooks 07, 08, 09",
-            "Record which curves are cached",
-            "Replace one cached column only if a real run is timed"
-          ],
-          "kind": "project",
-          "project": "scripts/execute_all_notebooks.py"
-        },
-        {
-          "title": "Exercise: choose early and late metrics",
-          "bullets": [
-            "Which metric screens 1000 designs?",
-            "Which metric validates five finalists?",
-            "What is the failure mode of each?"
-          ],
-          "kind": "exercise"
-        },
-        {
-          "title": "Exercise: proxy versus nonlinear ranking",
-          "bullets": [
-            "Select the proxy optimum",
-            "Select the validation optimum",
-            "Explain why the optimizer might prefer the wrong one"
-          ],
-          "kind": "exercise"
-        },
-        {
-          "title": "Lecture 3 notebook map",
-          "bullets": [
-            "03 effective ripple",
-            "07 neoclassical validation",
-            "08 linear GK metric",
-            "09 turbulence surrogate"
-          ],
-          "kind": "table"
-        },
-        {
-          "title": "Five rules from lecture 3",
-          "bullets": [
-            "Use cheap screens early",
-            "Validate with richer physics late",
-            "Plot profiles and regimes",
-            "Never hide proxy failure",
-            "Record the trust ladder"
-          ],
-          "kind": "summary"
-        },
-        {
-          "title": "Neoclassical outputs to track",
-          "bullets": [
-            "Effective ripple: low-collisionality transport screen",
-            "Ambipolar roots: radial electric-field validation",
-            "Bootstrap current: profile-dependent equilibrium feedback"
-          ],
-          "kind": "table"
-        },
-        {
-          "title": "Turbulence outputs to track",
-          "bullets": [
-            "Linear growth rate: fast instability screen",
-            "Quasilinear weight: ranking hypothesis",
-            "Nonlinear heat flux: validation for finalists"
-          ],
-          "kind": "table"
-        },
-        {
-          "title": "Fast-particle outputs to track",
-          "bullets": [
-            "Alpha confinement: reactor-relevant loss gate",
-            "Wall loads: engineering and material constraint",
-            "Orbit classes: topology-sensitive diagnostic"
-          ],
-          "kind": "table"
-        },
-        {
-          "title": "Cached transport metrics teach the hierarchy",
-          "bullets": [
-            "Use them to compare trends and failure modes",
-            "Use real code for numerical thresholds",
-            "Document which physics was omitted"
-          ],
-          "kind": "warning"
-        },
-        {
-          "title": "Discussion: what can reverse the ranking?",
-          "bullets": [
-            "A neoclassical winner can lose on turbulence",
-            "A turbulence winner can fail alpha confinement",
-            "A profile change can move both metrics together"
-          ],
-          "kind": "concept"
-        },
-        {
-          "title": "Research path: NEO_JAX and SFINCS_JAX",
-          "bullets": [
-            "Choose the same equilibrium and flux surface",
-            "Scan collisionality and radial electric field",
-            "Compare compact metrics before detailed validation",
-            "Record roots, bootstrap current, and sensitivity"
-          ],
-          "kind": "ladder"
-        },
-        {
-          "title": "Research path: SPECTRAX-GK",
-          "bullets": [
-            "Start with a tiny linear calculation",
-            "Plot growth rate and frequency versus ky",
-            "Compare proxy rankings with nonlinear expectations",
-            "Keep the nonlinear validation gate explicit"
-          ],
-          "kind": "ladder"
-        },
-        {
-          "title": "Example - W7-X as a validation reminder",
-          "bullets": [
-            "Neoclassical optimization is necessary",
-            "Ion-temperature clamping motivates turbulence checks",
-            "Profiles decide whether the metric matters experimentally"
-          ],
-          "kind": "concept"
-        },
-        {
+          "kind": "table",
           "title": "Metric trust ladder",
           "bullets": [
             "Screen: cached or reduced model trend",
             "Ranking hypothesis: tiny or quasilinear run",
             "Validation: expensive run or experimental comparison"
-          ],
-          "kind": "table"
+          ]
         },
         {
+          "kind": "summary",
+          "title": "Lecture 3 what to remember",
+          "bullets": [
+            "Use cheap metrics to steer the search",
+            "Use expensive metrics to challenge finalists",
+            "Plot profiles and regimes",
+            "Never hide proxy failure"
+          ]
+        },
+        {
+          "kind": "quote",
+          "title": "Transport metrics are gates, not decorations",
+          "bullets": [
+            "A good design survives a stronger metric"
+          ]
+        },
+        {
+          "kind": "transition",
+          "title": "APPENDIX. Lecture 3 checks and replacements",
+          "bullets": [
+            "Use this section when SFINCS, SPECTRAX, or particle tools are live",
+            "Keep cached ranking plots ready"
+          ]
+        },
+        {
+          "kind": "table",
+          "title": "Neoclassical outputs to track",
+          "bullets": [
+            "Effective ripple: low-collisionality screen",
+            "Ambipolar roots: radial electric-field validation",
+            "Bootstrap current: profile-dependent equilibrium feedback"
+          ]
+        },
+        {
+          "kind": "table",
+          "title": "Turbulence outputs to track",
+          "bullets": [
+            "Linear growth rate: fast instability screen",
+            "Quasilinear weight: ranking hypothesis",
+            "Nonlinear heat flux: validation for finalists"
+          ]
+        },
+        {
+          "kind": "code",
+          "title": "Research path: NEO_JAX and SFINCS_JAX",
+          "bullets": [
+            "Choose the same equilibrium and flux surface",
+            "Scan collisionality and radial electric field",
+            "Compare compact metrics before detailed validation"
+          ]
+        },
+        {
+          "kind": "code",
+          "title": "Research path: SPECTRAX-GK",
+          "bullets": [
+            "Start with a tiny linear calculation",
+            "Plot growth rate and frequency versus ky",
+            "Keep nonlinear validation gate explicit"
+          ]
+        },
+        {
+          "kind": "warning",
           "title": "How to read a fast metric",
           "bullets": [
             "Growth rate screens instability before heat-flux validation",
             "A scalar ripple value should point back to where losses occur",
             "A profile proxy should lead to a solved discharge model"
-          ],
-          "kind": "warning"
+          ]
         },
         {
-          "title": "Example - profile dependence enters early",
+          "kind": "figure",
+          "title": "Backup figure: growth-rate spectrum",
+          "image": "assets/figures/08_growth_rate_spectrum.png",
           "bullets": [
-            "Collisionality depends on density and temperature",
-            "Bootstrap current changes equilibrium assumptions",
-            "Turbulent heat flux changes the temperature profile"
-          ],
-          "kind": "concept"
+            "Use if a live linear run is slow",
+            "Ask what the scalar should be"
+          ]
         },
         {
+          "kind": "figure",
+          "title": "Backup figure: W7-X clamping cartoon",
+          "image": "assets/figures/09_w7x_clamping_cartoon.png",
+          "bullets": [
+            "Use to motivate turbulence after neoclassical success",
+            "Keep the cartoon label visible"
+          ]
+        },
+        {
+          "kind": "table",
           "title": "Before showing a transport number",
           "bullets": [
-            "Equilibrium: which surface and which profiles?",
+            "Equilibrium: which surface and assumptions?",
             "Kinetics: which species and collisionality?",
             "Validation: which expensive calculation confirms it?"
-          ],
-          "kind": "table"
+          ]
         },
         {
-          "title": "Exercise extension - choose two gates",
+          "kind": "table",
+          "title": "Discussion: what can reverse the ranking?",
           "bullets": [
-            "Pick an early screen that runs in class",
-            "Pick a validation gate for finalists",
-            "Explain which design could fail each gate"
-          ],
-          "kind": "concept"
+            "Neoclassical winner: can lose on turbulence",
+            "Turbulence winner: can fail alpha confinement",
+            "Profile change: can move both metrics together"
+          ]
         },
         {
-          "title": "Transport metrics are gates, not decorations",
-          "bullets": [
-            "Use cheap metrics to steer the search",
-            "Use expensive metrics to challenge finalists",
-            "Always record the physics omitted by the shortcut"
-          ],
-          "kind": "summary"
-        },
-        {
-          "title": "Lecture 3 take-home messages",
-          "bullets": [
-            "Neoclassical, turbulence, and particles enter at different costs",
-            "A design ranking is only as strong as its validation ladder",
-            "Profile assumptions should be visible on every transport claim"
-          ],
-          "kind": "summary"
-        },
-        {
-          "title": "Take-home message",
+          "kind": "closing",
+          "title": "What to remember",
           "bullets": [
             "Keep the scientific object and the computed artifact together",
-            "Rerun, perturb, compare, and explain before trusting the optimum"
-          ],
-          "kind": "closing"
+            "Rerun, perturb, compare, and explain before trusting the optimum",
+            "Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          ]
         }
       ]
     },
     {
       "id": "lecture_4_integrated_workflow",
-      "title": "Lecture 4 - Profiles, Pareto Fronts, Repo Lab",
+      "title": "Lecture 4 - Credible Design Workflow",
       "slides": [
         {
-          "title": "From optimized field to credible design workflow",
-          "bullets": [
-            "Profiles, coils, transport, and decisions must be checked together",
-            "The final deliverable is an auditable design argument"
-          ],
           "kind": "title",
+          "title": "When does an optimized field become a reactor design?",
+          "subtitle": "Lecture 4: profiles, Pareto decisions, and the repo lab",
           "image": "assets/figures/11_pareto_front.png",
-          "subtitle": "Lecture 4: profiles, Pareto fronts, repo lab"
-        },
-        {
-          "title": "PART 1. Close the loop with profiles",
           "bullets": [
-            "Field optimization changes transport",
-            "Transport changes profiles",
-            "Profiles change objectives"
-          ],
-          "kind": "transition"
+            "A design is not a shape; it is a validated workflow",
+            "Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          ]
         },
         {
+          "kind": "workflow",
           "title": "The full loop has memory",
           "bullets": [
             "Geometry changes transport",
             "Transport changes profiles",
-            "Profiles change objectives",
-            "Coils and engineering constrain what survives"
-          ],
-          "kind": "workflow"
+            "Profiles change objectives"
+          ]
         },
         {
-          "title": "Profiles close the design loop",
+          "kind": "transition",
+          "title": "PART 1. Close the loop with profiles",
+          "bullets": [
+            "Field optimization changes transport",
+            "Transport changes pressure and current"
+          ]
+        },
+        {
+          "kind": "figure",
+          "title": "Profiles turn a field optimum into a scenario",
+          "image": "assets/figures/10_profile_evolution.png",
           "bullets": [
             "Temperature and density gradients drive transport",
-            "Sources and sinks close the performance claim"
+            "A good field metric can underperform after closure"
           ],
-          "kind": "concept"
+          "caption": "This fallback model teaches profile feedback, not a live NEOPAX result."
         },
         {
-          "title": "NEOPAX or fallback profile closure",
-          "bullets": [
-            "Research path: profile-oriented JAX workflows",
-            "Cached path: educational radial diffusion/source model"
-          ],
-          "kind": "code"
-        },
-        {
-          "title": "Notebook project: profile closure",
-          "bullets": [
-            "Plot Ti, Te, and source balance",
-            "Increase turbulent transport",
-            "Explain why field-only optimization is incomplete"
-          ],
-          "kind": "project",
-          "project": "notebooks/10_neopax_profile_closure.ipynb"
-        },
-        {
-          "title": "Example: profile closure fallback",
-          "bullets": [
-            "Extra turbulent transport flattens the ion-temperature profile",
-            "A good field metric can still underperform after closure"
-          ],
           "kind": "figure",
-          "image": "assets/figures/10_profile_evolution.png"
-        },
-        {
-          "title": "Example: power-balance check",
+          "title": "Power balance is a credibility check",
+          "image": "assets/figures/10_power_balance.png",
           "bullets": [
-            "Sources, fluxes, and profiles must be mutually consistent",
-            "A profile plot without a balance check is weak evidence"
+            "Sources, fluxes, and residuals must match",
+            "A post-hoc residual is weak evidence"
           ],
-          "kind": "figure",
-          "image": "assets/figures/10_power_balance.png"
+          "caption": "A design claim needs a solved balance, not only a field metric."
         },
         {
+          "kind": "table",
           "title": "Integrated objectives should be staged",
           "bullets": [
             "Early: cheap geometry and Boozer screens",
             "Middle: coils and neoclassical metrics",
             "Late: turbulence, particles, profiles, engineering"
-          ],
-          "kind": "ladder"
+          ]
         },
         {
-          "title": "Reactor constraints enter as gates",
+          "kind": "demo",
+          "title": "Demo break: profile closure",
+          "project": "notebooks/10_neopax_profile_closure.ipynb",
+          "image": "assets/figures/10_profile_evolution.png",
           "bullets": [
-            "Alpha heating and losses",
-            "Wall loads and blankets",
-            "Tritium breeding",
-            "Maintenance and access",
-            "Materials and forces"
+            "Plot temperature response",
+            "Inspect power balance",
+            "Say what remains cached"
           ],
-          "kind": "table"
+          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
         },
         {
-          "title": "Coil robustness returns in the final workflow",
-          "bullets": [
-            "Manufacturing tolerances",
-            "Current errors",
-            "Thermal and mechanical deformation",
-            "Field-error correction margin"
-          ],
-          "kind": "concept"
-        },
-        {
+          "kind": "transition",
           "title": "PART 2. Pareto decisions",
           "bullets": [
             "Many designs can be defensible",
             "The decision weights must be explicit"
-          ],
-          "kind": "transition"
+          ]
         },
         {
-          "title": "Several good designs can coexist",
+          "kind": "table",
+          "title": "Reactor constraints enter as gates",
           "bullets": [
-            "Better transport can mean harder coils",
-            "Easier coils can mean worse turbulence or profiles",
-            "Decision weights must be explicit"
-          ],
-          "kind": "concept"
+            "Alpha heating and losses: reactor-relevant loss gate",
+            "Wall loads and blankets: engineering and material constraint",
+            "Maintenance and access: device availability constraint"
+          ]
         },
         {
-          "title": "Notebook project: Pareto dashboard",
-          "bullets": [
-            "Load cached design table",
-            "Compute nondominated points",
-            "Change weights and watch the selected design move"
-          ],
-          "kind": "project",
-          "project": "notebooks/11_pareto_design_dashboard.ipynb"
-        },
-        {
-          "title": "Example: Pareto front",
+          "kind": "figure",
+          "title": "Pareto fronts need interpretation",
+          "image": "assets/figures/11_pareto_front.png",
           "bullets": [
             "Nondominated points still require priorities",
-            "They are designs worth arguing about"
+            "Final choice needs context and validation"
           ],
-          "kind": "figure",
-          "image": "assets/figures/11_pareto_front.png"
+          "caption": "A Pareto front is an argument surface, not an automatic answer."
         },
         {
-          "title": "Example: weighted selection dashboard",
+          "kind": "figure",
+          "title": "Weights expose the design decision",
+          "image": "assets/figures/11_weighted_selection.png",
           "bullets": [
-            "Weights encode priorities, risk tolerance, and program stage",
-            "Changing them should be visible and reproducible"
+            "Changing weights changes the winner",
+            "Record weights beside every selected design"
           ],
-          "kind": "figure",
-          "image": "assets/figures/11_weighted_selection.png"
+          "caption": "A weighted score is a value judgment with units and provenance."
         },
         {
+          "kind": "demo",
+          "title": "Demo break: Pareto dashboard",
+          "project": "notebooks/11_pareto_design_dashboard.ipynb",
+          "image": "assets/figures/11_weighted_selection.png",
+          "bullets": [
+            "Change one metric weight",
+            "Regenerate the chart",
+            "Defend the selected design"
+          ],
+          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+        },
+        {
+          "kind": "warning",
           "title": "Validation gates prevent metric gaming",
           "bullets": [
-            "equilibrium",
-            "Boozer",
-            "neoclassical",
-            "coils",
-            "turbulence",
-            "particles",
-            "profiles",
-            "engineering"
-          ],
-          "kind": "ladder"
+            "Equilibrium, Boozer, neoclassical, turbulence, particles, profiles, coils, engineering",
+            "A design can pass one gate and fail the next"
+          ]
         },
         {
-          "title": "PART 3. The GitHub repo as the lab manual",
+          "kind": "transition",
+          "title": "PART 3. The GitHub repo is the lab manual",
           "bullets": [
             "Slides explain concepts",
             "Notebooks execute projects",
             "Scripts regenerate figures, movies, and status"
-          ],
-          "kind": "transition"
+          ]
         },
         {
-          "title": "The GitHub repo is the lab manual",
+          "kind": "quote",
+          "title": "A design is not a shape; it is a validated workflow",
           "bullets": [
-            "Slides explain concepts",
-            "Notebooks execute projects",
-            "Scripts regenerate figures, movies, and status",
-            "STATUS.md records truthfulness"
-          ],
-          "kind": "code"
+            "The repo is the audit trail"
+          ]
         },
         {
+          "kind": "code",
+          "title": "Repo lab flow",
+          "bullets": [
+            "python scripts/check_release_ready.py",
+            "python scripts/make_lecture_bundle.py",
+            "python scripts/audit_notebook_outputs.py"
+          ]
+        },
+        {
+          "kind": "table",
           "title": "Cached, tiny, and research modes serve different audiences",
           "bullets": [
             "cached: student reliability",
             "tiny: instructor live demo",
             "research: real-code replacement after timing"
-          ],
-          "kind": "table"
+          ]
         },
         {
-          "title": "CI is part of teaching reproducibility",
+          "kind": "table",
+          "title": "ReadTheDocs is the canonical guide",
           "bullets": [
-            "Cached-mode CI runs smoke tests, data fetch, figures, movies, notebooks, and pytest",
-            "Students can trust a green baseline before experimenting"
-          ],
-          "kind": "code"
+            "Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/",
+            "Repo: github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization",
+            "Use the live demo matrix during class"
+          ]
         },
         {
-          "title": "Notebook project: full repo run",
+          "kind": "demo",
+          "title": "Repo lab: full cached run",
+          "project": "scripts/check_release_ready.py",
+          "image": "assets/figures/environment_check.png",
           "bullets": [
-            "Run check_release_ready.py",
-            "Run execute_all_notebooks.py",
-            "Review STATUS.md before making claims"
+            "Run acceptance checks",
+            "Review STATUS.md",
+            "Open rendered docs"
           ],
-          "kind": "project",
-          "project": "scripts/check_release_ready.py"
+          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
         },
         {
-          "title": "Design sprint: modify one objective",
+          "kind": "table",
+          "title": "Coil robustness returns in the final workflow",
           "bullets": [
-            "Choose one metric column",
-            "Change a weight or cached value",
-            "Regenerate the plot",
-            "Explain whether the design decision changed"
-          ],
-          "kind": "exercise"
+            "Manufacturing tolerance: can the design survive perturbations?",
+            "Current errors: can operations maintain the target field?",
+            "Thermal and mechanical deformation: does the coil story remain true?"
+          ]
         },
         {
-          "title": "Design sprint: replace one cached artifact",
+          "kind": "quote",
+          "title": "There is no single best stellarator",
           "bullets": [
-            "Pick a real package output",
-            "Write it to data/cached with provenance",
-            "Update STATUS.md and rerun tests"
-          ],
-          "kind": "exercise"
+            "There are only defensible choices with stated priorities"
+          ]
         },
         {
-          "title": "How students should use the repo after the school",
+          "kind": "demo",
+          "title": "Exercise: change the weights and defend a design",
+          "project": "notebooks/11_pareto_design_dashboard.ipynb",
+          "image": "assets/figures/11_pareto_front.png",
           "bullets": [
-            "Start cached",
-            "Change one notebook at a time",
-            "Keep generated outputs small",
-            "Document live-code failures honestly"
+            "Move one weight",
+            "Identify the new winner",
+            "Say which validation gate you now trust less"
           ],
-          "kind": "concept"
+          "caption": "Cached dashboard first. Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
         },
         {
-          "title": "How researchers should use the repo",
+          "kind": "table",
+          "title": "Documentation is part of reproducibility",
           "bullets": [
-            "Replace fallback arrays with real outputs",
-            "Preserve notebook structure",
-            "Add tests for new artifacts",
-            "Avoid overclaiming new scientific results"
-          ],
-          "kind": "concept"
+            "README: how a student starts",
+            "ReadTheDocs: the rendered guide during class",
+            "STATUS.md: what was real, cached, or synthetic"
+          ]
         },
         {
+          "kind": "transition",
+          "title": "APPENDIX. Lecture 4 checks and replacements",
+          "bullets": [
+            "Use this section before distributing the school bundle",
+            "Keep cached mode honest"
+          ]
+        },
+        {
+          "kind": "table",
           "title": "What belongs in git",
           "bullets": [
-            "small public inputs",
-            "small cached data",
-            "figures used by slides",
-            "notebooks and scripts",
-            "status and docs"
-          ],
-          "kind": "table"
+            "Small inputs: versioned and documented",
+            "Cached data: labeled educational fallback",
+            "Large outputs: regenerated by scripts and ignored"
+          ]
         },
         {
+          "kind": "warning",
           "title": "What stays out of git",
           "bullets": [
-            "prompt-package PDFs/PPTX/zips",
-            "private screenshots",
-            "large generated runs",
-            "tokens or local environments"
-          ],
-          "kind": "warning"
+            "Original package PDFs and PPTX files",
+            "Private screenshots and huge generated media",
+            "Local environments and secrets"
+          ]
         },
         {
-          "title": "Integrated workflows need ownership",
+          "kind": "table",
+          "title": "STATUS.md anatomy",
           "bullets": [
-            "Every artifact needs an owner: script, notebook, source, and status line",
-            "This makes the workflow teachable and debuggable"
-          ],
-          "kind": "warning"
+            "Package status: what imported and what was skipped",
+            "Data status: what was real and what was synthetic",
+            "Notebook status: what ran and saved outputs"
+          ]
         },
         {
-          "title": "Pareto fronts need interpretation",
+          "kind": "warning",
+          "title": "Live-demo abort criteria",
           "bullets": [
-            "A Pareto front is an argument surface",
-            "The final choice still needs context and validation"
-          ],
-          "kind": "warning"
+            "A package starts compiling during class",
+            "A notebook loses its cached fallback",
+            "A result is numerical but the validation path is missing"
+          ]
         },
         {
+          "kind": "movie",
+          "title": "Movie: toy optimization history",
+          "image": "assets/movies/optimization_history_first_frame.png",
+          "bullets": [
+            "Play optimization_history.gif for the loop intuition",
+            "Use first frame for PDF/static review"
+          ],
+          "caption": "Use the GIF live; use this first-frame PNG when PowerPoint is static."
+        },
+        {
+          "kind": "table",
+          "title": "Manual steps before the school",
+          "bullets": [
+            "Choose the lecture machine and environment",
+            "Pre-fetch equilibria and verify notebooks render",
+            "Freeze the branch or tag used for the school"
+          ]
+        },
+        {
+          "kind": "table",
+          "title": "How students should use the repo after school",
+          "bullets": [
+            "Start cached: reproduce every figure",
+            "Change one notebook at a time",
+            "Keep generated outputs small and documented"
+          ]
+        },
+        {
+          "kind": "figure",
+          "title": "Backup figure: profile closure",
+          "image": "assets/figures/10_profile_evolution.png",
+          "bullets": [
+            "Use if live profile closure fails",
+            "Keep the cached limitation explicit"
+          ],
+          "caption": "Fallback plot for profile closure discussion."
+        },
+        {
+          "kind": "figure",
+          "title": "Backup figure: Pareto front",
+          "image": "assets/figures/11_pareto_front.png",
+          "bullets": [
+            "Use if dashboard edits run long",
+            "Ask which design the room would defend"
+          ],
+          "caption": "Fallback plot for design-decision discussion."
+        },
+        {
+          "kind": "summary",
           "title": "Final design commandments",
           "bullets": [
             "Show every boundary with its coil story",
             "State the validation domain for every metric",
             "Pair each proxy with its failure mode",
             "Show the weights behind each Pareto choice"
-          ],
-          "kind": "summary"
+          ]
         },
         {
-          "title": "Keep cached mode honest",
+          "kind": "quote",
+          "title": "Coupled, differentiable, reproducible stellarator design",
           "bullets": [
-            "Label synthetic data",
-            "Use only real wout files or labeled synthetic fallbacks",
-            "Record limitations in STATUS.md"
-          ],
-          "kind": "summary"
+            "Field, coils, transport, profiles, and decisions in one auditable loop"
+          ]
         },
         {
-          "title": "Make every plot teach a decision",
-          "bullets": [
-            "What changed?",
-            "Which design wins?",
-            "Which failure mode appears?",
-            "What would a higher-fidelity code check?"
-          ],
-          "kind": "summary"
-        },
-        {
-          "title": "Future of stellarator optimization",
-          "bullets": [
-            "Coupled",
-            "Differentiable",
-            "Multi-fidelity",
-            "Profile-aware",
-            "Reproducible"
-          ],
-          "kind": "closing"
-        },
-        {
-          "title": "Repo lab flow",
-          "bullets": [
-            "Start cached and confirm the figure appears",
-            "Change one objective or weight",
-            "Regenerate the plot and write one defensible sentence"
-          ],
-          "kind": "concept"
-        },
-        {
-          "title": "STATUS.md anatomy",
-          "bullets": [
-            "Package status: what imported and what was skipped",
-            "Data status: what was real and what was synthetic",
-            "Notebook status: what ran and what saved outputs"
-          ],
-          "kind": "table"
-        },
-        {
-          "title": "Live-demo abort criteria",
-          "bullets": [
-            "A package starts compiling during class",
-            "A notebook loses its cached fallback",
-            "A result is numerical but the validation path is missing"
-          ],
-          "kind": "warning"
-        },
-        {
-          "title": "Manual steps before the school",
-          "bullets": [
-            "Choose the lecture machine and environment",
-            "Pre-fetch equilibria and verify notebooks render",
-            "Decide which research-mode demos are worth running live",
-            "Freeze the branch or tag used for the school"
-          ],
-          "kind": "ladder"
-        },
-        {
-          "title": "Discussion: what is a credible design argument?",
-          "bullets": [
-            "Show the boundary and the coils",
-            "Show the metrics that improve and the metrics that fail",
-            "Show the final choice on a Pareto plot"
-          ],
-          "kind": "concept"
-        },
-        {
-          "title": "What belongs in git",
-          "bullets": [
-            "Small inputs: versioned and documented",
-            "Cached data: labeled educational fallback",
-            "Large outputs: regenerated by scripts and ignored"
-          ],
-          "kind": "table"
-        },
-        {
-          "title": "Example - replace one cached artifact",
-          "bullets": [
-            "Run the real package for one surface",
-            "Save a small processed array with provenance",
-            "Update STATUS.md before changing the slide"
-          ],
-          "kind": "concept"
-        },
-        {
-          "title": "Pareto decisions need context",
-          "bullets": [
-            "Weights express a design choice",
-            "Nondominated points still need validation",
-            "The final design must survive new constraints"
-          ],
-          "kind": "warning"
-        },
-        {
-          "title": "After the school: turn lessons into research runs",
-          "bullets": [
-            "Replace cached arrays one package at a time",
-            "Keep notebook exercises stable for students",
-            "Add validation artifacts before strengthening claims"
-          ],
-          "kind": "summary"
-        },
-        {
-          "title": "Lecture 4 take-home messages",
-          "bullets": [
-            "The design loop closes only after profiles and decisions",
-            "The repo is the lab manual and the audit trail",
-            "A credible optimum is a reproducible argument"
-          ],
-          "kind": "summary"
-        },
-        {
-          "title": "Take-home message",
+          "kind": "closing",
+          "title": "What to remember",
           "bullets": [
             "Keep the scientific object and the computed artifact together",
-            "Rerun, perturb, compare, and explain before trusting the optimum"
-          ],
-          "kind": "closing"
+            "Rerun, perturb, compare, and explain before trusting the optimum",
+            "Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          ]
         }
       ]
     }

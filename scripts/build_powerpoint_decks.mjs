@@ -15,6 +15,8 @@ const MANIFEST_PATH = path.join(ROOT, "data", "generated", "status", "powerpoint
 const UW_CREST_WHITE = path.join(ROOT, "assets", "logos", "uw_crest_white.png");
 const UW_CREST_RED = path.join(ROOT, "assets", "logos", "uw_crest_red.png");
 const SLIDE_SIZE = { width: 1280, height: 720 };
+const REPO_URL = "github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization";
+const DOCS_URL = "sos2026-rjorge-stellarator-optimization.readthedocs.io";
 
 const transparent = "#00000000";
 const palette = {
@@ -233,6 +235,11 @@ function addFooter(slide, deck, slideNumber) {
     color: palette.muted,
     align: "right",
   });
+  text(slide, DOCS_URL, 128, 675, 330, 18, {
+    fontSize: 8,
+    color: palette.muted,
+    valign: "middle",
+  });
   addSlideNumber(slide, slideNumber);
 }
 
@@ -315,14 +322,14 @@ async function renderTitleSlide(presentation, deck, item, slideNumber, total) {
   const theme = deckThemes[deck.id];
   rect(slide, 0, 0, SLIDE_SIZE.width, SLIDE_SIZE.height, "#ffffff");
   addUwMark(slide);
-  text(slide, item.title, 40, 72, 700, 170, {
-    fontSize: item.title.length > 78 ? 43 : 50,
+  text(slide, item.title, 40, 66, 720, 184, {
+    fontSize: item.title.length > 82 ? 42 : 52,
     bold: true,
     color: palette.ink,
     valign: "middle",
   });
-  rect(slide, 40, 264, 92, 7, theme.accent);
-  text(slide, item.subtitle ?? "", 40, 294, 700, 70, {
+  rect(slide, 40, 268, 92, 7, theme.accent);
+  text(slide, item.subtitle ?? "", 40, 296, 700, 70, {
     fontSize: 25,
     color: palette.uwGray,
     valign: "middle",
@@ -358,6 +365,15 @@ async function renderTitleSlide(presentation, deck, item, slideNumber, total) {
     align: "right",
     valign: "middle",
   });
+  text(slide, `Repo: ${REPO_URL}`, 42, 672, 520, 18, {
+    fontSize: 11,
+    color: "#ffffff",
+  });
+  text(slide, `Docs: ${DOCS_URL}`, 780, 660, 390, 18, {
+    fontSize: 11,
+    color: "#ffffff",
+    align: "right",
+  });
   addSlideNumber(slide, slideNumber, "#ffffff");
   return slide;
 }
@@ -366,27 +382,27 @@ function renderTransition(presentation, deck, item, slideNumber, total) {
   const slide = presentation.slides.add();
   const theme = deckThemes[deck.id];
   rect(slide, 0, 0, 1280, 720, "#ffffff");
-  rect(slide, 150, 118, 980, 512, theme.accent);
-  rect(slide, 150, 118, 980, 512, "#b00000", transparent, 0);
   addUwMark(slide);
-  text(slide, theme.tag, 196, 168, 220, 32, {
-    fontSize: 18,
+  text(slide, theme.tag, 64, 58, 180, 26, {
+    fontSize: 16,
     bold: true,
-    color: "#ffffff",
+    color: theme.accent,
     valign: "middle",
   });
-  text(slide, item.title, 194, 238, 820, 132, {
-    fontSize: item.title.length > 65 ? 46 : 56,
+  rect(slide, 64, 94, 1080, 2, "#b7c5d9");
+  text(slide, item.title, 170, 230, 900, 130, {
+    fontSize: item.title.length > 65 ? 44 : 54,
     bold: true,
-    color: "#ffffff",
+    color: palette.ink,
+    align: "center",
     valign: "middle",
   });
-  rect(slide, 198, 384, 88, 7, "#ffffff");
-  addBullets(slide, item.bullets ?? [], 198, 428, 760, 86, {
+  rect(slide, 564, 382, 148, 8, theme.accent);
+  addBullets(slide, item.bullets ?? [], 238, 430, 820, 96, {
     theme,
-    dotColor: "#ffffff",
-    color: "#f8fafc",
-    fontSize: 23,
+    dotColor: theme.accent,
+    color: palette.ink,
+    fontSize: 24,
     maxRowHeight: 62,
   });
   addFooter(slide, deck, slideNumber);
@@ -397,25 +413,120 @@ async function renderFigure(presentation, deck, item, slideNumber, total) {
   const slide = presentation.slides.add();
   const theme = deckThemes[deck.id];
   rect(slide, 0, 0, 1280, 720, palette.paper);
-  rect(slide, 44, 168, 742, 430, "#ffffff", "#d0d0d0", 1);
-  if (item.image) await addImage(slide, item.image, 64, 188, 702, 386, { fit: "contain" });
-  text(slide, "How to read it", 830, 170, 320, 28, {
+  const full = item.layout === "full";
+  const imageBox = full
+    ? { x: 72, y: 158, w: 1040, h: 438 }
+    : { x: 52, y: 160, w: 776, h: 438 };
+  rect(slide, imageBox.x, imageBox.y, imageBox.w, imageBox.h, "#ffffff", "#d0d0d0", 1);
+  if (item.image) await addImage(slide, item.image, imageBox.x + 18, imageBox.y + 18, imageBox.w - 36, imageBox.h - 46, { fit: "contain" });
+  if (!full) {
+    text(slide, item.calloutTitle ?? "How to read it", 870, 170, 300, 28, {
     fontSize: 20,
     bold: true,
     color: theme.accent,
+    });
+    addBullets(slide, item.bullets ?? [], 866, 218, 340, 230, {
+      theme,
+      fontSize: 21,
+      maxRowHeight: 74,
+    });
+    rect(slide, 866, 508, 340, 70, palette.lightGray, "#d0d0d0", 1);
+    text(slide, item.caption ?? "Read the plot as a diagnostic, not as a new validated result.", 884, 522, 304, 38, {
+      fontSize: 15,
+      color: palette.uwGray,
+      valign: "middle",
+    });
+  } else if (item.caption) {
+    rect(slide, 126, 572, 900, 42, "#ffffff", "#e5e7eb", 1);
+    text(slide, item.caption, 146, 582, 860, 24, {
+      fontSize: 16,
+      color: palette.uwGray,
+      valign: "middle",
+    });
+  }
+  addPageTitle(slide, deck, item, slideNumber, total);
+  addFooter(slide, deck, slideNumber);
+  return slide;
+}
+
+async function renderDemo(presentation, deck, item, slideNumber, total) {
+  const slide = presentation.slides.add();
+  const theme = deckThemes[deck.id];
+  rect(slide, 0, 0, 1280, 720, "#ffffff");
+  addPageTitle(slide, deck, item, slideNumber, total);
+  rect(slide, 80, 170, 420, 358, "#ffffff", "#d1d5db", 1);
+  rect(slide, 80, 170, 420, 14, theme.accent);
+  text(slide, "Notebook break", 112, 214, 300, 34, {
+    fontSize: 25,
+    bold: true,
+    color: theme.accent,
   });
-  addBullets(slide, item.bullets ?? [], 826, 218, 352, 270, {
+  text(slide, item.project ?? "", 112, 268, 340, 54, {
+    fontSize: 18,
+    color: palette.ink,
+    typeface: "Aptos Mono",
+    valign: "middle",
+    fill: "#f8fafc",
+    stroke: "#e5e7eb",
+    strokeWidth: 1,
+    insets: { left: 14, right: 14, top: 8, bottom: 8 },
+  });
+  addBullets(slide, item.bullets ?? [], 112, 354, 340, 116, {
     theme,
     fontSize: 21,
-    maxRowHeight: 88,
+    maxRowHeight: 48,
   });
-  rect(slide, 826, 520, 348, 56, palette.lightGray, "#d0d0d0", 1);
-  text(slide, "Use the figure to identify the design choice and the diagnostic that changes.", 846, 532, 306, 32, {
-    fontSize: 15,
-    color: palette.uwGray,
+  if (item.image) await addImage(slide, item.image, 590, 174, 560, 330, { fit: "contain" });
+  rect(slide, 590, 540, 560, 54, "#eef2ff", "#c7d2fe", 1);
+  text(slide, item.caption ?? `Docs: ${DOCS_URL}`, 612, 553, 516, 28, {
+    fontSize: 17,
+    color: palette.navy,
     valign: "middle",
   });
+  addFooter(slide, deck, slideNumber);
+  return slide;
+}
+
+async function renderMovie(presentation, deck, item, slideNumber, total) {
+  const slide = presentation.slides.add();
+  rect(slide, 0, 0, 1280, 720, palette.paper);
   addPageTitle(slide, deck, item, slideNumber, total);
+  if (item.image) await addImage(slide, item.image, 86, 160, 760, 430, { fit: "contain" });
+  addBullets(slide, item.bullets ?? [], 898, 210, 290, 184, {
+    theme: deckThemes[deck.id],
+    fontSize: 21,
+    maxRowHeight: 58,
+  });
+  rect(slide, 898, 492, 290, 64, "#fff7ed", "#fed7aa", 1);
+  text(slide, item.caption ?? "Use the PNG first frame if PowerPoint does not animate the GIF.", 914, 506, 258, 34, {
+    fontSize: 15,
+    color: "#9a3412",
+    valign: "middle",
+  });
+  addFooter(slide, deck, slideNumber);
+  return slide;
+}
+
+function renderQuote(presentation, deck, item, slideNumber, total) {
+  const slide = presentation.slides.add();
+  const theme = deckThemes[deck.id];
+  rect(slide, 0, 0, 1280, 720, "#ffffff");
+  addUwMark(slide);
+  text(slide, item.title, 130, 190, 940, 148, {
+    fontSize: item.title.length > 78 ? 42 : 52,
+    bold: true,
+    color: palette.ink,
+    align: "center",
+    valign: "middle",
+  });
+  rect(slide, 470, 374, 340, 8, theme.accent);
+  addBullets(slide, item.bullets ?? [], 250, 430, 760, 90, {
+    theme,
+    dotColor: theme.accent,
+    color: palette.ink,
+    fontSize: 24,
+    maxRowHeight: 48,
+  });
   addFooter(slide, deck, slideNumber);
   return slide;
 }
@@ -819,6 +930,12 @@ function renderClosing(presentation, deck, item, slideNumber, total) {
     color: palette.uwGray,
     valign: "middle",
   });
+  text(slide, `${REPO_URL}\n${DOCS_URL}`, 888, 610, 300, 48, {
+    fontSize: 13,
+    color: palette.uwGray,
+    align: "right",
+    valign: "middle",
+  });
   addSlideNumber(slide, slideNumber);
   return slide;
 }
@@ -836,6 +953,12 @@ async function renderSlide(presentation, deck, item, slideNumber, total) {
       return renderTransition(presentation, deck, item, slideNumber, total);
     case "figure":
       return renderFigure(presentation, deck, item, slideNumber, total);
+    case "demo":
+      return renderDemo(presentation, deck, item, slideNumber, total);
+    case "movie":
+      return renderMovie(presentation, deck, item, slideNumber, total);
+    case "quote":
+      return renderQuote(presentation, deck, item, slideNumber, total);
     case "map":
       return renderMap(presentation, deck, item, slideNumber, total);
     case "workflow":

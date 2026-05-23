@@ -62,6 +62,8 @@ def main() -> int:
     lines.append("")
     lines.append("This repository is ready for cached-mode teaching. Real scientific packages are optional and are documented as live, cached, or research-only below.")
     lines.append("")
+    lines.append("Provenance categories used below: `real public data`, `real package output`, `cached derived data`, and `synthetic educational fallback`.")
+    lines.append("")
     lines.append("## Package Import Status")
     lines.append("")
     for label, module in OPTIONAL.items():
@@ -71,20 +73,30 @@ def main() -> int:
     lines.append("")
     if fetch:
         for item in fetch:
-            lines.append(f"- {item.get('label')}: {'OK' if item.get('ok') else 'FAIL'}; source={item.get('source')}; {item.get('message')}")
+            category = item.get("category", "real public data" if item.get("ok") else "unknown")
+            lines.append(f"- {item.get('label')}: {'OK' if item.get('ok') else 'FAIL'}; category={category}; source={item.get('source')}; {item.get('message')}")
             if item.get("validation"):
                 lines.append(f"  - validation: {item['validation']}")
+            if item.get("sha256"):
+                lines.append(f"  - sha256: `{item['sha256'][:16]}...`")
     else:
         lines.append("- `scripts/fetch_equilibria.py --minimal` has not been run yet in this checkout.")
     lines.append("")
     lines.append("## Figure And Movie Status")
     lines.append("")
     lines.append(f"- Figures: {figs.get('count', len(figs.get('figures', [])))} PNG files in `assets/figures/`.")
+    if figs.get("manifest"):
+        lines.append(f"  - manifest: `{figs['manifest']}`")
     for name in figs.get("figures", [])[:30]:
         lines.append(f"  - `{name}`")
     lines.append(f"- Movies: {len(movies.get('movies', []))} GIF files in `assets/movies/`.")
     for item in movies.get("results", []):
-        lines.append(f"  - {item.get('label')}: {'OK' if item.get('ok') else 'FAIL'}")
+        first_frame = item.get("first_frame")
+        if first_frame:
+            first_frame = Path(first_frame)
+            if first_frame.is_absolute() and first_frame.exists():
+                first_frame = first_frame.relative_to(PROJECT_ROOT)
+        lines.append(f"  - {item.get('label')}: {'OK' if item.get('ok') else 'FAIL'}; category={item.get('category', 'synthetic educational fallback')}; first frame `{first_frame}`")
     lines.append("")
     lines.append("## Notebook Execution Status")
     lines.append("")
@@ -147,14 +159,15 @@ def main() -> int:
     lines.append("## Real-Code Demos")
     lines.append("")
     lines.append("- The environment check notebook imports installed optional packages when present.")
-    lines.append("- `fetch_equilibria.py` uses real public HSX/W7-X VMEC files and a public SIMSOPT QA input when download or local public checkout succeeds.")
+    lines.append("- `fetch_equilibria.py` uses real public HSX/W7-X VMEC files and a public SIMSOPT QA input when download succeeds or when an instructor opts into `SOS2026_PUBLIC_CHECKOUT_ROOT`.")
     lines.append("- Research-mode notebooks contain pointers for replacing cached arrays with `vmec_jax`, `booz_xform_jax`, `NEO_JAX`, `sfincs_jax`, `SPECTRAX-GK`, `NEOPAX`, `ESSOS`, or SIMSOPT runs.")
+    lines.append("- No notebook claims a new real package output unless that package path is explicitly executed in `research` mode.")
     lines.append("")
     lines.append("## Cached Or Synthetic Demos")
     lines.append("")
     for path in sorted(CACHE_DIR.glob("*")):
         if path.is_file():
-            lines.append(f"- `{path.relative_to(PROJECT_ROOT)}`: cached educational fallback; not a new scientific prediction.")
+            lines.append(f"- `{path.relative_to(PROJECT_ROOT)}`: cached derived data or synthetic educational fallback; not a new scientific prediction.")
     lines.append("")
     lines.append("## Known Limitations And Next Steps")
     lines.append("")

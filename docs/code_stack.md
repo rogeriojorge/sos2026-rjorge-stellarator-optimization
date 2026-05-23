@@ -24,3 +24,5 @@ Local inspection was performed on 2026-05-22 using the prompt package, local sou
 - SIMSOPT local checkout contains `tests/test_files/input.LandremanPaul2021_QA`, which is the stage-2 target copied/fetched by `scripts/fetch_equilibria.py`.
 
 The notebooks intentionally do not assume these APIs are stable enough for live school demos. Cached mode is the supported default.
+
+Use `STATUS.md` and `assets/figures/manifest.json` to distinguish `real public data`, `real package output`, `cached derived data`, and `synthetic educational fallback`. Import success alone is not a claim that a real scientific calculation was run for a notebook output.

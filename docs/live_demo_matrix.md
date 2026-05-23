@@ -1,6 +1,7 @@
 # Live Demo Matrix
 
 This matrix separates the reliable classroom path from optional live-code paths.
+Canonical rendered documentation: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/
 
 | Notebook | Classroom default | Real package path | Risk level | Failure mode to teach |
 |---|---|---|---|---|
@@ -19,4 +20,4 @@ This matrix separates the reliable classroom path from optional live-code paths.
 
 ## Recommendation
 
-Use cached mode for all student machines. On the instructor machine, pick at most one live research demo per lecture and test it immediately before the session.
+Use cached mode for all student machines. On the instructor machine, pick at most one live research demo per lecture and test it immediately before the session. Keep this matrix open from ReadTheDocs during class.

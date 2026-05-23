@@ -1,5 +1,7 @@
 # Teaching Notes
 
+Canonical rendered documentation: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/
+
 The recurring pattern is:
 
 ```text

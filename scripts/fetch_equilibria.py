@@ -5,7 +5,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 import argparse
+import hashlib
 import json
+import os
 import shutil
 import urllib.request
 import warnings
@@ -13,13 +15,28 @@ from pathlib import Path
 
 from sos2026.paths import PROJECT_ROOT, STATUS_DIR, VMEC_DIR, INPUT_DIR, ensure_directories
 
+LOCAL_PUBLIC_ROOT = os.environ.get("SOS2026_PUBLIC_CHECKOUT_ROOT")
+
+
+def optional_local_hint(relative_path: str) -> Path | None:
+    """Return an opt-in local public-checkout fallback path.
+
+    Public CI and student machines should download from GitHub or use files
+    already present in this repo. Instructors with local public checkouts can
+    set SOS2026_PUBLIC_CHECKOUT_ROOT without baking private paths into git.
+    """
+    if not LOCAL_PUBLIC_ROOT:
+        return None
+    return Path(LOCAL_PUBLIC_ROOT).expanduser() / relative_path
+
+
 CASES_MINIMAL = [
     {
         "label": "HSX QHS vacuum ns201",
         "repo": "landreman/vmec_equilibria",
         "path": "HSX/QHS_vac_ns201_fixed/wout_HSX_QHS_vacuum_ns201.nc",
         "dest": VMEC_DIR / "HSX/QHS_vac_ns201_fixed/wout_HSX_QHS_vacuum_ns201.nc",
-        "local_hint": Path("/Users/rogeriojorge/local/vmec_equilibria/HSX/QHS_vac_ns201_fixed/wout_HSX_QHS_vacuum_ns201.nc"),
+        "local_hint": optional_local_hint("vmec_equilibria/HSX/QHS_vac_ns201_fixed/wout_HSX_QHS_vacuum_ns201.nc"),
         "netcdf": True,
     },
     {
@@ -27,7 +44,7 @@ CASES_MINIMAL = [
         "repo": "landreman/vmec_equilibria",
         "path": "W7-X/Standard/wout.nc",
         "dest": VMEC_DIR / "W7-X/Standard/wout.nc",
-        "local_hint": Path("/Users/rogeriojorge/local/vmec_equilibria/W7-X/Standard/wout.nc"),
+        "local_hint": optional_local_hint("vmec_equilibria/W7-X/Standard/wout.nc"),
         "netcdf": True,
     },
     {
@@ -35,7 +52,7 @@ CASES_MINIMAL = [
         "repo": "hiddenSymmetries/simsopt",
         "path": "tests/test_files/input.LandremanPaul2021_QA",
         "dest": INPUT_DIR / "simsopt/input.LandremanPaul2021_QA",
-        "local_hint": Path("/Users/rogeriojorge/local/simsopt/tests/test_files/input.LandremanPaul2021_QA"),
+        "local_hint": optional_local_hint("simsopt/tests/test_files/input.LandremanPaul2021_QA"),
         "netcdf": False,
     },
 ]
@@ -46,7 +63,7 @@ CASES_OPTIONAL = [
         "repo": "landreman/vmec_equilibria",
         "path": "NCSX/li383_1.4m/wout_li383_1.4m.nc",
         "dest": VMEC_DIR / "NCSX/li383_1.4m/wout_li383_1.4m.nc",
-        "local_hint": Path("/Users/rogeriojorge/local/vmec_equilibria/NCSX/li383_1.4m/wout_li383_1.4m.nc"),
+        "local_hint": optional_local_hint("vmec_equilibria/NCSX/li383_1.4m/wout_li383_1.4m.nc"),
         "netcdf": True,
     }
 ]
@@ -71,6 +88,14 @@ def validate_netcdf(path: Path) -> str:
                 return f"netCDF OK; variables={len(ds.variables)}"
     except Exception as exc:
         return f"netCDF validation failed: {type(exc).__name__}: {exc}"
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def fetch_case(case: dict) -> dict:
@@ -100,6 +125,10 @@ def fetch_case(case: dict) -> dict:
             result["errors"] = errors
     if result["ok"] and case.get("netcdf"):
         result["validation"] = validate_netcdf(dest)
+    if result["ok"]:
+        result["category"] = "real public data" if case.get("netcdf") else "real public data"
+        result["sha256"] = sha256(dest)
+        result["warning"] = "Public input artifact; downstream teaching figures may still be cached or synthetic."
     return result
 
 

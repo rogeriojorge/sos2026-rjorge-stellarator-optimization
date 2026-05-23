@@ -35,6 +35,20 @@ def caption(ax, text: str) -> None:
     ax.text(0.0, -0.14, text, transform=ax.transAxes, fontsize=9, color=PALETTE["gray"], va="top")
 
 
+def provenance_label(ax, label: str = "synthetic educational fallback") -> None:
+    ax.text(
+        0.995,
+        0.01,
+        label,
+        transform=ax.transAxes,
+        ha="right",
+        va="bottom",
+        fontsize=7.5,
+        color=PALETTE["gray"],
+        bbox={"boxstyle": "round,pad=0.25", "facecolor": "white", "edgecolor": "#e5e7eb", "alpha": 0.86},
+    )
+
+
 def fix_matplotlib_3d(ax) -> None:
     """Use equal data limits for a 3D Matplotlib axes."""
     x_limits = ax.get_xlim3d()
@@ -79,6 +93,7 @@ def plot_surface_3d(surface: dict, title: str, name: str):
     ax.set_axis_off()
     fix_matplotlib_3d(ax)
     ax.view_init(elev=22, azim=35)
+    ax.text2D(0.02, 0.02, "synthetic educational fallback", transform=ax.transAxes, fontsize=8, color=PALETTE["gray"])
     return savefig(fig, name)
 
 
@@ -106,6 +121,17 @@ def plot_boozer_spectrum(modes, title="Boozer spectrum", name="02_boozer_spectru
     ax.set_xlabel("toroidal mode n")
     ax.set_ylabel("poloidal mode m")
     ax.set_title(title)
+    nfp = int(modes.get("nfp", 1))
+    for m, n, b in zip(modes["m"], modes["n"], modes["bmn"]):
+        if int(m) == 0 and int(n) == 0:
+            continue
+        row = mvals.index(int(m))
+        col = nvals.index(int(n))
+        good = nfp and int(n) % nfp == 0
+        color = "#22c55e" if good else PALETTE["red"]
+        ax.scatter(col, row, s=220 if good else 260, facecolors="none", edgecolors=color, linewidths=2.0)
+    ax.text(0.02, 0.98, "green = symmetry line\nred = penalize", transform=ax.transAxes, fontsize=8.5, color=PALETTE["ink"], va="top", bbox={"facecolor": "white", "edgecolor": "#e5e7eb", "alpha": 0.88})
     fig.colorbar(im, ax=ax, label="|Bmn| / B00")
     caption(ax, "The sparse dominant line represents the intended symmetry; off-line modes become optimization penalties.")
+    provenance_label(ax)
     return savefig(fig, name)

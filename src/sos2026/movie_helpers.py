@@ -19,6 +19,10 @@ def _frame_from_figure(fig):
     return rgba[..., :3].copy()
 
 
+def _first_frame_path(path: Path) -> Path:
+    return path.with_name(f"{path.stem}_first_frame.png")
+
+
 def rotating_surface_gif(path: Path | None = None, frames: int = 28) -> Path:
     ensure_directories()
     path = path or (MOVIE_DIR / "rotating_surface.gif")
@@ -37,6 +41,7 @@ def rotating_surface_gif(path: Path | None = None, frames: int = 28) -> Path:
         imgs.append(_frame_from_figure(fig))
         plt.close(fig)
     imageio.mimsave(path, imgs, duration=0.08)
+    imageio.imwrite(_first_frame_path(path), imgs[0])
     return path
 
 
@@ -59,4 +64,5 @@ def optimization_history_gif(path: Path | None = None, frames: int = 30) -> Path
         imgs.append(_frame_from_figure(fig))
         plt.close(fig)
     imageio.mimsave(path, imgs, duration=0.09)
+    imageio.imwrite(_first_frame_path(path), imgs[0])
     return path

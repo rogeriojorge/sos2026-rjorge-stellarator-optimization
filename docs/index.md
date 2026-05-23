@@ -1,6 +1,10 @@
 # SOS 2026 Stellarator Optimization
 
 This documentation supports the SOS 2026 teaching repository for Rogerio Jorge's stellarator optimization lectures.
+The canonical rendered documentation site is:
+
+https://sos2026-rjorge-stellarator-optimization.readthedocs.io/
+
 The repository is organized around a computational design loop:
 
 ```text

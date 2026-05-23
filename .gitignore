@@ -35,6 +35,7 @@ slides/pptx/~$*.ppt
 
 # Generated/re-runnable outputs
 build/
+docs/_build/
 dist/
 *.egg-info/
 data/generated/*

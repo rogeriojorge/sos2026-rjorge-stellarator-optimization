@@ -1,6 +1,7 @@
 # Instructor Checklist
 
 Use this checklist to make the repository predictable on the lecture machine.
+Canonical rendered documentation: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/
 
 ## One week before
 
@@ -14,6 +15,8 @@ Use this checklist to make the repository predictable on the lecture machine.
 ## One day before
 
 - Re-run `python scripts/check_release_ready.py`.
+- Run `python scripts/audit_no_local_paths.py` and `python scripts/audit_readthedocs_links.py`.
+- Build the lecture bundle with `python scripts/make_lecture_bundle.py` if distributing files offline.
 - Launch JupyterLab and execute the first two cells of every notebook.
 - Check both GIFs in `assets/movies/`.
 - Review the contact sheets in `slides/pptx/contact_sheets/`; build Marp HTML/PDF only if using rendered Markdown slides.

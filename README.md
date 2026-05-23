@@ -1,8 +1,11 @@
 # SOS 2026 Stellarator Optimization
 
 [![Cached-mode CI](https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization/actions/workflows/cached-mode-ci.yml/badge.svg)](https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization/actions/workflows/cached-mode-ci.yml)
+[![Documentation Status](https://readthedocs.org/projects/sos2026-rjorge-stellarator-optimization/badge/?version=latest)](https://sos2026-rjorge-stellarator-optimization.readthedocs.io/)
 
 This repository supports Rogerio Jorge's four 90-minute lectures for the 2026 CEA-IRFM / Renaissance Fusion School on Stellarators in Aix-en-Provence. The course treats stellarator design as a computational optimization loop: equilibrium -> Boozer spectrum -> neoclassical metrics -> coils -> turbulence metrics -> profile closure -> Pareto decisions.
+
+Rendered documentation: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/
 
 ## 10-minute quickstart
 
@@ -18,8 +21,9 @@ python scripts/generate_all_figures.py
 jupyter lab notebooks/
 ```
 
-Cached mode is enough for all classroom notebooks and does not require compiling scientific codes.
+Cached mode is the classroom default. It is enough for all student notebooks and does not require compiling scientific codes.
 The finished lecture decks are in `slides/pptx/`; open the `.pptx` files directly in PowerPoint.
+Contact sheets for quick visual review are in `slides/pptx/contact_sheets/`.
 The notebooks in `notebooks/` are committed with cached-mode outputs so GitHub can render the lesson plots without a local run.
 
 ## Colab quickstart
@@ -65,6 +69,10 @@ python scripts/check_release_ready.py
 
 ## Notebook map
 
+Low-risk live demos are `00_environment_check.ipynb`, `05_single_stage_toy.ipynb`, `09_turbulence_metric_surrogate.ipynb`, `10_neopax_profile_closure.ipynb`, and `11_pareto_design_dashboard.ipynb`.
+Medium-risk demos are `01`-`04` and `06`, especially when reading real public files or inspecting optional package paths.
+Treat `07` and `08` as cached classroom demos unless the instructor machine has already been timed.
+
 | Notebook | Topic | Default path |
 |---|---|---|
 | `00_environment_check.ipynb` | Environment, optional packages, write checks | cached |
@@ -89,9 +97,13 @@ python scripts/check_release_ready.py
 
 Editable PowerPoint decks are tracked in `slides/pptx/`, with contact sheets in `slides/pptx/contact_sheets/` for quick review. The Markdown slide sources remain Marp-compatible; build with `slides/build_slides.sh` after installing `@marp-team/marp-cli`, or read them directly in Markdown.
 
+To assemble an offline instructor bundle after regenerating assets, run `python scripts/make_lecture_bundle.py`. The bundle is written under `dist/` and is intentionally ignored by git.
+
 ## Documentation
 
-Start with `docs/install.md`, then use `docs/instructor_checklist.md`, `docs/live_demo_matrix.md`, `docs/code_stack.md`, `docs/data_sources.md`, `docs/teaching_notes.md`, `docs/troubleshooting.md`, and `docs/references.md`. The repository includes `.readthedocs.yaml` and `docs/conf.py` so Read the Docs can build the same documentation after the project is enabled there.
+ReadTheDocs is the canonical rendered documentation site: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/
+
+Start with `docs/install.md`, then use `docs/instructor_checklist.md`, `docs/live_demo_matrix.md`, `docs/code_stack.md`, `docs/data_sources.md`, `docs/teaching_notes.md`, `docs/troubleshooting.md`, and `docs/references.md`. The repository includes `.readthedocs.yaml` and `docs/conf.py` for the public documentation build.
 
 ## Honesty policy
 

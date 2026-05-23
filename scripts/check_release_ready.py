@@ -18,7 +18,10 @@ COMMANDS = [
     ("execute core notebooks", [sys.executable, "scripts/execute_notebooks_core.py"]),
     ("execute all notebooks", [sys.executable, "scripts/execute_all_notebooks.py"]),
     ("execute notebooks in place", [sys.executable, "scripts/execute_notebooks_in_place.py"]),
+    ("audit no local paths", [sys.executable, "scripts/audit_no_local_paths.py"]),
+    ("audit ReadTheDocs links", [sys.executable, "scripts/audit_readthedocs_links.py"]),
     ("audit notebook outputs", [sys.executable, "scripts/audit_notebook_outputs.py"]),
+    ("audit slide style", [sys.executable, "scripts/audit_slides_style.py"]),
     ("status report", [sys.executable, "scripts/make_status_report.py"]),
     ("pytest", [sys.executable, "-m", "pytest", "-q"]),
 ]
