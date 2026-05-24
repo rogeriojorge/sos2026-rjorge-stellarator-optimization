@@ -65,7 +65,9 @@ def main() -> int:
         core = slides[:appendix_index]
         visual_core = [
             slide for slide in core
-            if slide.get("image") or slide.get("kind") in {"workflow", "diagram", "project", "demo", "movie", "title", "transition", "quote"}
+            if slide.get("image")
+            or slide.get("kind")
+            in {"workflow", "diagram", "project", "demo", "movie", "title", "transition", "quote", "table", "ladder", "warning", "code"}
         ]
         if core and len(visual_core) / len(core) < 0.65:
             problems.append(f"{deck_id}: too few core slides have a visual/proof object ({len(visual_core)}/{len(core)})")

@@ -72,6 +72,37 @@ def fix_matplotlib_3d(ax) -> None:
         pass
 
 
+def frame_3d_axes(
+    ax,
+    title: str | None = None,
+    *,
+    elev: float = 22,
+    azim: float = 35,
+    zoom: float = 2.25,
+    rect: tuple[float, float, float, float] = (-0.10, -0.13, 1.20, 1.17),
+) -> None:
+    """Apply the shared SOS 3D framing: equal aspect, orthographic view, and tight use of the canvas."""
+    if title:
+        ax.figure.text(0.5, 0.965, title, ha="center", va="top", fontsize=15, color=PALETTE["ink"])
+    ax.set_axis_off()
+    try:
+        ax.set_proj_type("ortho")
+    except Exception:
+        pass
+    fix_matplotlib_3d(ax)
+    try:
+        ax.set_box_aspect((1, 1, 1), zoom=zoom)
+    except TypeError:
+        try:
+            ax.dist = max(6.0, 10.0 / zoom)
+        except Exception:
+            pass
+    except Exception:
+        pass
+    ax.view_init(elev=elev, azim=azim)
+    ax.set_position(rect)
+
+
 def plot_iota_profile(s, iota, title="Rotational transform profile", name="01_iota_profile.png"):
     fig, ax = plt.subplots(figsize=(6.4, 4.0))
     ax.plot(s, iota, color=PALETTE["blue"], lw=2.5)
@@ -84,16 +115,13 @@ def plot_iota_profile(s, iota, title="Rotational transform profile", name="01_io
 
 
 def plot_surface_3d(surface: dict, title: str, name: str):
-    fig = plt.figure(figsize=(6.4, 5.2))
+    fig = plt.figure(figsize=(7.0, 3.9))
     ax = fig.add_subplot(111, projection="3d")
     x, y, z = surface["x"], surface["y"], surface["z"]
     color = np.sqrt(x * x + y * y)
     ax.plot_surface(x, y, z, facecolors=plt.cm.viridis((color - color.min()) / (np.ptp(color) + 1e-12)), rstride=2, cstride=2, linewidth=0, antialiased=True, alpha=0.96)
-    ax.set_title(title)
-    ax.set_axis_off()
-    fix_matplotlib_3d(ax)
-    ax.view_init(elev=22, azim=35)
-    ax.text2D(0.02, 0.02, "synthetic educational fallback", transform=ax.transAxes, fontsize=8, color=PALETTE["gray"])
+    frame_3d_axes(ax, title, elev=22, azim=32, rect=(-0.04, -0.16, 1.12, 1.20))
+    ax.figure.text(0.03, 0.86, "synthetic educational fallback", fontsize=8, color=PALETTE["gray"])
     return savefig(fig, name)
 
 

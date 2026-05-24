@@ -13,7 +13,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from sos2026.paths import CACHE_DIR, STATUS_DIR, FIGURE_DIR, PROJECT_ROOT, ensure_directories
-from sos2026.plotting import PALETTE, savefig, caption, fix_matplotlib_3d, plot_surface_3d, plot_iota_profile, plot_boozer_contour, plot_boozer_spectrum
+from sos2026.plotting import PALETTE, savefig, caption, frame_3d_axes, plot_surface_3d, plot_iota_profile, plot_boozer_contour, plot_boozer_spectrum
 from sos2026.vmec_helpers import synthetic_surface, load_iota_profile, boundary_mode_scan
 from sos2026.boozer_helpers import synthetic_boozer_modes, compute_boozer_grid, symmetry_residual
 from sos2026.neo_helpers import epsilon_eff_curves, epsilon_sensitivity
@@ -65,15 +65,25 @@ def plot_epsilon():
 
 
 def plot_coils():
+    surface = synthetic_surface("hsx", ntheta=36, nphi=64)
     for stage, name in [("initial", "04_initial_coils.png"), ("final", "04_final_coils.png")]:
-        fig = plt.figure(figsize=(6.2, 4.7))
+        fig = plt.figure(figsize=(7.0, 3.9))
         ax = fig.add_subplot(111, projection="3d")
+        ax.plot_surface(
+            surface["x"],
+            surface["y"],
+            surface["z"],
+            color="#e5e7eb",
+            linewidth=0,
+            alpha=0.22,
+            shade=False,
+            rstride=2,
+            cstride=2,
+        )
         for curve in coil_curves(stage):
-            ax.plot(curve[:, 0], curve[:, 1], curve[:, 2], lw=2.0)
-        ax.set_title(f"{stage.capitalize()} synthetic stage-2 coils")
-        ax.set_axis_off()
-        fix_matplotlib_3d(ax)
-        ax.view_init(elev=24, azim=36)
+            ax.plot(curve[:, 0], curve[:, 1], curve[:, 2], lw=2.8)
+        frame_3d_axes(ax, f"{stage.capitalize()} synthetic stage-2 coils", elev=24, azim=32, zoom=1.95, rect=(-0.07, -0.18, 1.18, 1.22))
+        ax.figure.text(0.03, 0.86, "gray surface = target boundary; colored curves = coil set", fontsize=8, color=PALETTE["gray"])
         savefig(fig, name)
     fig, axes = plt.subplots(1, 2, figsize=(9.2, 3.8), sharex=True, sharey=True)
     for ax, stage in zip(axes, ["initial", "final"]):
@@ -134,12 +144,23 @@ def plot_fieldlines_particles():
     x = r * np.cos(t / 4)
     y = r * np.sin(t / 4)
     z = 0.16 * np.sin(t)
-    fig = plt.figure(figsize=(6.0, 4.5))
+    surface = synthetic_surface("hsx", ntheta=28, nphi=48)
+    fig = plt.figure(figsize=(7.0, 3.9))
     ax = fig.add_subplot(111, projection="3d")
-    ax.plot(x, y, z, color=PALETTE["teal"], lw=1.0)
-    ax.set_title("Cached fieldline diagnostic")
-    ax.set_axis_off()
-    fix_matplotlib_3d(ax)
+    ax.plot_surface(
+        surface["x"],
+        surface["y"],
+        surface["z"],
+        color="#dbeafe",
+        linewidth=0,
+        alpha=0.20,
+        shade=False,
+        rstride=2,
+        cstride=2,
+    )
+    ax.plot(x, y, z, color=PALETTE["teal"], lw=2.2)
+    frame_3d_axes(ax, "Cached fieldline diagnostic", elev=23, azim=31, zoom=2.05, rect=(-0.08, -0.18, 1.18, 1.22))
+    ax.figure.text(0.03, 0.86, "blue sheet = cached target surface; teal line = one traced diagnostic", fontsize=8, color=PALETTE["gray"])
     savefig(fig, "06_fieldlines.png")
     t = np.linspace(0, 2 * np.pi, 300)
     fig, ax = plt.subplots(figsize=(5.8, 4.2))

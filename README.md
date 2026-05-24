@@ -25,6 +25,7 @@ Cached mode is the classroom default. It is enough for all student notebooks and
 The finished lecture decks are in `slides/pptx/`; open the `.pptx` files directly in PowerPoint.
 Contact sheets for quick visual review are in `slides/pptx/contact_sheets/`.
 The notebooks in `notebooks/` are committed with cached-mode outputs so GitHub can render the lesson plots without a local run.
+Each notebook includes a short literature anchor so students can connect the cached classroom metric to the paper or code family that motivated it.
 
 ## Colab quickstart
 

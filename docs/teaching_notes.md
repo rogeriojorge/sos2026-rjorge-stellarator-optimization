@@ -10,6 +10,8 @@ concept -> code -> plot -> failure mode -> exercise
 
 Each notebook teaches one concept, one code step, one plot family, one failure mode, and one exercise.
 
+Every notebook also includes a short literature anchor before the first code path. These anchors explain why the cached metric exists, which paper or code family made the metric worth teaching, and where the classroom approximation stops. The goal is to connect the optimization loop to the research literature without turning Rogerio's lectures into derivation lectures.
+
 ## Lecture 1 timing
 
 - 15 min: optimization loop and boundary variables.

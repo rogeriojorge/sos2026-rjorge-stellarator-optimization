@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import imageio.v2 as imageio
 
 from .paths import MOVIE_DIR, ensure_directories
-from .plotting import fix_matplotlib_3d
+from .plotting import frame_3d_axes
 from .vmec_helpers import synthetic_surface
 from .coil_helpers import coil_curves
 
@@ -29,15 +29,12 @@ def rotating_surface_gif(path: Path | None = None, frames: int = 28) -> Path:
     surface = synthetic_surface("hsx", ntheta=42, nphi=70)
     imgs = []
     for azim in np.linspace(0, 360, frames, endpoint=False):
-        fig = plt.figure(figsize=(5.2, 4.0))
+        fig = plt.figure(figsize=(6.2, 4.1))
         ax = fig.add_subplot(111, projection="3d")
         ax.plot_surface(surface["x"], surface["y"], surface["z"], cmap="viridis", linewidth=0, antialiased=True)
         for curve in coil_curves("final", ncoils=4, npts=120):
             ax.plot(curve[:, 0], curve[:, 1], curve[:, 2], color="#111827", lw=1.0, alpha=0.75)
-        ax.set_axis_off()
-        ax.set_title("Cached rotating surface and coils", fontsize=11)
-        fix_matplotlib_3d(ax)
-        ax.view_init(elev=22, azim=float(azim))
+        frame_3d_axes(ax, "Cached rotating surface and coils", elev=22, azim=float(azim), rect=(-0.08, -0.20, 1.18, 1.22))
         imgs.append(_frame_from_figure(fig))
         plt.close(fig)
     imageio.mimsave(path, imgs, duration=0.08)

@@ -26,3 +26,10 @@ Local inspection was performed on 2026-05-22 using the prompt package, local sou
 The notebooks intentionally do not assume these APIs are stable enough for live school demos. Cached mode is the supported default.
 
 Use `STATUS.md` and `assets/figures/manifest.json` to distinguish `real public data`, `real package output`, `cached derived data`, and `synthetic educational fallback`. Import success alone is not a claim that a real scientific calculation was run for a notebook output.
+
+## Literature-backed teaching role
+
+- Equilibrium and Boozer notebooks use the precise-quasisymmetry and good-magnetic-surface literature to motivate why spectra, iota, and topology checks are objective terms.
+- Coil notebooks use SIMSOPT and single-stage papers to frame coils as part of the design variable set, not only as a downstream drawing exercise.
+- Neoclassical notebooks use W7-X and SFINCS literature to explain why effective ripple, D11 scans, Er roots, and bootstrap current appear as validation gates.
+- Turbulence/profile notebooks use nonlinear turbulence-optimization literature to explain why a cheap proxy can fail and why profile closure belongs in the final design loop.

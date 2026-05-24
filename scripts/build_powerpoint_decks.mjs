@@ -940,52 +940,82 @@ function renderClosing(presentation, deck, item, slideNumber, total) {
   return slide;
 }
 
+function addReference(slide, item) {
+  if (!item.reference) return;
+  text(slide, item.reference, 34, 638, 910, 18, {
+    fontSize: 8,
+    color: palette.muted,
+    valign: "middle",
+  });
+}
+
 async function renderGeneric(presentation, deck, item, slideNumber, total) {
   if (item.image) return renderFigure(presentation, deck, item, slideNumber, total);
   return renderConcept(presentation, deck, item, slideNumber, total);
 }
 
 async function renderSlide(presentation, deck, item, slideNumber, total) {
+  let slide;
   switch (item.kind) {
     case "title":
-      return renderTitleSlide(presentation, deck, item, slideNumber, total);
+      slide = await renderTitleSlide(presentation, deck, item, slideNumber, total);
+      break;
     case "transition":
-      return renderTransition(presentation, deck, item, slideNumber, total);
+      slide = renderTransition(presentation, deck, item, slideNumber, total);
+      break;
     case "figure":
-      return renderFigure(presentation, deck, item, slideNumber, total);
+      slide = await renderFigure(presentation, deck, item, slideNumber, total);
+      break;
     case "demo":
-      return renderDemo(presentation, deck, item, slideNumber, total);
+      slide = await renderDemo(presentation, deck, item, slideNumber, total);
+      break;
     case "movie":
-      return renderMovie(presentation, deck, item, slideNumber, total);
+      slide = await renderMovie(presentation, deck, item, slideNumber, total);
+      break;
     case "quote":
-      return renderQuote(presentation, deck, item, slideNumber, total);
+      slide = renderQuote(presentation, deck, item, slideNumber, total);
+      break;
     case "map":
-      return renderMap(presentation, deck, item, slideNumber, total);
+      slide = renderMap(presentation, deck, item, slideNumber, total);
+      break;
     case "workflow":
     case "diagram":
-      return renderWorkflow(presentation, deck, item, slideNumber, total);
+      slide = renderWorkflow(presentation, deck, item, slideNumber, total);
+      break;
     case "ladder":
-      return renderLadder(presentation, deck, item, slideNumber, total);
+      slide = renderLadder(presentation, deck, item, slideNumber, total);
+      break;
     case "warning":
-      return renderWarning(presentation, deck, item, slideNumber, total);
+      slide = renderWarning(presentation, deck, item, slideNumber, total);
+      break;
     case "exercise":
-      return renderExercise(presentation, deck, item, slideNumber, total);
+      slide = renderExercise(presentation, deck, item, slideNumber, total);
+      break;
     case "code":
-      return renderCode(presentation, deck, item, slideNumber, total);
+      slide = renderCode(presentation, deck, item, slideNumber, total);
+      break;
     case "table":
-      return renderTable(presentation, deck, item, slideNumber, total);
+      slide = renderTable(presentation, deck, item, slideNumber, total);
+      break;
     case "project":
-      return renderProject(presentation, deck, item, slideNumber, total);
+      slide = renderProject(presentation, deck, item, slideNumber, total);
+      break;
     case "summary":
-      return renderSummary(presentation, deck, item, slideNumber, total);
+      slide = renderSummary(presentation, deck, item, slideNumber, total);
+      break;
     case "closing":
-      return renderClosing(presentation, deck, item, slideNumber, total);
+      slide = renderClosing(presentation, deck, item, slideNumber, total);
+      break;
     case "backup":
-      return renderGeneric(presentation, deck, item, slideNumber, total);
+      slide = await renderGeneric(presentation, deck, item, slideNumber, total);
+      break;
     case "concept":
     default:
-      return renderGeneric(presentation, deck, item, slideNumber, total);
+      slide = await renderGeneric(presentation, deck, item, slideNumber, total);
+      break;
   }
+  addReference(slide, item);
+  return slide;
 }
 
 async function writePreviewAndLayout(presentation, deck, slide, index, previewScale) {

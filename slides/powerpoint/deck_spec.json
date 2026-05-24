@@ -30,8 +30,18 @@
           ]
         },
         {
+          "kind": "table",
+          "title": "Three literature gates shape the workflow",
+          "bullets": [
+            "Precise quasisymmetry: make the Boozer spectrum sparse, then test what remains",
+            "Good magnetic surfaces: compare surface-based objectives with island and chaos diagnostics",
+            "W7-X validation: reduced neoclassical transport is real progress, but it is one gate in the loop"
+          ],
+          "reference": "Refs: Landreman & Paul PRL 128, 035001 (2022); Landreman et al. Phys. Plasmas 28, 092505 (2021); Beidler et al. Nature 596, 221-226 (2021)."
+        },
+        {
           "kind": "workflow",
-          "title": "The optimizer sees artifacts, not intuition",
+          "title": "The optimizer sees artifacts with provenance",
           "bullets": [
             "Boundary and profiles create an equilibrium",
             "Spectra and scalars turn physics into objectives",
@@ -46,7 +56,9 @@
             "Read the shape as a parameterized boundary",
             "This is a cached educational surface"
           ],
-          "caption": "A visible surface is a design variable, not yet a validated device."
+          "caption": "A visible surface is a design variable, not yet a validated device.",
+          "reference": "VMEC background: Hirshman & Whitson, Phys. Fluids 26, 3553 (1983); public cases from landreman/vmec_equilibria.",
+          "layout": "full"
         },
         {
           "kind": "figure",
@@ -56,17 +68,20 @@
             "Use it as experimental motivation",
             "Do not treat the fallback surface as a new W7-X result"
           ],
-          "caption": "The reference case anchors the design discussion without duplicating geometry lectures."
+          "caption": "The reference case anchors the design discussion without duplicating geometry lectures.",
+          "reference": "Ref: Beidler et al., Nature 596, 221-226 (2021), reduced neoclassical energy transport in W7-X.",
+          "layout": "full"
         },
         {
           "kind": "figure",
-          "title": "Rotational transform is a target, not a decoration",
+          "title": "Rotational transform is an optimization target",
           "image": "assets/figures/01_iota_profile.png",
           "bullets": [
             "Plot pitch before optimizing spectra",
             "Watch low-order rational surfaces"
           ],
-          "caption": "A profile can be a constraint, an objective, or a diagnostic."
+          "caption": "A profile can be a constraint, an objective, or a diagnostic.",
+          "reference": "Ref: Landreman, Medasani & Zhu, Phys. Plasmas 28, 092505 (2021), good surfaces and quasisymmetry together."
         },
         {
           "kind": "figure",
@@ -134,7 +149,8 @@
             "Green modes preserve the intended line",
             "Red modes are symmetry-breaking targets"
           ],
-          "caption": "Good and bad modes are marked explicitly for the classroom scan."
+          "caption": "Good and bad modes are marked explicitly for the classroom scan.",
+          "reference": "Ref: Landreman & Paul, Phys. Rev. Lett. 128, 035001 (2022), precise quasisymmetry."
         },
         {
           "kind": "figure",
@@ -163,7 +179,8 @@
             "Lower is better for this screen",
             "Use it before expensive validation"
           ],
-          "caption": "This cached curve teaches how to read a metric; it is not a new NEO result."
+          "caption": "This cached curve teaches how to read a metric; it is not a new NEO result.",
+          "reference": "Ref: Beidler et al., Nature 596, 221-226 (2021), effective ripple as a W7-X optimization target."
         },
         {
           "kind": "figure",
@@ -290,7 +307,8 @@
             "Use if the live surface plot fails",
             "Keep the cached label visible"
           ],
-          "caption": "Fallback image for a short live-demo recovery."
+          "caption": "Fallback image for a short live-demo recovery.",
+          "layout": "full"
         },
         {
           "kind": "figure",
@@ -361,14 +379,25 @@
           ]
         },
         {
+          "kind": "table",
+          "title": "Single-stage changed the controlled object",
+          "bullets": [
+            "Two-stage: choose a plasma boundary first, then ask coils to reproduce it",
+            "Fixed-boundary single-stage: boundary and coils move together through a quadratic-flux penalty",
+            "Simplified coils: few-coil designs become searchable, but engineering gates still decide viability"
+          ],
+          "reference": "Refs: Jorge et al., PPCF 65, 074003 (2023); Jorge, Giuliani & Loizu, arXiv:2406.07830 (2024); Giuliani et al., JCP 459, 111147 (2022)."
+        },
+        {
           "kind": "figure",
-          "title": "Initial coils are a diagnostic, not an answer",
+          "title": "Initial coils define the first mismatch",
           "image": "assets/figures/04_initial_coils.png",
           "bullets": [
             "Look for scale, symmetry, and crowding",
             "The curves are synthetic teaching coils"
           ],
-          "caption": "The first coil set shows the inverse problem before regularization."
+          "caption": "The first coil set shows the inverse problem before regularization.",
+          "layout": "full"
         },
         {
           "kind": "figure",
@@ -378,7 +407,9 @@
             "Compare shape and smoothness",
             "Then ask whether access and curvature remain acceptable"
           ],
-          "caption": "A better coil picture is still not a manufacturability proof."
+          "caption": "A better coil picture is still not a manufacturability proof.",
+          "reference": "Ref: SIMSOPT, Landreman et al., JOSS 6, 3525 (2021).",
+          "layout": "full"
         },
         {
           "kind": "figure",
@@ -388,7 +419,8 @@
             "Blue/red patches show normal-field error",
             "The target surface is damaged when patches remain"
           ],
-          "caption": "Quadratic flux measures whether coils reproduce the requested boundary."
+          "caption": "Quadratic flux measures whether coils reproduce the requested boundary.",
+          "reference": "Ref: SIMSOPT docs stage-two coil optimization example."
         },
         {
           "kind": "figure",
@@ -445,7 +477,8 @@
             "Good surfaces support the coil story",
             "Bad topology catches failures a scalar may miss"
           ],
-          "caption": "This cached fieldline is a qualitative diagnostic, not a live ESSOS run."
+          "caption": "This cached fieldline is a qualitative diagnostic, not a live ESSOS run.",
+          "layout": "full"
         },
         {
           "kind": "figure",
@@ -473,7 +506,8 @@
           "bullets": [
             "Boundary variables and coil variables move together",
             "The objective includes plasma metrics, flux error, and coil metrics"
-          ]
+          ],
+          "reference": "Ref: Jorge et al., PPCF 65, 074003 (2023), single-stage fixed-boundary/coils workflow."
         },
         {
           "kind": "figure",
@@ -593,7 +627,8 @@
           "bullets": [
             "Use to explain the starting point",
             "Ask what makes the target hard"
-          ]
+          ],
+          "layout": "full"
         },
         {
           "kind": "figure",
@@ -602,7 +637,8 @@
           "bullets": [
             "Use to explain the claimed improvement",
             "Ask what still needs engineering checks"
-          ]
+          ],
+          "layout": "full"
         },
         {
           "kind": "figure",
@@ -666,7 +702,7 @@
         },
         {
           "kind": "quote",
-          "title": "The optimizer does exactly what we ask, not what we meant",
+          "title": "The optimizer follows the metric we choose",
           "bullets": [
             "Metric design is part of physics"
           ]
@@ -679,6 +715,16 @@
             "Effective ripple and Boozer metrics: early transport warnings",
             "DKE, gyrokinetics, particles, profiles: validation gates"
           ]
+        },
+        {
+          "kind": "table",
+          "title": "Transport literature says: validate the winner",
+          "bullets": [
+            "W7-X: neoclassical optimization reduced the geometry-driven loss channel",
+            "SFINCS: drift-kinetic validation depends on trajectory, electric-field, and collision modeling choices",
+            "Nonlinear turbulence: heat-flux objectives can be noisy enough to need stochastic or staged optimization"
+          ],
+          "reference": "Refs: Beidler et al., Nature 596, 221-226 (2021); Landreman et al., Phys. Plasmas 21, 042503 (2014); Kim et al., JPP 90, 905900203 (2024)."
         },
         {
           "kind": "figure",
@@ -698,7 +744,8 @@
             "Collisionality changes the answer",
             "Er suppression changes the interpretation"
           ],
-          "caption": "This SFINCS-style scan is cached educational data."
+          "caption": "This SFINCS-style scan is cached educational data.",
+          "reference": "Ref: Landreman et al., Phys. Plasmas 21, 042503 (2014), SFINCS drift-kinetic solver."
         },
         {
           "kind": "figure",
@@ -737,7 +784,8 @@
             "The blue expectation keeps rising",
             "The orange curve saturates"
           ],
-          "caption": "The cartoon motivates turbulence-aware validation without rederiving transport theory."
+          "caption": "The cartoon motivates turbulence-aware validation without rederiving transport theory.",
+          "reference": "Ref: Beidler et al., Nature 596, 221-226 (2021); W7-X ion-temperature clamping literature."
         },
         {
           "kind": "demo",
@@ -767,7 +815,8 @@
             "Positive growth marks unstable branches",
             "The peak is not the heat flux"
           ],
-          "caption": "Use growth rate as a screen, not as the final objective."
+          "caption": "Use growth rate as a screen, not as the final objective.",
+          "reference": "Ref: SPECTRAX-GK PyPI/docs, JAX-native gyrokinetic solver for stellarator optimization workflows."
         },
         {
           "kind": "figure",
@@ -787,7 +836,8 @@
             "Red circle: proxy winner",
             "Green circle: validation winner"
           ],
-          "caption": "The ranking failure is the point of the plot."
+          "caption": "The ranking failure is the point of the plot.",
+          "reference": "Ref: Kim et al., J. Plasma Phys. 90, 905900203 (2024), nonlinear turbulence optimization with noisy heat fluxes."
         },
         {
           "kind": "demo",
@@ -849,7 +899,7 @@
         },
         {
           "kind": "quote",
-          "title": "Transport metrics are gates, not decorations",
+          "title": "Transport metrics are validation gates",
           "bullets": [
             "A good design survives a stronger metric"
           ]
@@ -964,7 +1014,7 @@
           "subtitle": "Lecture 4: profiles, Pareto decisions, and the repo lab",
           "image": "assets/figures/11_pareto_front.png",
           "bullets": [
-            "A design is not a shape; it is a validated workflow",
+            "A design becomes credible when the workflow is validated",
             "Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
           ]
         },
@@ -976,6 +1026,16 @@
             "Transport changes profiles",
             "Profiles change objectives"
           ]
+        },
+        {
+          "kind": "table",
+          "title": "Modern workflows are multi-fidelity by design",
+          "bullets": [
+            "SIMSOPT: objective terms, geometry objects, and coils live in one optimization framework",
+            "JAX transport tools: differentiable metrics are useful only inside a documented claim scope",
+            "Profile closure: sources and turbulence can reverse a geometry-only ranking"
+          ],
+          "reference": "Refs: Landreman et al., JOSS 6, 3525 (2021); sfincs-jax and SPECTRAX-GK public docs; Kim et al., JPP 90, 905900203 (2024)."
         },
         {
           "kind": "transition",
@@ -993,7 +1053,8 @@
             "Temperature and density gradients drive transport",
             "A good field metric can underperform after closure"
           ],
-          "caption": "This fallback model teaches profile feedback, not a live NEOPAX result."
+          "caption": "This fallback model teaches profile feedback, not a live NEOPAX result.",
+          "reference": "Ref: transport/profile closure logic in nonlinear turbulence optimization and T3D validation literature."
         },
         {
           "kind": "figure",
@@ -1051,7 +1112,8 @@
             "Nondominated points still require priorities",
             "Final choice needs context and validation"
           ],
-          "caption": "A Pareto front is an argument surface, not an automatic answer."
+          "caption": "A Pareto front is an argument surface, not an automatic answer.",
+          "reference": "Ref: SIMSOPT objective composition and multiobjective stellarator optimization workflows."
         },
         {
           "kind": "figure",
@@ -1094,7 +1156,7 @@
         },
         {
           "kind": "quote",
-          "title": "A design is not a shape; it is a validated workflow",
+          "title": "A design is a validated workflow",
           "bullets": [
             "The repo is the audit trail"
           ]
