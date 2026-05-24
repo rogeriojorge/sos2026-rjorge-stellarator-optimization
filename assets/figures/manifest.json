@@ -1,6 +1,6 @@
 {
   "schema": "sos2026.figure-manifest/v1",
-  "generated_at": "2026-05-24T02:05:15Z",
+  "generated_at": "2026-05-24T12:47:20Z",
   "categories": [
     "real public data",
     "real package output",
@@ -12,7 +12,7 @@
       "path": "assets/figures/01_boundary_mode_scan.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "9a469d4b43a27c14ec0fea033e53f6b31e3c7f4b34c495a4f3cb7f8d30a8549c",
       "used_by": [
         "supporting documentation"
@@ -23,8 +23,8 @@
       "path": "assets/figures/01_hsx_surface.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T02:05:15Z",
-      "sha256": "a48c748ad321aeaa1050ec64b375e9772be5a10c2a7504b7d5fbb5c6bc4f009d",
+      "generated_at": "2026-05-24T12:47:20Z",
+      "sha256": "127f3e7cb3a62ba44071eeafd1cc0c7b734bbada8643db98f8cff5a34ddf6f68",
       "used_by": [
         "Lecture 1",
         "notebooks/01_vmec_jax_first_equilibrium.ipynb"
@@ -35,7 +35,7 @@
       "path": "assets/figures/01_iota_profile.png",
       "category": "real public data",
       "source": "data/vmec_equilibria/HSX/QHS_vac_ns201_fixed/wout_HSX_QHS_vacuum_ns201.nc when present",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "16b7013f7b07082d8eb6874679332ba52ec7bef289a738b70f778404b0d8dd52",
       "used_by": [
         "Lecture 1",
@@ -47,8 +47,8 @@
       "path": "assets/figures/01_w7x_surface.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T02:05:15Z",
-      "sha256": "1c4a618366336afb19a31ecf5f860b4b89c564f540fc5c4c7a5ef2c3c8827aad",
+      "generated_at": "2026-05-24T12:47:20Z",
+      "sha256": "70ba349cac9c55ca0606e6dd4bc2088578439e2807d3ac71f6aabdcc54d39156",
       "used_by": [
         "Lecture 1"
       ],
@@ -58,7 +58,7 @@
       "path": "assets/figures/02_bad_mode_perturbation.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "80b8664dd20d23427387d666fa5069033f8d3cfe1aa6700e5161eac5f99cd2db",
       "used_by": [
         "supporting documentation"
@@ -69,7 +69,7 @@
       "path": "assets/figures/02_boozer_contour.png",
       "category": "synthetic educational fallback",
       "source": "src/sos2026/boozer_helpers.py",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "f15f30cffce418c6d6aa8d39ffd129f20800b9c59ffebda3fb3c4615dad44dfe",
       "used_by": [
         "Lecture 1",
@@ -81,8 +81,8 @@
       "path": "assets/figures/02_boozer_spectrum.png",
       "category": "synthetic educational fallback",
       "source": "src/sos2026/boozer_helpers.py",
-      "generated_at": "2026-05-24T02:05:15Z",
-      "sha256": "e9dc4f45e7c3fedb907ec69b53658eab1f87cf320850d7cd3c75fc787fd23105",
+      "generated_at": "2026-05-24T12:47:20Z",
+      "sha256": "2947fe0bb71f2f127ca4d32097a2eb28cebcc8c53873d25380d80a26b02d68cb",
       "used_by": [
         "Lecture 1",
         "notebooks/02_boozer_spectrum.ipynb"
@@ -93,8 +93,8 @@
       "path": "assets/figures/03_epsilon_eff_comparison.png",
       "category": "cached derived data",
       "source": "data/cached/epsilon_eff_comparison.npz",
-      "generated_at": "2026-05-24T02:05:15Z",
-      "sha256": "3d2ffd0190ab76107ff0b08a23743049a3bd65e0f77ce7dd4debe8b00462617f",
+      "generated_at": "2026-05-24T12:47:20Z",
+      "sha256": "a405d954702707f998fffa2fd34678134ebca00cb887201bdb818dcbac1a0958",
       "used_by": [
         "Lecture 1",
         "Lecture 3",
@@ -106,8 +106,8 @@
       "path": "assets/figures/03_epsilon_eff_sensitivity.png",
       "category": "synthetic educational fallback",
       "source": "src/sos2026/neo_helpers.py",
-      "generated_at": "2026-05-24T02:05:15Z",
-      "sha256": "fe73a51cbbc12746411f673aa9b9eba67214750dd25a31092bad5ec3c54744c3",
+      "generated_at": "2026-05-24T12:47:20Z",
+      "sha256": "cfedee966153dad69f000995f5e79dae9045b713cd80dab4c963a50b98924ddb",
       "used_by": [
         "Lecture 1",
         "notebooks/03_effective_ripple_neo_jax.ipynb"
@@ -118,7 +118,7 @@
       "path": "assets/figures/04_bdotn_before_after.png",
       "category": "synthetic educational fallback",
       "source": "src/sos2026/coil_helpers.py",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "87df34083bc612a9bee25c84c97bf1ed3c95b7684e53bf69524e0e411bff7050",
       "used_by": [
         "Lecture 2",
@@ -130,7 +130,7 @@
       "path": "assets/figures/04_coil_tradeoff.png",
       "category": "cached derived data",
       "source": "data/cached/coil_demo_cached.csv",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "14735480068a2ff4222571343555b148c5df568a61f95426037cb08758aef18d",
       "used_by": [
         "Lecture 2",
@@ -142,8 +142,8 @@
       "path": "assets/figures/04_final_coils.png",
       "category": "synthetic educational fallback",
       "source": "src/sos2026/coil_helpers.py",
-      "generated_at": "2026-05-24T02:05:15Z",
-      "sha256": "00976f0a082e7bce2dd3f602de77f533d974128ea7ff0ed963ce405c51890f5b",
+      "generated_at": "2026-05-24T12:47:20Z",
+      "sha256": "4d6078626c9db5c644a06c27d622800c1957a61f0444e70163059af45e339276",
       "used_by": [
         "Lecture 2",
         "notebooks/04_simsopt_stage2_coils.ipynb"
@@ -154,8 +154,8 @@
       "path": "assets/figures/04_initial_coils.png",
       "category": "synthetic educational fallback",
       "source": "src/sos2026/coil_helpers.py",
-      "generated_at": "2026-05-24T02:05:15Z",
-      "sha256": "76bef82da2ae17c5cb2be2e593efc3c7cce389540ae84e2618e445bdca970a27",
+      "generated_at": "2026-05-24T12:47:20Z",
+      "sha256": "577dd361766cc03e65407c9a5293fea259e6d4ca50037d2f9c4f5ce05c1a708d",
       "used_by": [
         "Lecture 2",
         "notebooks/04_simsopt_stage2_coils.ipynb"
@@ -166,7 +166,7 @@
       "path": "assets/figures/05_single_stage_history.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "2a7a910ce31b7bcb90f67621a31a10bf91352ea6fff1ba9f7f0382ab08a07724",
       "used_by": [
         "supporting documentation"
@@ -177,7 +177,7 @@
       "path": "assets/figures/05_weight_continuation.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "dda49fa2e1d15e25510d07097b94af3aa8c9c4eca963d1042e50f6d05d8278e1",
       "used_by": [
         "supporting documentation"
@@ -188,8 +188,8 @@
       "path": "assets/figures/06_fieldlines.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T02:05:15Z",
-      "sha256": "a8f5fb98488a3acccfb143a120a33b757de9b4b2f69a9309a19f14a9609a4cac",
+      "generated_at": "2026-05-24T12:47:20Z",
+      "sha256": "fb8ca468835596eb8c3167c2cb66b8b0991a3fd022e84da66fa4eabb0ac0a706",
       "used_by": [
         "Lecture 2",
         "notebooks/06_essos_fieldlines_particles.ipynb"
@@ -200,7 +200,7 @@
       "path": "assets/figures/06_particle_orbit.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "484e9caa93370c5a623c7e41fc9c7a307dd5ce37bcec02d82e2c7a12c905406b",
       "used_by": [
         "Lecture 2",
@@ -212,7 +212,7 @@
       "path": "assets/figures/07_bootstrap_profile.png",
       "category": "cached derived data",
       "source": "data/cached/sfincs_demo_cached.npz",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "968ec9d93478f6d8a650b6b03be2c9b43f9a909f9f82e32646ce7c7b07ac1e82",
       "used_by": [
         "Lecture 3",
@@ -224,7 +224,7 @@
       "path": "assets/figures/07_er_roots.png",
       "category": "cached derived data",
       "source": "data/cached/sfincs_demo_cached.npz",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "678468ad5c6a692999367804d2dc1c08e9ce5f1901ee614c0fe2550b52fa409e",
       "used_by": [
         "Lecture 3",
@@ -236,8 +236,8 @@
       "path": "assets/figures/07_sfincs_d11_scan.png",
       "category": "cached derived data",
       "source": "data/cached/sfincs_demo_cached.npz",
-      "generated_at": "2026-05-24T02:05:15Z",
-      "sha256": "333a7970c7028e6dbd884ce04800634fcc9ac0dc95fe7e9a0709c06037bb5f64",
+      "generated_at": "2026-05-24T12:47:20Z",
+      "sha256": "d7ff42597a5fd8b5fc8ccbce9faccff764d9cda82a2216afe68ad4b76d47377b",
       "used_by": [
         "Lecture 3",
         "notebooks/07_sfincs_jax_neoclassical_cached.ipynb"
@@ -248,7 +248,7 @@
       "path": "assets/figures/08_frequency_spectrum.png",
       "category": "cached derived data",
       "source": "data/cached/spectrax_linear_cached.npz",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "d52aee2485d121442800cf825669454b88fcbb34759bcdc69153961b3a12d273",
       "used_by": [
         "Lecture 3",
@@ -260,7 +260,7 @@
       "path": "assets/figures/08_growth_rate_spectrum.png",
       "category": "cached derived data",
       "source": "data/cached/spectrax_linear_cached.npz",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "a16471fc5f47946742c22ca639c31434f09f67417312306315ebb857f8d11d97",
       "used_by": [
         "Lecture 3",
@@ -272,7 +272,7 @@
       "path": "assets/figures/09_proxy_vs_nonlinear.png",
       "category": "cached derived data",
       "source": "data/cached/turbulence_proxy_cached.csv",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "55ce0a63cc0644f015f257e51a6cd46a17501a77203be3efccdedfc6a8d16c51",
       "used_by": [
         "Lecture 3",
@@ -284,7 +284,7 @@
       "path": "assets/figures/09_w7x_clamping_cartoon.png",
       "category": "synthetic educational fallback",
       "source": "src/sos2026/turbulence_helpers.py",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "b66a4c232b496774f078d06754511e29b8bdc1eb9b8b9e7d01290bee9116ba7a",
       "used_by": [
         "Lecture 3"
@@ -295,7 +295,7 @@
       "path": "assets/figures/10_power_balance.png",
       "category": "cached derived data",
       "source": "data/cached/neopax_profile_cached.npz",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "f5710a20f96e47eaba706fcfb2b1d370cfe6ded8a4e36f9e6d1334a8a1c83e14",
       "used_by": [
         "Lecture 4",
@@ -307,8 +307,8 @@
       "path": "assets/figures/10_profile_evolution.png",
       "category": "cached derived data",
       "source": "data/cached/neopax_profile_cached.npz",
-      "generated_at": "2026-05-24T02:05:15Z",
-      "sha256": "d947558ce4dee52c1f3ac6269a2a30d9e612e46f5d4e57650e2a26c33d819b7e",
+      "generated_at": "2026-05-24T12:47:20Z",
+      "sha256": "30ad3dfb7a0785002648bd1e6c747b2b68ae05ba2f4f8ba93f7cc0afa28b6c3e",
       "used_by": [
         "Lecture 4",
         "notebooks/10_neopax_profile_closure.ipynb"
@@ -319,8 +319,8 @@
       "path": "assets/figures/11_pareto_front.png",
       "category": "cached derived data",
       "source": "data/cached/pareto_design_table.csv",
-      "generated_at": "2026-05-24T02:05:15Z",
-      "sha256": "fd21493727da624bdd28ea5aa1d3bb30cb2cb427ac034b5e1fa330a2b938e653",
+      "generated_at": "2026-05-24T12:47:20Z",
+      "sha256": "daa781370780d0801e88b2c3f88dfd0069ef65791c0a1db28c0f37f730a5a7bb",
       "used_by": [
         "Lecture 4",
         "notebooks/11_pareto_design_dashboard.ipynb"
@@ -331,7 +331,7 @@
       "path": "assets/figures/11_weighted_selection.png",
       "category": "cached derived data",
       "source": "data/cached/pareto_design_table.csv",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "4b22a0b79ba30d5ff4c1d66ad606faa8f5daa083c92169af780b5f9bc135d4c9",
       "used_by": [
         "Lecture 4",
@@ -343,7 +343,7 @@
       "path": "assets/figures/environment_check.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T02:05:15Z",
+      "generated_at": "2026-05-24T12:47:20Z",
       "sha256": "0af2f74d55590085524e112cbf004d8f5f7fca55d913b9f8e9fd48b7f023316a",
       "used_by": [
         "supporting documentation"

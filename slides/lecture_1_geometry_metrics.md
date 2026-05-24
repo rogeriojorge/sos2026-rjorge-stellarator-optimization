@@ -6,7 +6,6 @@ size: 16:9
 ---
 
 # Can we design a stellarator by following gradients?
-
 Lecture 1: what the optimizer actually sees
 
 ![bg right:48% contain](../assets/figures/01_hsx_surface.png)
@@ -16,20 +15,30 @@ Lecture 1: what the optimizer actually sees
 ---
 
 # PART 1. From field lines to hidden symmetry
-
 - Goal: turn confinement physics into computable objectives
 - Caveat: geometry freedom creates an inverse problem
 
 ---
 
 # Metrics are compressed physics
-
 - They are useful only when we know what was compressed
 
 ---
 
-# Three literature gates shape the workflow
+# What is rotational transform?
+- **Term:** Rotational transform, iota
+- **Definition:** The number of poloidal turns a magnetic field line makes per toroidal turn on a flux surface.
+- **Equation:** iota = Delta theta / Delta zeta
+- **Physical meaning:** Iota controls field-line pitch and where rational surfaces can appear.
+- **Optimizer sees:** The optimizer can shape the radial iota profile or avoid low-order rationals in sensitive regions.
+- **Failure mode:** A good scalar score can still land near a rational surface that creates islands.
+- **Remember:** A stellarator is designed by shaping both the surface and the field-line pitch.
 
+<small>Refs: VMEC equilibrium conventions; Landreman et al., Phys. Plasmas 28, 092505 (2021).</small>
+
+---
+
+# Three literature gates shape the workflow
 - Precise quasisymmetry: make the Boozer spectrum sparse, then test what remains
 - Good magnetic surfaces: compare surface-based objectives with island and chaos diagnostics
 - W7-X validation: reduced neoclassical transport is real progress, but it is one gate in the loop
@@ -39,7 +48,6 @@ Lecture 1: what the optimizer actually sees
 ---
 
 # The optimizer sees artifacts with provenance
-
 - Boundary and profiles create an equilibrium
 - Spectra and scalars turn physics into objectives
 - Every scalar needs a validation gate
@@ -50,7 +58,7 @@ Lecture 1: what the optimizer actually sees
 
 ![bg right:48% contain](../assets/figures/01_hsx_surface.png)
 - Read the shape as a parameterized boundary
-- This is a cached educational surface
+- Read the boundary shape as the first design variable
 
 _A visible surface is a design variable, not yet a validated device._
 
@@ -62,7 +70,7 @@ _A visible surface is a design variable, not yet a validated device._
 
 ![bg right:48% contain](../assets/figures/01_w7x_surface.png)
 - Use it as experimental motivation
-- Do not treat the fallback surface as a new W7-X result
+- Use W7-X as the experimental reference for what validation must reach
 
 _The reference case anchors the design discussion without duplicating geometry lectures._
 
@@ -93,15 +101,13 @@ _The optimizer needs knobs whose effects can be measured._
 ---
 
 # Equilibrium convergence is part of the result
-
 - Record resolution and residuals
 - Do not compare designs before the solve is trustworthy
-- Cached mode keeps the teaching path alive
+- Keep a reliable lecture path alongside research runs
 
 ---
 
 # The wout file is the first checked artifact
-
 - Inspect dimensions, surfaces, and mode counts
 - Use public HSX/W7-X files when present
 - Record what was actually read
@@ -110,21 +116,31 @@ _The optimizer needs knobs whose effects can be measured._
 
 # Demo break: first equilibrium object
 
-![bg right:48% contain](../assets/figures/01_iota_profile.png)
-`notebooks/01_vmec_jax_first_equilibrium.ipynb`
-
+![](../assets/figures/01_iota_profile.png)
 - Locate the HSX wout file
 - Plot surface and iota
 - Change one boundary-mode proxy
 
-_Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/_
+_Notebook path: notebooks/01_vmec_jax_first_equilibrium.ipynb_
 
 ---
 
 # PART 2. Boozer coordinates make symmetry measurable
-
 - The spectrum turns geometry into a table
 - Bad modes become penalties
+
+---
+
+# What is a Boozer spectrum?
+- **Term:** Boozer spectrum
+- **Definition:** A Fourier representation of |B| in magnetic coordinates where guiding-center physics has a simple form.
+- **Equation:** B(theta,zeta)=sum B_mn cos(m theta - n zeta)
+- **Physical meaning:** Quasisymmetry appears when most off-symmetry coefficients are small.
+- **Optimizer sees:** The objective penalizes the modes that break the target symmetry line.
+- **Failure mode:** A sparse spectrum is not enough if the equilibrium, coils, or transport gates fail.
+- **Remember:** Boozer coordinates turn hidden symmetry into a plot and a penalty.
+
+<small>Ref: Landreman & Paul, Phys. Rev. Lett. 128, 035001 (2022).</small>
 
 ---
 
@@ -134,7 +150,7 @@ _Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellar
 - Clean bands suggest the intended symmetry
 - Broken bands warn before the scalar metric
 
-_This contour is a teaching diagnostic, not a fresh Boozer transform._
+_Use the contour to connect symmetry intuition to the spectrum._
 
 ---
 
@@ -144,7 +160,7 @@ _This contour is a teaching diagnostic, not a fresh Boozer transform._
 - Green modes preserve the intended line
 - Red modes are symmetry-breaking targets
 
-_Good and bad modes are marked explicitly for the classroom scan._
+_Symmetry-preserving and symmetry-breaking modes are marked explicitly._
 
 <small>Ref: Landreman & Paul, Phys. Rev. Lett. 128, 035001 (2022), precise quasisymmetry.</small>
 
@@ -161,10 +177,22 @@ _The exercise is to connect a table entry to a visible field-strength change._
 ---
 
 # Several symmetry targets use the same workflow
-
 - Quasi-axisymmetry: penalize modes off the QA line
 - Quasi-helical symmetry: keep the QH ridge clean
 - Quasi-isodynamic: use different metrics but the same artifact discipline
+
+---
+
+# What is effective ripple?
+- **Term:** Effective ripple, epsilon_eff
+- **Definition:** A scalar proxy for ripple-driven trapped-particle radial transport in the low-collisionality neoclassical regime.
+- **Equation:** D_11 ~ epsilon_eff^(3/2) / nu
+- **Physical meaning:** Lower effective ripple usually means lower 1/nu neoclassical losses.
+- **Optimizer sees:** Use it as an early screen before expensive drift-kinetic validation.
+- **Failure mode:** It does not include every transport channel, electric-field branch, or turbulence effect.
+- **Remember:** Effective ripple is a fast warning light, not the whole transport model.
+
+<small>Ref: Beidler et al., Nature 596, 221-226 (2021).</small>
 
 ---
 
@@ -174,7 +202,7 @@ _The exercise is to connect a table entry to a visible field-strength change._
 - Lower is better for this screen
 - Use it before expensive validation
 
-_This cached curve teaches how to read a metric; it is not a new NEO result._
+_Read the radial trend: lower effective ripple points to lower 1/nu neoclassical loss._
 
 <small>Ref: Beidler et al., Nature 596, 221-226 (2021), effective ripple as a W7-X optimization target.</small>
 
@@ -183,7 +211,7 @@ _This cached curve teaches how to read a metric; it is not a new NEO result._
 # Gradients tell us which knobs matter
 
 ![bg right:48% contain](../assets/figures/03_epsilon_eff_sensitivity.png)
-- Finite differences are robust for teaching
+- Finite differences make the sensitivity visible
 - Autodiff becomes important at scale
 
 _The point is sensitivity ranking, not a production derivative._
@@ -191,34 +219,29 @@ _The point is sensitivity ranking, not a production derivative._
 ---
 
 # The scalar objective is a negotiation
-
 - Weights encode scientific and engineering priorities
 
 ---
 
 # Demo break: spectrum and ripple
 
-![bg right:48% contain](../assets/figures/02_boozer_spectrum.png)
-`notebooks/02_boozer_spectrum.ipynb + notebooks/03_effective_ripple_neo_jax.ipynb`
-
+![](../assets/figures/02_boozer_spectrum.png)
 - Circle bad modes
 - Change one scalar
 - Explain what the plot proves
 
-_Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/_
+_Notebook path: notebooks/02_boozer_spectrum.ipynb + notebooks/03_effective_ripple_neo_jax.ipynb_
 
 ---
 
 # Failure mode: optimizing a beautiful plot
-
 - A clean surface is not a validated design
 - A scalar can hide the wrong physics
-- A cached figure must say what it is
+- A diagnostic figure must state its assumptions
 
 ---
 
 # Lecture 1 what to remember
-
 - Optimization starts with a parameterization
 - A wout file is a scientific artifact
 - Boozer spectra turn symmetry into penalties
@@ -227,20 +250,17 @@ _Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellar
 ---
 
 # A design loop starts when the artifact can be rerun
-
 - Repo and docs are part of the scientific object
 
 ---
 
 # APPENDIX. Lecture 1 checks and replacements
-
 - Use this section when a live package succeeds
-- Keep cached mode as the classroom baseline
+- Keep the reference demo path ready for timing
 
 ---
 
 # VMEC file review
-
 - Dimensions: surfaces, modes, field periods
 - Variables: iota, pressure, boundary coefficients
 - Provenance: public repo path and hash
@@ -248,23 +268,20 @@ _Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellar
 ---
 
 # Boozer file review
-
 - Surface labels: choose the same radial grid
 - Mode truncation: report m/n limits
 - Residual: separate symmetry-preserving from breaking modes
 
 ---
 
-# When cached mode is enough
-
-- Teaching the loop structure
+# When a reference demo is enough
+- Following the design-loop structure
 - Testing plotting and data plumbing
-- Preparing exercises with qualitative answers
+- Preparing exercises with defensible qualitative answers
 
 ---
 
 # When research mode is needed
-
 - Reporting a numerical value
 - Comparing HSX and W7-X quantitatively
 - Changing VMEC or Boozer resolution
@@ -272,43 +289,40 @@ _Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellar
 ---
 
 # Research path: VMEC_JAX to Boozer transform
-
 - Start from a verified input or wout file
-- Run a tiny equilibrium on the lecture machine
-- Replace cached arrays with documented outputs
+- Run a short equilibrium on the lecture machine
+- Replace screening arrays with documented solver outputs
 
 ---
 
 # Metric acceptance checklist
-
-- Cached figure: use for trend and classroom discussion
+- Reference figure: use for trends and discussion
 - Real-code run: use for numerical claim after provenance check
 - STATUS.md record: package, data source, and validation domain
 
 ---
 
-# Backup figure: HSX surface
+# Reference figure: HSX surface
 
 ![bg right:48% contain](../assets/figures/01_hsx_surface.png)
-- Use if the live surface plot fails
-- Keep the cached label visible
+- Use to anchor the surface discussion
+- Keep the claim scope visible
 
-_Fallback image for a short live-demo recovery._
+_Reference image for the surface discussion._
 
 ---
 
-# Backup figure: Boozer contour
+# Reference figure: Boozer contour
 
 ![bg right:48% contain](../assets/figures/02_boozer_contour.png)
-- Use if the transform is slow
+- Use to read the expected symmetry pattern
 - Discuss the expected symmetry pattern
 
-_Fallback image for reading the contour before scalarizing._
+_Reference image for reading the contour before scalarizing._
 
 ---
 
 # Discussion: what did the optimizer see?
-
 - Design variable: boundary modes and profiles
 - Computed object: equilibrium, spectra, scalar metrics
 - Decision variable: which scalar deserves trust
@@ -316,7 +330,6 @@ _Fallback image for reading the contour before scalarizing._
 ---
 
 # What to remember
-
 - Keep the scientific object and the computed artifact together
 - Rerun, perturb, compare, and explain before trusting the optimum
 - Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/

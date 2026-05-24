@@ -25,6 +25,7 @@ def main() -> int:
         try:
             path = func()
             first_frame = path.with_name(f"{path.stem}_first_frame.png")
+            storyboard = path.with_name(f"{path.stem}_storyboard.png")
             results.append({
                 "label": label,
                 "ok": True,
@@ -32,9 +33,11 @@ def main() -> int:
                 "bytes": path.stat().st_size,
                 "first_frame": str(first_frame),
                 "first_frame_bytes": first_frame.stat().st_size if first_frame.exists() else 0,
+                "storyboard": str(storyboard),
+                "storyboard_bytes": storyboard.stat().st_size if storyboard.exists() else 0,
                 "category": "synthetic educational fallback",
                 "sha256": sha256(path),
-                "caption": "Small classroom GIF generated from cached/synthetic teaching geometry.",
+                "caption": "Small classroom animation with a static storyboard for PowerPoint.",
                 "regenerate": "python scripts/generate_movies.py",
             })
             print(f"{label}: OK -> {path}")
@@ -43,8 +46,9 @@ def main() -> int:
             print(f"{label}: FAIL -> {exc}")
     movies = sorted(p.name for p in MOVIE_DIR.glob("*.gif"))
     first_frames = sorted(p.name for p in MOVIE_DIR.glob("*_first_frame.png"))
+    storyboards = sorted(p.name for p in MOVIE_DIR.glob("*_storyboard.png"))
     STATUS_DIR.mkdir(parents=True, exist_ok=True)
-    (STATUS_DIR / "movies.json").write_text(json.dumps({"results": results, "movies": movies, "first_frames": first_frames}, indent=2), encoding="utf-8")
+    (STATUS_DIR / "movies.json").write_text(json.dumps({"results": results, "movies": movies, "first_frames": first_frames, "storyboards": storyboards}, indent=2), encoding="utf-8")
     return 0 if sum(1 for r in results if r["ok"]) >= 2 else 2
 
 

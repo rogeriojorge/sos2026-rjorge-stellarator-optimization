@@ -48,8 +48,7 @@ def plot_epsilon():
     ax.set_title("Effective-ripple comparison")
     ax.legend(fontsize=8)
     ax.grid(True, which="both", alpha=0.25)
-    ax.text(0.04, 0.07, "cached teaching metric", transform=ax.transAxes, fontsize=8, color=PALETTE["gray"], bbox={"facecolor": "white", "edgecolor": "#e5e7eb", "alpha": 0.85})
-    caption(ax, "Lower curves represent better low-collisionality neoclassical optimization in this cached teaching metric.")
+    caption(ax, "Lower curves represent better low-collisionality neoclassical optimization in this screening metric.")
     savefig(fig, "03_epsilon_eff_comparison.png")
 
     strengths, eps = epsilon_sensitivity()
@@ -60,7 +59,7 @@ def plot_epsilon():
     ax.set_title("Finite-difference sensitivity cartoon")
     ax.grid(alpha=0.25)
     ax.annotate("small symmetry-breaking changes can dominate the objective", xy=(strengths[-2], eps[-2]), xytext=(0.18, 0.75), textcoords="axes fraction", arrowprops={"arrowstyle": "->", "color": PALETTE["red"]}, fontsize=8.5, color=PALETTE["ink"])
-    caption(ax, "The key lesson is monotonic sensitivity, not a validated NEO_JAX result.")
+    caption(ax, "Read this as gradient intuition; quantitative claims require a validated transport calculation.")
     savefig(fig, "03_epsilon_eff_sensitivity.png")
 
 
@@ -73,17 +72,16 @@ def plot_coils():
             surface["x"],
             surface["y"],
             surface["z"],
-            color="#e5e7eb",
+            color="#60a5fa",
             linewidth=0,
-            alpha=0.22,
-            shade=False,
+            alpha=0.54,
+            shade=True,
             rstride=2,
             cstride=2,
         )
         for curve in coil_curves(stage):
-            ax.plot(curve[:, 0], curve[:, 1], curve[:, 2], lw=2.8)
-        frame_3d_axes(ax, f"{stage.capitalize()} synthetic stage-2 coils", elev=24, azim=32, zoom=1.95, rect=(-0.07, -0.18, 1.18, 1.22))
-        ax.figure.text(0.03, 0.86, "gray surface = target boundary; colored curves = coil set", fontsize=8, color=PALETTE["gray"])
+            ax.plot(curve[:, 0], curve[:, 1], curve[:, 2], lw=3.2)
+        frame_3d_axes(ax, None, elev=24, azim=32, zoom=2.08, rect=(-0.10, -0.20, 1.23, 1.26))
         savefig(fig, name)
     fig, axes = plt.subplots(1, 2, figsize=(9.2, 3.8), sharex=True, sharey=True)
     for ax, stage in zip(axes, ["initial", "final"]):
@@ -151,16 +149,15 @@ def plot_fieldlines_particles():
         surface["x"],
         surface["y"],
         surface["z"],
-        color="#dbeafe",
+        color="#60a5fa",
         linewidth=0,
-        alpha=0.20,
-        shade=False,
+        alpha=0.52,
+        shade=True,
         rstride=2,
         cstride=2,
     )
     ax.plot(x, y, z, color=PALETTE["teal"], lw=2.2)
-    frame_3d_axes(ax, "Cached fieldline diagnostic", elev=23, azim=31, zoom=2.05, rect=(-0.08, -0.18, 1.18, 1.22))
-    ax.figure.text(0.03, 0.86, "blue sheet = cached target surface; teal line = one traced diagnostic", fontsize=8, color=PALETTE["gray"])
+    frame_3d_axes(ax, None, elev=23, azim=31, zoom=2.65, rect=(-0.14, -0.24, 1.31, 1.34))
     savefig(fig, "06_fieldlines.png")
     t = np.linspace(0, 2 * np.pi, 300)
     fig, ax = plt.subplots(figsize=(5.8, 4.2))
@@ -181,10 +178,10 @@ def plot_sfincs_transport():
     ax.loglog(d["nu"], d["D11_with_Er"], label="with Er suppression")
     ax.set_xlabel("collisionality proxy")
     ax.set_ylabel("D11-like coefficient")
-    ax.set_title("Cached neoclassical scan")
+    ax.set_title("Neoclassical D11 scan")
     ax.legend(fontsize=8)
     ax.grid(True, which="both", alpha=0.25)
-    caption(ax, "This teaches the shape of a validation scan; it is not a SFINCS_JAX production solve.")
+    caption(ax, "Read this as the shape of a validation scan; quantitative claims require a production SFINCS_JAX solve.")
     savefig(fig, "07_sfincs_d11_scan.png")
     fig, ax = plt.subplots(figsize=(6.2, 3.8))
     ax.plot(d["Er"], d["ambipolar"], color=PALETTE["red"], lw=2)
@@ -267,7 +264,7 @@ def plot_profiles_pareto():
     ax.plot(d["r"], d["Te"], label="Te")
     ax.set_xlabel("r/a")
     ax.set_ylabel("temperature proxy")
-    ax.set_title("Profile closure fallback")
+    ax.set_title("Profile closure response")
     ax.legend(fontsize=8)
     ax.grid(alpha=0.25)
     caption(ax, "The field design is not complete until profiles and sources close the transport loop.")
@@ -295,7 +292,6 @@ def plot_profiles_pareto():
     ax.set_title("Pareto front: transport vs coils")
     ax.legend(fontsize=8)
     ax.grid(alpha=0.25)
-    ax.text(0.02, 0.03, "named designs, cached table", transform=ax.transAxes, fontsize=8, color=PALETTE["gray"], bbox={"facecolor": "white", "edgecolor": "#e5e7eb", "alpha": 0.85})
     caption(ax, "Nondominated points expose tradeoffs that a single weighted objective can hide.")
     savefig(fig, "11_pareto_front.png")
     ranked = weighted_selection(df, {"epsilon_eff": 0.35, "coil_length": 0.25, "turbulence_proxy": 0.25, "profile_error": 0.15})
@@ -374,8 +370,8 @@ def main() -> int:
     ensure_directories()
     paths = []
     paths.append(plot_environment())
-    paths.append(plot_surface_3d(synthetic_surface("hsx"), "HSX-like QHS surface (cached fallback)", "01_hsx_surface.png"))
-    paths.append(plot_surface_3d(synthetic_surface("w7x"), "W7-X-like reference surface (cached fallback)", "01_w7x_surface.png"))
+    paths.append(plot_surface_3d(synthetic_surface("hsx"), "HSX-like QHS surface", "01_hsx_surface.png"))
+    paths.append(plot_surface_3d(synthetic_surface("w7x"), "W7-X-like reference surface", "01_w7x_surface.png"))
     s, iota, _ = load_iota_profile()
     paths.append(plot_iota_profile(s, iota))
     modes = synthetic_boozer_modes("hsx")

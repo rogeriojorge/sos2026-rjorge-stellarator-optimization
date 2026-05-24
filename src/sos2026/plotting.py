@@ -35,7 +35,9 @@ def caption(ax, text: str) -> None:
     ax.text(0.0, -0.14, text, transform=ax.transAxes, fontsize=9, color=PALETTE["gray"], va="top")
 
 
-def provenance_label(ax, label: str = "synthetic educational fallback") -> None:
+def provenance_label(ax, label: str = "") -> None:
+    if not label:
+        return
     ax.text(
         0.995,
         0.01,
@@ -121,7 +123,6 @@ def plot_surface_3d(surface: dict, title: str, name: str):
     color = np.sqrt(x * x + y * y)
     ax.plot_surface(x, y, z, facecolors=plt.cm.viridis((color - color.min()) / (np.ptp(color) + 1e-12)), rstride=2, cstride=2, linewidth=0, antialiased=True, alpha=0.96)
     frame_3d_axes(ax, title, elev=22, azim=32, rect=(-0.04, -0.16, 1.12, 1.20))
-    ax.figure.text(0.03, 0.86, "synthetic educational fallback", fontsize=8, color=PALETTE["gray"])
     return savefig(fig, name)
 
 

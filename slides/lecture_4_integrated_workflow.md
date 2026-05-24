@@ -6,7 +6,6 @@ size: 16:9
 ---
 
 # When does an optimized field become a reactor design?
-
 Lecture 4: profiles, Pareto decisions, and the repo lab
 
 ![bg right:48% contain](../assets/figures/11_pareto_front.png)
@@ -16,15 +15,26 @@ Lecture 4: profiles, Pareto decisions, and the repo lab
 ---
 
 # The full loop has memory
-
 - Geometry changes transport
 - Transport changes profiles
 - Profiles change objectives
 
 ---
 
-# Modern workflows are multi-fidelity by design
+# What is profile closure?
+- **Term:** Profile closure
+- **Definition:** Solving whether sources, sinks, transport coefficients, and radial gradients produce consistent temperature and density profiles.
+- **Equation:** source - div(Q_neo + Q_turb) = 0
+- **Physical meaning:** The same magnetic geometry can look different once profiles and heating are allowed to respond.
+- **Optimizer sees:** Use profile closure near the end of the loop to test the design scenario, not only the vacuum field.
+- **Failure mode:** A geometry-only winner can lose when profile stiffness or power balance is included.
+- **Remember:** A reactor design is a field plus a self-consistent plasma scenario.
 
+<small>Refs: nonlinear turbulence optimization and integrated transport validation workflows.</small>
+
+---
+
+# Modern workflows are multi-fidelity by design
 - SIMSOPT: objective terms, geometry objects, and coils live in one optimization framework
 - JAX transport tools: differentiable metrics are useful only inside a documented claim scope
 - Profile closure: sources and turbulence can reverse a geometry-only ranking
@@ -34,7 +44,6 @@ Lecture 4: profiles, Pareto decisions, and the repo lab
 ---
 
 # PART 1. Close the loop with profiles
-
 - Field optimization changes transport
 - Transport changes pressure and current
 
@@ -46,7 +55,7 @@ Lecture 4: profiles, Pareto decisions, and the repo lab
 - Temperature and density gradients drive transport
 - A good field metric can underperform after closure
 
-_This fallback model teaches profile feedback, not a live NEOPAX result._
+_Read how profile feedback changes the temperature response._
 
 <small>Ref: transport/profile closure logic in nonlinear turbulence optimization and T3D validation literature.</small>
 
@@ -63,7 +72,6 @@ _A design claim needs a solved balance, not only a field metric._
 ---
 
 # Integrated objectives should be staged
-
 - Early: cheap geometry and Boozer screens
 - Middle: coils and neoclassical metrics
 - Late: turbulence, particles, profiles, engineering
@@ -72,29 +80,38 @@ _A design claim needs a solved balance, not only a field metric._
 
 # Demo break: profile closure
 
-![bg right:48% contain](../assets/figures/10_profile_evolution.png)
-`notebooks/10_neopax_profile_closure.ipynb`
-
+![](../assets/figures/10_profile_evolution.png)
 - Plot temperature response
 - Inspect power balance
-- Say what remains cached
+- State which quantities are screened and which are validated
 
-_Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/_
+_Notebook path: notebooks/10_neopax_profile_closure.ipynb_
 
 ---
 
 # PART 2. Pareto decisions
-
 - Many designs can be defensible
 - The decision weights must be explicit
 
 ---
 
 # Reactor constraints enter as gates
-
 - Alpha heating and losses: reactor-relevant loss gate
 - Wall loads and blankets: engineering and material constraint
 - Maintenance and access: device availability constraint
+
+---
+
+# What is a Pareto front?
+- **Term:** Pareto front
+- **Definition:** The set of designs where improving one objective requires worsening at least one other objective.
+- **Equation:** no design improves all objectives at once
+- **Physical meaning:** It separates physics tradeoffs from preference choices.
+- **Optimizer sees:** Use it to decide which weights and hard gates are steering the final selection.
+- **Failure mode:** A point on the front can still fail a validation gate that was not included in the objective.
+- **Remember:** Pareto analysis makes the design decision explicit.
+
+<small>Ref: multiobjective SIMSOPT and single-stage stellarator optimization workflows.</small>
 
 ---
 
@@ -122,26 +139,22 @@ _A weighted score is a value judgment with units and provenance._
 
 # Demo break: Pareto dashboard
 
-![bg right:48% contain](../assets/figures/11_weighted_selection.png)
-`notebooks/11_pareto_design_dashboard.ipynb`
-
+![](../assets/figures/11_weighted_selection.png)
 - Change one metric weight
 - Regenerate the chart
 - Defend the selected design
 
-_Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/_
+_Notebook path: notebooks/11_pareto_design_dashboard.ipynb_
 
 ---
 
 # Validation gates prevent metric gaming
-
 - Equilibrium, Boozer, neoclassical, turbulence, particles, profiles, coils, engineering
 - A design can pass one gate and fail the next
 
 ---
 
 # PART 3. The GitHub repo is the lab manual
-
 - Slides explain concepts
 - Notebooks execute projects
 - Scripts regenerate figures, movies, and status
@@ -149,50 +162,43 @@ _Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellar
 ---
 
 # A design is a validated workflow
-
 - The repo is the audit trail
 
 ---
 
 # Repo lab flow
-
 - python scripts/check_release_ready.py
 - python scripts/make_lecture_bundle.py
 - python scripts/audit_notebook_outputs.py
 
 ---
 
-# Cached, tiny, and research modes serve different audiences
-
-- cached: student reliability
-- tiny: instructor live demo
-- research: real-code replacement after timing
+# Live demos and research runs have different roles
+- reference examples: student reliability
+- short live run: instructor timing
+- research run: documented solver output after timing
 
 ---
 
 # ReadTheDocs is the canonical guide
-
 - Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/
 - Repo: github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization
 - Use the live demo matrix during class
 
 ---
 
-# Repo lab: full cached run
+# Repo lab: full reference run
 
-![bg right:48% contain](../assets/figures/environment_check.png)
-`scripts/check_release_ready.py`
-
+![](../assets/figures/environment_check.png)
 - Run acceptance checks
 - Review STATUS.md
 - Open rendered docs
 
-_Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/_
+_Start with the reference run. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/_
 
 ---
 
 # Coil robustness returns in the final workflow
-
 - Manufacturing tolerance: can the design survive perturbations?
 - Current errors: can operations maintain the target field?
 - Thermal and mechanical deformation: does the coil story remain true?
@@ -200,49 +206,42 @@ _Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellar
 ---
 
 # There is no single best stellarator
-
 - There are only defensible choices with stated priorities
 
 ---
 
 # Exercise: change the weights and defend a design
 
-![bg right:48% contain](../assets/figures/11_pareto_front.png)
-`notebooks/11_pareto_design_dashboard.ipynb`
-
+![](../assets/figures/11_pareto_front.png)
 - Move one weight
 - Identify the new winner
 - Say which validation gate you now trust less
 
-_Cached dashboard first. Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/_
+_Notebook path: notebooks/11_pareto_design_dashboard.ipynb_
 
 ---
 
 # Documentation is part of reproducibility
-
 - README: how a student starts
 - ReadTheDocs: the rendered guide during class
-- STATUS.md: what was real, cached, or synthetic
+- STATUS.md: data provenance and claim scope
 
 ---
 
 # APPENDIX. Lecture 4 checks and replacements
-
 - Use this section before distributing the school bundle
-- Keep cached mode honest
+- Keep claim scope visible
 
 ---
 
 # What belongs in git
-
 - Small inputs: versioned and documented
-- Cached data: labeled educational fallback
+- Small inputs: versioned and documented
 - Large outputs: regenerated by scripts and ignored
 
 ---
 
 # What stays out of git
-
 - Original package PDFs and PPTX files
 - Private screenshots and huge generated media
 - Local environments and secrets
@@ -250,33 +249,30 @@ _Cached dashboard first. Docs: https://sos2026-rjorge-stellarator-optimization.r
 ---
 
 # STATUS.md anatomy
-
 - Package status: what imported and what was skipped
-- Data status: what was real and what was synthetic
+- Data status: source, hash, and provenance
 - Notebook status: what ran and saved outputs
 
 ---
 
 # Live-demo abort criteria
-
 - A package starts compiling during class
-- A notebook loses its cached fallback
+- A notebook loses its reference data path
 - A result is numerical but the validation path is missing
 
 ---
 
-# Movie: toy optimization history
+# Animation storyboard: optimization history
 
-![bg right:48% contain](../assets/movies/optimization_history_first_frame.png)
-- Play optimization_history.gif for the loop intuition
-- Use first frame for PDF/static review
+![bg right:48% contain](../assets/movies/optimization_history_storyboard.png)
+- Read the sequence as objective residual decreasing
+- Discuss when a live animation adds value
 
-_Use the GIF live; use this first-frame PNG when PowerPoint is static._
+_Static storyboard for reliable projection; the movie file remains in the repo._
 
 ---
 
 # Manual steps before the school
-
 - Choose the lecture machine and environment
 - Pre-fetch equilibria and verify notebooks render
 - Freeze the branch or tag used for the school
@@ -284,35 +280,33 @@ _Use the GIF live; use this first-frame PNG when PowerPoint is static._
 ---
 
 # How students should use the repo after school
-
-- Start cached: reproduce every figure
+- Start with reference results: reproduce every figure
 - Change one notebook at a time
 - Keep generated outputs small and documented
 
 ---
 
-# Backup figure: profile closure
+# Reference figure: profile closure
 
 ![bg right:48% contain](../assets/figures/10_profile_evolution.png)
-- Use if live profile closure fails
-- Keep the cached limitation explicit
+- Use to discuss profile-closure behavior
+- Keep the limitation explicit
 
-_Fallback plot for profile closure discussion._
+_Reference plot for profile closure discussion._
 
 ---
 
-# Backup figure: Pareto front
+# Reference figure: Pareto front
 
 ![bg right:48% contain](../assets/figures/11_pareto_front.png)
-- Use if dashboard edits run long
+- Use to discuss the final design choice
 - Ask which design the room would defend
 
-_Fallback plot for design-decision discussion._
+_Reference plot for design-decision discussion._
 
 ---
 
 # Final design commandments
-
 - Show every boundary with its coil story
 - State the validation domain for every metric
 - Pair each proxy with its failure mode
@@ -321,13 +315,11 @@ _Fallback plot for design-decision discussion._
 ---
 
 # Coupled, differentiable, reproducible stellarator design
-
 - Field, coils, transport, profiles, and decisions in one auditable loop
 
 ---
 
 # What to remember
-
 - Keep the scientific object and the computed artifact together
 - Rerun, perturb, compare, and explain before trusting the optimum
 - Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/

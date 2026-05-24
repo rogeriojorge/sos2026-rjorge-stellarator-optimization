@@ -8,7 +8,7 @@ def epsilon_eff_curves(n: int = 80):
     hsx = 0.006 + 0.020 * s**2 + 0.002 * np.sin(2 * np.pi * s)
     w7x = 0.004 + 0.014 * s**1.7 + 0.0015 * np.cos(2 * np.pi * s)
     classical = 0.025 + 0.060 * s**1.2
-    return {"s": s, "HSX QHS cached metric": hsx, "W7-X standard cached metric": w7x, "classical stellarator reference": classical}
+    return {"s": s, "HSX QHS screening metric": hsx, "W7-X standard screening metric": w7x, "classical stellarator reference": classical}
 
 
 def epsilon_sensitivity(strengths=None):

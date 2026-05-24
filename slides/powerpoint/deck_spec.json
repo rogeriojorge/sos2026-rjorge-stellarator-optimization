@@ -30,6 +30,18 @@
           ]
         },
         {
+          "kind": "explainer",
+          "title": "What is rotational transform?",
+          "term": "Rotational transform, iota",
+          "definition": "The number of poloidal turns a magnetic field line makes per toroidal turn on a flux surface.",
+          "equation": "iota = Delta theta / Delta zeta",
+          "meaning": "Iota controls field-line pitch and where rational surfaces can appear.",
+          "optimizer": "The optimizer can shape the radial iota profile or avoid low-order rationals in sensitive regions.",
+          "failure": "A good scalar score can still land near a rational surface that creates islands.",
+          "remember": "A stellarator is designed by shaping both the surface and the field-line pitch.",
+          "reference": "Refs: VMEC equilibrium conventions; Landreman et al., Phys. Plasmas 28, 092505 (2021)."
+        },
+        {
           "kind": "table",
           "title": "Three literature gates shape the workflow",
           "bullets": [
@@ -54,7 +66,7 @@
           "image": "assets/figures/01_hsx_surface.png",
           "bullets": [
             "Read the shape as a parameterized boundary",
-            "This is a cached educational surface"
+            "Read the boundary shape as the first design variable"
           ],
           "caption": "A visible surface is a design variable, not yet a validated device.",
           "reference": "VMEC background: Hirshman & Whitson, Phys. Fluids 26, 3553 (1983); public cases from landreman/vmec_equilibria.",
@@ -66,7 +78,7 @@
           "image": "assets/figures/01_w7x_surface.png",
           "bullets": [
             "Use it as experimental motivation",
-            "Do not treat the fallback surface as a new W7-X result"
+            "Use W7-X as the experimental reference for what validation must reach"
           ],
           "caption": "The reference case anchors the design discussion without duplicating geometry lectures.",
           "reference": "Ref: Beidler et al., Nature 596, 221-226 (2021), reduced neoclassical energy transport in W7-X.",
@@ -99,7 +111,7 @@
           "bullets": [
             "Record resolution and residuals",
             "Do not compare designs before the solve is trustworthy",
-            "Cached mode keeps the teaching path alive"
+            "Keep a reliable lecture path alongside research runs"
           ]
         },
         {
@@ -114,14 +126,14 @@
         {
           "kind": "demo",
           "title": "Demo break: first equilibrium object",
-          "project": "notebooks/01_vmec_jax_first_equilibrium.ipynb",
+          "project": "Notebook: Vmec Jax First Equilibrium",
           "image": "assets/figures/01_iota_profile.png",
           "bullets": [
             "Locate the HSX wout file",
             "Plot surface and iota",
             "Change one boundary-mode proxy"
           ],
-          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          "caption": "Notebook path: notebooks/01_vmec_jax_first_equilibrium.ipynb"
         },
         {
           "kind": "transition",
@@ -132,6 +144,18 @@
           ]
         },
         {
+          "kind": "explainer",
+          "title": "What is a Boozer spectrum?",
+          "term": "Boozer spectrum",
+          "definition": "A Fourier representation of |B| in magnetic coordinates where guiding-center physics has a simple form.",
+          "equation": "B(theta,zeta)=sum B_mn cos(m theta - n zeta)",
+          "meaning": "Quasisymmetry appears when most off-symmetry coefficients are small.",
+          "optimizer": "The objective penalizes the modes that break the target symmetry line.",
+          "failure": "A sparse spectrum is not enough if the equilibrium, coils, or transport gates fail.",
+          "remember": "Boozer coordinates turn hidden symmetry into a plot and a penalty.",
+          "reference": "Ref: Landreman & Paul, Phys. Rev. Lett. 128, 035001 (2022)."
+        },
+        {
           "kind": "figure",
           "title": "Boozer coordinates make symmetry visible",
           "image": "assets/figures/02_boozer_contour.png",
@@ -139,7 +163,7 @@
             "Clean bands suggest the intended symmetry",
             "Broken bands warn before the scalar metric"
           ],
-          "caption": "This contour is a teaching diagnostic, not a fresh Boozer transform."
+          "caption": "Use the contour to connect symmetry intuition to the spectrum."
         },
         {
           "kind": "figure",
@@ -149,7 +173,7 @@
             "Green modes preserve the intended line",
             "Red modes are symmetry-breaking targets"
           ],
-          "caption": "Good and bad modes are marked explicitly for the classroom scan.",
+          "caption": "Symmetry-preserving and symmetry-breaking modes are marked explicitly.",
           "reference": "Ref: Landreman & Paul, Phys. Rev. Lett. 128, 035001 (2022), precise quasisymmetry."
         },
         {
@@ -172,6 +196,18 @@
           ]
         },
         {
+          "kind": "explainer",
+          "title": "What is effective ripple?",
+          "term": "Effective ripple, epsilon_eff",
+          "definition": "A scalar proxy for ripple-driven trapped-particle radial transport in the low-collisionality neoclassical regime.",
+          "equation": "D_11 ~ epsilon_eff^(3/2) / nu",
+          "meaning": "Lower effective ripple usually means lower 1/nu neoclassical losses.",
+          "optimizer": "Use it as an early screen before expensive drift-kinetic validation.",
+          "failure": "It does not include every transport channel, electric-field branch, or turbulence effect.",
+          "remember": "Effective ripple is a fast warning light, not the whole transport model.",
+          "reference": "Ref: Beidler et al., Nature 596, 221-226 (2021)."
+        },
+        {
           "kind": "figure",
           "title": "Effective ripple is an early transport warning",
           "image": "assets/figures/03_epsilon_eff_comparison.png",
@@ -179,7 +215,7 @@
             "Lower is better for this screen",
             "Use it before expensive validation"
           ],
-          "caption": "This cached curve teaches how to read a metric; it is not a new NEO result.",
+          "caption": "Read the radial trend: lower effective ripple points to lower 1/nu neoclassical loss.",
           "reference": "Ref: Beidler et al., Nature 596, 221-226 (2021), effective ripple as a W7-X optimization target."
         },
         {
@@ -187,7 +223,7 @@
           "title": "Gradients tell us which knobs matter",
           "image": "assets/figures/03_epsilon_eff_sensitivity.png",
           "bullets": [
-            "Finite differences are robust for teaching",
+            "Finite differences make the sensitivity visible",
             "Autodiff becomes important at scale"
           ],
           "caption": "The point is sensitivity ranking, not a production derivative."
@@ -202,14 +238,14 @@
         {
           "kind": "demo",
           "title": "Demo break: spectrum and ripple",
-          "project": "notebooks/02_boozer_spectrum.ipynb + notebooks/03_effective_ripple_neo_jax.ipynb",
+          "project": "Notebook: Effective Ripple Neo Jax",
           "image": "assets/figures/02_boozer_spectrum.png",
           "bullets": [
             "Circle bad modes",
             "Change one scalar",
             "Explain what the plot proves"
           ],
-          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          "caption": "Notebook path: notebooks/02_boozer_spectrum.ipynb + notebooks/03_effective_ripple_neo_jax.ipynb"
         },
         {
           "kind": "warning",
@@ -217,7 +253,7 @@
           "bullets": [
             "A clean surface is not a validated design",
             "A scalar can hide the wrong physics",
-            "A cached figure must say what it is"
+            "A diagnostic figure must state its assumptions"
           ]
         },
         {
@@ -242,7 +278,7 @@
           "title": "APPENDIX. Lecture 1 checks and replacements",
           "bullets": [
             "Use this section when a live package succeeds",
-            "Keep cached mode as the classroom baseline"
+            "Keep the reference demo path ready for timing"
           ]
         },
         {
@@ -265,11 +301,11 @@
         },
         {
           "kind": "warning",
-          "title": "When cached mode is enough",
+          "title": "When a reference demo is enough",
           "bullets": [
-            "Teaching the loop structure",
+            "Following the design-loop structure",
             "Testing plotting and data plumbing",
-            "Preparing exercises with qualitative answers"
+            "Preparing exercises with defensible qualitative answers"
           ]
         },
         {
@@ -286,39 +322,39 @@
           "title": "Research path: VMEC_JAX to Boozer transform",
           "bullets": [
             "Start from a verified input or wout file",
-            "Run a tiny equilibrium on the lecture machine",
-            "Replace cached arrays with documented outputs"
+            "Run a short equilibrium on the lecture machine",
+            "Replace screening arrays with documented solver outputs"
           ]
         },
         {
           "kind": "table",
           "title": "Metric acceptance checklist",
           "bullets": [
-            "Cached figure: use for trend and classroom discussion",
+            "Reference figure: use for trends and discussion",
             "Real-code run: use for numerical claim after provenance check",
             "STATUS.md record: package, data source, and validation domain"
           ]
         },
         {
           "kind": "figure",
-          "title": "Backup figure: HSX surface",
+          "title": "Reference figure: HSX surface",
           "image": "assets/figures/01_hsx_surface.png",
           "bullets": [
-            "Use if the live surface plot fails",
-            "Keep the cached label visible"
+            "Use to anchor the surface discussion",
+            "Keep the claim scope visible"
           ],
-          "caption": "Fallback image for a short live-demo recovery.",
+          "caption": "Reference image for the surface discussion.",
           "layout": "full"
         },
         {
           "kind": "figure",
-          "title": "Backup figure: Boozer contour",
+          "title": "Reference figure: Boozer contour",
           "image": "assets/figures/02_boozer_contour.png",
           "bullets": [
-            "Use if the transform is slow",
+            "Use to read the expected symmetry pattern",
             "Discuss the expected symmetry pattern"
           ],
-          "caption": "Fallback image for reading the contour before scalarizing."
+          "caption": "Reference image for reading the contour before scalarizing."
         },
         {
           "kind": "table",
@@ -379,6 +415,18 @@
           ]
         },
         {
+          "kind": "explainer",
+          "title": "What is a modular coil set?",
+          "term": "Modular coils",
+          "definition": "A set of separate closed coils placed around the torus, each shaped to reproduce the target magnetic surface.",
+          "equation": "min  \u222b |B \u00b7 n|^2 dA  + engineering penalties",
+          "meaning": "The loops are hardware objects: length, curvature, separation, ports, and tolerance matter.",
+          "optimizer": "Move coil control points while measuring normal-field error and engineering regularization.",
+          "failure": "A coil set can reproduce the surface mathematically while being too complex or too close to the plasma.",
+          "remember": "The field is credible only when the coil geometry is credible.",
+          "reference": "Refs: SIMSOPT JOSS 6, 3525 (2021); Giuliani et al., JCP 459, 111147 (2022)."
+        },
+        {
           "kind": "table",
           "title": "Single-stage changed the controlled object",
           "bullets": [
@@ -394,7 +442,7 @@
           "image": "assets/figures/04_initial_coils.png",
           "bullets": [
             "Look for scale, symmetry, and crowding",
-            "The curves are synthetic teaching coils"
+            "The loops represent modular coil degrees of freedom"
           ],
           "caption": "The first coil set shows the inverse problem before regularization.",
           "layout": "full"
@@ -410,6 +458,18 @@
           "caption": "A better coil picture is still not a manufacturability proof.",
           "reference": "Ref: SIMSOPT, Landreman et al., JOSS 6, 3525 (2021).",
           "layout": "full"
+        },
+        {
+          "kind": "explainer",
+          "title": "What does B dot n measure?",
+          "term": "Normal-field error",
+          "definition": "The component of the coil-produced magnetic field that crosses the target plasma boundary.",
+          "equation": "B \u00b7 n = 0 on the target surface",
+          "meaning": "If B dot n is large, field lines pierce the intended boundary instead of staying tangent to it.",
+          "optimizer": "Stage-2 optimization drives the normal-field error down while respecting coil complexity.",
+          "failure": "A small B dot n can still hide current, clearance, tolerance, or maintenance problems.",
+          "remember": "B dot n is the first coil score; it is not the last engineering score.",
+          "reference": "Ref: SIMSOPT stage-two coil optimization workflow."
         },
         {
           "kind": "figure",
@@ -452,14 +512,14 @@
         {
           "kind": "demo",
           "title": "Demo break: SIMSOPT stage-2 coils",
-          "project": "notebooks/04_simsopt_stage2_coils.ipynb",
+          "project": "Notebook: Simsopt Stage2 Coils",
           "image": "assets/figures/04_bdotn_before_after.png",
           "bullets": [
             "Compare initial and final coils",
             "Plot B dot n maps",
             "Name the tradeoff"
           ],
-          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          "caption": "Notebook path: notebooks/04_simsopt_stage2_coils.ipynb"
         },
         {
           "kind": "transition",
@@ -477,7 +537,7 @@
             "Good surfaces support the coil story",
             "Bad topology catches failures a scalar may miss"
           ],
-          "caption": "This cached fieldline is a qualitative diagnostic, not a live ESSOS run.",
+          "caption": "The fieldline is a topology diagnostic; particle confinement needs a separate check.",
           "layout": "full"
         },
         {
@@ -492,13 +552,13 @@
         },
         {
           "kind": "movie",
-          "title": "Movie: rotating surface and coils",
-          "image": "assets/movies/rotating_surface_first_frame.png",
+          "title": "Animation storyboard: rotating surface and modular coils",
+          "image": "assets/movies/rotating_surface_storyboard.png",
           "bullets": [
-            "Play rotating_surface.gif during class",
-            "Use the first frame in static slides"
+            "Use the four views to explain modular-coil clearance",
+            "Emphasize that coils and surface must be judged together"
           ],
-          "caption": "Use the GIF live; use this first-frame PNG when PowerPoint is static."
+          "caption": "Static storyboard for reliable projection; the movie file remains in the repo."
         },
         {
           "kind": "workflow",
@@ -532,14 +592,14 @@
         {
           "kind": "demo",
           "title": "Demo break: fieldlines and single-stage toy",
-          "project": "notebooks/05_single_stage_toy.ipynb + notebooks/06_essos_fieldlines_particles.ipynb",
+          "project": "Notebook: Essos Fieldlines Particles",
           "image": "assets/figures/05_weight_continuation.png",
           "bullets": [
             "Change one weight",
-            "Run cached diagnostics",
+            "Run the reference diagnostics",
             "Defend the result"
           ],
-          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          "caption": "Notebook path: notebooks/05_single_stage_toy.ipynb + notebooks/06_essos_fieldlines_particles.ipynb"
         },
         {
           "kind": "warning",
@@ -581,7 +641,7 @@
           "title": "APPENDIX. Lecture 2 checks and replacements",
           "bullets": [
             "Use this section when SIMSOPT or ESSOS is available",
-            "Keep cached images for lecture timing"
+            "Keep reference figures for lecture timing"
           ]
         },
         {
@@ -622,7 +682,7 @@
         },
         {
           "kind": "figure",
-          "title": "Backup figure: initial coils",
+          "title": "Reference figure: initial coils",
           "image": "assets/figures/04_initial_coils.png",
           "bullets": [
             "Use to explain the starting point",
@@ -632,7 +692,7 @@
         },
         {
           "kind": "figure",
-          "title": "Backup figure: final coils",
+          "title": "Reference figure: final coils",
           "image": "assets/figures/04_final_coils.png",
           "bullets": [
             "Use to explain the claimed improvement",
@@ -642,7 +702,7 @@
         },
         {
           "kind": "figure",
-          "title": "Backup figure: particle orbit",
+          "title": "Reference figure: particle orbit",
           "image": "assets/figures/06_particle_orbit.png",
           "bullets": [
             "Use if a particle trace is unavailable",
@@ -701,6 +761,18 @@
           ]
         },
         {
+          "kind": "explainer",
+          "title": "What is neoclassical transport?",
+          "term": "Neoclassical transport",
+          "definition": "Collisional transport caused by guiding-center drifts in a toroidal magnetic field with trapped particles.",
+          "equation": "Gamma, Q = functions(geometry, nu, E_r, profiles)",
+          "meaning": "It is geometry sensitive, especially in stellarators, and can be reduced by optimization.",
+          "optimizer": "Use cheap geometry metrics first, then drift-kinetic validation for finalists.",
+          "failure": "The result depends on collisionality, radial electric field, species, and profiles.",
+          "remember": "Neoclassical metrics are geometry gates with plasma-state assumptions.",
+          "reference": "Refs: Helander RPP 77, 087001 (2014); Beidler et al., Nature 596, 221-226 (2021)."
+        },
+        {
           "kind": "quote",
           "title": "The optimizer follows the metric we choose",
           "bullets": [
@@ -734,7 +806,19 @@
             "Rank candidates before expensive runs",
             "Do not treat the scalar as the whole transport story"
           ],
-          "caption": "Cached curves teach the screen; they are not new transport calculations."
+          "caption": "These curves show how the screen should be read; full transport validation remains a separate step."
+        },
+        {
+          "kind": "explainer",
+          "title": "What is D11?",
+          "term": "D11 transport coefficient",
+          "definition": "A radial particle-transport coefficient from the drift-kinetic response, often scanned versus collisionality.",
+          "equation": "Gamma_1 = - n D_11 (d ln n / dr + ...)",
+          "meaning": "It tells how strongly particles diffuse radially for a given thermodynamic drive.",
+          "optimizer": "Use D11 scans to test whether a low-ripple design remains good under richer kinetic physics.",
+          "failure": "A single D11 curve is not a full flux prediction without Er, sources, profiles, and species choices.",
+          "remember": "D11 is a validation coefficient, not a universal confinement number.",
+          "reference": "Ref: Landreman et al., Phys. Plasmas 21, 042503 (2014)."
         },
         {
           "kind": "figure",
@@ -744,7 +828,7 @@
             "Collisionality changes the answer",
             "Er suppression changes the interpretation"
           ],
-          "caption": "This SFINCS-style scan is cached educational data.",
+          "caption": "Read the slope, the electric-field suppression, and the collisionality window.",
           "reference": "Ref: Landreman et al., Phys. Plasmas 21, 042503 (2014), SFINCS drift-kinetic solver."
         },
         {
@@ -789,15 +873,15 @@
         },
         {
           "kind": "demo",
-          "title": "Demo break: neoclassical cached validation",
-          "project": "notebooks/07_sfincs_jax_neoclassical_cached.ipynb",
+          "title": "Demo break: neoclassical validation",
+          "project": "Notebook: Sfincs Jax Neoclassical Validation",
           "image": "assets/figures/07_sfincs_d11_scan.png",
           "bullets": [
             "Read a collisionality scan",
             "Inspect Er roots",
             "Plot bootstrap feedback"
           ],
-          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          "caption": "Notebook 07: SFINCS-style neoclassical validation."
         },
         {
           "kind": "transition",
@@ -806,6 +890,18 @@
             "Linear calculations are early screens",
             "Nonlinear validation changes rankings"
           ]
+        },
+        {
+          "kind": "explainer",
+          "title": "What is turbulent transport?",
+          "term": "Turbulent transport",
+          "definition": "Radial heat and particle transport driven by microinstabilities and nonlinear fluctuations.",
+          "equation": "Q_turb ~ <delta v_E \u00b7 delta p>",
+          "meaning": "It can dominate after neoclassical losses are reduced, as seen in W7-X temperature-clamping discussions.",
+          "optimizer": "Start with linear or proxy metrics, then validate finalists with nonlinear heat-flux calculations.",
+          "failure": "Linear growth rates can rank designs differently from nonlinear heat flux.",
+          "remember": "A transport optimizer must survive both neoclassical and turbulence gates.",
+          "reference": "Ref: Kim et al., J. Plasma Phys. 90, 905900203 (2024)."
         },
         {
           "kind": "figure",
@@ -817,6 +913,18 @@
           ],
           "caption": "Use growth rate as a screen, not as the final objective.",
           "reference": "Ref: SPECTRAX-GK PyPI/docs, JAX-native gyrokinetic solver for stellarator optimization workflows."
+        },
+        {
+          "kind": "explainer",
+          "title": "What are growth rate and frequency?",
+          "term": "Linear gyrokinetic spectrum",
+          "definition": "The growth rate says whether a mode amplifies; the frequency helps identify the branch.",
+          "equation": "omega = omega_r + i gamma",
+          "meaning": "Positive gamma marks an unstable mode, but the nonlinear saturated flux is a separate result.",
+          "optimizer": "Use spectra as fast screens and branch diagnostics before nonlinear validation.",
+          "failure": "A design with a lower peak gamma can still have worse nonlinear heat flux.",
+          "remember": "Linear spectra are warning lights; nonlinear flux is the stronger gate.",
+          "reference": "Ref: SPECTRAX-GK public package notes and nonlinear turbulence optimization literature."
         },
         {
           "kind": "figure",
@@ -842,14 +950,14 @@
         {
           "kind": "demo",
           "title": "Demo break: turbulence proxy versus validation",
-          "project": "notebooks/08_spectrax_gk_linear_metric.ipynb + notebooks/09_turbulence_metric_surrogate.ipynb",
+          "project": "Notebook: Turbulence Metric Surrogate",
           "image": "assets/figures/09_proxy_vs_nonlinear.png",
           "bullets": [
             "Choose the proxy winner",
             "Compare validation ranking",
             "Explain the failure mode"
           ],
-          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          "caption": "Notebook path: notebooks/08_spectrax_gk_linear_metric.ipynb + notebooks/09_turbulence_metric_surrogate.ipynb"
         },
         {
           "kind": "transition",
@@ -882,8 +990,8 @@
           "kind": "table",
           "title": "Metric trust ladder",
           "bullets": [
-            "Screen: cached or reduced model trend",
-            "Ranking hypothesis: tiny or quasilinear run",
+            "Screen: reduced model trend",
+            "Ranking hypothesis: fast or quasilinear run",
             "Validation: expensive run or experimental comparison"
           ]
         },
@@ -909,7 +1017,7 @@
           "title": "APPENDIX. Lecture 3 checks and replacements",
           "bullets": [
             "Use this section when SFINCS, SPECTRAX, or particle tools are live",
-            "Keep cached ranking plots ready"
+            "Keep reference ranking plots ready"
           ]
         },
         {
@@ -943,7 +1051,7 @@
           "kind": "code",
           "title": "Research path: SPECTRAX-GK",
           "bullets": [
-            "Start with a tiny linear calculation",
+            "Start with a short linear calculation",
             "Plot growth rate and frequency versus ky",
             "Keep nonlinear validation gate explicit"
           ]
@@ -959,7 +1067,7 @@
         },
         {
           "kind": "figure",
-          "title": "Backup figure: growth-rate spectrum",
+          "title": "Reference figure: growth-rate spectrum",
           "image": "assets/figures/08_growth_rate_spectrum.png",
           "bullets": [
             "Use if a live linear run is slow",
@@ -968,7 +1076,7 @@
         },
         {
           "kind": "figure",
-          "title": "Backup figure: W7-X clamping cartoon",
+          "title": "Reference figure: W7-X clamping cartoon",
           "image": "assets/figures/09_w7x_clamping_cartoon.png",
           "bullets": [
             "Use to motivate turbulence after neoclassical success",
@@ -1028,6 +1136,18 @@
           ]
         },
         {
+          "kind": "explainer",
+          "title": "What is profile closure?",
+          "term": "Profile closure",
+          "definition": "Solving whether sources, sinks, transport coefficients, and radial gradients produce consistent temperature and density profiles.",
+          "equation": "source - div(Q_neo + Q_turb) = 0",
+          "meaning": "The same magnetic geometry can look different once profiles and heating are allowed to respond.",
+          "optimizer": "Use profile closure near the end of the loop to test the design scenario, not only the vacuum field.",
+          "failure": "A geometry-only winner can lose when profile stiffness or power balance is included.",
+          "remember": "A reactor design is a field plus a self-consistent plasma scenario.",
+          "reference": "Refs: nonlinear turbulence optimization and integrated transport validation workflows."
+        },
+        {
           "kind": "table",
           "title": "Modern workflows are multi-fidelity by design",
           "bullets": [
@@ -1053,7 +1173,7 @@
             "Temperature and density gradients drive transport",
             "A good field metric can underperform after closure"
           ],
-          "caption": "This fallback model teaches profile feedback, not a live NEOPAX result.",
+          "caption": "Read how profile feedback changes the temperature response.",
           "reference": "Ref: transport/profile closure logic in nonlinear turbulence optimization and T3D validation literature."
         },
         {
@@ -1078,14 +1198,14 @@
         {
           "kind": "demo",
           "title": "Demo break: profile closure",
-          "project": "notebooks/10_neopax_profile_closure.ipynb",
+          "project": "Notebook: Neopax Profile Closure",
           "image": "assets/figures/10_profile_evolution.png",
           "bullets": [
             "Plot temperature response",
             "Inspect power balance",
-            "Say what remains cached"
+            "State which quantities are screened and which are validated"
           ],
-          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          "caption": "Notebook path: notebooks/10_neopax_profile_closure.ipynb"
         },
         {
           "kind": "transition",
@@ -1103,6 +1223,18 @@
             "Wall loads and blankets: engineering and material constraint",
             "Maintenance and access: device availability constraint"
           ]
+        },
+        {
+          "kind": "explainer",
+          "title": "What is a Pareto front?",
+          "term": "Pareto front",
+          "definition": "The set of designs where improving one objective requires worsening at least one other objective.",
+          "equation": "no design improves all objectives at once",
+          "meaning": "It separates physics tradeoffs from preference choices.",
+          "optimizer": "Use it to decide which weights and hard gates are steering the final selection.",
+          "failure": "A point on the front can still fail a validation gate that was not included in the objective.",
+          "remember": "Pareto analysis makes the design decision explicit.",
+          "reference": "Ref: multiobjective SIMSOPT and single-stage stellarator optimization workflows."
         },
         {
           "kind": "figure",
@@ -1128,14 +1260,14 @@
         {
           "kind": "demo",
           "title": "Demo break: Pareto dashboard",
-          "project": "notebooks/11_pareto_design_dashboard.ipynb",
+          "project": "Notebook: Pareto Design Dashboard",
           "image": "assets/figures/11_weighted_selection.png",
           "bullets": [
             "Change one metric weight",
             "Regenerate the chart",
             "Defend the selected design"
           ],
-          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          "caption": "Notebook path: notebooks/11_pareto_design_dashboard.ipynb"
         },
         {
           "kind": "warning",
@@ -1172,11 +1304,11 @@
         },
         {
           "kind": "table",
-          "title": "Cached, tiny, and research modes serve different audiences",
+          "title": "Live demos and research runs have different roles",
           "bullets": [
-            "cached: student reliability",
-            "tiny: instructor live demo",
-            "research: real-code replacement after timing"
+            "reference examples: student reliability",
+            "short live run: instructor timing",
+            "research run: documented solver output after timing"
           ]
         },
         {
@@ -1190,7 +1322,7 @@
         },
         {
           "kind": "demo",
-          "title": "Repo lab: full cached run",
+          "title": "Repo lab: full reference run",
           "project": "scripts/check_release_ready.py",
           "image": "assets/figures/environment_check.png",
           "bullets": [
@@ -1198,7 +1330,7 @@
             "Review STATUS.md",
             "Open rendered docs"
           ],
-          "caption": "Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          "caption": "Start with the reference run. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
         },
         {
           "kind": "table",
@@ -1219,14 +1351,14 @@
         {
           "kind": "demo",
           "title": "Exercise: change the weights and defend a design",
-          "project": "notebooks/11_pareto_design_dashboard.ipynb",
+          "project": "Notebook: Pareto Design Dashboard",
           "image": "assets/figures/11_pareto_front.png",
           "bullets": [
             "Move one weight",
             "Identify the new winner",
             "Say which validation gate you now trust less"
           ],
-          "caption": "Cached dashboard first. Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/"
+          "caption": "Notebook path: notebooks/11_pareto_design_dashboard.ipynb"
         },
         {
           "kind": "table",
@@ -1234,7 +1366,7 @@
           "bullets": [
             "README: how a student starts",
             "ReadTheDocs: the rendered guide during class",
-            "STATUS.md: what was real, cached, or synthetic"
+            "STATUS.md: data provenance and claim scope"
           ]
         },
         {
@@ -1242,7 +1374,7 @@
           "title": "APPENDIX. Lecture 4 checks and replacements",
           "bullets": [
             "Use this section before distributing the school bundle",
-            "Keep cached mode honest"
+            "Keep claim scope visible"
           ]
         },
         {
@@ -1250,7 +1382,7 @@
           "title": "What belongs in git",
           "bullets": [
             "Small inputs: versioned and documented",
-            "Cached data: labeled educational fallback",
+            "Small inputs: versioned and documented",
             "Large outputs: regenerated by scripts and ignored"
           ]
         },
@@ -1268,7 +1400,7 @@
           "title": "STATUS.md anatomy",
           "bullets": [
             "Package status: what imported and what was skipped",
-            "Data status: what was real and what was synthetic",
+            "Data status: source, hash, and provenance",
             "Notebook status: what ran and saved outputs"
           ]
         },
@@ -1277,19 +1409,19 @@
           "title": "Live-demo abort criteria",
           "bullets": [
             "A package starts compiling during class",
-            "A notebook loses its cached fallback",
+            "A notebook loses its reference data path",
             "A result is numerical but the validation path is missing"
           ]
         },
         {
           "kind": "movie",
-          "title": "Movie: toy optimization history",
-          "image": "assets/movies/optimization_history_first_frame.png",
+          "title": "Animation storyboard: optimization history",
+          "image": "assets/movies/optimization_history_storyboard.png",
           "bullets": [
-            "Play optimization_history.gif for the loop intuition",
-            "Use first frame for PDF/static review"
+            "Read the sequence as objective residual decreasing",
+            "Discuss when a live animation adds value"
           ],
-          "caption": "Use the GIF live; use this first-frame PNG when PowerPoint is static."
+          "caption": "Static storyboard for reliable projection; the movie file remains in the repo."
         },
         {
           "kind": "table",
@@ -1304,30 +1436,30 @@
           "kind": "table",
           "title": "How students should use the repo after school",
           "bullets": [
-            "Start cached: reproduce every figure",
+            "Start with reference results: reproduce every figure",
             "Change one notebook at a time",
             "Keep generated outputs small and documented"
           ]
         },
         {
           "kind": "figure",
-          "title": "Backup figure: profile closure",
+          "title": "Reference figure: profile closure",
           "image": "assets/figures/10_profile_evolution.png",
           "bullets": [
-            "Use if live profile closure fails",
-            "Keep the cached limitation explicit"
+            "Use to discuss profile-closure behavior",
+            "Keep the limitation explicit"
           ],
-          "caption": "Fallback plot for profile closure discussion."
+          "caption": "Reference plot for profile closure discussion."
         },
         {
           "kind": "figure",
-          "title": "Backup figure: Pareto front",
+          "title": "Reference figure: Pareto front",
           "image": "assets/figures/11_pareto_front.png",
           "bullets": [
-            "Use if dashboard edits run long",
+            "Use to discuss the final design choice",
             "Ask which design the room would defend"
           ],
-          "caption": "Fallback plot for design-decision discussion."
+          "caption": "Reference plot for design-decision discussion."
         },
         {
           "kind": "summary",

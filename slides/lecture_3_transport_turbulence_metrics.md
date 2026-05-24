@@ -6,7 +6,6 @@ size: 16:9
 ---
 
 # What should go into the objective function?
-
 Lecture 3: neoclassical, turbulence, and fast-particle gates
 
 ![bg right:48% contain](../assets/figures/09_proxy_vs_nonlinear.png)
@@ -16,20 +15,30 @@ Lecture 3: neoclassical, turbulence, and fast-particle gates
 ---
 
 # PART 1. A hierarchy of transport calculations
-
 - Cheap screens move many designs
 - Expensive calculations validate finalists
 
 ---
 
-# The optimizer follows the metric we choose
+# What is neoclassical transport?
+- **Term:** Neoclassical transport
+- **Definition:** Collisional transport caused by guiding-center drifts in a toroidal magnetic field with trapped particles.
+- **Equation:** Gamma, Q = functions(geometry, nu, E_r, profiles)
+- **Physical meaning:** It is geometry sensitive, especially in stellarators, and can be reduced by optimization.
+- **Optimizer sees:** Use cheap geometry metrics first, then drift-kinetic validation for finalists.
+- **Failure mode:** The result depends on collisionality, radial electric field, species, and profiles.
+- **Remember:** Neoclassical metrics are geometry gates with plasma-state assumptions.
 
+<small>Refs: Helander RPP 77, 087001 (2014); Beidler et al., Nature 596, 221-226 (2021).</small>
+
+---
+
+# The optimizer follows the metric we choose
 - Metric design is part of physics
 
 ---
 
 # Cost hierarchy for transport metrics
-
 - Geometry metrics: fastest screens
 - Effective ripple and Boozer metrics: early transport warnings
 - DKE, gyrokinetics, particles, profiles: validation gates
@@ -37,7 +46,6 @@ Lecture 3: neoclassical, turbulence, and fast-particle gates
 ---
 
 # Transport literature says: validate the winner
-
 - W7-X: neoclassical optimization reduced the geometry-driven loss channel
 - SFINCS: drift-kinetic validation depends on trajectory, electric-field, and collision modeling choices
 - Nonlinear turbulence: heat-flux objectives can be noisy enough to need stochastic or staged optimization
@@ -52,7 +60,20 @@ Lecture 3: neoclassical, turbulence, and fast-particle gates
 - Rank candidates before expensive runs
 - Do not treat the scalar as the whole transport story
 
-_Cached curves teach the screen; they are not new transport calculations._
+_These curves show how the screen should be read; full transport validation remains a separate step._
+
+---
+
+# What is D11?
+- **Term:** D11 transport coefficient
+- **Definition:** A radial particle-transport coefficient from the drift-kinetic response, often scanned versus collisionality.
+- **Equation:** Gamma_1 = - n D_11 (d ln n / dr + ...)
+- **Physical meaning:** It tells how strongly particles diffuse radially for a given thermodynamic drive.
+- **Optimizer sees:** Use D11 scans to test whether a low-ripple design remains good under richer kinetic physics.
+- **Failure mode:** A single D11 curve is not a full flux prediction without Er, sources, profiles, and species choices.
+- **Remember:** D11 is a validation coefficient, not a universal confinement number.
+
+<small>Ref: Landreman et al., Phys. Plasmas 21, 042503 (2014).</small>
 
 ---
 
@@ -62,7 +83,7 @@ _Cached curves teach the screen; they are not new transport calculations._
 - Collisionality changes the answer
 - Er suppression changes the interpretation
 
-_This SFINCS-style scan is cached educational data._
+_Read the slope, the electric-field suppression, and the collisionality window._
 
 <small>Ref: Landreman et al., Phys. Plasmas 21, 042503 (2014), SFINCS drift-kinetic solver.</small>
 
@@ -89,7 +110,6 @@ _Transport outputs become equilibrium inputs._
 ---
 
 # W7-X lesson for optimizers
-
 - Neoclassical optimization: reduced radial losses
 - Ion-temperature clamping: turbulence bottleneck
 - Profiles: decide whether the metric matters experimentally
@@ -108,23 +128,33 @@ _The cartoon motivates turbulence-aware validation without rederiving transport 
 
 ---
 
-# Demo break: neoclassical cached validation
+# Demo break: neoclassical validation
 
-![bg right:48% contain](../assets/figures/07_sfincs_d11_scan.png)
-`notebooks/07_sfincs_jax_neoclassical_cached.ipynb`
-
+![](../assets/figures/07_sfincs_d11_scan.png)
 - Read a collisionality scan
 - Inspect Er roots
 - Plot bootstrap feedback
 
-_Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/_
+_Notebook 07: SFINCS-style neoclassical validation._
 
 ---
 
 # PART 2. Turbulence metrics
-
 - Linear calculations are early screens
 - Nonlinear validation changes rankings
+
+---
+
+# What is turbulent transport?
+- **Term:** Turbulent transport
+- **Definition:** Radial heat and particle transport driven by microinstabilities and nonlinear fluctuations.
+- **Equation:** Q_turb ~ <delta v_E · delta p>
+- **Physical meaning:** It can dominate after neoclassical losses are reduced, as seen in W7-X temperature-clamping discussions.
+- **Optimizer sees:** Start with linear or proxy metrics, then validate finalists with nonlinear heat-flux calculations.
+- **Failure mode:** Linear growth rates can rank designs differently from nonlinear heat flux.
+- **Remember:** A transport optimizer must survive both neoclassical and turbulence gates.
+
+<small>Ref: Kim et al., J. Plasma Phys. 90, 905900203 (2024).</small>
 
 ---
 
@@ -137,6 +167,19 @@ _Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellar
 _Use growth rate as a screen, not as the final objective._
 
 <small>Ref: SPECTRAX-GK PyPI/docs, JAX-native gyrokinetic solver for stellarator optimization workflows.</small>
+
+---
+
+# What are growth rate and frequency?
+- **Term:** Linear gyrokinetic spectrum
+- **Definition:** The growth rate says whether a mode amplifies; the frequency helps identify the branch.
+- **Equation:** omega = omega_r + i gamma
+- **Physical meaning:** Positive gamma marks an unstable mode, but the nonlinear saturated flux is a separate result.
+- **Optimizer sees:** Use spectra as fast screens and branch diagnostics before nonlinear validation.
+- **Failure mode:** A design with a lower peak gamma can still have worse nonlinear heat flux.
+- **Remember:** Linear spectra are warning lights; nonlinear flux is the stronger gate.
+
+<small>Ref: SPECTRAX-GK public package notes and nonlinear turbulence optimization literature.</small>
 
 ---
 
@@ -164,19 +207,16 @@ _The ranking failure is the point of the plot._
 
 # Demo break: turbulence proxy versus validation
 
-![bg right:48% contain](../assets/figures/09_proxy_vs_nonlinear.png)
-`notebooks/08_spectrax_gk_linear_metric.ipynb + notebooks/09_turbulence_metric_surrogate.ipynb`
-
+![](../assets/figures/09_proxy_vs_nonlinear.png)
 - Choose the proxy winner
 - Compare validation ranking
 - Explain the failure mode
 
-_Cached mode first. Repo: https://github.com/rogeriojorge/sos2026-rjorge-stellarator-optimization | Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/_
+_Notebook path: notebooks/08_spectrax_gk_linear_metric.ipynb + notebooks/09_turbulence_metric_surrogate.ipynb_
 
 ---
 
 # PART 3. Fast particles are reactor gates
-
 - Alpha confinement, wall loads, and orbit classes matter
 - Particle metrics must rerun after coil changes
 
@@ -193,7 +233,6 @@ _Fast-particle checks belong in the validation ladder._
 ---
 
 # Validation compares failure modes
-
 - Does the metric fail on a known bad design?
 - Does it rank a known good design correctly?
 - Does it change smoothly under perturbations?
@@ -201,15 +240,13 @@ _Fast-particle checks belong in the validation ladder._
 ---
 
 # Metric trust ladder
-
-- Screen: cached or reduced model trend
-- Ranking hypothesis: tiny or quasilinear run
+- Screen: reduced model trend
+- Ranking hypothesis: fast or quasilinear run
 - Validation: expensive run or experimental comparison
 
 ---
 
 # Lecture 3 what to remember
-
 - Use cheap metrics to steer the search
 - Use expensive metrics to challenge finalists
 - Plot profiles and regimes
@@ -218,20 +255,17 @@ _Fast-particle checks belong in the validation ladder._
 ---
 
 # Transport metrics are validation gates
-
 - A good design survives a stronger metric
 
 ---
 
 # APPENDIX. Lecture 3 checks and replacements
-
 - Use this section when SFINCS, SPECTRAX, or particle tools are live
-- Keep cached ranking plots ready
+- Keep reference ranking plots ready
 
 ---
 
 # Neoclassical outputs to track
-
 - Effective ripple: low-collisionality screen
 - Ambipolar roots: radial electric-field validation
 - Bootstrap current: profile-dependent equilibrium feedback
@@ -239,7 +273,6 @@ _Fast-particle checks belong in the validation ladder._
 ---
 
 # Turbulence outputs to track
-
 - Linear growth rate: fast instability screen
 - Quasilinear weight: ranking hypothesis
 - Nonlinear heat flux: validation for finalists
@@ -247,7 +280,6 @@ _Fast-particle checks belong in the validation ladder._
 ---
 
 # Research path: NEO_JAX and SFINCS_JAX
-
 - Choose the same equilibrium and flux surface
 - Scan collisionality and radial electric field
 - Compare compact metrics before detailed validation
@@ -255,22 +287,20 @@ _Fast-particle checks belong in the validation ladder._
 ---
 
 # Research path: SPECTRAX-GK
-
-- Start with a tiny linear calculation
+- Start with a short linear calculation
 - Plot growth rate and frequency versus ky
 - Keep nonlinear validation gate explicit
 
 ---
 
 # How to read a fast metric
-
 - Growth rate screens instability before heat-flux validation
 - A scalar ripple value should point back to where losses occur
 - A profile proxy should lead to a solved discharge model
 
 ---
 
-# Backup figure: growth-rate spectrum
+# Reference figure: growth-rate spectrum
 
 ![bg right:48% contain](../assets/figures/08_growth_rate_spectrum.png)
 - Use if a live linear run is slow
@@ -278,7 +308,7 @@ _Fast-particle checks belong in the validation ladder._
 
 ---
 
-# Backup figure: W7-X clamping cartoon
+# Reference figure: W7-X clamping cartoon
 
 ![bg right:48% contain](../assets/figures/09_w7x_clamping_cartoon.png)
 - Use to motivate turbulence after neoclassical success
@@ -287,7 +317,6 @@ _Fast-particle checks belong in the validation ladder._
 ---
 
 # Before showing a transport number
-
 - Equilibrium: which surface and assumptions?
 - Kinetics: which species and collisionality?
 - Validation: which expensive calculation confirms it?
@@ -295,7 +324,6 @@ _Fast-particle checks belong in the validation ladder._
 ---
 
 # Discussion: what can reverse the ranking?
-
 - Neoclassical winner: can lose on turbulence
 - Turbulence winner: can fail alpha confinement
 - Profile change: can move both metrics together
@@ -303,7 +331,6 @@ _Fast-particle checks belong in the validation ladder._
 ---
 
 # What to remember
-
 - Keep the scientific object and the computed artifact together
 - Rerun, perturb, compare, and explain before trusting the optimum
 - Docs: https://sos2026-rjorge-stellarator-optimization.readthedocs.io/

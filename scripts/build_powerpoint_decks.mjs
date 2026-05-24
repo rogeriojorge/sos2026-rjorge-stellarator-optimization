@@ -207,15 +207,16 @@ function bulletFont(value) {
 function addPageTitle(slide, deck, item, slideNumber, total) {
   const theme = deckThemes[deck.id];
   addUwMark(slide);
-  text(slide, item.title, 34, 48, 1008, 70, {
+  const titleWraps = item.title.length > 58;
+  text(slide, item.title, 34, 42, 1008, titleWraps ? 92 : 70, {
     fontSize: titleFont(item.title),
     bold: true,
     color: palette.ink,
     valign: "middle",
   });
-  rect(slide, 34, 126, 92, 7, theme.accent);
+  rect(slide, 34, titleWraps ? 142 : 126, 92, 7, theme.accent);
   if (item.subtitle) {
-    text(slide, item.subtitle, 148, 122, 740, 26, {
+    text(slide, item.subtitle, 148, titleWraps ? 138 : 122, 740, 26, {
       fontSize: 18,
       color: palette.muted,
       valign: "middle",
@@ -230,7 +231,7 @@ function addFooter(slide, deck, slideNumber) {
     color: palette.muted,
     align: "right",
   });
-  text(slide, "cached / tiny / research", 758, 675, 180, 18, {
+  text(slide, "optimization workflow", 758, 675, 180, 18, {
     fontSize: 8,
     color: palette.muted,
     align: "right",
@@ -498,7 +499,7 @@ async function renderMovie(presentation, deck, item, slideNumber, total) {
     maxRowHeight: 58,
   });
   rect(slide, 898, 492, 290, 64, "#fff7ed", "#fed7aa", 1);
-  text(slide, item.caption ?? "Use the PNG first frame if PowerPoint does not animate the GIF.", 914, 506, 258, 34, {
+  text(slide, item.caption ?? "Use the static storyboard for reliable projection.", 914, 506, 258, 34, {
     fontSize: 15,
     color: "#9a3412",
     valign: "middle",
@@ -702,7 +703,7 @@ function renderWarning(presentation, deck, item, slideNumber, total) {
     maxRowHeight: 56,
   });
   rect(slide, 132, 512, 870, 1, "#fed7aa");
-  text(slide, "Classroom rule: label approximations, keep cached mode ready, and write down what was actually computed.", 134, 528, 850, 40, {
+  text(slide, item.footer ?? "Validation rule: state the assumption, identify the metric, and explain what would change your mind.", 134, 528, 850, 40, {
     fontSize: 18,
     color: "#9a3412",
     valign: "middle",
@@ -751,11 +752,11 @@ function renderCode(presentation, deck, item, slideNumber, total) {
   addPageTitle(slide, deck, item, slideNumber, total);
   rect(slide, 96, 182, 700, 300, "#0f172a", "#334155", 1);
   rect(slide, 96, 182, 700, 34, "#1f2937", "#334155", 1);
-  text(slide, "cached-mode command surface", 118, 190, 320, 22, {
+  text(slide, item.label ?? "command surface", 118, 190, 320, 22, {
     fontSize: 14,
     color: "#e5e7eb",
   });
-  const lines = [
+  const lines = item.commands ?? [
     "$ python scripts/run_smoke_tests.py",
     "$ python scripts/execute_all_notebooks.py",
     "$ python scripts/build_powerpoint_decks.mjs",
@@ -846,7 +847,7 @@ function renderProject(presentation, deck, item, slideNumber, total) {
     fontSize: 22,
     maxRowHeight: 58,
   });
-  const steps = ["Open", "Run cached", "Change one knob", "Explain the plot"];
+  const steps = item.steps ?? ["Open", "Run", "Change one knob", "Explain the plot"];
   steps.forEach((step, index) => {
     const y = 188 + index * 88;
     rect(slide, 662, y, 430, 58, index === 1 ? "#ecfdf5" : "#ffffff", "#d1d5db", 1);
@@ -868,6 +869,71 @@ function renderProject(presentation, deck, item, slideNumber, total) {
   text(slide, "Deliverable: one figure and one defensible sentence.", 682, 568, 390, 22, {
     fontSize: 18,
     color: palette.navy,
+    valign: "middle",
+  });
+  addFooter(slide, deck, slideNumber);
+  return slide;
+}
+
+function renderExplainer(presentation, deck, item, slideNumber, total) {
+  const slide = presentation.slides.add();
+  const theme = deckThemes[deck.id];
+  rect(slide, 0, 0, 1280, 720, palette.paper);
+  addPageTitle(slide, deck, item, slideNumber, total);
+
+  rect(slide, 76, 164, 478, 336, "#f8fafc", "#d1d5db", 1);
+  rect(slide, 76, 164, 478, 14, theme.accent);
+  text(slide, item.term ?? "Concept", 106, 200, 410, 38, {
+    fontSize: 31,
+    bold: true,
+    color: theme.accent,
+    valign: "middle",
+  });
+  text(slide, item.definition ?? "", 106, 256, 404, 88, {
+    fontSize: 23,
+    color: palette.ink,
+    valign: "middle",
+  });
+  if (item.equation) {
+    rect(slide, 106, 376, 396, 64, "#ffffff", "#e5e7eb", 1);
+    text(slide, item.equation, 122, 391, 364, 34, {
+      fontSize: item.equation.length > 44 ? 23 : 28,
+      bold: true,
+      color: palette.navy,
+      align: "center",
+      valign: "middle",
+      typeface: "Aptos Display",
+    });
+  }
+
+  const cards = [
+    ["Physical meaning", item.meaning],
+    ["What the optimizer sees", item.optimizer],
+    ["Failure mode", item.failure],
+  ];
+  cards.forEach(([label, body], index) => {
+    const y = 166 + index * 116;
+    rect(slide, 610, y, 548, 92, "#ffffff", "#d1d5db", 1);
+    rect(slide, 610, y, 8, 92, index === 2 ? palette.amber : theme.accent);
+    text(slide, label, 638, y + 14, 220, 24, {
+      fontSize: 18,
+      bold: true,
+      color: index === 2 ? palette.amber : theme.accent,
+      valign: "middle",
+    });
+    text(slide, body ?? "", 638, y + 42, 482, 36, {
+      fontSize: 20,
+      color: palette.ink,
+      valign: "middle",
+    });
+  });
+
+  rect(slide, 160, 546, 910, 52, theme.dark);
+  text(slide, item.remember ?? "Remember the metric, the assumption, and the validation gate.", 186, 559, 858, 26, {
+    fontSize: 20,
+    bold: true,
+    color: "#ffffff",
+    align: "center",
     valign: "middle",
   });
   addFooter(slide, deck, slideNumber);
@@ -999,6 +1065,9 @@ async function renderSlide(presentation, deck, item, slideNumber, total) {
       break;
     case "project":
       slide = renderProject(presentation, deck, item, slideNumber, total);
+      break;
+    case "explainer":
+      slide = renderExplainer(presentation, deck, item, slideNumber, total);
       break;
     case "summary":
       slide = renderSummary(presentation, deck, item, slideNumber, total);

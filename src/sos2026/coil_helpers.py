@@ -4,17 +4,28 @@ import numpy as np
 import pandas as pd
 
 
-def coil_curves(stage: str = "initial", ncoils: int = 4, npts: int = 220):
-    t = np.linspace(0, 2 * np.pi, npts)
+def coil_curves(stage: str = "initial", ncoils: int = 8, npts: int = 220):
+    """Return compact modular coil loops distributed around the torus.
+
+    Each coil is a closed loop near one toroidal station. The small toroidal
+    excursion gives a realistic modular-coil lean without creating a helical
+    winding that wraps continuously around the device.
+    """
+    u = np.linspace(0, 2 * np.pi, npts)
     curves = []
-    waviness = 0.12 if stage == "initial" else 0.07
-    radius = 1.35 if stage == "initial" else 1.25
+    radial_size = 0.27 if stage == "initial" else 0.23
+    vertical_size = 0.44 if stage == "initial" else 0.39
+    toroidal_lean = 0.13 if stage == "initial" else 0.09
+    center_radius = 1.18 if stage == "initial" else 1.12
+    scallop = 0.08 if stage == "initial" else 0.045
     for k in range(ncoils):
-        phase = 2 * np.pi * k / ncoils
-        r = radius + waviness * np.cos(3 * t + phase)
-        x = r * np.cos(t + phase / 6)
-        y = r * np.sin(t + phase / 6)
-        z = 0.24 * np.sin(2 * t + phase) + (0.04 if stage == "initial" else 0.02) * np.sin(5 * t)
+        phi0 = 2 * np.pi * k / ncoils
+        phase = 0.55 * np.sin(2 * phi0)
+        r = center_radius + radial_size * np.cos(u) + scallop * np.cos(2 * u + phase)
+        phi = phi0 + toroidal_lean * np.sin(u) + 0.018 * np.sin(3 * u + phase)
+        z = vertical_size * np.sin(u) + 0.06 * np.sin(2 * u + phase)
+        x = r * np.cos(phi)
+        y = r * np.sin(phi)
         curves.append(np.vstack([x, y, z]).T)
     return curves
 
