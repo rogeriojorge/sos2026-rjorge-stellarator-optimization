@@ -62,7 +62,7 @@ def main() -> int:
     lines.append("")
     lines.append("This repository is ready for cached-mode teaching. Real scientific packages are optional and are documented as live, cached, or research-only below.")
     lines.append("")
-    lines.append("Provenance categories used below: `real public data`, `real package output`, `cached derived data`, and `synthetic educational fallback`.")
+    lines.append("Provenance categories used below: `real public data`, `real package output`, `cached derived data`, `synthetic educational fallback`, and `reference slide extract`.")
     lines.append("")
     lines.append("## Package Import Status")
     lines.append("")
@@ -87,8 +87,11 @@ def main() -> int:
     lines.append(f"- Figures: {figs.get('count', len(figs.get('figures', [])))} PNG files in `assets/figures/`.")
     if figs.get("manifest"):
         lines.append(f"  - manifest: `{figs['manifest']}`")
-    for name in figs.get("figures", [])[:30]:
+    figure_names = figs.get("figures", [])
+    for name in figure_names[:30]:
         lines.append(f"  - `{name}`")
+    if len(figure_names) > 30:
+        lines.append(f"  - plus {len(figure_names) - 30} more; see `assets/figures/manifest.json` for full provenance.")
     lines.append(f"- Movies: {len(movies.get('movies', []))} GIF files in `assets/movies/`.")
     for item in movies.get("results", []):
         first_frame = item.get("first_frame")

@@ -25,10 +25,37 @@ Lecture 2: coils, quadratic flux, and single-stage design
 
 ---
 
+# Plasma and coil shapes share the design freedom
+
+![bg right:48% contain](../assets/figures/ref_stellarator_objectives.png)
+- Good surfaces
+- Enough transform
+- Buildable coils
+- Low transport
+
+_This is the compact motivation for a multiobjective stellarator design loop._
+
+<small>Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 2.</small>
+
+---
+
 # Stage 1, stage 2, single stage
 - Stage 1: optimize the plasma target
 - Stage 2: fit coils to that target
 - Single stage: move plasma and coils together
+
+---
+
+# Two-stage design is useful but incomplete
+
+![bg right:48% contain](../assets/figures/ref_two_stage_optimization.png)
+- Stage 1 chooses the target plasma
+- Stage 2 tries to realize the field
+- Single-stage methods couple the two
+
+_The transition into single-stage optimization starts from this historical compromise._
+
+<small>Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 9.</small>
 
 ---
 
@@ -115,6 +142,19 @@ _The annotation marks what gets worse when coils are pushed too hard._
 - Length: cost, maintenance, and access
 - Curvature: force and strain risk
 - Separation: ports and assembly constraints
+
+---
+
+# Current-potential methods expose coil regularization
+
+![bg right:48% contain](../assets/figures/ref_current_potential_methods.png)
+- Surface current is the optimization variable
+- Regularization controls complexity
+- Contours become coils
+
+_Use this when explaining why low B dot n is not the only engineering objective._
+
+<small>Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 39.</small>
 
 ---
 
@@ -221,6 +261,19 @@ _Notebook path: notebooks/05_single_stage_toy.ipynb + notebooks/06_essos_fieldli
 - Manufacturing errors: sensitivity to shape perturbations
 - Current perturbations: sensitivity to power-supply changes
 - Maintenance tolerance: clearance, curvature, and access
+
+---
+
+# Coil feasibility has a magnetic scale length
+
+![bg right:48% contain](../assets/figures/ref_coil_distance_scale_length.png)
+- Small scale lengths demand close coils
+- Close coils reduce access and tolerance
+- The metric connects physics to hardware
+
+_This is a stronger explanation of why modular-coil design needs geometric scale diagnostics._
+
+<small>Source visual: Landreman et al., APS-DPP theory supporting FPP talk, 2023, slide 11.</small>
 
 ---
 

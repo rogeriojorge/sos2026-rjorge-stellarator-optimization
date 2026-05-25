@@ -38,6 +38,19 @@ Lecture 1: what the optimizer actually sees
 
 ---
 
+# Rotational transform is field-line pitch made visible
+
+![bg right:48% contain](../assets/figures/ref_rotational_transform_fieldline.png)
+- Follow one field line toroidally
+- Count the poloidal advance
+- Rational values deserve attention
+
+_This is the build-up sequence students remember: helical field lines create rotational transform._
+
+<small>Source visual: Landreman, Introduction to Stellarator Optimization, IPFN 2022, slide 10.</small>
+
+---
+
 # Three literature gates shape the workflow
 - Precise quasisymmetry: make the Boozer spectrum sparse, then test what remains
 - Good magnetic surfaces: compare surface-based objectives with island and chaos diagnostics
@@ -107,6 +120,19 @@ _The optimizer needs knobs whose effects can be measured._
 
 ---
 
+# Good surfaces are the first optimization gate
+
+![bg right:48% contain](../assets/figures/ref_good_bad_flux_surfaces.png)
+- Nested surfaces make confinement possible
+- Islands and chaos invalidate scalar scores
+- The first diagnostic is geometric
+
+_A clean objective is not enough unless the field lines lie on good magnetic surfaces._
+
+<small>Source visual: Landreman, Introduction to Stellarator Optimization, IPFN 2022, slide 12.</small>
+
+---
+
 # The wout file is the first checked artifact
 - Inspect dimensions, surfaces, and mode counts
 - Use public HSX/W7-X files when present
@@ -141,6 +167,19 @@ _Notebook path: notebooks/01_vmec_jax_first_equilibrium.ipynb_
 - **Remember:** Boozer coordinates turn hidden symmetry into a plot and a penalty.
 
 <small>Ref: Landreman & Paul, Phys. Rev. Lett. 128, 035001 (2022).</small>
+
+---
+
+# Quasisymmetry is an equation and a visual pattern
+
+![bg right:48% contain](../assets/figures/ref_quasisymmetry_equation.png)
+- Use Boozer angles
+- Penalize the wrong Fourier modes
+- Keep the boundary parameterization visible
+
+_The useful slide rhythm is equation on one side, geometry on the other._
+
+<small>Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 27.</small>
 
 ---
 
@@ -238,6 +277,19 @@ _Notebook path: notebooks/02_boozer_spectrum.ipynb + notebooks/03_effective_ripp
 - A clean surface is not a validated design
 - A scalar can hide the wrong physics
 - A diagnostic figure must state its assumptions
+
+---
+
+# Direct quantities and proxies are different design bets
+
+![bg right:48% contain](../assets/figures/ref_direct_vs_proxy_table.png)
+- Direct metrics answer the real question
+- Proxies make search affordable
+- Validation decides when proxies fail
+
+_The course workflow keeps both columns visible instead of pretending a proxy is the final objective._
+
+<small>Source visual: Rogerio Jorge / Landreman UMD physics talk, 2020, slide 20.</small>
 
 ---
 

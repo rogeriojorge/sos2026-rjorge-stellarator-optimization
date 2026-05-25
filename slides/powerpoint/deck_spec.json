@@ -42,6 +42,18 @@
           "reference": "Refs: VMEC equilibrium conventions; Landreman et al., Phys. Plasmas 28, 092505 (2021)."
         },
         {
+          "kind": "source_slide",
+          "title": "Rotational transform is field-line pitch made visible",
+          "image": "assets/figures/ref_rotational_transform_fieldline.png",
+          "bullets": [
+            "Follow one field line toroidally",
+            "Count the poloidal advance",
+            "Rational values deserve attention"
+          ],
+          "caption": "This is the build-up sequence students remember: helical field lines create rotational transform.",
+          "source": "Source visual: Landreman, Introduction to Stellarator Optimization, IPFN 2022, slide 10."
+        },
+        {
           "kind": "table",
           "title": "Three literature gates shape the workflow",
           "bullets": [
@@ -115,6 +127,18 @@
           ]
         },
         {
+          "kind": "source_slide",
+          "title": "Good surfaces are the first optimization gate",
+          "image": "assets/figures/ref_good_bad_flux_surfaces.png",
+          "bullets": [
+            "Nested surfaces make confinement possible",
+            "Islands and chaos invalidate scalar scores",
+            "The first diagnostic is geometric"
+          ],
+          "caption": "A clean objective is not enough unless the field lines lie on good magnetic surfaces.",
+          "source": "Source visual: Landreman, Introduction to Stellarator Optimization, IPFN 2022, slide 12."
+        },
+        {
           "kind": "code",
           "title": "The wout file is the first checked artifact",
           "bullets": [
@@ -154,6 +178,18 @@
           "failure": "A sparse spectrum is not enough if the equilibrium, coils, or transport gates fail.",
           "remember": "Boozer coordinates turn hidden symmetry into a plot and a penalty.",
           "reference": "Ref: Landreman & Paul, Phys. Rev. Lett. 128, 035001 (2022)."
+        },
+        {
+          "kind": "source_slide",
+          "title": "Quasisymmetry is an equation and a visual pattern",
+          "image": "assets/figures/ref_quasisymmetry_equation.png",
+          "bullets": [
+            "Use Boozer angles",
+            "Penalize the wrong Fourier modes",
+            "Keep the boundary parameterization visible"
+          ],
+          "caption": "The useful slide rhythm is equation on one side, geometry on the other.",
+          "source": "Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 27."
         },
         {
           "kind": "figure",
@@ -255,6 +291,18 @@
             "A scalar can hide the wrong physics",
             "A diagnostic figure must state its assumptions"
           ]
+        },
+        {
+          "kind": "source_slide",
+          "title": "Direct quantities and proxies are different design bets",
+          "image": "assets/figures/ref_direct_vs_proxy_table.png",
+          "bullets": [
+            "Direct metrics answer the real question",
+            "Proxies make search affordable",
+            "Validation decides when proxies fail"
+          ],
+          "caption": "The course workflow keeps both columns visible instead of pretending a proxy is the final objective.",
+          "source": "Source visual: Rogerio Jorge / Landreman UMD physics talk, 2020, slide 20."
         },
         {
           "kind": "summary",
@@ -406,6 +454,19 @@
           ]
         },
         {
+          "kind": "source_slide",
+          "title": "Plasma and coil shapes share the design freedom",
+          "image": "assets/figures/ref_stellarator_objectives.png",
+          "bullets": [
+            "Good surfaces",
+            "Enough transform",
+            "Buildable coils",
+            "Low transport"
+          ],
+          "caption": "This is the compact motivation for a multiobjective stellarator design loop.",
+          "source": "Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 2."
+        },
+        {
           "kind": "table",
           "title": "Stage 1, stage 2, single stage",
           "bullets": [
@@ -413,6 +474,18 @@
             "Stage 2: fit coils to that target",
             "Single stage: move plasma and coils together"
           ]
+        },
+        {
+          "kind": "source_slide",
+          "title": "Two-stage design is useful but incomplete",
+          "image": "assets/figures/ref_two_stage_optimization.png",
+          "bullets": [
+            "Stage 1 chooses the target plasma",
+            "Stage 2 tries to realize the field",
+            "Single-stage methods couple the two"
+          ],
+          "caption": "The transition into single-stage optimization starts from this historical compromise.",
+          "source": "Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 9."
         },
         {
           "kind": "explainer",
@@ -500,6 +573,18 @@
             "Curvature: force and strain risk",
             "Separation: ports and assembly constraints"
           ]
+        },
+        {
+          "kind": "source_slide",
+          "title": "Current-potential methods expose coil regularization",
+          "image": "assets/figures/ref_current_potential_methods.png",
+          "bullets": [
+            "Surface current is the optimization variable",
+            "Regularization controls complexity",
+            "Contours become coils"
+          ],
+          "caption": "Use this when explaining why low B dot n is not the only engineering objective.",
+          "source": "Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 39."
         },
         {
           "kind": "warning",
@@ -618,6 +703,18 @@
             "Current perturbations: sensitivity to power-supply changes",
             "Maintenance tolerance: clearance, curvature, and access"
           ]
+        },
+        {
+          "kind": "source_slide",
+          "title": "Coil feasibility has a magnetic scale length",
+          "image": "assets/figures/ref_coil_distance_scale_length.png",
+          "bullets": [
+            "Small scale lengths demand close coils",
+            "Close coils reduce access and tolerance",
+            "The metric connects physics to hardware"
+          ],
+          "caption": "This is a stronger explanation of why modular-coil design needs geometric scale diagnostics.",
+          "source": "Source visual: Landreman et al., APS-DPP theory supporting FPP talk, 2023, slide 11."
         },
         {
           "kind": "summary",
@@ -773,6 +870,18 @@
           "reference": "Refs: Helander RPP 77, 087001 (2014); Beidler et al., Nature 596, 221-226 (2021)."
         },
         {
+          "kind": "source_slide",
+          "title": "Trapped particles explain the need for symmetry",
+          "image": "assets/figures/ref_trapped_particles_quasisymmetry.png",
+          "bullets": [
+            "Trapped particles sample only part of a surface",
+            "Drift averages can fail",
+            "Quasisymmetry restores a conserved quantity"
+          ],
+          "caption": "This is the clearest bridge from orbit physics to an optimization target.",
+          "source": "Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 20."
+        },
+        {
           "kind": "quote",
           "title": "The optimizer follows the metric we choose",
           "bullets": [
@@ -787,6 +896,18 @@
             "Effective ripple and Boozer metrics: early transport warnings",
             "DKE, gyrokinetics, particles, profiles: validation gates"
           ]
+        },
+        {
+          "kind": "source_slide",
+          "title": "Transport means neoclassical plus turbulent flux",
+          "image": "assets/figures/ref_total_flux_neoclassical_turbulent.png",
+          "bullets": [
+            "Neoclassical flux follows guiding-center drifts",
+            "Turbulent flux follows instabilities",
+            "Both depend on geometry"
+          ],
+          "caption": "This slide gives students the mental equation before the individual metrics appear.",
+          "source": "Source visual: Landreman, Introduction to Stellarator Optimization, IPFN 2022, slide 16."
         },
         {
           "kind": "table",
@@ -819,6 +940,18 @@
           "failure": "A single D11 curve is not a full flux prediction without Er, sources, profiles, and species choices.",
           "remember": "D11 is a validation coefficient, not a universal confinement number.",
           "reference": "Ref: Landreman et al., Phys. Plasmas 21, 042503 (2014)."
+        },
+        {
+          "kind": "source_slide",
+          "title": "DKE calculations turn geometry into transport coefficients",
+          "image": "assets/figures/ref_drift_kinetic_bootstrap_equation.png",
+          "bullets": [
+            "Solve along phase-space characteristics",
+            "Compute distribution-function moments",
+            "Scan coefficients before claiming performance"
+          ],
+          "caption": "Use this to explain what sits behind D11 and bootstrap-current validation plots.",
+          "source": "Source visual: Landreman, PoP webinar on bootstrap current and energetic particles, 2022, slide 16."
         },
         {
           "kind": "figure",
@@ -902,6 +1035,18 @@
           "failure": "Linear growth rates can rank designs differently from nonlinear heat flux.",
           "remember": "A transport optimizer must survive both neoclassical and turbulence gates.",
           "reference": "Ref: Kim et al., J. Plasma Phys. 90, 905900203 (2024)."
+        },
+        {
+          "kind": "source_slide",
+          "title": "Turbulence metrics need invariant feature maps",
+          "image": "assets/figures/ref_turbulence_ml_workflow.png",
+          "bullets": [
+            "Many geometries feed the simulation database",
+            "Features must respect translations and symmetries",
+            "Regression is useful only after validation"
+          ],
+          "caption": "This visual motivates the notebook surrogate without replacing gyrokinetic validation.",
+          "source": "Source visual: Landreman, Plasma turbulence in stellarators, 2026, slide 20."
         },
         {
           "kind": "figure",
@@ -1158,6 +1303,18 @@
           "reference": "Refs: Landreman et al., JOSS 6, 3525 (2021); sfincs-jax and SPECTRAX-GK public docs; Kim et al., JPP 90, 905900203 (2024)."
         },
         {
+          "kind": "source_slide",
+          "title": "Objective functions have landscapes",
+          "image": "assets/figures/ref_objective_visualization_method.png",
+          "bullets": [
+            "Flatten a local parameter space",
+            "Interpolate between configurations",
+            "Look for basins and traps"
+          ],
+          "caption": "This makes the optimization dashboard feel like a landscape, not just a table of scores.",
+          "source": "Source visual: Jang and Landreman, Visualizing Stellarator Objective Functions, DPP 2024, slide 7."
+        },
+        {
           "kind": "transition",
           "title": "PART 1. Close the loop with profiles",
           "bullets": [
@@ -1225,6 +1382,19 @@
           ]
         },
         {
+          "kind": "source_slide",
+          "title": "W7-X shows what optimized design must still prove",
+          "image": "assets/figures/ref_w7x_optimization_targets.png",
+          "bullets": [
+            "Equilibrium quality",
+            "Transport reduction",
+            "Engineering feasibility",
+            "Experimental validation"
+          ],
+          "caption": "A credible design story connects computed metrics to a device that can be built and tested.",
+          "source": "Source visual: Per Helander, Aix Stellarator Optimization lecture, 2026, slide 10."
+        },
+        {
           "kind": "explainer",
           "title": "What is a Pareto front?",
           "term": "Pareto front",
@@ -1246,6 +1416,18 @@
           ],
           "caption": "A Pareto front is an argument surface, not an automatic answer.",
           "reference": "Ref: SIMSOPT objective composition and multiobjective stellarator optimization workflows."
+        },
+        {
+          "kind": "source_slide",
+          "title": "Different proxies can rank the same designs differently",
+          "image": "assets/figures/ref_proxy_landscape_comparison.png",
+          "bullets": [
+            "Compare landscapes before trusting weights",
+            "Look for cliffs and flat regions",
+            "Validation chooses the metric ladder"
+          ],
+          "caption": "This is the visual reason the final lecture ends with Pareto decisions rather than one winner.",
+          "source": "Source visual: Jang and Landreman, Visualizing Stellarator Objective Functions, DPP 2024, slide 13."
         },
         {
           "kind": "figure",
@@ -1470,6 +1652,19 @@
             "Pair each proxy with its failure mode",
             "Show the weights behind each Pareto choice"
           ]
+        },
+        {
+          "kind": "source_slide",
+          "title": "Open questions define the next optimization loop",
+          "image": "assets/figures/ref_open_questions_optimization.png",
+          "bullets": [
+            "Combine coil and plasma design",
+            "Avoid local minima",
+            "Optimize expensive objectives",
+            "Build flexible configurations"
+          ],
+          "caption": "The last slide should leave students with problems they can attack using the repo.",
+          "source": "Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 42."
         },
         {
           "kind": "quote",

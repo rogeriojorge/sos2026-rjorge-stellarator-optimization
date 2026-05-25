@@ -26,6 +26,7 @@ sos2026_codex_prompt_package/
 !slides/pptx/*.pptx
 !slides/pptx/contact_sheets/
 !slides/pptx/contact_sheets/*.png
+slides/pptx/Lecture*.pptx
 slides/pptx/~$*.pptx
 slides/pptx/~$*.ppt
 *.zip
@@ -37,6 +38,7 @@ slides/pptx/~$*.ppt
 build/
 docs/_build/
 dist/
+outputs/
 *.egg-info/
 data/generated/*
 !data/generated/.gitkeep

@@ -1,18 +1,19 @@
 {
   "schema": "sos2026.figure-manifest/v1",
-  "generated_at": "2026-05-24T12:47:20Z",
+  "generated_at": "2026-05-25T00:35:11Z",
   "categories": [
     "real public data",
     "real package output",
     "cached derived data",
-    "synthetic educational fallback"
+    "synthetic educational fallback",
+    "reference slide extract"
   ],
   "figures": [
     {
       "path": "assets/figures/01_boundary_mode_scan.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "9a469d4b43a27c14ec0fea033e53f6b31e3c7f4b34c495a4f3cb7f8d30a8549c",
       "used_by": [
         "supporting documentation"
@@ -23,7 +24,7 @@
       "path": "assets/figures/01_hsx_surface.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "127f3e7cb3a62ba44071eeafd1cc0c7b734bbada8643db98f8cff5a34ddf6f68",
       "used_by": [
         "Lecture 1",
@@ -35,7 +36,7 @@
       "path": "assets/figures/01_iota_profile.png",
       "category": "real public data",
       "source": "data/vmec_equilibria/HSX/QHS_vac_ns201_fixed/wout_HSX_QHS_vacuum_ns201.nc when present",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "16b7013f7b07082d8eb6874679332ba52ec7bef289a738b70f778404b0d8dd52",
       "used_by": [
         "Lecture 1",
@@ -47,7 +48,7 @@
       "path": "assets/figures/01_w7x_surface.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "70ba349cac9c55ca0606e6dd4bc2088578439e2807d3ac71f6aabdcc54d39156",
       "used_by": [
         "Lecture 1"
@@ -58,7 +59,7 @@
       "path": "assets/figures/02_bad_mode_perturbation.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "80b8664dd20d23427387d666fa5069033f8d3cfe1aa6700e5161eac5f99cd2db",
       "used_by": [
         "supporting documentation"
@@ -69,7 +70,7 @@
       "path": "assets/figures/02_boozer_contour.png",
       "category": "synthetic educational fallback",
       "source": "src/sos2026/boozer_helpers.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "f15f30cffce418c6d6aa8d39ffd129f20800b9c59ffebda3fb3c4615dad44dfe",
       "used_by": [
         "Lecture 1",
@@ -81,7 +82,7 @@
       "path": "assets/figures/02_boozer_spectrum.png",
       "category": "synthetic educational fallback",
       "source": "src/sos2026/boozer_helpers.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "2947fe0bb71f2f127ca4d32097a2eb28cebcc8c53873d25380d80a26b02d68cb",
       "used_by": [
         "Lecture 1",
@@ -93,7 +94,7 @@
       "path": "assets/figures/03_epsilon_eff_comparison.png",
       "category": "cached derived data",
       "source": "data/cached/epsilon_eff_comparison.npz",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "a405d954702707f998fffa2fd34678134ebca00cb887201bdb818dcbac1a0958",
       "used_by": [
         "Lecture 1",
@@ -106,7 +107,7 @@
       "path": "assets/figures/03_epsilon_eff_sensitivity.png",
       "category": "synthetic educational fallback",
       "source": "src/sos2026/neo_helpers.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "cfedee966153dad69f000995f5e79dae9045b713cd80dab4c963a50b98924ddb",
       "used_by": [
         "Lecture 1",
@@ -118,7 +119,7 @@
       "path": "assets/figures/04_bdotn_before_after.png",
       "category": "synthetic educational fallback",
       "source": "src/sos2026/coil_helpers.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "87df34083bc612a9bee25c84c97bf1ed3c95b7684e53bf69524e0e411bff7050",
       "used_by": [
         "Lecture 2",
@@ -130,7 +131,7 @@
       "path": "assets/figures/04_coil_tradeoff.png",
       "category": "cached derived data",
       "source": "data/cached/coil_demo_cached.csv",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "14735480068a2ff4222571343555b148c5df568a61f95426037cb08758aef18d",
       "used_by": [
         "Lecture 2",
@@ -142,7 +143,7 @@
       "path": "assets/figures/04_final_coils.png",
       "category": "synthetic educational fallback",
       "source": "src/sos2026/coil_helpers.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "4d6078626c9db5c644a06c27d622800c1957a61f0444e70163059af45e339276",
       "used_by": [
         "Lecture 2",
@@ -154,7 +155,7 @@
       "path": "assets/figures/04_initial_coils.png",
       "category": "synthetic educational fallback",
       "source": "src/sos2026/coil_helpers.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "577dd361766cc03e65407c9a5293fea259e6d4ca50037d2f9c4f5ce05c1a708d",
       "used_by": [
         "Lecture 2",
@@ -166,7 +167,7 @@
       "path": "assets/figures/05_single_stage_history.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "2a7a910ce31b7bcb90f67621a31a10bf91352ea6fff1ba9f7f0382ab08a07724",
       "used_by": [
         "supporting documentation"
@@ -177,7 +178,7 @@
       "path": "assets/figures/05_weight_continuation.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "dda49fa2e1d15e25510d07097b94af3aa8c9c4eca963d1042e50f6d05d8278e1",
       "used_by": [
         "supporting documentation"
@@ -188,7 +189,7 @@
       "path": "assets/figures/06_fieldlines.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "fb8ca468835596eb8c3167c2cb66b8b0991a3fd022e84da66fa4eabb0ac0a706",
       "used_by": [
         "Lecture 2",
@@ -200,7 +201,7 @@
       "path": "assets/figures/06_particle_orbit.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "484e9caa93370c5a623c7e41fc9c7a307dd5ce37bcec02d82e2c7a12c905406b",
       "used_by": [
         "Lecture 2",
@@ -212,7 +213,7 @@
       "path": "assets/figures/07_bootstrap_profile.png",
       "category": "cached derived data",
       "source": "data/cached/sfincs_demo_cached.npz",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "968ec9d93478f6d8a650b6b03be2c9b43f9a909f9f82e32646ce7c7b07ac1e82",
       "used_by": [
         "Lecture 3",
@@ -224,7 +225,7 @@
       "path": "assets/figures/07_er_roots.png",
       "category": "cached derived data",
       "source": "data/cached/sfincs_demo_cached.npz",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "678468ad5c6a692999367804d2dc1c08e9ce5f1901ee614c0fe2550b52fa409e",
       "used_by": [
         "Lecture 3",
@@ -236,7 +237,7 @@
       "path": "assets/figures/07_sfincs_d11_scan.png",
       "category": "cached derived data",
       "source": "data/cached/sfincs_demo_cached.npz",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "d7ff42597a5fd8b5fc8ccbce9faccff764d9cda82a2216afe68ad4b76d47377b",
       "used_by": [
         "Lecture 3",
@@ -248,7 +249,7 @@
       "path": "assets/figures/08_frequency_spectrum.png",
       "category": "cached derived data",
       "source": "data/cached/spectrax_linear_cached.npz",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "d52aee2485d121442800cf825669454b88fcbb34759bcdc69153961b3a12d273",
       "used_by": [
         "Lecture 3",
@@ -260,7 +261,7 @@
       "path": "assets/figures/08_growth_rate_spectrum.png",
       "category": "cached derived data",
       "source": "data/cached/spectrax_linear_cached.npz",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "a16471fc5f47946742c22ca639c31434f09f67417312306315ebb857f8d11d97",
       "used_by": [
         "Lecture 3",
@@ -272,7 +273,7 @@
       "path": "assets/figures/09_proxy_vs_nonlinear.png",
       "category": "cached derived data",
       "source": "data/cached/turbulence_proxy_cached.csv",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "55ce0a63cc0644f015f257e51a6cd46a17501a77203be3efccdedfc6a8d16c51",
       "used_by": [
         "Lecture 3",
@@ -284,7 +285,7 @@
       "path": "assets/figures/09_w7x_clamping_cartoon.png",
       "category": "synthetic educational fallback",
       "source": "src/sos2026/turbulence_helpers.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "b66a4c232b496774f078d06754511e29b8bdc1eb9b8b9e7d01290bee9116ba7a",
       "used_by": [
         "Lecture 3"
@@ -295,7 +296,7 @@
       "path": "assets/figures/10_power_balance.png",
       "category": "cached derived data",
       "source": "data/cached/neopax_profile_cached.npz",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "f5710a20f96e47eaba706fcfb2b1d370cfe6ded8a4e36f9e6d1334a8a1c83e14",
       "used_by": [
         "Lecture 4",
@@ -307,7 +308,7 @@
       "path": "assets/figures/10_profile_evolution.png",
       "category": "cached derived data",
       "source": "data/cached/neopax_profile_cached.npz",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "30ad3dfb7a0785002648bd1e6c747b2b68ae05ba2f4f8ba93f7cc0afa28b6c3e",
       "used_by": [
         "Lecture 4",
@@ -319,7 +320,7 @@
       "path": "assets/figures/11_pareto_front.png",
       "category": "cached derived data",
       "source": "data/cached/pareto_design_table.csv",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "daa781370780d0801e88b2c3f88dfd0069ef65791c0a1db28c0f37f730a5a7bb",
       "used_by": [
         "Lecture 4",
@@ -331,7 +332,7 @@
       "path": "assets/figures/11_weighted_selection.png",
       "category": "cached derived data",
       "source": "data/cached/pareto_design_table.csv",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "4b22a0b79ba30d5ff4c1d66ad606faa8f5daa083c92169af780b5f9bc135d4c9",
       "used_by": [
         "Lecture 4",
@@ -343,12 +344,188 @@
       "path": "assets/figures/environment_check.png",
       "category": "synthetic educational fallback",
       "source": "scripts/generate_all_figures.py",
-      "generated_at": "2026-05-24T12:47:20Z",
+      "generated_at": "2026-05-25T00:35:11Z",
       "sha256": "0af2f74d55590085524e112cbf004d8f5f7fca55d913b9f8e9fd48b7f023316a",
       "used_by": [
         "supporting documentation"
       ],
       "warning": "This cached figure teaches how to read the metric. It is not a new validated transport, coil, or equilibrium calculation."
+    },
+    {
+      "path": "assets/figures/ref_coil_distance_scale_length.png",
+      "category": "reference slide extract",
+      "source": "Landreman_2023_APS-DPP_Theory_supporting_FPP_v04.pdf slide 11: Coil-to-plasma distance and magnetic scale length correlation.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "32b750792a4bec86f475e75b109f67cbca6e4d469fc3626e36556cbf441bfce6",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_current_potential_methods.png",
+      "category": "reference slide extract",
+      "source": "Landreman_Charkiw_lectures_Stellarator_optimization_final.pdf slide 39: Current-potential coil methods and regularization.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "9a4745a53a1bd2a58d325a0a7696e94177f0f0b20a1ee08c00e002ad7f8e7556",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_direct_vs_proxy_table.png",
+      "category": "reference slide extract",
+      "source": "2020-02_Landreman_UMD_physics_talk_v07.pdf slide 20: Direct quantities compared with proxy objectives.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "373d210d20ab0ab8ca54b1f744be3e7e189091b38b4b2550289834fe858d69e4",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_drift_kinetic_bootstrap_equation.png",
+      "category": "reference slide extract",
+      "source": "2022-12_Landreman_PoP_webinar_final.pdf slide 16: Drift-kinetic equation and bootstrap-current calculation context.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "681af8ee10ed7dba740457ff08a100246ae196d6f98042ce14ef6541342ae5be",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_good_bad_flux_surfaces.png",
+      "category": "reference slide extract",
+      "source": "Landreman_2022_IPFN_Intro_to_stellarators_final.pdf slide 12: Good and bad magnetic surfaces as a validation gate.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "6de18634923b3c96143d4c9a3195fd633383e575545e1f1c45551a6e7203f944",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_objective_visualization_method.png",
+      "category": "reference slide extract",
+      "source": "2024-10_Jang_DPP_Stellarators_objective_function_visualization_final.pdf slide 7: Objective-function landscape visualization method.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "7b14daf2155669338b7c37b618d85445ceddec17126d72def665be044bf0a3b3",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_open_questions_optimization.png",
+      "category": "reference slide extract",
+      "source": "Landreman_Charkiw_lectures_Stellarator_optimization_final.pdf slide 42: Open questions for stellarator optimization.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "39ceaa2c65e61c33962eb7ad0d4bb0a77c12d7d77242835415a7ebccc8412648",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_proxy_landscape_comparison.png",
+      "category": "reference slide extract",
+      "source": "2024-10_Jang_DPP_Stellarators_objective_function_visualization_final.pdf slide 13: Comparing proxy landscapes for neoclassical confinement objectives.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "25c87319b935bcef1996171cfff052553d56270264fd8bc8d0a8c395c78fe56b",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_quasisymmetry_equation.png",
+      "category": "reference slide extract",
+      "source": "Landreman_Charkiw_lectures_Stellarator_optimization_final.pdf slide 27: Quasisymmetry objective written next to the shape it targets.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "fa0845992fc6c265a695d802164dc8288fb304d4a29ba58ceeb71114cc583646",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_rotational_transform_fieldline.png",
+      "category": "reference slide extract",
+      "source": "Landreman_2022_IPFN_Intro_to_stellarators_final.pdf slide 10: Rotational transform construction from field-line pitch.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "7798cbd0ed1b3c44b0b03290045db1d66add8ec74636a8b56cdbcddf79babb81",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_stellarator_objectives.png",
+      "category": "reference slide extract",
+      "source": "Landreman_Charkiw_lectures_Stellarator_optimization_final.pdf slide 2: Freedom in plasma and coil shapes creates a multiobjective design problem.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "2adcf933a3db371971d0489b807d8a5613599fdd8a311936a6aa1b784201000a",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_total_flux_neoclassical_turbulent.png",
+      "category": "reference slide extract",
+      "source": "Landreman_2022_IPFN_Intro_to_stellarators_final.pdf slide 16: Total transport flux decomposed into neoclassical and turbulent parts.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "9f3a978fdb31eeaf38041e7c62ce9bda3da1ec70c7c0ccbaeeb3d578718f9297",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_trapped_particles_quasisymmetry.png",
+      "category": "reference slide extract",
+      "source": "Landreman_Charkiw_lectures_Stellarator_optimization_final.pdf slide 20: Trapped particles are not confined unless a stronger condition is imposed.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "790a5ca28da28beac8a3fd5b400c0a6017a02281db0fa4e8f29e290b724326df",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_turbulence_ml_workflow.png",
+      "category": "reference slide extract",
+      "source": "2026-02_Landreman_UMD_physics-ML_turbulence_forWeb.pdf slide 23: Turbulence database regression workflow from equilibrium shapes to validation targets.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "e4d18fc5d785ddc2553c4cd2b0c364ecd3601434b4b2c648278004edf305917a",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_two_stage_optimization.png",
+      "category": "reference slide extract",
+      "source": "Landreman_Charkiw_lectures_Stellarator_optimization_final.pdf slide 9: Most transport-optimized stellarators used two sequential stages.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "5f8caa000ffa6c1af2e3e1dfff5415591112656939a2237d9401b456219526d0",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
+    },
+    {
+      "path": "assets/figures/ref_w7x_optimization_targets.png",
+      "category": "reference slide extract",
+      "source": "Aix-optimisation.pdf slide 10: W7-X optimization targets and remaining constraints.",
+      "generated_at": "2026-05-25T00:35:11Z",
+      "sha256": "19713fad3551613655eea58c8af034034988a5d42c2c3107dfba85948324b81e",
+      "used_by": [
+        "PowerPoint lecture decks"
+      ],
+      "warning": "This is a selected visual extract from local reference teaching material, used with source attribution."
     }
   ]
 }

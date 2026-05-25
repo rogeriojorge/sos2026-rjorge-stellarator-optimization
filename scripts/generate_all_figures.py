@@ -344,8 +344,21 @@ def write_figure_manifest() -> Path:
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     records = []
     warning = "This cached figure teaches how to read the metric. It is not a new validated transport, coil, or equilibrium calculation."
+    reference_sources_path = FIGURE_DIR / "reference_slide_sources.json"
+    reference_sources = {}
+    if reference_sources_path.exists():
+        for item in json.loads(reference_sources_path.read_text(encoding="utf-8")):
+            reference_sources[Path(item["file"]).name] = item
     for path in sorted(FIGURE_DIR.glob("*.png")):
-        category, source, used_by = FIGURE_PROVENANCE.get(path.name, ("synthetic educational fallback", "scripts/generate_all_figures.py", ["supporting documentation"]))
+        if path.name in reference_sources:
+            ref = reference_sources[path.name]
+            category = "reference slide extract"
+            source = f"{ref['source_pdf']} slide {ref['source_slide']}: {ref['description']}"
+            used_by = ["PowerPoint lecture decks"]
+            figure_warning = "This is a selected visual extract from local reference teaching material, used with source attribution."
+        else:
+            category, source, used_by = FIGURE_PROVENANCE.get(path.name, ("synthetic educational fallback", "scripts/generate_all_figures.py", ["supporting documentation"]))
+            figure_warning = warning if category != "real public data" else "This figure uses a real public input artifact but may still include cached plotting choices."
         records.append({
             "path": str(path.relative_to(PROJECT_ROOT)),
             "category": category,
@@ -353,12 +366,12 @@ def write_figure_manifest() -> Path:
             "generated_at": generated_at,
             "sha256": file_sha256(path),
             "used_by": used_by,
-            "warning": warning if category != "real public data" else "This figure uses a real public input artifact but may still include cached plotting choices.",
+            "warning": figure_warning,
         })
     manifest = {
         "schema": "sos2026.figure-manifest/v1",
         "generated_at": generated_at,
-        "categories": ["real public data", "real package output", "cached derived data", "synthetic educational fallback"],
+        "categories": ["real public data", "real package output", "cached derived data", "synthetic educational fallback", "reference slide extract"],
         "figures": records,
     }
     path = FIGURE_DIR / "manifest.json"

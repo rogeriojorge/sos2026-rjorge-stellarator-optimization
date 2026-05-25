@@ -206,19 +206,19 @@ function bulletFont(value) {
 
 function addPageTitle(slide, deck, item, slideNumber, total) {
   const theme = deckThemes[deck.id];
+  rect(slide, 0, 0, 1280, 86, theme.accent);
   addUwMark(slide);
   const titleWraps = item.title.length > 58;
-  text(slide, item.title, 34, 42, 1008, titleWraps ? 92 : 70, {
-    fontSize: titleFont(item.title),
+  text(slide, item.title, 34, 10, 1060, 64, {
+    fontSize: Math.min(titleFont(item.title), titleWraps ? 31 : 35),
     bold: true,
-    color: palette.ink,
+    color: "#ffffff",
     valign: "middle",
   });
-  rect(slide, 34, titleWraps ? 142 : 126, 92, 7, theme.accent);
   if (item.subtitle) {
-    text(slide, item.subtitle, 148, titleWraps ? 138 : 122, 740, 26, {
-      fontSize: 18,
-      color: palette.muted,
+    text(slide, item.subtitle, 34, 62, 740, 18, {
+      fontSize: 14,
+      color: "#f7d8d8",
       valign: "middle",
     });
   }
@@ -940,6 +940,48 @@ function renderExplainer(presentation, deck, item, slideNumber, total) {
   return slide;
 }
 
+async function renderSourceSlide(presentation, deck, item, slideNumber, total) {
+  const slide = presentation.slides.add();
+  const theme = deckThemes[deck.id];
+  rect(slide, 0, 0, 1280, 720, palette.paper);
+  rect(slide, 1, 87, 1278, 572, palette.lightGray, palette.lightGray, 1);
+
+  rect(slide, 42, 118, 870, 490, "#ffffff", "#cbd5e1", 1);
+  if (item.image) await addImage(slide, item.image, 54, 130, 846, 466, { fit: "contain" });
+
+  rect(slide, 946, 130, 276, 320, "#ffffff", "#d1d5db", 1);
+  rect(slide, 946, 130, 276, 12, theme.accent);
+  text(slide, item.calloutTitle ?? "How to read it", 970, 164, 226, 30, {
+    fontSize: 20,
+    bold: true,
+    color: theme.accent,
+    valign: "middle",
+  });
+  addBullets(slide, item.bullets ?? [], 970, 210, 220, 170, {
+    theme,
+    fontSize: 18,
+    gap: 8,
+    maxRowHeight: 52,
+  });
+
+  rect(slide, 946, 484, 276, 74, "#fff7ed", "#fed7aa", 1);
+  text(slide, item.caption ?? "Use this as a visual anchor for the optimization argument.", 970, 498, 228, 38, {
+    fontSize: 15,
+    color: "#9a3412",
+    valign: "middle",
+  });
+  if (item.source) {
+    text(slide, item.source, 54, 614, 850, 22, {
+      fontSize: 8,
+      color: palette.muted,
+      valign: "middle",
+    });
+  }
+  addPageTitle(slide, deck, item, slideNumber, total);
+  addFooter(slide, deck, slideNumber);
+  return slide;
+}
+
 function renderSummary(presentation, deck, item, slideNumber, total) {
   const slide = presentation.slides.add();
   const theme = deckThemes[deck.id];
@@ -1068,6 +1110,9 @@ async function renderSlide(presentation, deck, item, slideNumber, total) {
       break;
     case "explainer":
       slide = renderExplainer(presentation, deck, item, slideNumber, total);
+      break;
+    case "source_slide":
+      slide = await renderSourceSlide(presentation, deck, item, slideNumber, total);
       break;
     case "summary":
       slide = renderSummary(presentation, deck, item, slideNumber, total);

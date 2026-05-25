@@ -43,6 +43,19 @@ Lecture 4: profiles, Pareto decisions, and the repo lab
 
 ---
 
+# Objective functions have landscapes
+
+![bg right:48% contain](../assets/figures/ref_objective_visualization_method.png)
+- Flatten a local parameter space
+- Interpolate between configurations
+- Look for basins and traps
+
+_This makes the optimization dashboard feel like a landscape, not just a table of scores._
+
+<small>Source visual: Jang and Landreman, Visualizing Stellarator Objective Functions, DPP 2024, slide 7.</small>
+
+---
+
 # PART 1. Close the loop with profiles
 - Field optimization changes transport
 - Transport changes pressure and current
@@ -102,6 +115,20 @@ _Notebook path: notebooks/10_neopax_profile_closure.ipynb_
 
 ---
 
+# W7-X shows what optimized design must still prove
+
+![bg right:48% contain](../assets/figures/ref_w7x_optimization_targets.png)
+- Equilibrium quality
+- Transport reduction
+- Engineering feasibility
+- Experimental validation
+
+_A credible design story connects computed metrics to a device that can be built and tested._
+
+<small>Source visual: Per Helander, Aix Stellarator Optimization lecture, 2026, slide 10.</small>
+
+---
+
 # What is a Pareto front?
 - **Term:** Pareto front
 - **Definition:** The set of designs where improving one objective requires worsening at least one other objective.
@@ -124,6 +151,19 @@ _Notebook path: notebooks/10_neopax_profile_closure.ipynb_
 _A Pareto front is an argument surface, not an automatic answer._
 
 <small>Ref: SIMSOPT objective composition and multiobjective stellarator optimization workflows.</small>
+
+---
+
+# Different proxies can rank the same designs differently
+
+![bg right:48% contain](../assets/figures/ref_proxy_landscape_comparison.png)
+- Compare landscapes before trusting weights
+- Look for cliffs and flat regions
+- Validation chooses the metric ladder
+
+_This is the visual reason the final lecture ends with Pareto decisions rather than one winner._
+
+<small>Source visual: Jang and Landreman, Visualizing Stellarator Objective Functions, DPP 2024, slide 13.</small>
 
 ---
 
@@ -311,6 +351,20 @@ _Reference plot for design-decision discussion._
 - State the validation domain for every metric
 - Pair each proxy with its failure mode
 - Show the weights behind each Pareto choice
+
+---
+
+# Open questions define the next optimization loop
+
+![bg right:48% contain](../assets/figures/ref_open_questions_optimization.png)
+- Combine coil and plasma design
+- Avoid local minima
+- Optimize expensive objectives
+- Build flexible configurations
+
+_The last slide should leave students with problems they can attack using the repo._
+
+<small>Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 42.</small>
 
 ---
 

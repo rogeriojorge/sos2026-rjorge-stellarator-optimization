@@ -1,0 +1,98 @@
+[
+  {
+    "file": "assets/figures/ref_rotational_transform_fieldline.png",
+    "source_pdf": "Landreman_2022_IPFN_Intro_to_stellarators_final.pdf",
+    "source_slide": 10,
+    "description": "Rotational transform construction from field-line pitch."
+  },
+  {
+    "file": "assets/figures/ref_good_bad_flux_surfaces.png",
+    "source_pdf": "Landreman_2022_IPFN_Intro_to_stellarators_final.pdf",
+    "source_slide": 12,
+    "description": "Good and bad magnetic surfaces as a validation gate."
+  },
+  {
+    "file": "assets/figures/ref_quasisymmetry_equation.png",
+    "source_pdf": "Landreman_Charkiw_lectures_Stellarator_optimization_final.pdf",
+    "source_slide": 27,
+    "description": "Quasisymmetry objective written next to the shape it targets."
+  },
+  {
+    "file": "assets/figures/ref_direct_vs_proxy_table.png",
+    "source_pdf": "2020-02_Landreman_UMD_physics_talk_v07.pdf",
+    "source_slide": 20,
+    "description": "Direct quantities compared with proxy objectives."
+  },
+  {
+    "file": "assets/figures/ref_stellarator_objectives.png",
+    "source_pdf": "Landreman_Charkiw_lectures_Stellarator_optimization_final.pdf",
+    "source_slide": 2,
+    "description": "Freedom in plasma and coil shapes creates a multiobjective design problem."
+  },
+  {
+    "file": "assets/figures/ref_two_stage_optimization.png",
+    "source_pdf": "Landreman_Charkiw_lectures_Stellarator_optimization_final.pdf",
+    "source_slide": 9,
+    "description": "Most transport-optimized stellarators used two sequential stages."
+  },
+  {
+    "file": "assets/figures/ref_current_potential_methods.png",
+    "source_pdf": "Landreman_Charkiw_lectures_Stellarator_optimization_final.pdf",
+    "source_slide": 39,
+    "description": "Current-potential coil methods and regularization."
+  },
+  {
+    "file": "assets/figures/ref_coil_distance_scale_length.png",
+    "source_pdf": "Landreman_2023_APS-DPP_Theory_supporting_FPP_v04.pdf",
+    "source_slide": 11,
+    "description": "Coil-to-plasma distance and magnetic scale length correlation."
+  },
+  {
+    "file": "assets/figures/ref_total_flux_neoclassical_turbulent.png",
+    "source_pdf": "Landreman_2022_IPFN_Intro_to_stellarators_final.pdf",
+    "source_slide": 16,
+    "description": "Total transport flux decomposed into neoclassical and turbulent parts."
+  },
+  {
+    "file": "assets/figures/ref_trapped_particles_quasisymmetry.png",
+    "source_pdf": "Landreman_Charkiw_lectures_Stellarator_optimization_final.pdf",
+    "source_slide": 20,
+    "description": "Trapped particles are not confined unless a stronger condition is imposed."
+  },
+  {
+    "file": "assets/figures/ref_drift_kinetic_bootstrap_equation.png",
+    "source_pdf": "2022-12_Landreman_PoP_webinar_final.pdf",
+    "source_slide": 16,
+    "description": "Drift-kinetic equation and bootstrap-current calculation context."
+  },
+  {
+    "file": "assets/figures/ref_turbulence_ml_workflow.png",
+    "source_pdf": "2026-02_Landreman_UMD_physics-ML_turbulence_forWeb.pdf",
+    "source_slide": 23,
+    "description": "Turbulence database regression workflow from equilibrium shapes to validation targets."
+  },
+  {
+    "file": "assets/figures/ref_objective_visualization_method.png",
+    "source_pdf": "2024-10_Jang_DPP_Stellarators_objective_function_visualization_final.pdf",
+    "source_slide": 7,
+    "description": "Objective-function landscape visualization method."
+  },
+  {
+    "file": "assets/figures/ref_proxy_landscape_comparison.png",
+    "source_pdf": "2024-10_Jang_DPP_Stellarators_objective_function_visualization_final.pdf",
+    "source_slide": 13,
+    "description": "Comparing proxy landscapes for neoclassical confinement objectives."
+  },
+  {
+    "file": "assets/figures/ref_w7x_optimization_targets.png",
+    "source_pdf": "Aix-optimisation.pdf",
+    "source_slide": 10,
+    "description": "W7-X optimization targets and remaining constraints."
+  },
+  {
+    "file": "assets/figures/ref_open_questions_optimization.png",
+    "source_pdf": "Landreman_Charkiw_lectures_Stellarator_optimization_final.pdf",
+    "source_slide": 42,
+    "description": "Open questions for stellarator optimization."
+  }
+]

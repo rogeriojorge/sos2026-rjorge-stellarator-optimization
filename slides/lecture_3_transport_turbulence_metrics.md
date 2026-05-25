@@ -33,6 +33,19 @@ Lecture 3: neoclassical, turbulence, and fast-particle gates
 
 ---
 
+# Trapped particles explain the need for symmetry
+
+![bg right:48% contain](../assets/figures/ref_trapped_particles_quasisymmetry.png)
+- Trapped particles sample only part of a surface
+- Drift averages can fail
+- Quasisymmetry restores a conserved quantity
+
+_This is the clearest bridge from orbit physics to an optimization target._
+
+<small>Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 20.</small>
+
+---
+
 # The optimizer follows the metric we choose
 - Metric design is part of physics
 
@@ -42,6 +55,19 @@ Lecture 3: neoclassical, turbulence, and fast-particle gates
 - Geometry metrics: fastest screens
 - Effective ripple and Boozer metrics: early transport warnings
 - DKE, gyrokinetics, particles, profiles: validation gates
+
+---
+
+# Transport means neoclassical plus turbulent flux
+
+![bg right:48% contain](../assets/figures/ref_total_flux_neoclassical_turbulent.png)
+- Neoclassical flux follows guiding-center drifts
+- Turbulent flux follows instabilities
+- Both depend on geometry
+
+_This slide gives students the mental equation before the individual metrics appear._
+
+<small>Source visual: Landreman, Introduction to Stellarator Optimization, IPFN 2022, slide 16.</small>
 
 ---
 
@@ -74,6 +100,19 @@ _These curves show how the screen should be read; full transport validation rema
 - **Remember:** D11 is a validation coefficient, not a universal confinement number.
 
 <small>Ref: Landreman et al., Phys. Plasmas 21, 042503 (2014).</small>
+
+---
+
+# DKE calculations turn geometry into transport coefficients
+
+![bg right:48% contain](../assets/figures/ref_drift_kinetic_bootstrap_equation.png)
+- Solve along phase-space characteristics
+- Compute distribution-function moments
+- Scan coefficients before claiming performance
+
+_Use this to explain what sits behind D11 and bootstrap-current validation plots._
+
+<small>Source visual: Landreman, PoP webinar on bootstrap current and energetic particles, 2022, slide 16.</small>
 
 ---
 
@@ -155,6 +194,19 @@ _Notebook 07: SFINCS-style neoclassical validation._
 - **Remember:** A transport optimizer must survive both neoclassical and turbulence gates.
 
 <small>Ref: Kim et al., J. Plasma Phys. 90, 905900203 (2024).</small>
+
+---
+
+# Turbulence metrics need invariant feature maps
+
+![bg right:48% contain](../assets/figures/ref_turbulence_ml_workflow.png)
+- Many geometries feed the simulation database
+- Features must respect translations and symmetries
+- Regression is useful only after validation
+
+_This visual motivates the notebook surrogate without replacing gyrokinetic validation._
+
+<small>Source visual: Landreman, Plasma turbulence in stellarators, 2026, slide 20.</small>
 
 ---
 
