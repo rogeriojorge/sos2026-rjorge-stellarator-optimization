@@ -90,6 +90,18 @@ _The reference case anchors the design discussion without duplicating geometry l
 <small>Ref: Beidler et al., Nature 596, 221-226 (2021), reduced neoclassical energy transport in W7-X.</small>
 
 ---
+# Magnetic coordinates turn geometry into labels
+
+![bg right:48% contain](../assets/figures/ref_aix_magnetic_coordinates.png)
+- Label surfaces before optimizing
+- Separate radial and angular structure
+- Compare designs in the same coordinates
+
+_This is the bridge from visual geometry to the quantities a code can differentiate._
+
+<small>Source visual: Aix-final stellarator theory deck, slide 27.</small>
+
+---
 
 # Rotational transform is an optimization target
 

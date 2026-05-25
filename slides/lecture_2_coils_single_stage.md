@@ -157,6 +157,18 @@ _Use this when explaining why low B dot n is not the only engineering objective.
 <small>Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 39.</small>
 
 ---
+# Topology can be a design variable
+
+![bg right:48% contain](../assets/figures/ref_simons_current_voxels.png)
+- Do not assume the number of coils
+- Regularization defines what is buildable
+- Topology search still needs engineering gates
+
+_The coil problem can move beyond smoothing a fixed set of curves._
+
+<small>Source visual: Simons/Maryland Hidden Symmetries overview, 2024, slide 6.</small>
+
+---
 
 # Ports and maintenance enter early
 - Access can invalidate attractive coil sets
@@ -178,6 +190,18 @@ _Notebook path: notebooks/04_simsopt_stage2_coils.ipynb_
 # PART 2. Direct optimization
 - Move field, particles, and coils in the same loop
 - Use differentiable codes where the gradient is meaningful
+
+---
+# Direct particle objectives are honest but noisy
+
+![bg right:48% contain](../assets/figures/ref_numerical_direct_particle_confinement.png)
+- Optimize the quantity that matters
+- Expect stochastic-looking landscapes
+- Use cheap screens before expensive calls
+
+_Direct optimization is attractive because the metric is physical; it is hard because the landscape is rough._
+
+<small>Source visual: Landreman UMD numerical-analysis seminar, 2023, slide 13.</small>
 
 ---
 

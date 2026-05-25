@@ -42,6 +42,18 @@ Lecture 4: profiles, Pareto decisions, and the repo lab
 <small>Refs: Landreman et al., JOSS 6, 3525 (2021); sfincs-jax and SPECTRAX-GK public docs; Kim et al., JPP 90, 905900203 (2024).</small>
 
 ---
+# Surrogates expand the loop, but do not replace it
+
+![bg right:48% contain](../assets/figures/ref_simons_pinn_equilibrium.png)
+- Fast models can widen parameter scans
+- Physics constraints keep them grounded
+- Validation still returns to the solver
+
+_Use surrogates as accelerators inside the workflow, not as unvalidated endpoints._
+
+<small>Source visual: Simons/Maryland Hidden Symmetries overview, 2024, slide 9.</small>
+
+---
 
 # Objective functions have landscapes
 
@@ -365,6 +377,18 @@ _Reference plot for design-decision discussion._
 _The last slide should leave students with problems they can attack using the repo._
 
 <small>Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 42.</small>
+
+---
+# The old checklist is still the right checklist
+
+![bg right:48% contain](../assets/figures/ref_summer_school_optimization_questions.png)
+- Balance confinement, coils, and stability
+- Ask which constraints changed the answer
+- Keep the design question explicit
+
+_The final repo lab is a modern computational version of this optimization checklist._
+
+<small>Source visual: Landreman Simons summer school stellarator optimization deck, 2020, slide 34.</small>
 
 ---
 

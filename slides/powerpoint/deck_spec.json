@@ -97,6 +97,18 @@
           "layout": "full"
         },
         {
+          "kind": "source_slide",
+          "title": "Magnetic coordinates turn geometry into labels",
+          "image": "assets/figures/ref_aix_magnetic_coordinates.png",
+          "bullets": [
+            "Label surfaces before optimizing",
+            "Separate radial and angular structure",
+            "Compare designs in the same coordinates"
+          ],
+          "caption": "This is the bridge from visual geometry to the quantities a code can differentiate.",
+          "source": "Source visual: Aix-final stellarator theory deck, slide 27."
+        },
+        {
           "kind": "figure",
           "title": "Rotational transform is an optimization target",
           "image": "assets/figures/01_iota_profile.png",
@@ -587,6 +599,18 @@
           "source": "Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 39."
         },
         {
+          "kind": "source_slide",
+          "title": "Topology can be a design variable",
+          "image": "assets/figures/ref_simons_current_voxels.png",
+          "bullets": [
+            "Do not assume the number of coils",
+            "Regularization defines what is buildable",
+            "Topology search still needs engineering gates"
+          ],
+          "caption": "The coil problem can move beyond smoothing a fixed set of curves.",
+          "source": "Source visual: Simons/Maryland Hidden Symmetries overview, 2024, slide 6."
+        },
+        {
           "kind": "warning",
           "title": "Ports and maintenance enter early",
           "bullets": [
@@ -613,6 +637,18 @@
             "Move field, particles, and coils in the same loop",
             "Use differentiable codes where the gradient is meaningful"
           ]
+        },
+        {
+          "kind": "source_slide",
+          "title": "Direct particle objectives are honest but noisy",
+          "image": "assets/figures/ref_numerical_direct_particle_confinement.png",
+          "bullets": [
+            "Optimize the quantity that matters",
+            "Expect stochastic-looking landscapes",
+            "Use cheap screens before expensive calls"
+          ],
+          "caption": "Direct optimization is attractive because the metric is physical; it is hard because the landscape is rough.",
+          "source": "Source visual: Landreman UMD numerical-analysis seminar, 2023, slide 13."
         },
         {
           "kind": "figure",
@@ -1038,6 +1074,18 @@
         },
         {
           "kind": "source_slide",
+          "title": "Turbulence optimization starts with a rankable metric",
+          "image": "assets/figures/ref_numerical_turbulence_optimization.png",
+          "bullets": [
+            "Linear growth is a useful first screen",
+            "Heat flux remains the validation target",
+            "The wrong proxy can win the wrong race"
+          ],
+          "caption": "The lecture uses this same staged logic: cheap metric first, expensive validation later.",
+          "source": "Source visual: Landreman UMD numerical-analysis seminar, 2023, slide 22."
+        },
+        {
+          "kind": "source_slide",
           "title": "Turbulence metrics need invariant feature maps",
           "image": "assets/figures/ref_turbulence_ml_workflow.png",
           "bullets": [
@@ -1047,6 +1095,18 @@
           ],
           "caption": "This visual motivates the notebook surrogate without replacing gyrokinetic validation.",
           "source": "Source visual: Landreman, Plasma turbulence in stellarators, 2026, slide 20."
+        },
+        {
+          "kind": "source_slide",
+          "title": "Multiple feature checks agree on the same physics",
+          "image": "assets/figures/ref_sherwood_feature_importance.png",
+          "bullets": [
+            "Compare methods before trusting a surrogate",
+            "Look for a repeated physical feature",
+            "Use agreement as a diagnostic, not a proof"
+          ],
+          "caption": "Several independent ranking methods point to the same bad-curvature-region metric.",
+          "source": "Source visual: Landreman Sherwood ML turbulence regression deck, 2025, slide 37."
         },
         {
           "kind": "figure",
@@ -1301,6 +1361,18 @@
             "Profile closure: sources and turbulence can reverse a geometry-only ranking"
           ],
           "reference": "Refs: Landreman et al., JOSS 6, 3525 (2021); sfincs-jax and SPECTRAX-GK public docs; Kim et al., JPP 90, 905900203 (2024)."
+        },
+        {
+          "kind": "source_slide",
+          "title": "Surrogates expand the loop, but do not replace it",
+          "image": "assets/figures/ref_simons_pinn_equilibrium.png",
+          "bullets": [
+            "Fast models can widen parameter scans",
+            "Physics constraints keep them grounded",
+            "Validation still returns to the solver"
+          ],
+          "caption": "Use surrogates as accelerators inside the workflow, not as unvalidated endpoints.",
+          "source": "Source visual: Simons/Maryland Hidden Symmetries overview, 2024, slide 9."
         },
         {
           "kind": "source_slide",
@@ -1665,6 +1737,18 @@
           ],
           "caption": "The last slide should leave students with problems they can attack using the repo.",
           "source": "Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 42."
+        },
+        {
+          "kind": "source_slide",
+          "title": "The old checklist is still the right checklist",
+          "image": "assets/figures/ref_summer_school_optimization_questions.png",
+          "bullets": [
+            "Balance confinement, coils, and stability",
+            "Ask which constraints changed the answer",
+            "Keep the design question explicit"
+          ],
+          "caption": "The final repo lab is a modern computational version of this optimization checklist.",
+          "source": "Source visual: Landreman Simons summer school stellarator optimization deck, 2020, slide 34."
         },
         {
           "kind": "quote",

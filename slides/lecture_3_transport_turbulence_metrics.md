@@ -196,6 +196,18 @@ _Notebook 07: SFINCS-style neoclassical validation._
 <small>Ref: Kim et al., J. Plasma Phys. 90, 905900203 (2024).</small>
 
 ---
+# Turbulence optimization starts with a rankable metric
+
+![bg right:48% contain](../assets/figures/ref_numerical_turbulence_optimization.png)
+- Linear growth is a useful first screen
+- Heat flux remains the validation target
+- The wrong proxy can win the wrong race
+
+_The lecture uses this same staged logic: cheap metric first, expensive validation later._
+
+<small>Source visual: Landreman UMD numerical-analysis seminar, 2023, slide 22.</small>
+
+---
 
 # Turbulence metrics need invariant feature maps
 
@@ -207,6 +219,18 @@ _Notebook 07: SFINCS-style neoclassical validation._
 _This visual motivates the notebook surrogate without replacing gyrokinetic validation._
 
 <small>Source visual: Landreman, Plasma turbulence in stellarators, 2026, slide 20.</small>
+
+---
+# Multiple feature checks agree on the same physics
+
+![bg right:48% contain](../assets/figures/ref_sherwood_feature_importance.png)
+- Compare methods before trusting a surrogate
+- Look for a repeated physical feature
+- Use agreement as a diagnostic, not a proof
+
+_Several independent ranking methods point to the same bad-curvature-region metric._
+
+<small>Source visual: Landreman Sherwood ML turbulence regression deck, 2025, slide 37.</small>
 
 ---
 
