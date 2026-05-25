@@ -30,6 +30,34 @@
           ]
         },
         {
+          "kind": "code_table",
+          "title": "Main ideas for Lecture 1",
+          "headers": [
+            "Main idea",
+            "What students should be able to say"
+          ],
+          "leftWidth": 310,
+          "rows": [
+            [
+              "Equilibrium",
+              "VMEC or DESC converts a boundary and profiles into flux surfaces, iota, pressure, and field strength."
+            ],
+            [
+              "Coordinates",
+              "Boozer coordinates turn hidden symmetry into Fourier coefficients that can be plotted and penalized."
+            ],
+            [
+              "Metrics",
+              "Rotational transform, quasi-symmetry residuals, and epsilon effective are compact checks, not full validation."
+            ],
+            [
+              "Workflow",
+              "Every plotted number should point back to an input file, code path, and resolution choice."
+            ]
+          ],
+          "caption": "This is the same workflow as the reference optimization talks: define the object, compute the field, then ask what metric the optimizer sees."
+        },
+        {
           "kind": "explainer",
           "title": "What is rotational transform?",
           "term": "Rotational transform, iota",
@@ -65,12 +93,45 @@
         },
         {
           "kind": "workflow",
-          "title": "The optimizer sees artifacts with provenance",
+          "title": "The workflow is a chain of code artifacts",
           "bullets": [
-            "Boundary and profiles create an equilibrium",
-            "Spectra and scalars turn physics into objectives",
-            "Every scalar needs a validation gate"
+            "Boundary and profiles go into VMEC, vmec_jax, or DESC",
+            "The equilibrium file goes to Boozer transforms and spectra",
+            "Metrics return to the optimizer with convergence and validation checks"
           ]
+        },
+        {
+          "kind": "code_table",
+          "title": "Codes used in this lecture",
+          "headers": [
+            "Code",
+            "What it does here"
+          ],
+          "leftWidth": 292,
+          "rows": [
+            [
+              "VMEC",
+              "The standard equilibrium workhorse: solve ideal-MHD equilibria and write the wout file used downstream."
+            ],
+            [
+              "vmec_jax",
+              "A JAX path for differentiable equilibrium experiments and small gradient-based demonstrations."
+            ],
+            [
+              "DESC",
+              "A complementary equilibrium optimizer with differentiable objectives and spectral representations."
+            ],
+            [
+              "booz_xform_jax",
+              "Transform VMEC-style equilibria into Boozer coordinates and B_mn spectra."
+            ],
+            [
+              "NEO_JAX",
+              "Convert Boozer geometry into epsilon_eff-style neoclassical screens."
+            ]
+          ],
+          "caption": "The lecture is about the handoff between codes: surface -> equilibrium -> Boozer spectrum -> metric.",
+          "reference": "Code references: VMEC; DESC docs; booz_xform_jax, vmec_jax, and NEO_JAX public repositories."
         },
         {
           "kind": "figure",
@@ -330,7 +391,7 @@
           "kind": "quote",
           "title": "A design loop starts when the artifact can be rerun",
           "bullets": [
-            "Repo and docs are part of the scientific object"
+            "Inputs, code versions, and outputs are part of the scientific object"
           ]
         },
         {
@@ -370,7 +431,7 @@
         },
         {
           "kind": "warning",
-          "title": "When research mode is needed",
+          "title": "When to use the full package path",
           "bullets": [
             "Reporting a numerical value",
             "Comparing HSX and W7-X quantitatively",
@@ -379,7 +440,7 @@
         },
         {
           "kind": "code",
-          "title": "Research path: VMEC_JAX to Boozer transform",
+          "title": "Package path: VMEC_JAX to Boozer transform",
           "bullets": [
             "Start from a verified input or wout file",
             "Run a short equilibrium on the lecture machine",
@@ -466,6 +527,34 @@
           ]
         },
         {
+          "kind": "code_table",
+          "title": "Main ideas for Lecture 2",
+          "headers": [
+            "Main idea",
+            "What students should be able to say"
+          ],
+          "leftWidth": 310,
+          "rows": [
+            [
+              "Stage 2",
+              "Given a target surface, find modular coils whose Biot-Savart field has small B dot n."
+            ],
+            [
+              "Regularization",
+              "Length, curvature, spacing, ports, and robustness are objective terms, not afterthoughts."
+            ],
+            [
+              "Single stage",
+              "Move the plasma target and the coils together when the separated problem is too restrictive."
+            ],
+            [
+              "Validation",
+              "A coil set should be judged by field quality, engineering scale, and particle/field-line diagnostics."
+            ]
+          ],
+          "caption": "The reference talks move from a target plasma to coils quickly; this lecture follows that same path."
+        },
+        {
           "kind": "source_slide",
           "title": "Plasma and coil shapes share the design freedom",
           "image": "assets/figures/ref_stellarator_objectives.png",
@@ -480,12 +569,45 @@
         },
         {
           "kind": "table",
-          "title": "Stage 1, stage 2, single stage",
+          "title": "Optimization is organized by what is allowed to move",
           "bullets": [
-            "Stage 1: optimize the plasma target",
-            "Stage 2: fit coils to that target",
-            "Single stage: move plasma and coils together"
+            "Stage 1: VMEC or DESC moves the plasma target",
+            "Stage 2: SIMSOPT or coil-design codes move the coils around that target",
+            "Single stage: the target and coils move together under physics and engineering penalties"
           ]
+        },
+        {
+          "kind": "code_table",
+          "title": "Codes used in this lecture",
+          "headers": [
+            "Code",
+            "What it does here"
+          ],
+          "leftWidth": 330,
+          "rows": [
+            [
+              "SIMSOPT",
+              "Build the objective graph: VMEC coupling, surfaces, curves, Biot-Savart fields, and stage-2 coil penalties."
+            ],
+            [
+              "NESCOIL / REGCOIL",
+              "Current-potential and regularized coil-design baselines; useful for explaining the inverse problem."
+            ],
+            [
+              "FOCUS / QUADCOIL",
+              "Alternative coil optimization families for comparing field quality and engineering constraints."
+            ],
+            [
+              "ESSOS",
+              "JAX fieldline, particle, and coil workflows for direct diagnostics and gradient experiments."
+            ],
+            [
+              "VMEC / DESC",
+              "Provide the target surface when the plasma boundary is allowed to move."
+            ]
+          ],
+          "caption": "A modern coil lecture should name the tools and the object each one controls.",
+          "reference": "Code references: SIMSOPT JOSS 6, 3525 (2021); NESCOIL, REGCOIL, FOCUS, QUADCOIL, ESSOS, DESC."
         },
         {
           "kind": "source_slide",
@@ -705,8 +827,7 @@
           "title": "Weights reveal which constraint is active",
           "image": "assets/figures/05_weight_continuation.png",
           "bullets": [
-            "Increasing one weight can improve one metric and hurt another",
-            "This is the classroom Pareto intuition"
+            "Increase the coil penalty and watch which design quality is traded away"
           ],
           "caption": "Weight scans are design arguments."
         },
@@ -788,7 +909,7 @@
         },
         {
           "kind": "code",
-          "title": "SIMSOPT research path",
+          "title": "SIMSOPT package path",
           "bullets": [
             "Load the public QA target",
             "Build curves and Biot-Savart fields",
@@ -925,13 +1046,78 @@
           ]
         },
         {
+          "kind": "code_table",
+          "title": "Main ideas for Lecture 3",
+          "headers": [
+            "Main idea",
+            "What students should be able to say"
+          ],
+          "leftWidth": 315,
+          "rows": [
+            [
+              "Neoclassical",
+              "Trapped-particle drifts make geometry-dependent transport, measured with epsilon_eff, D11, Er roots, and bootstrap current."
+            ],
+            [
+              "Turbulence",
+              "Microinstabilities drive fluctuation transport; fast growth-rate screens need nonlinear validation."
+            ],
+            [
+              "Cost hierarchy",
+              "Use cheap metrics to rank many designs, then expensive solvers to validate finalists."
+            ],
+            [
+              "Optimization",
+              "A transport number is useful only with its species, profiles, collisionality, and normalization."
+            ]
+          ],
+          "caption": "This lecture does not derive the DKE or GKE; it shows where these quantities enter a design loop."
+        },
+        {
           "kind": "table",
-          "title": "Cost hierarchy for transport metrics",
+          "title": "Cheap screens come before expensive transport",
           "bullets": [
-            "Geometry metrics: fastest screens",
-            "Effective ripple and Boozer metrics: early transport warnings",
-            "DKE, gyrokinetics, particles, profiles: validation gates"
+            "Boozer spectra and epsilon_eff screen many geometries quickly",
+            "DKE solvers such as SFINCS add collisionality, Er, and bootstrap-current physics",
+            "Gyrokinetic solvers such as GX validate turbulence ranking for finalists"
           ]
+        },
+        {
+          "kind": "code_table",
+          "title": "Codes used in this lecture",
+          "headers": [
+            "Code",
+            "What it does here"
+          ],
+          "leftWidth": 320,
+          "rows": [
+            [
+              "NEO_JAX",
+              "Fast epsilon_eff and trapped-particle screens from Boozer geometry."
+            ],
+            [
+              "SFINCS / sfincs_jax",
+              "Drift-kinetic neoclassical transport: D11 scans, ambipolar Er roots, bootstrap current, and JAX experiments."
+            ],
+            [
+              "NTX",
+              "Differentiable neoclassical, bootstrap-current, and profile-transport optimization lane; local import verified."
+            ],
+            [
+              "KNOSOS / MONKES",
+              "Comparison neoclassical lanes for cross-checking low-collisionality conclusions."
+            ],
+            [
+              "GX / Trinity3D",
+              "Gyrokinetic turbulence and integrated transport validation when ranking finalists."
+            ],
+            [
+              "SPECTRAX-GK",
+              "JAX gyrokinetic metrics for optimization loops and fast growth-rate scans."
+            ]
+          ],
+          "caption": "Teaching point: use a ladder of cost and trust; live class runs can focus on selected tools.",
+          "reference": "Code references: NEO_JAX, SFINCS, sfincs_jax, NTX, GX, Trinity3D, SPECTRAX-GK, KNOSOS, and MONKES."
         },
         {
           "kind": "source_slide",
@@ -1008,7 +1194,7 @@
             "Multiple roots imply multiple regimes",
             "Optimization needs a root-choice rule"
           ],
-          "caption": "The root structure is the lesson; the numbers are not a live SFINCS result."
+          "caption": "Read the zero crossings as possible radial electric-field roots; the physical branch depends on profiles, species, and stability."
         },
         {
           "kind": "figure",
@@ -1245,7 +1431,7 @@
         },
         {
           "kind": "code",
-          "title": "Research path: NEO_JAX and SFINCS_JAX",
+          "title": "Package path: NEO_JAX, SFINCS, and SFINCS_JAX",
           "bullets": [
             "Choose the same equilibrium and flux surface",
             "Scan collisionality and radial electric field",
@@ -1254,7 +1440,7 @@
         },
         {
           "kind": "code",
-          "title": "Research path: SPECTRAX-GK",
+          "title": "Package path: GX and SPECTRAX-GK",
           "bullets": [
             "Start with a short linear calculation",
             "Plot growth rate and frequency versus ky",
@@ -1341,6 +1527,34 @@
           ]
         },
         {
+          "kind": "code_table",
+          "title": "Main ideas for Lecture 4",
+          "headers": [
+            "Main idea",
+            "What students should be able to say"
+          ],
+          "leftWidth": 315,
+          "rows": [
+            [
+              "Closure",
+              "The field optimum must survive profiles, power balance, bootstrap current, and turbulent stiffness."
+            ],
+            [
+              "Pareto view",
+              "There is no single best stellarator until the design weights and gates are stated."
+            ],
+            [
+              "Workflow",
+              "A credible design is a reproducible chain of inputs, codes, plots, and decisions."
+            ],
+            [
+              "Teaching lab",
+              "Students should be able to rerun the small loop and defend a design choice."
+            ]
+          ],
+          "caption": "The final lecture ties the code stack to design decisions rather than adding a new physics derivation."
+        },
+        {
           "kind": "explainer",
           "title": "What is profile closure?",
           "term": "Profile closure",
@@ -1354,13 +1568,46 @@
         },
         {
           "kind": "table",
-          "title": "Modern workflows are multi-fidelity by design",
+          "title": "The modern workflow is multi-fidelity by design",
           "bullets": [
-            "SIMSOPT: objective terms, geometry objects, and coils live in one optimization framework",
-            "JAX transport tools: differentiable metrics are useful only inside a documented claim scope",
-            "Profile closure: sources and turbulence can reverse a geometry-only ranking"
+            "VMEC and DESC establish the equilibrium candidates",
+            "Boozer, neoclassical, turbulence, particle, and coil tools rank and validate them",
+            "Profile closure and Pareto analysis decide what survives as a design scenario"
           ],
           "reference": "Refs: Landreman et al., JOSS 6, 3525 (2021); sfincs-jax and SPECTRAX-GK public docs; Kim et al., JPP 90, 905900203 (2024)."
+        },
+        {
+          "kind": "code_table",
+          "title": "Codes used in the full loop",
+          "headers": [
+            "Workflow step",
+            "Codes to name and what they contribute"
+          ],
+          "leftWidth": 300,
+          "rows": [
+            [
+              "Equilibrium",
+              "VMEC, vmec_jax, and DESC define the magnetic configuration and the differentiable design variables."
+            ],
+            [
+              "Coordinates and neoclassical",
+              "booz_xform_jax, NEO_JAX, SFINCS, sfincs_jax, NTX, KNOSOS, and MONKES turn geometry into transport metrics."
+            ],
+            [
+              "Turbulence",
+              "GX, SPECTRAX-GK, and Trinity3D connect fast instability screens to heat-flux and profile validation."
+            ],
+            [
+              "Coils and particles",
+              "SIMSOPT, ESSOS, REGCOIL/FOCUS-style tools check buildability, fieldlines, particles, and robustness."
+            ],
+            [
+              "Profiles and decisions",
+              "NEOPAX-style profile closure and Pareto dashboards make the final tradeoffs explicit."
+            ]
+          ],
+          "caption": "The code stack is the lecture spine: every design claim should say which code produced which artifact.",
+          "reference": "Code references: public project repositories and documentation listed in docs/code_stack.md."
         },
         {
           "kind": "source_slide",

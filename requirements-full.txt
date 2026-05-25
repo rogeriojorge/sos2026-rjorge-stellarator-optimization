@@ -3,6 +3,7 @@
 # Verified locally from inspected pyproject.toml / README files on 2026-05-22.
 # Import names are documented in docs/code_stack.md.
 jax
+desc-opt
 vmec-jax
 booz_xform_jax
 neo-jax
@@ -11,6 +12,15 @@ spectraxgk
 simsopt
 essos
 
+# NTX was verified locally as package/import `ntx` from a source checkout on
+# 2026-05-25. Add the appropriate source URL here when the public install route
+# for the school environment is fixed.
+# ntx
+#
+# Classic SFINCS, GX, Trinity3D, KNOSOS, and MONKES are discussed as
+# comparison/validation tools in the lectures, but no Python package import was
+# available in this local environment.
+#
 # NEOPAX was verified as a source package named NEOPAX. Use source install unless a
 # PyPI release is confirmed for your platform.
 git+https://github.com/uwplasma/NEOPAX.git

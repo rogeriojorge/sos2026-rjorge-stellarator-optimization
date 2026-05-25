@@ -13,14 +13,21 @@ from sos2026.paths import PROJECT_ROOT, STATUS_DIR, ensure_directories, CACHE_DI
 CORE = ["numpy", "scipy", "matplotlib", "pandas", "xarray", "netCDF4", "h5py", "nbformat", "nbconvert", "pytest"]
 OPTIONAL = {
     "jax": "jax",
+    "DESC": "desc",
     "vmec_jax": "vmec_jax",
     "booz_xform_jax": "booz_xform_jax",
     "NEO_JAX": "neo_jax",
+    "SFINCS": "sfincs",
     "sfincs_jax": "sfincs_jax",
+    "NTX": "ntx",
     "SPECTRAX-GK": "spectrax",
+    "GX": "gx",
+    "Trinity3D": "trinity3d",
     "SIMSOPT": "simsopt",
     "NEOPAX": "NEOPAX",
     "ESSOS": "essos",
+    "KNOSOS": "knosos",
+    "MONKES": "monkes",
 }
 REQUIRED_NOTEBOOKS = [
     "00_environment_check.ipynb", "01_vmec_jax_first_equilibrium.ipynb", "02_boozer_spectrum.ipynb",

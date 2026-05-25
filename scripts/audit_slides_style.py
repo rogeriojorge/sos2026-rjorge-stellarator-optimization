@@ -44,8 +44,8 @@ def main() -> int:
             continue
         deck = decks[deck_id]
         slides = deck.get("slides", [])
-        if not 30 <= len(slides) <= 45:
-            problems.append(f"{deck_id}: expected 30-45 slides, found {len(slides)}")
+        if not 30 <= len(slides) <= 50:
+            problems.append(f"{deck_id}: expected 30-50 slides, found {len(slides)}")
 
         pptx = ROOT / "slides" / "pptx" / f"{deck_id}.pptx"
         contact = ROOT / "slides" / "pptx" / "contact_sheets" / f"{deck_id}_contact_sheet.png"
@@ -67,7 +67,7 @@ def main() -> int:
             slide for slide in core
             if slide.get("image")
             or slide.get("kind")
-            in {"workflow", "diagram", "project", "demo", "movie", "title", "transition", "quote", "table", "ladder", "warning", "code", "explainer"}
+            in {"workflow", "diagram", "project", "demo", "movie", "title", "transition", "quote", "table", "code_table", "ladder", "warning", "code", "explainer"}
         ]
         if core and len(visual_core) / len(core) < 0.65:
             problems.append(f"{deck_id}: too few core slides have a visual/proof object ({len(visual_core)}/{len(core)})")

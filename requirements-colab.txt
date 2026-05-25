@@ -16,9 +16,11 @@ pytest
 
 # Optional in Colab after cached mode works:
 # jax
+# desc-opt
 # vmec-jax
 # booz_xform_jax
 # neo-jax
 # sfincs_jax
 # spectraxgk
 # simsopt
+# ntx  # only after the school install route is confirmed

@@ -820,6 +820,71 @@ function renderTable(presentation, deck, item, slideNumber, total) {
   return slide;
 }
 
+function renderCodeTable(presentation, deck, item, slideNumber, total) {
+  const slide = presentation.slides.add();
+  const theme = deckThemes[deck.id];
+  rect(slide, 0, 0, 1280, 720, palette.paper);
+  addPageTitle(slide, deck, item, slideNumber, total);
+
+  const rows = item.rows ?? item.bullets ?? [];
+  const headers = item.headers ?? ["Code", "Role in this workflow"];
+  const x = 86;
+  const y = 164;
+  const w = 1108;
+  const headerH = 44;
+  const leftW = item.leftWidth ?? 300;
+  const rightW = w - leftW;
+  const rowH = Math.min(86, Math.floor((594 - y - headerH) / Math.max(rows.length, 1)));
+
+  rect(slide, x, y, leftW, headerH, theme.dark, "#ffffff", 0);
+  rect(slide, x + leftW, y, rightW, headerH, theme.dark, "#ffffff", 0);
+  text(slide, headers[0], x + 18, y + 9, leftW - 36, 24, {
+    fontSize: 18,
+    bold: true,
+    color: "#ffffff",
+    valign: "middle",
+  });
+  text(slide, headers[1], x + leftW + 18, y + 9, rightW - 36, 24, {
+    fontSize: 18,
+    bold: true,
+    color: "#ffffff",
+    valign: "middle",
+  });
+
+  rows.forEach((row, index) => {
+    const yy = y + headerH + index * rowH;
+    const left = Array.isArray(row) ? String(row[0]) : String(row).split(":")[0];
+    const right = Array.isArray(row)
+      ? String(row[1])
+      : String(row).split(":").slice(1).join(":").trim();
+    rect(slide, x, yy, leftW, rowH, "#ffffff", "#d1d5db", 1);
+    rect(slide, x + leftW, yy, rightW, rowH, index % 2 ? "#f7f7f7" : "#ffffff", "#d1d5db", 1);
+    text(slide, left.trim(), x + 18, yy + 10, leftW - 36, rowH - 20, {
+      fontSize: 20,
+      bold: true,
+      color: theme.accent,
+      valign: "middle",
+    });
+    text(slide, right || "Used as a comparison or validation tool after inputs are verified.", x + leftW + 18, yy + 10, rightW - 36, rowH - 20, {
+      fontSize: bulletFont(right || ""),
+      color: palette.ink,
+      valign: "middle",
+    });
+  });
+
+  if (item.caption) {
+    text(slide, item.caption, 96, 604, 780, 30, {
+      fontSize: 15,
+      italic: true,
+      color: palette.muted,
+      valign: "middle",
+    });
+  }
+  addReference(slide, item);
+  addFooter(slide, deck, slideNumber);
+  return slide;
+}
+
 function renderProject(presentation, deck, item, slideNumber, total) {
   const slide = presentation.slides.add();
   const theme = deckThemes[deck.id];
@@ -1104,6 +1169,9 @@ async function renderSlide(presentation, deck, item, slideNumber, total) {
       break;
     case "table":
       slide = renderTable(presentation, deck, item, slideNumber, total);
+      break;
+    case "code_table":
+      slide = renderCodeTable(presentation, deck, item, slideNumber, total);
       break;
     case "project":
       slide = renderProject(presentation, deck, item, slideNumber, total);

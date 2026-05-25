@@ -34,7 +34,6 @@ Lecture 3: neoclassical, turbulence, and fast-particle gates
 ---
 
 # Trapped particles explain the need for symmetry
-
 ![bg right:48% contain](../assets/figures/ref_trapped_particles_quasisymmetry.png)
 - Trapped particles sample only part of a surface
 - Drift averages can fail
@@ -51,15 +50,42 @@ _This is the clearest bridge from orbit physics to an optimization target._
 
 ---
 
-# Cost hierarchy for transport metrics
-- Geometry metrics: fastest screens
-- Effective ripple and Boozer metrics: early transport warnings
-- DKE, gyrokinetics, particles, profiles: validation gates
+# Main ideas for Lecture 3
+| Main idea | What students should be able to say |
+|---|---|
+| Neoclassical | Trapped-particle drifts make geometry-dependent transport, measured with epsilon_eff, D11, Er roots, and bootstrap current. |
+| Turbulence | Microinstabilities drive fluctuation transport; fast growth-rate screens need nonlinear validation. |
+| Cost hierarchy | Use cheap metrics to rank many designs, then expensive solvers to validate finalists. |
+| Optimization | A transport number is useful only with its species, profiles, collisionality, and normalization. |
+
+_This lecture does not derive the DKE or GKE; it shows where these quantities enter a design loop._
+
+---
+
+# Cheap screens come before expensive transport
+- Boozer spectra and epsilon_eff screen many geometries quickly
+- DKE solvers such as SFINCS add collisionality, Er, and bootstrap-current physics
+- Gyrokinetic solvers such as GX validate turbulence ranking for finalists
+
+---
+
+# Codes used in this lecture
+| Code | What it does here |
+|---|---|
+| NEO_JAX | Fast epsilon_eff and trapped-particle screens from Boozer geometry. |
+| SFINCS / sfincs_jax | Drift-kinetic neoclassical transport: D11 scans, ambipolar Er roots, bootstrap current, and JAX experiments. |
+| NTX | Differentiable neoclassical, bootstrap-current, and profile-transport optimization lane; local import verified. |
+| KNOSOS / MONKES | Comparison neoclassical lanes for cross-checking low-collisionality conclusions. |
+| GX / Trinity3D | Gyrokinetic turbulence and integrated transport validation when ranking finalists. |
+| SPECTRAX-GK | JAX gyrokinetic metrics for optimization loops and fast growth-rate scans. |
+
+_Teaching point: use a ladder of cost and trust; live class runs can focus on selected tools._
+
+<small>Code references: NEO_JAX, SFINCS, sfincs_jax, NTX, GX, Trinity3D, SPECTRAX-GK, KNOSOS, and MONKES.</small>
 
 ---
 
 # Transport means neoclassical plus turbulent flux
-
 ![bg right:48% contain](../assets/figures/ref_total_flux_neoclassical_turbulent.png)
 - Neoclassical flux follows guiding-center drifts
 - Turbulent flux follows instabilities
@@ -81,7 +107,6 @@ _This slide gives students the mental equation before the individual metrics app
 ---
 
 # Effective ripple is a neoclassical screen
-
 ![bg right:48% contain](../assets/figures/03_epsilon_eff_comparison.png)
 - Rank candidates before expensive runs
 - Do not treat the scalar as the whole transport story
@@ -104,7 +129,6 @@ _These curves show how the screen should be read; full transport validation rema
 ---
 
 # DKE calculations turn geometry into transport coefficients
-
 ![bg right:48% contain](../assets/figures/ref_drift_kinetic_bootstrap_equation.png)
 - Solve along phase-space characteristics
 - Compute distribution-function moments
@@ -117,7 +141,6 @@ _Use this to explain what sits behind D11 and bootstrap-current validation plots
 ---
 
 # D11 scans add richer validation
-
 ![bg right:48% contain](../assets/figures/07_sfincs_d11_scan.png)
 - Collisionality changes the answer
 - Er suppression changes the interpretation
@@ -129,17 +152,15 @@ _Read the slope, the electric-field suppression, and the collisionality window._
 ---
 
 # Ambipolar roots are not always unique
-
 ![bg right:48% contain](../assets/figures/07_er_roots.png)
 - Multiple roots imply multiple regimes
 - Optimization needs a root-choice rule
 
-_The root structure is the lesson; the numbers are not a live SFINCS result._
+_Read the zero crossings as possible radial electric-field roots; the physical branch depends on profiles, species, and stability._
 
 ---
 
 # Bootstrap current feeds back on equilibrium
-
 ![bg right:48% contain](../assets/figures/07_bootstrap_profile.png)
 - Bootstrap current can alter transform and islands
 - Profile dependence enters early
@@ -156,7 +177,6 @@ _Transport outputs become equilibrium inputs._
 ---
 
 # Neoclassical success can expose turbulence
-
 ![bg right:48% contain](../assets/figures/09_w7x_clamping_cartoon.png)
 - The blue expectation keeps rising
 - The orange curve saturates
@@ -168,8 +188,7 @@ _The cartoon motivates turbulence-aware validation without rederiving transport 
 ---
 
 # Demo break: neoclassical validation
-
-![](../assets/figures/07_sfincs_d11_scan.png)
+![bg right:48% contain](../assets/figures/07_sfincs_d11_scan.png)
 - Read a collisionality scan
 - Inspect Er roots
 - Plot bootstrap feedback
@@ -196,8 +215,8 @@ _Notebook 07: SFINCS-style neoclassical validation._
 <small>Ref: Kim et al., J. Plasma Phys. 90, 905900203 (2024).</small>
 
 ---
-# Turbulence optimization starts with a rankable metric
 
+# Turbulence optimization starts with a rankable metric
 ![bg right:48% contain](../assets/figures/ref_numerical_turbulence_optimization.png)
 - Linear growth is a useful first screen
 - Heat flux remains the validation target
@@ -210,7 +229,6 @@ _The lecture uses this same staged logic: cheap metric first, expensive validati
 ---
 
 # Turbulence metrics need invariant feature maps
-
 ![bg right:48% contain](../assets/figures/ref_turbulence_ml_workflow.png)
 - Many geometries feed the simulation database
 - Features must respect translations and symmetries
@@ -221,8 +239,8 @@ _This visual motivates the notebook surrogate without replacing gyrokinetic vali
 <small>Source visual: Landreman, Plasma turbulence in stellarators, 2026, slide 20.</small>
 
 ---
-# Multiple feature checks agree on the same physics
 
+# Multiple feature checks agree on the same physics
 ![bg right:48% contain](../assets/figures/ref_sherwood_feature_importance.png)
 - Compare methods before trusting a surrogate
 - Look for a repeated physical feature
@@ -235,7 +253,6 @@ _Several independent ranking methods point to the same bad-curvature-region metr
 ---
 
 # Linear growth is a fast warning
-
 ![bg right:48% contain](../assets/figures/08_growth_rate_spectrum.png)
 - Positive growth marks unstable branches
 - The peak is not the heat flux
@@ -260,7 +277,6 @@ _Use growth rate as a screen, not as the final objective._
 ---
 
 # Frequency helps identify the branch
-
 ![bg right:48% contain](../assets/figures/08_frequency_spectrum.png)
 - Growth and frequency belong together
 - The sign and trend help classify modes
@@ -270,7 +286,6 @@ _Frequency is diagnostic context, not the scalar objective._
 ---
 
 # A proxy can pick the wrong winner
-
 ![bg right:48% contain](../assets/figures/09_proxy_vs_nonlinear.png)
 - Red circle: proxy winner
 - Green circle: validation winner
@@ -282,8 +297,7 @@ _The ranking failure is the point of the plot._
 ---
 
 # Demo break: turbulence proxy versus validation
-
-![](../assets/figures/09_proxy_vs_nonlinear.png)
+![bg right:48% contain](../assets/figures/09_proxy_vs_nonlinear.png)
 - Choose the proxy winner
 - Compare validation ranking
 - Explain the failure mode
@@ -299,7 +313,6 @@ _Notebook path: notebooks/08_spectrax_gk_linear_metric.ipynb + notebooks/09_turb
 ---
 
 # Particle metrics connect back to coils
-
 ![bg right:48% contain](../assets/figures/06_particle_orbit.png)
 - A fieldline picture can look acceptable
 - An orbit diagnostic can still fail
@@ -355,14 +368,14 @@ _Fast-particle checks belong in the validation ladder._
 
 ---
 
-# Research path: NEO_JAX and SFINCS_JAX
+# Package path: NEO_JAX, SFINCS, and SFINCS_JAX
 - Choose the same equilibrium and flux surface
 - Scan collisionality and radial electric field
 - Compare compact metrics before detailed validation
 
 ---
 
-# Research path: SPECTRAX-GK
+# Package path: GX and SPECTRAX-GK
 - Start with a short linear calculation
 - Plot growth rate and frequency versus ky
 - Keep nonlinear validation gate explicit
@@ -377,7 +390,6 @@ _Fast-particle checks belong in the validation ladder._
 ---
 
 # Reference figure: growth-rate spectrum
-
 ![bg right:48% contain](../assets/figures/08_growth_rate_spectrum.png)
 - Use if a live linear run is slow
 - Ask what the scalar should be
@@ -385,7 +397,6 @@ _Fast-particle checks belong in the validation ladder._
 ---
 
 # Reference figure: W7-X clamping cartoon
-
 ![bg right:48% contain](../assets/figures/09_w7x_clamping_cartoon.png)
 - Use to motivate turbulence after neoclassical success
 - Keep the cartoon label visible

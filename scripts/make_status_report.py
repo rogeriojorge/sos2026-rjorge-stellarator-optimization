@@ -12,14 +12,21 @@ from sos2026.paths import PROJECT_ROOT, STATUS_DIR, FIGURE_DIR, MOVIE_DIR, CACHE
 
 OPTIONAL = {
     "JAX": "jax",
+    "DESC": "desc",
     "vmec_jax": "vmec_jax",
     "booz_xform_jax": "booz_xform_jax",
     "NEO_JAX": "neo_jax",
+    "SFINCS": "sfincs",
     "sfincs_jax": "sfincs_jax",
+    "NTX": "ntx",
     "SPECTRAX-GK": "spectrax",
+    "GX": "gx",
+    "Trinity3D": "trinity3d",
     "SIMSOPT": "simsopt",
     "NEOPAX": "NEOPAX",
     "ESSOS": "essos",
+    "KNOSOS": "knosos",
+    "MONKES": "monkes",
 }
 
 
@@ -163,7 +170,7 @@ def main() -> int:
     lines.append("")
     lines.append("- The environment check notebook imports installed optional packages when present.")
     lines.append("- `fetch_equilibria.py` uses real public HSX/W7-X VMEC files and a public SIMSOPT QA input when download succeeds or when an instructor opts into `SOS2026_PUBLIC_CHECKOUT_ROOT`.")
-    lines.append("- Research-mode notebooks contain pointers for replacing cached arrays with `vmec_jax`, `booz_xform_jax`, `NEO_JAX`, `sfincs_jax`, `SPECTRAX-GK`, `NEOPAX`, `ESSOS`, or SIMSOPT runs.")
+    lines.append("- Research-mode notebooks contain pointers for replacing cached arrays with VMEC/DESC equilibrium paths, `vmec_jax`, `booz_xform_jax`, `NEO_JAX`, SFINCS/`sfincs_jax`, NTX, GX/`SPECTRAX-GK`, `NEOPAX`, `ESSOS`, or SIMSOPT runs where the package and inputs are available.")
     lines.append("- No notebook claims a new real package output unless that package path is explicitly executed in `research` mode.")
     lines.append("")
     lines.append("## Cached Or Synthetic Demos")

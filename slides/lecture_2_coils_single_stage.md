@@ -25,8 +25,19 @@ Lecture 2: coils, quadratic flux, and single-stage design
 
 ---
 
-# Plasma and coil shapes share the design freedom
+# Main ideas for Lecture 2
+| Main idea | What students should be able to say |
+|---|---|
+| Stage 2 | Given a target surface, find modular coils whose Biot-Savart field has small B dot n. |
+| Regularization | Length, curvature, spacing, ports, and robustness are objective terms, not afterthoughts. |
+| Single stage | Move the plasma target and the coils together when the separated problem is too restrictive. |
+| Validation | A coil set should be judged by field quality, engineering scale, and particle/field-line diagnostics. |
 
+_The reference talks move from a target plasma to coils quickly; this lecture follows that same path._
+
+---
+
+# Plasma and coil shapes share the design freedom
 ![bg right:48% contain](../assets/figures/ref_stellarator_objectives.png)
 - Good surfaces
 - Enough transform
@@ -39,15 +50,29 @@ _This is the compact motivation for a multiobjective stellarator design loop._
 
 ---
 
-# Stage 1, stage 2, single stage
-- Stage 1: optimize the plasma target
-- Stage 2: fit coils to that target
-- Single stage: move plasma and coils together
+# Optimization is organized by what is allowed to move
+- Stage 1: VMEC or DESC moves the plasma target
+- Stage 2: SIMSOPT or coil-design codes move the coils around that target
+- Single stage: the target and coils move together under physics and engineering penalties
+
+---
+
+# Codes used in this lecture
+| Code | What it does here |
+|---|---|
+| SIMSOPT | Build the objective graph: VMEC coupling, surfaces, curves, Biot-Savart fields, and stage-2 coil penalties. |
+| NESCOIL / REGCOIL | Current-potential and regularized coil-design baselines; useful for explaining the inverse problem. |
+| FOCUS / QUADCOIL | Alternative coil optimization families for comparing field quality and engineering constraints. |
+| ESSOS | JAX fieldline, particle, and coil workflows for direct diagnostics and gradient experiments. |
+| VMEC / DESC | Provide the target surface when the plasma boundary is allowed to move. |
+
+_A modern coil lecture should name the tools and the object each one controls._
+
+<small>Code references: SIMSOPT JOSS 6, 3525 (2021); NESCOIL, REGCOIL, FOCUS, QUADCOIL, ESSOS, DESC.</small>
 
 ---
 
 # Two-stage design is useful but incomplete
-
 ![bg right:48% contain](../assets/figures/ref_two_stage_optimization.png)
 - Stage 1 chooses the target plasma
 - Stage 2 tries to realize the field
@@ -82,7 +107,6 @@ _The transition into single-stage optimization starts from this historical compr
 ---
 
 # Initial coils define the first mismatch
-
 ![bg right:48% contain](../assets/figures/04_initial_coils.png)
 - Look for scale, symmetry, and crowding
 - The loops represent modular coil degrees of freedom
@@ -92,7 +116,6 @@ _The first coil set shows the inverse problem before regularization._
 ---
 
 # Final coils reduce the obvious mismatch
-
 ![bg right:48% contain](../assets/figures/04_final_coils.png)
 - Compare shape and smoothness
 - Then ask whether access and curvature remain acceptable
@@ -117,7 +140,6 @@ _A better coil picture is still not a manufacturability proof._
 ---
 
 # B dot n is the basic stage-2 score
-
 ![bg right:48% contain](../assets/figures/04_bdotn_before_after.png)
 - Blue/red patches show normal-field error
 - The target surface is damaged when patches remain
@@ -129,7 +151,6 @@ _Quadratic flux measures whether coils reproduce the requested boundary._
 ---
 
 # Regularization trades field quality for hardware
-
 ![bg right:48% contain](../assets/figures/04_coil_tradeoff.png)
 - Shorter coils can make B dot n worse
 - A single optimum hides the engineering choice
@@ -146,7 +167,6 @@ _The annotation marks what gets worse when coils are pushed too hard._
 ---
 
 # Current-potential methods expose coil regularization
-
 ![bg right:48% contain](../assets/figures/ref_current_potential_methods.png)
 - Surface current is the optimization variable
 - Regularization controls complexity
@@ -157,8 +177,8 @@ _Use this when explaining why low B dot n is not the only engineering objective.
 <small>Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 39.</small>
 
 ---
-# Topology can be a design variable
 
+# Topology can be a design variable
 ![bg right:48% contain](../assets/figures/ref_simons_current_voxels.png)
 - Do not assume the number of coils
 - Regularization defines what is buildable
@@ -177,8 +197,7 @@ _The coil problem can move beyond smoothing a fixed set of curves._
 ---
 
 # Demo break: SIMSOPT stage-2 coils
-
-![](../assets/figures/04_bdotn_before_after.png)
+![bg right:48% contain](../assets/figures/04_bdotn_before_after.png)
 - Compare initial and final coils
 - Plot B dot n maps
 - Name the tradeoff
@@ -192,8 +211,8 @@ _Notebook path: notebooks/04_simsopt_stage2_coils.ipynb_
 - Use differentiable codes where the gradient is meaningful
 
 ---
-# Direct particle objectives are honest but noisy
 
+# Direct particle objectives are honest but noisy
 ![bg right:48% contain](../assets/figures/ref_numerical_direct_particle_confinement.png)
 - Optimize the quantity that matters
 - Expect stochastic-looking landscapes
@@ -206,7 +225,6 @@ _Direct optimization is attractive because the metric is physical; it is hard be
 ---
 
 # Fieldlines diagnose topology
-
 ![bg right:48% contain](../assets/figures/06_fieldlines.png)
 - Good surfaces support the coil story
 - Bad topology catches failures a scalar may miss
@@ -216,7 +234,6 @@ _The fieldline is a topology diagnostic; particle confinement needs a separate c
 ---
 
 # Particles answer a different question
-
 ![bg right:48% contain](../assets/figures/06_particle_orbit.png)
 - Fieldlines do not guarantee confinement
 - Fast-particle gates matter for reactors
@@ -226,7 +243,6 @@ _Orbit cartoons teach why particle objectives can enter directly._
 ---
 
 # Animation storyboard: rotating surface and modular coils
-
 ![bg right:48% contain](../assets/movies/rotating_surface_storyboard.png)
 - Use the four views to explain modular-coil clearance
 - Emphasize that coils and surface must be judged together
@@ -244,7 +260,6 @@ _Static storyboard for reliable projection; the movie file remains in the repo._
 ---
 
 # Continuation makes the negotiation visible
-
 ![bg right:48% contain](../assets/figures/05_single_stage_history.png)
 - Watch objective terms decrease together
 - Stop when one term dominates the story
@@ -254,18 +269,15 @@ _A coupled objective is a trace, not just a final number._
 ---
 
 # Weights reveal which constraint is active
-
 ![bg right:48% contain](../assets/figures/05_weight_continuation.png)
-- Increasing one weight can improve one metric and hurt another
-- This is the classroom Pareto intuition
+- Increase the coil penalty and watch which design quality is traded away
 
 _Weight scans are design arguments._
 
 ---
 
 # Demo break: fieldlines and single-stage toy
-
-![](../assets/figures/05_weight_continuation.png)
+![bg right:48% contain](../assets/figures/05_weight_continuation.png)
 - Change one weight
 - Run the reference diagnostics
 - Defend the result
@@ -289,7 +301,6 @@ _Notebook path: notebooks/05_single_stage_toy.ipynb + notebooks/06_essos_fieldli
 ---
 
 # Coil feasibility has a magnetic scale length
-
 ![bg right:48% contain](../assets/figures/ref_coil_distance_scale_length.png)
 - Small scale lengths demand close coils
 - Close coils reduce access and tolerance
@@ -327,7 +338,7 @@ _This is a stronger explanation of why modular-coil design needs geometric scale
 
 ---
 
-# SIMSOPT research path
+# SIMSOPT package path
 - Load the public QA target
 - Build curves and Biot-Savart fields
 - Run a short optimization before class
@@ -349,7 +360,6 @@ _This is a stronger explanation of why modular-coil design needs geometric scale
 ---
 
 # Reference figure: initial coils
-
 ![bg right:48% contain](../assets/figures/04_initial_coils.png)
 - Use to explain the starting point
 - Ask what makes the target hard
@@ -357,7 +367,6 @@ _This is a stronger explanation of why modular-coil design needs geometric scale
 ---
 
 # Reference figure: final coils
-
 ![bg right:48% contain](../assets/figures/04_final_coils.png)
 - Use to explain the claimed improvement
 - Ask what still needs engineering checks
@@ -365,7 +374,6 @@ _This is a stronger explanation of why modular-coil design needs geometric scale
 ---
 
 # Reference figure: particle orbit
-
 ![bg right:48% contain](../assets/figures/06_particle_orbit.png)
 - Use if a particle trace is unavailable
 - Connect orbit loss to reactor gates

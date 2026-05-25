@@ -21,6 +21,18 @@ Lecture 4: profiles, Pareto decisions, and the repo lab
 
 ---
 
+# Main ideas for Lecture 4
+| Main idea | What students should be able to say |
+|---|---|
+| Closure | The field optimum must survive profiles, power balance, bootstrap current, and turbulent stiffness. |
+| Pareto view | There is no single best stellarator until the design weights and gates are stated. |
+| Workflow | A credible design is a reproducible chain of inputs, codes, plots, and decisions. |
+| Teaching lab | Students should be able to rerun the small loop and defend a design choice. |
+
+_The final lecture ties the code stack to design decisions rather than adding a new physics derivation._
+
+---
+
 # What is profile closure?
 - **Term:** Profile closure
 - **Definition:** Solving whether sources, sinks, transport coefficients, and radial gradients produce consistent temperature and density profiles.
@@ -34,16 +46,31 @@ Lecture 4: profiles, Pareto decisions, and the repo lab
 
 ---
 
-# Modern workflows are multi-fidelity by design
-- SIMSOPT: objective terms, geometry objects, and coils live in one optimization framework
-- JAX transport tools: differentiable metrics are useful only inside a documented claim scope
-- Profile closure: sources and turbulence can reverse a geometry-only ranking
+# The modern workflow is multi-fidelity by design
+- VMEC and DESC establish the equilibrium candidates
+- Boozer, neoclassical, turbulence, particle, and coil tools rank and validate them
+- Profile closure and Pareto analysis decide what survives as a design scenario
 
 <small>Refs: Landreman et al., JOSS 6, 3525 (2021); sfincs-jax and SPECTRAX-GK public docs; Kim et al., JPP 90, 905900203 (2024).</small>
 
 ---
-# Surrogates expand the loop, but do not replace it
 
+# Codes used in the full loop
+| Workflow step | Codes to name and what they contribute |
+|---|---|
+| Equilibrium | VMEC, vmec_jax, and DESC define the magnetic configuration and the differentiable design variables. |
+| Coordinates and neoclassical | booz_xform_jax, NEO_JAX, SFINCS, sfincs_jax, NTX, KNOSOS, and MONKES turn geometry into transport metrics. |
+| Turbulence | GX, SPECTRAX-GK, and Trinity3D connect fast instability screens to heat-flux and profile validation. |
+| Coils and particles | SIMSOPT, ESSOS, REGCOIL/FOCUS-style tools check buildability, fieldlines, particles, and robustness. |
+| Profiles and decisions | NEOPAX-style profile closure and Pareto dashboards make the final tradeoffs explicit. |
+
+_The code stack is the lecture spine: every design claim should say which code produced which artifact._
+
+<small>Code references: public project repositories and documentation listed in docs/code_stack.md.</small>
+
+---
+
+# Surrogates expand the loop, but do not replace it
 ![bg right:48% contain](../assets/figures/ref_simons_pinn_equilibrium.png)
 - Fast models can widen parameter scans
 - Physics constraints keep them grounded
@@ -56,7 +83,6 @@ _Use surrogates as accelerators inside the workflow, not as unvalidated endpoint
 ---
 
 # Objective functions have landscapes
-
 ![bg right:48% contain](../assets/figures/ref_objective_visualization_method.png)
 - Flatten a local parameter space
 - Interpolate between configurations
@@ -75,7 +101,6 @@ _This makes the optimization dashboard feel like a landscape, not just a table o
 ---
 
 # Profiles turn a field optimum into a scenario
-
 ![bg right:48% contain](../assets/figures/10_profile_evolution.png)
 - Temperature and density gradients drive transport
 - A good field metric can underperform after closure
@@ -87,7 +112,6 @@ _Read how profile feedback changes the temperature response._
 ---
 
 # Power balance is a credibility check
-
 ![bg right:48% contain](../assets/figures/10_power_balance.png)
 - Sources, fluxes, and residuals must match
 - A post-hoc residual is weak evidence
@@ -104,8 +128,7 @@ _A design claim needs a solved balance, not only a field metric._
 ---
 
 # Demo break: profile closure
-
-![](../assets/figures/10_profile_evolution.png)
+![bg right:48% contain](../assets/figures/10_profile_evolution.png)
 - Plot temperature response
 - Inspect power balance
 - State which quantities are screened and which are validated
@@ -128,7 +151,6 @@ _Notebook path: notebooks/10_neopax_profile_closure.ipynb_
 ---
 
 # W7-X shows what optimized design must still prove
-
 ![bg right:48% contain](../assets/figures/ref_w7x_optimization_targets.png)
 - Equilibrium quality
 - Transport reduction
@@ -155,7 +177,6 @@ _A credible design story connects computed metrics to a device that can be built
 ---
 
 # Pareto fronts need interpretation
-
 ![bg right:48% contain](../assets/figures/11_pareto_front.png)
 - Nondominated points still require priorities
 - Final choice needs context and validation
@@ -167,7 +188,6 @@ _A Pareto front is an argument surface, not an automatic answer._
 ---
 
 # Different proxies can rank the same designs differently
-
 ![bg right:48% contain](../assets/figures/ref_proxy_landscape_comparison.png)
 - Compare landscapes before trusting weights
 - Look for cliffs and flat regions
@@ -180,7 +200,6 @@ _This is the visual reason the final lecture ends with Pareto decisions rather t
 ---
 
 # Weights expose the design decision
-
 ![bg right:48% contain](../assets/figures/11_weighted_selection.png)
 - Changing weights changes the winner
 - Record weights beside every selected design
@@ -190,8 +209,7 @@ _A weighted score is a value judgment with units and provenance._
 ---
 
 # Demo break: Pareto dashboard
-
-![](../assets/figures/11_weighted_selection.png)
+![bg right:48% contain](../assets/figures/11_weighted_selection.png)
 - Change one metric weight
 - Regenerate the chart
 - Defend the selected design
@@ -240,8 +258,7 @@ _Notebook path: notebooks/11_pareto_design_dashboard.ipynb_
 ---
 
 # Repo lab: full reference run
-
-![](../assets/figures/environment_check.png)
+![bg right:48% contain](../assets/figures/environment_check.png)
 - Run acceptance checks
 - Review STATUS.md
 - Open rendered docs
@@ -263,8 +280,7 @@ _Start with the reference run. Repo: https://github.com/rogeriojorge/sos2026-rjo
 ---
 
 # Exercise: change the weights and defend a design
-
-![](../assets/figures/11_pareto_front.png)
+![bg right:48% contain](../assets/figures/11_pareto_front.png)
 - Move one weight
 - Identify the new winner
 - Say which validation gate you now trust less
@@ -315,7 +331,6 @@ _Notebook path: notebooks/11_pareto_design_dashboard.ipynb_
 ---
 
 # Animation storyboard: optimization history
-
 ![bg right:48% contain](../assets/movies/optimization_history_storyboard.png)
 - Read the sequence as objective residual decreasing
 - Discuss when a live animation adds value
@@ -339,7 +354,6 @@ _Static storyboard for reliable projection; the movie file remains in the repo._
 ---
 
 # Reference figure: profile closure
-
 ![bg right:48% contain](../assets/figures/10_profile_evolution.png)
 - Use to discuss profile-closure behavior
 - Keep the limitation explicit
@@ -349,7 +363,6 @@ _Reference plot for profile closure discussion._
 ---
 
 # Reference figure: Pareto front
-
 ![bg right:48% contain](../assets/figures/11_pareto_front.png)
 - Use to discuss the final design choice
 - Ask which design the room would defend
@@ -367,7 +380,6 @@ _Reference plot for design-decision discussion._
 ---
 
 # Open questions define the next optimization loop
-
 ![bg right:48% contain](../assets/figures/ref_open_questions_optimization.png)
 - Combine coil and plasma design
 - Avoid local minima
@@ -379,8 +391,8 @@ _The last slide should leave students with problems they can attack using the re
 <small>Source visual: Landreman, Charkiw Stellarator Optimization Lectures, slide 42.</small>
 
 ---
-# The old checklist is still the right checklist
 
+# The old checklist is still the right checklist
 ![bg right:48% contain](../assets/figures/ref_summer_school_optimization_questions.png)
 - Balance confinement, coils, and stability
 - Ask which constraints changed the answer
